@@ -1,0 +1,82 @@
+name: UI regression checks
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+# GitHub-maintained actions, all MIT licensed:
+# https://github.com/actions/checkout
+# https://github.com/actions/setup-python
+# https://github.com/actions/setup-node
+# https://github.com/actions/upload-artifact
+# Browser test tooling: Playwright 1.62.1, Apache-2.0
+# https://github.com/microsoft/playwright
+jobs:
+  observer-browser-tests:
+    name: Observer browser regressions (static server)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      TANAW_TEST_BROWSER: chromium
+      TANAW_TEST_BASE_URL: http://127.0.0.1:4410
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.13.0'
+          package-manager-cache: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Set browser test paths
+        run: |
+          echo "TANAW_PLAYWRIGHT_PATH=$RUNNER_TEMP/observer-browser/node_modules/playwright" >> "$GITHUB_ENV"
+          echo "TANAW_TEST_OUTPUT=$RUNNER_TEMP/observer-browser-results" >> "$GITHUB_ENV"
+      - name: Install Playwright and Chromium outside the shipped app
+        run: |
+          npm install --prefix "$RUNNER_TEMP/observer-browser" --no-save --package-lock=false playwright@1.62.1
+          node "$TANAW_PLAYWRIGHT_PATH/cli.js" install --with-deps chromium
+      - name: Run observer regressions against plain static hosting
+        run: |
+          node --test --test-isolation=none app/observer/*.test.mjs app/compare/*.test.mjs app/travel/*.test.mjs
+          mkdir -p "$TANAW_TEST_OUTPUT"
+          python -m http.server 4410 --bind 127.0.0.1 --directory app > "$TANAW_TEST_OUTPUT/static-server.log" 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          for attempt in {1..30}; do
+            if curl --fail --silent "$TANAW_TEST_BASE_URL/observer/" > /dev/null; then
+              break
+            fi
+            sleep 1
+          done
+          curl --fail --silent --show-error "$TANAW_TEST_BASE_URL/observer/" > /dev/null
+          # No science service runs here. The suite also checks real static-host 404s.
+          timeout 5m node app/observer/verify-window-loading.mjs 2>&1 | tee "$TANAW_TEST_OUTPUT/browser-tests.log"
+          timeout 5m node app/verify-main-page.mjs 2>&1 | tee "$TANAW_TEST_OUTPUT/main-page-tests.log"
+          chrome=$(node -e "console.log(require(process.env.TANAW_PLAYWRIGHT_PATH).chromium.executablePath())")
+          # Full monthly tracks and Times/diagram checks add work to both boundary-date scenes.
+          timeout 8m node app/observer/verify-quick-estimate.mjs "$chrome" "$TANAW_TEST_OUTPUT" 2>&1 | tee "$TANAW_TEST_OUTPUT/estimate-tests.log"
+      - name: Save browser screenshots and logs
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: observer-browser-results
+          path: ${{ runner.temp }}/observer-browser-results/
+          retention-days: 7
+          if-no-files-found: ignore
