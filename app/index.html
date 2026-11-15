@@ -87,7 +87,10 @@
           <button class="btn" id="panel-close" type="button">Close</button>
         </div>
         <div class="p-more" id="panel-more"></div>
-        <div class="panel-actions"><button class="btn" id="panel-compare" type="button" aria-controls="compare" aria-expanded="false">Compare</button></div>
+        <div class="panel-actions">
+          <button class="btn" id="panel-compare" type="button" aria-controls="compare" aria-expanded="false">Compare</button>
+          <div class="compare-capacity" id="panel-compare-full" role="status" hidden><span>Comparison full</span><small>Remove a site from the comparison to add this location.</small></div>
+        </div>
         <section class="p-spots" id="panel-spots" aria-label="Nearby spots" hidden></section>
       </section>
       <section class="picker" id="picker" aria-labelledby="picker-heading">

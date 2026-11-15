@@ -22,9 +22,7 @@ export const localAssetProvider = {
   async getAssets({signal}) {
     const response=await fetch(new URL('../assets/observer/stars.json',import.meta.url),{signal});
     if(!response.ok)throw new Error(`Star catalog ${response.status}`);
-    const milkyWay = { url: new URL('../assets/observer/milkyway-4k.webp', import.meta.url).href,
-      source: 'NASA SVS 4851 / ESA Gaia DR2; see app/SOURCES.md', license: 'NASA media with attribution' };
     const relief=name=>({url:new URL(`../assets/${name}`,import.meta.url).href,source:'NASA LRO LOLA; see app/SOURCES.md',license:'NASA public data with attribution',shading:'data'});
-    return { milkyWay, moonRelief:{normal:relief('moon-normal-4k.webp'),polar:relief('moon-pole-normal-2k.webp')},earth:{url:new URL('../assets/observer/earth-blue-marble.png',import.meta.url).href,source:'NASA SVS 2915 / NASA Earth Observatory',license:'NASA media with attribution',shading:'baked'}, terrain:{url:new URL('../assets/moon-color-4k.webp',import.meta.url).href,source:'NASA SVS 4720 / LRO LROC',license:'NASA media with attribution',shading:'albedo-approximation'}, catalog:await response.json() };
+    return { moonRelief:{normal:relief('moon-normal-4k.webp'),polar:relief('moon-pole-normal-2k.webp')},earth:{url:new URL('../assets/observer/earth-blue-marble.png',import.meta.url).href,source:'NASA SVS 2915 / NASA Earth Observatory',license:'NASA media with attribution',shading:'baked'}, terrain:{url:new URL('../assets/moon-color-4k.webp',import.meta.url).href,source:'NASA SVS 4720 / LRO LROC',license:'NASA media with attribution',shading:'albedo-approximation'}, catalog:await response.json() };
   }
 };

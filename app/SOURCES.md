@@ -108,7 +108,7 @@ Artemis region names: [NASA, 28 October 2024](https://www.nasa.gov/news-release/
 
 Stage 2 observer assets (locally cached; replaceable through provider APIs):
 
-The observer's dim Milky Way texture derives from the celestial-coordinate layer of
+The retained, currently unused Milky Way texture derives from the celestial-coordinate layer of
 [NASA SVS Deep Star Maps 2020](https://svs.gsfc.nasa.gov/4851/),
 [original 4K OpenEXR](https://svs.gsfc.nasa.gov/vis/a000000/a004800/a004851/milkyway_2020_4k.exr).
 Credit: NASA/Goddard Space Flight Center Scientific Visualization Studio, Ernie Wright;

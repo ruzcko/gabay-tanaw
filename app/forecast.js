@@ -7,6 +7,7 @@ import { parseUtc } from './computation/dist/core.js';
 import { QUICK_RANGE } from './computation/dist/quick/coverage.js';
 import { createDateWindow } from './observer/date-scrubber.js';
 import { createTravelPanel } from './travel/panel.js';
+import { travelPointKey } from './travel/model.js';
 import { createComparePanel } from './compare/panel.js';
 import { createRangePicker, rangeDayCount } from './observer/range-picker.js';
 
@@ -369,7 +370,7 @@ function fitWindow(force) {
 // Every user selection comes through here: it focuses the site (the site panel opens), and a
 // site with a terrain tile opens in the site view.
 function select(id) {
-  if (!comparison?.fromTravel) travel?.close();
+  if (!comparison?.active) travel?.close();
   travelTrip = null;
   pause();
   const fromTyped = !state.data[state.site]; // leaving coordinates typed in the picker
@@ -724,7 +725,9 @@ function syncCompareAction() {
   if (!button || !point) return;
   const active = comparison?.active;
   button.textContent = active ? comparison.action(point) : 'Compare';
-  button.disabled = active && button.textContent !== 'Add site';
+  const full = active && button.textContent === 'Comparison full';
+  button.hidden = full;
+  $('panel-compare-full').hidden = !full;
   button.setAttribute('aria-expanded', String(!!active));
 }
 function comparisonChanged() {
@@ -734,8 +737,11 @@ function comparisonChanged() {
 }
 function selectedForCompare() {
   if (!comparison?.active) return;
-  if (comparison.fromTravel) {
-    if (comparison.picking) { const result = travel.resultFor(travelSelection().point); if (result) comparison.add(compareTravelPoint(result.point)); }
+  if (travel?.active) {
+    if (comparison.picking) {
+      const point = travelSelection().point, result = travel.resultFor(point);
+      if (result || !comparison.fromTravel) comparison.add(compareTravelPoint(result?.point || point));
+    }
     compareCandidate = false; sheet = false; state.focus = false; layout(); return;
   }
   compareCandidate = true;
@@ -1897,7 +1903,7 @@ function setCompare(on, tripResult = null) {
     state.view = 'globe';
   } else { comparison.close(); compareCandidate = false; sheet = false; }
   hud.classList.toggle('compare', on);
-  hud.classList.toggle('travel-compare', on && comparison.fromTravel);
+  hud.classList.toggle('travel-compare', on && travel?.active);
   travel?.syncComparison();
   hud.classList.remove('compare-picking');
   ring.inert = on;
@@ -2013,10 +2019,11 @@ function closeSheet() {
 
 $('panel-compare').addEventListener('click', () => {
   if (!comparison?.active) { setCompare(true); compareBtn.focus(); return; }
-  if (comparison.add(state.sites.find(s => s.id === state.site))) {
-    compareCandidate = false; sheet = false; layout(); frame();
-    $('compare-slots').querySelector('.compare-add, .compare-remove')?.focus();
-  }
+  const point = state.sites.find(s => s.id === state.site);
+  if (comparison.contains(point)) comparison.remove(point);
+  else comparison.add(point);
+  syncCompareAction(); layout(); frame();
+  $('panel-compare').focus();
 });
 compareBtn.addEventListener("click", () => setCompare(!hud.classList.contains("compare")));
 now.addEventListener("click", () => setPicker(!hud.classList.contains("picker")));
@@ -2630,9 +2637,11 @@ fpSizes.observe(slider);
 fpSizes.observe(fpanel);
 
 function layout() {
+  const combined = !!comparison?.active && !!travel?.active;
+  hud.classList.toggle('travel-compare', combined);
   if (!state.focus || wide.matches) sheet = false;
   if (state.focus && wide.matches) hud.classList.remove("times");
-  const open = !comparison?.fromTravel && state.focus && (comparison?.active ? compareCandidate : (wide.matches || sheet));
+  const open = !combined && state.focus && (comparison?.active ? compareCandidate : (wide.matches || sheet));
   const col = !comparison?.active && open && wide.matches;
   const changed = open !== hud.classList.contains("panel") || col !== hud.classList.contains("col");
   hud.classList.toggle("focus", state.focus);
@@ -2721,7 +2730,7 @@ function frame() {
       if (travelBounds.mobile) bottom = Math.min(bottom, travelBounds.top - 12);
       else right = Math.min(right, travelBounds.left - 16);
     }
-    if (comparison?.fromTravel) {
+    if (comparison?.active && travel?.active) {
       const bounds = compare.getBoundingClientRect();
       bottom = Math.min(bottom, bounds.top - 12);
     }
@@ -2878,7 +2887,7 @@ document.addEventListener("tanaw:pick", (e) => {
 const sceneSource = createForecastSource();
 // Stars reuse the same computation inputs as Observer. Load only while requested;
 // coalesce fast scrub/playback updates instead of queuing a worker job per frame.
-let starsEnabled = false, wantedStarFrame = null, starFrameRunning = false;
+let starsEnabled = true, wantedStarFrame = null, starFrameRunning = false;
 async function updateStarFrame(utc = quickMode ? quickNow() : instant()) {
   if (!starsEnabled) return;
   wantedStarFrame = { utc, site: state.site, estimate: quickMode, emission: quickEmission };
@@ -2995,6 +3004,7 @@ function renderQuickTimeline() {
   const label = dateLabel(selected.instantUtc.slice(0, 10));
   dayOut.textContent = phone.matches ? `${label.split(' ').slice(1, 3).join(' ')}, ${selected.instantUtc.slice(11, 16)} UTC` : slider.getAttribute('aria-valuetext');
   quickPanel.setDate(shownUtc(selected.instantUtc));
+  comparison?.sync(selected.instantUtc);
 }
 // The published forecast's first and last days (the date picker marks them; Today stays inside).
 const PUBLISHED = ['2026-12-01', '2027-11-30'];
@@ -3036,7 +3046,7 @@ async function loadQuick(utc, keepWindow = false, fromPicker = false, playback =
   const tripCrossesCoverage = travelTrip?.site === state.site &&
     (Date.parse(travelTrip.startUtc) - 7 * 86400000 < Date.parse('2026-12-01T00:00:00Z') ||
      Date.parse(travelTrip.endUtc) + 7 * 86400000 > Date.parse('2027-12-01T00:00:00Z'));
-  if ((fromPicker || !quickMode) && !tripCrossesCoverage && publishedDate(utc) && Date.parse(utc) % 3600000 === 0) { leaveQuick(utc); return; }
+  if ((fromPicker || !quickMode) && !tripCrossesCoverage && publishedDate(utc) && Date.parse(utc) % 3600000 === 0) { leaveQuick(utc, keepWindow && comparison?.active ? compareWindow() : null); return; }
   const requestedRange = quickMode && quickWindow ? quickWindow.state.rangeDays : state.len;
   $('quick-estimate').classList.remove('published');
   cancelQuick(); const own = quickGeneration;
@@ -3172,7 +3182,8 @@ function compareTravelPoint(point) {
 function travelSelection() {
   return { point: state.sites.find(s => s.id === state.site), instantUtc: instant() };
 }
-async function selectTravelResult({ point, startUtc, endUtc }) {
+async function selectTravelResult({ point, startUtc, endUtc }, { preserveTime = false } = {}) {
+  const selectedUtc = instant(), window = preserveTime ? compareWindow() : null;
   pause();
   leaveLive(); // a trip is a picked date
   const known = state.sites.find(s => Math.abs(s.lat - point.lat) < 1e-7 && Math.abs(((s.lon - point.lon + 540) % 360) - 180) < 1e-7);
@@ -3180,6 +3191,11 @@ async function selectTravelResult({ point, startUtc, endUtc }) {
   if (!known) state.sites.push(selected);
   state.site = selected.id; state.focus = false; state.view = 'globe';
   travelTrip = { site: selected.id, startUtc, endUtc };
+  if (preserveTime) {
+    if (!quickWindow) quickWindow = createDateWindow(new Date(QUICK_RANGE.start).toISOString(), new Date(QUICK_RANGE.end).toISOString(), selectedUtc,
+      { windowStartUtc: window.startUtc, rangeDays: window.days });
+    await loadQuick(selectedUtc, true); frame(); return;
+  }
   // Calendar-day context surrounds the exact travel interval. The white selection remains
   // at arrival; the separate outline keeps the trip visible while scrubbing nearby days.
   state.len = Math.ceil(Date.parse(endUtc) / 86400000) - Math.floor(Date.parse(startUtc) / 86400000) + 14;
@@ -3196,7 +3212,17 @@ document.addEventListener('tanaw:select', event => {
   travel?.sync({ point, instantUtc: event.detail.instant });
 });
 document.addEventListener('tanaw:time', event => {
+  comparison?.sync(event.detail.instant);
   if (!event.detail.smooth) travel?.sync({ point: state.sites.find(s => s.id === state.site), instantUtc: event.detail.instant });
+});
+document.addEventListener('tanaw:compare-pick', event => {
+  if (travel?.active && travel.resultFor(event.detail)) {
+    document.dispatchEvent(new CustomEvent('tanaw:travel-pick', { detail: { key: travelPointKey(event.detail), preserveTime: true } }));
+    return;
+  }
+  if (state.data[event.detail.id]) select(event.detail.id);
+  else goTo(event.detail.lat, event.detail.lon);
+  if (event.detail.reveal === false) { compareCandidate = false; sheet = false; layout(); frame(); }
 });
 load().then(() => {
   comparison = createComparePanel({ root: compare, selection: travelSelection, window: compareWindow,
@@ -3214,22 +3240,27 @@ load().then(() => {
   start();
   travel = createTravelPanel({
     selection: travelSelection, catalog: () => state.sites.filter(s => state.data[s.id]),
-    select(result) {
-      if (comparison?.fromTravel && comparison.picking) comparison.add(compareTravelPoint(result.point));
-      return selectTravelResult(result);
+    select(result, options) {
+      if (comparison?.active && comparison.picking) comparison.add(compareTravelPoint(result.point));
+      return selectTravelResult(result, options);
     },
     frame,
-    comparing: () => !!comparison?.fromTravel,
-    compareAction: point => comparison?.fromTravel ? comparison.action(point) : 'Compare',
-    resetComparison() { if (comparison?.fromTravel) setCompare(false); },
+    comparing: () => !!comparison?.active,
+    compareAction: point => comparison?.active ? (comparison.contains(point) ? 'Remove site' : comparison.action(point)) : 'Compare',
+    resetComparison() { if (comparison?.fromTravel) setCompare(false); else layout(); },
     compare(result) {
       const point = compareTravelPoint(result.point);
       if (!comparison.active) { setCompare(true, result); }
-      else if (comparison.contains(point)) comparison.remove(point);
+      else if (comparison.contains(point)) comparison.remove(point, { allowPinned: true });
       else comparison.add(point);
     },
     wholeMoon() { wholeMoon(); document.dispatchEvent(new CustomEvent('tanaw:frame-moon')); },
-    open() { pause(); setCompare(false); if (hud.classList.contains('picker')) closePicker(); wholeMoon(); }
+    open() {
+      pause();
+      if (hud.classList.contains('picker')) closePicker();
+      if (comparison?.active) { compareCandidate = false; sheet = false; comparison.cancelPick(); }
+      wholeMoon(); layout(); frame();
+    }
   });
   // Travel's button as an icon (Tabler route), like the top bar's: in the top bar after Layers on
   // wider screens, in the bottom bar on phones, where the top bar has no room (layout).

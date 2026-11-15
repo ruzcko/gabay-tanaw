@@ -550,36 +550,52 @@ glowing edges or terminal-style typography.
     every other.
   - Missing data: a field that has no value is left out with its label and separator, so
     there are no empty labels, stray dots or blank rows.
-- **Compare:** the bar or site panel's "Compare" button pins the current location as
-  the first of three slots in a lower tray. The first location cannot be replaced or removed
-  during that comparison. The Moon stays visible and interactive above the tray; the sky
+- **Compare:** the bar or site panel's "Compare" button captures the current location as
+  the first of three slots in a lower tray. Every location can be removed. Sites are numbered
+  1–3 in insertion order; removing a site compacts the remaining numbers. The Moon stays
+  visible and interactive above the tray; the sky
   clock, horizon strip and Earth/Sun diagram slide left and fade out. Reduced motion removes
   the transition. The shared date and range remain available below the tray.
   - Two outlined "Add a site" slots start empty. Selecting a slot arms the next Moon click;
     its text changes to "Click on the Moon". Escape cancels picking without closing Compare.
   - Clicking the Moon without arming a slot opens that location's details. Its action reads
-    "Add site" in Compare and "Compare" otherwise. Added locations say "Site added" and
-    disable the action; after three locations it says "Comparison full". Removing either
-    added location opens its slot again. Candidates never replace the pinned first location.
+    "Add site" in Compare and "Compare" otherwise. Adding keeps the details open and changes
+    the action to "Remove site"; removing changes it back to "Add site". A new candidate at
+    capacity shows a "Comparison full" status label and a guide to remove a site before adding
+    this location. Candidates never replace an existing comparison site.
+  - Matching numbered Moon markers replace the catalogue markers during comparison.
+    Selecting a numbered site name in the tray rotates the Moon to that location without
+    opening candidate details. Marker numbers always match the current row order.
+    Nearby markers separate with a line to the exact point. Locations on the hidden hemisphere
+    use a dashed, explicitly labelled "Far side" indicator at the limb. Travel markers remain.
   - Each row shows its location, forecast quality, and daily Sun/Earth hours and Go status
     from the shared forecast source. Custom locations retain their estimate label. Forecast
-    columns share the same UTC window, scroll together, and let users select a day. Loading
-    and failure/retry states stay within their own row.
+    columns share the same UTC window, use one shared horizontal scrollbar below the rows,
+    and let users select a day. Scrolling any chart also moves the others. Scrubbing
+    the timeline follows the selected date in every chart. Loading uses a small spinner, with
+    a static indicator under reduced motion; failure/retry states stay within their own row.
   - On desktop, candidate details occupy the right side. On narrower screens, they replace
     the lower tray temporarily, preserving the Moon and timeline. Close returns to the tray.
     "Done" or Compare closes comparison; Escape closes the candidate or armed slot first.
+    On exit the tray fades and collapses as the sky details and catalogue markers return.
 - **Travel comparison:** a card's Compare action starts with that destination only. The
   shared three-site controller switches the cards to Add site, Remove site, or Comparison
   full. In this context every member can be removed, including the first. Travel keeps
   its search, dates, filters and matching Moon diamonds. Compare uses its existing bottom tray beneath the Moon
-  and stays clear of Travel on the right; on narrow screens both become independently scrolling lower
-  sections. Filters never change the Moon framing. Closing comparison returns focus to
-  the selected Travel card. The 360� Observer icon reuses the top-bar glyph and carries
+  and stays clear of Travel on the right. On phones, Travel collapses to a retained header;
+  Expand/Collapse switches the lower workspace without clearing dates or results, leaving
+  enough room for a complete comparison chart and its shared rail. Opening Travel from Compare preserves its selected sites, UTC window and hidden
+  sky/forecast panels; closing that added Travel panel returns to the same comparison.
+  Comparison row and marker navigation preserve the scrubbed UTC and shared window. On
+  short phones the comparison heading scrolls with the rows so site controls remain usable.
+  Filters never change the Moon framing. Closing comparison returns focus to
+  the selected Travel card. The 360° Observer icon reuses the top-bar glyph and carries
   the exact destination coordinates and full trip interval.
   - Comparison reuses the science module's existing Travel daily values, including
     partial arrival/departure days, explicit unknowns and mixed forecast sources. It
     does not rerun or substitute the example mission's daily Go rule. Changing the
-    search criteria ends the comparison before refreshing results.
+    search criteria ends a comparison started from Travel before refreshing results; a
+    comparison started on the main Moon retains its sites and window.
 - **Lanes:** two lanes over a Go line, one column per day with no gaps. The Sun lane
   (7 px) is `--sun` on days with at least `NEEDS.sunHours`, the Earth lane (7 px, 2 px
   below) is `--earth` on days with at least `NEEDS.earthHours`, and the Go line (3 px,
@@ -1078,11 +1094,12 @@ glowing edges or terminal-style typography.
 
 ### Observer controls and readouts
 
-Presentation, Horizon, Sun, Earth and View options sit in the bottom bar. Buttons reuse the
+Horizon, Sun, Earth, Horizon line and View options sit in the bottom bar. Site selection
+uses the Moon navigator; the duplicate catalog and presentation dropdowns are removed. Buttons reuse the
 Moon page's unfilled outline control. Native selects use the same outline and corner radius.
 Control hit areas are at least 44 px. Hover brightens the outline over 160 ms; keyboard focus
 is a 2 px outline with a 3 px offset. Press feedback scales buttons to 0.97 without moving
-their layout. Disabled controls use half opacity; observer-only settings disable in overview.
+their layout. Disabled controls use half opacity.
 
 View options enters over 180 ms with an ease-out, 6 px upward settle and opacity from 0.6
 to 1. Reduced motion removes this entrance, press scaling and control transitions. The
@@ -1099,8 +1116,8 @@ in View options. Loading, errors and coarse custom-terrain status stay visible o
 
 A Moon color texture without relief maps provides geographic context, with a white point
 outlined in black for the current site. Scroll/+/- zooms; drag/arrow keys orbits; clicking
-or Enter/Space requests new coordinates from the host. The separate Lunar overview button
-opens the larger view at the current site. Keyboard focus uses the shared visible outline.
+or Enter/Space requests new coordinates from the host. Whole Moon returns to the main
+Moon page at the selected location and time. Keyboard focus uses the shared visible outline.
 The host supplies Sun/Earth directions and illumination to one 3D scene, with no orbit
 lines. Yellow and blue surface dots mark the Sun-facing and Earth-facing points; the
 Moon hides far-side dots and bodies. Their sizes and distances are schematic. If science is unavailable,
@@ -1112,7 +1129,7 @@ skips the transition. The navigator only draws on data, texture or camera change
 Scientific calculations remain outside the UI. Loading retains the previous accepted
 site, terrain and sky together; a failed calculation offers Retry forecast. When the
 forecast service is unavailable, one inline message explains that custom locations need
-the service and asks the visitor to pick a listed site; selection loading indicators stop.
+the service and asks the visitor to choose another location on the navigator; selection loading indicators stop.
 
 Both Moon views use an unrestricted camera-space orbit that crosses either pole. The
 camera stays where the user placed it while the date changes. A newly accepted site
@@ -1122,7 +1139,7 @@ percentage; reduced motion removes the spin and pulse. Prepared custom windows c
 30 exact daily scenes at the selected UTC hour, so Sun/Earth positions and geometric
 lighting update together during timeline input without waiting for a network response.
 
-### Lunar overview navigation and site highlight
+### Lunar overview renderer (integration API)
 
 The Moon occupies about 60% of the shorter viewport dimension at the default zoom.
 Portrait framing widens the vertical field of view to keep the Moon inside the screen.
@@ -1131,10 +1148,8 @@ Opening the location globe restores this zoom while facing the current site. A f
 position; a nearby Current site label gives its name. Both hide when the site is behind
 the Moon. This neutral marker is distinct from the Sun and Earth colors.
 
-Back to observer replaces the inactive look-direction controls in overview mode. It
-preserves the selected site, UTC instant and observer camera, closes View options if open,
-and returns keyboard focus to the small Moon button. On phones it occupies the full second
-control row with the standard 44 px minimum height.
+The renderer retains this API for integration checks. The Observer page stays in Observer
+view and exposes no overview switch or return control.
 
 Except for calendar and forecast range selections, brighten button outlines rather than filling them. Scientific
 calculations remain outside the views.
@@ -1244,7 +1259,8 @@ Phone controls retain touch targets and the existing sheet pattern. Estimate and
 source labels remain visible on results; detailed metrics stay in the information tooltip.
 Candidate counts report the bounded search's progress and any shortfall explicitly.
 
-The Moon View menu places Stars beside Lat/lon grid. Stars start off and load the same fixed
-Hipparcos catalog and NASA Milky Way background as Observer on demand. The host supplies
+The Moon View menu places Stars beside Lat/lon grid. Stars start on, with the same fixed
+Hipparcos catalog as Observer; users can toggle them off. Both views use individual stars
+with a 15% display brightness boost and no Milky Way background. The host supplies
 the selected time's sky orientation; the renderer composes it with the Moon model rotation.
 The background follows the camera without parallax, and missing orientation hides it.

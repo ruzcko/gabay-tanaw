@@ -212,17 +212,15 @@ try {
   await evaluate(`(()=>{const input=document.querySelector('#estimate-date');input.value='2100-12-31';input.dispatchEvent(new Event('change',{bubbles:true}));})()`);
   await waitFor(`${acceptedDate('2100-12-31')} && document.querySelector('#terrain-note').textContent.startsWith('Detailed terrain loaded.')`);
   assert.equal(await evaluate(`document.querySelector('.location-map .globe-compass').textContent`),'NESW');
-  await evaluate(`(()=>{const mode=document.querySelector('#mode');mode.value='overview';mode.dispatchEvent(new Event('change',{bubbles:true}));})()`);
-  await waitFor(`!!document.querySelector('.overview-site-label:not([hidden])')`);
+  assert.equal(await evaluate(`document.querySelector('#mode, #catalog-site, #observer-back')`),null);
   assert.equal(await evaluate(`document.querySelector('.navigator-open')`),null);
   assert.ok(await evaluate(`new URL(document.querySelector('.observer-topbar a').href).searchParams.get('t')==='2100-12-31T00:00:00.000Z'`));
-  for(const [width,height] of [[1280,900],[390,844]]){
+  for(const [width,height] of [[1280,900],[390,844],[320,568]]){
     await send('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:1,mobile:false});await delay(200);
-    assert.ok(await evaluate(`(()=>{const r=document.querySelector('.observer-viewport').getBoundingClientRect();return [...document.querySelectorAll('.overview-label:not([hidden])')].every(e=>{const b=e.getBoundingClientRect();return b.left>=r.left&&b.right<=r.right&&b.top>=r.top&&b.bottom<=r.bottom;});})()`),'Overview overlays stay within the viewport');
-    assert.ok(await evaluate(`(()=>{const boxes=[...document.querySelectorAll('.overview-label:not([hidden])')].map(e=>e.getBoundingClientRect());return boxes.every((a,i)=>boxes.slice(i+1).every(b=>a.right<=b.left||b.right<=a.left||a.bottom<=b.top||b.bottom<=a.top));})()`),'Body labels do not overlap the site label');
-    assert.ok(await evaluate(`(()=>{const r=document.querySelector('.observer-viewport').getBoundingClientRect(),s=document.querySelector('.overview-site-label').getBoundingClientRect();return Math.abs((s.top+s.bottom-r.top-r.bottom)/2)<1;})()`),'Site label stays anchored after resizing');
+    assert.ok(await evaluate(`document.documentElement.scrollWidth<=innerWidth`),'Observer controls fit without horizontal overflow');
+    assert.ok(await evaluate(`(()=>{const controls=[...document.querySelectorAll('.look-controls button, #horizon-toggle, #options-toggle')];return controls.every(el=>{const r=el.getBoundingClientRect();return r.width>=44&&r.height>=44;});})()`),'Remaining controls retain touch targets');
     const shot=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});
-    await writeFile(join(output,`overview-${width}.png`),Buffer.from(shot.data,'base64'));
+    await writeFile(join(output,`observer-controls-${width}.png`),Buffer.from(shot.data,'base64'));
   }
   assert.deepEqual(errors,[],'No browser JavaScript exceptions');
   for (const route of ['/observer/','/']) {
@@ -235,6 +233,6 @@ try {
     await evaluate(`(()=>{const d=document.querySelector('#estimate-date');d.value='${outside}';d.dispatchEvent(new Event('input',{bubbles:true}));})()`);
     await waitFor(`document.querySelector('#quick-estimate [role="status"]')?.textContent.includes('${ESTIMATE_UNAVAILABLE}')`);
   }
-  console.log('PASS: manifest picker bounds; both scenes at first/last years and terminal day; sky clock, strip, countdowns, heights and diagrams; range choices; accurate priority and coverage edges; coarse then detailed terrain at boundary dates; on-demand packs/terrain; worker and inline unavailable errors; compass and overview clipping; desktop/mobile layout.');
+  console.log('PASS: manifest picker bounds; both scenes at first/last years and terminal day; sky clock, strip, countdowns, heights and diagrams; range choices; accurate priority and coverage edges; coarse then detailed terrain at boundary dates; on-demand packs/terrain; worker and inline unavailable errors; compass and simplified Observer controls; desktop/mobile layout.');
   console.log(`Screenshots: ${output}`);
 } finally {releaseDetail?.();await browser.close();server.closeAllConnections();await new Promise(r=>server.close(r));}

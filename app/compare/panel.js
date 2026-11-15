@@ -6,12 +6,66 @@ const node = (tag, className, text = '') => Object.assign(document.createElement
 const sameSite = (a, b) => a && b && Math.abs(a.lat - b.lat) < 1e-5 &&
   Math.abs(((a.lon - b.lon + 540) % 360) - 180) < 1e-5;
 
-// Comparison owns its pinned locations; the host continues to own the selected location and UTC.
+// Comparison owns its locations; the host continues to own the selected location and UTC.
 export function createComparePanel({ root, selection, window: getWindow, onChange, pickDay }) {
   const slots = root.querySelector('#compare-slots'), status = root.querySelector('#compare-sub');
+  const scrollbar = node('input', 'compare-scrollbar');
+  scrollbar.type = 'range'; scrollbar.min = 0; scrollbar.step = 1; scrollbar.value = 0; scrollbar.hidden = true;
+  scrollbar.setAttribute('aria-label', 'Scroll dates for all comparison sites'); scrollbar.setAttribute('aria-controls', 'compare-slots');
+  root.append(scrollbar);
+  function scrollCharts(left) {
+    for (const chart of slots.querySelectorAll('.compare-forecast')) {
+      if (Math.abs(chart.scrollLeft - left) > 1) chart.scrollLeft = left;
+    }
+    scrollbar.value = left;
+  }
+  scrollbar.addEventListener('input', () => scrollCharts(Number(scrollbar.value)));
+  scrollbar.addEventListener('keydown', event => {
+    if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+    event.preventDefault();
+    scrollCharts(Math.max(0, Math.min(Number(scrollbar.max), Number(scrollbar.value) + (event.key === 'ArrowLeft' ? -40 : 40))));
+  });
   let active = false, armed = -1, points = [], windowKey = '', controller, source, generation = 0;
   const results = new Map();
   let trip = null;
+  let followedDate = '', selectedUtc = '', followFrame = 0;
+  const publish = () => document.dispatchEvent(new CustomEvent('tanaw:compare', { detail: {
+    active, points: points.flatMap((point, i) => point ? [{ ...point, slot: i + 1 }] : []),
+  } }));
+  function followDate() {
+    cancelAnimationFrame(followFrame);
+    followFrame = requestAnimationFrame(() => {
+      if (!active) return;
+      const charts = [...slots.querySelectorAll('.compare-forecast')];
+      const first = charts[0], selected = first?.querySelector('[aria-current="date"]');
+      scrollbar.hidden = !first || first.scrollWidth <= first.clientWidth;
+      if (!scrollbar.hidden) {
+        scrollbar.style.width = `${first.clientWidth}px`;
+        scrollbar.max = first.scrollWidth - first.clientWidth;
+        scrollbar.style.setProperty('--thumb-width', `${Math.max(28, first.clientWidth * first.clientWidth / first.scrollWidth)}px`);
+      }
+      if (!selected || !first.clientWidth) return;
+      const sticky = first.querySelector('th').offsetWidth;
+      const at = selected.getBoundingClientRect(), box = first.getBoundingClientRect();
+      const left = Math.max(0, Math.min(first.scrollWidth - first.clientWidth,
+        first.scrollLeft + at.left - box.left - sticky - (first.clientWidth - sticky - at.width) / 2));
+      scrollCharts(left);
+    });
+  }
+  function syncCharts(utc, force = false) {
+    const date = utc.slice(0, 10);
+    if (!force && date === followedDate) return;
+    slots.querySelectorAll('.compare-table button').forEach(b => {
+      const current = b.getAttribute('aria-label') === date;
+      b.tabIndex = current ? 0 : -1;
+      if (current) b.setAttribute('aria-current', 'date');
+      else b.removeAttribute('aria-current');
+    });
+    slots.querySelectorAll('.compare-table td').forEach(cell => cell.toggleAttribute('data-selected', cell.dataset.date === date));
+    if (force || date !== followedDate) followDate();
+    followedDate = date;
+  }
+  new ResizeObserver(() => { if (active) followDate(); }).observe(root);
   const button = (label, className, click) => {
     const b = node('button', className, label);
     b.type = 'button'; b.addEventListener('click', click); return b;
@@ -27,7 +81,7 @@ export function createComparePanel({ root, selection, window: getWindow, onChang
     const focused = slots.contains(document.activeElement) ? document.activeElement.dataset.focus : null;
     const positions = new Map([...slots.querySelectorAll('.compare-site')].map(row => [row.dataset.site, row.querySelector('.compare-forecast')?.scrollLeft || 0]));
     message();
-    const selectedDate = selection().instantUtc.slice(0, 10);
+    const selectedDate = (selectedUtc || selection().instantUtc).slice(0, 10);
     slots.replaceChildren(...Array.from({ length: 3 }, (_, i) => {
       const point = points[i];
       if (!point) {
@@ -48,18 +102,22 @@ export function createComparePanel({ root, selection, window: getWindow, onChang
       }
       const row = node('article', 'compare-site');
       row.dataset.site = point.id; row.dataset.slot = i;
-      const info = node('div', 'compare-info'), title = node('h3', '', point.name);
+      const info = node('div', 'compare-info'), title = node('h3', '');
       const result = results.get(point.id);
+      const choose = button('', 'compare-site-select', () => {
+        armed = -1; message(); onChange();
+        document.dispatchEvent(new CustomEvent('tanaw:compare-pick', { detail: { ...point, reveal: false } }));
+      });
+      choose.dataset.slot = i; choose.dataset.focus = `site-${i}`;
+      choose.setAttribute('aria-label', `Show site ${i + 1}: ${point.name} on the Moon`);
+      choose.setAttribute('aria-pressed', String(sameSite(point, selection().point)));
+      choose.append(node('span', 'compare-site-number', String(i + 1)), node('span', 'compare-site-name', point.name));
+      title.append(choose);
       info.append(title);
-      if (!trip) info.append(node('p', 'compare-quality', i === 0 ? 'First site · Pinned' : 'Comparison site'));
-      if (i > 0 || trip) {
-        const remove = button('Remove', 'btn compare-remove', () => {
-          points[i] = null; draw(); onChange(); slots.querySelector(`[data-slot="${i}"]`)?.focus();
-        });
-        remove.dataset.focus = `remove-${i}`;
-        remove.setAttribute('aria-label', `Remove ${point.name}`);
-        info.append(remove);
-      }
+      const remove = button('Remove', 'btn compare-remove', () => removeSite(point));
+      remove.dataset.focus = `remove-${i}`;
+      remove.setAttribute('aria-label', `Remove ${point.name}`);
+      info.append(remove);
       row.append(info);
       if (!result) {
         row.setAttribute('aria-busy', 'true');
@@ -72,16 +130,15 @@ export function createComparePanel({ root, selection, window: getWindow, onChang
         row.append(error);
       } else {
         row.dataset.quality = result.quality;
-        info.append(node('p', 'compare-quality', result.quality === 'accurate' ? 'Accurate forecast' : 'Estimate · Coarse terrain'));
+        info.append(node('p', 'compare-quality', {
+          accurate: 'Accurate forecast', estimate: 'Estimate · Coarse terrain',
+          mixed: 'Mixed forecast · Includes estimates', unknown: 'Forecast incomplete · Unknown values',
+        }[result.quality] || 'Forecast quality unknown'));
         const scroll = node('div', 'compare-forecast');
         scroll.dataset.focus = `forecast-${i}`;
         scroll.tabIndex = 0; scroll.setAttribute('role', 'region');
         scroll.setAttribute('aria-label', `${point.name} daily forecast`);
-        scroll.addEventListener('scroll', () => {
-          slots.querySelectorAll('.compare-forecast').forEach(other => {
-            if (other !== scroll && other.scrollLeft !== scroll.scrollLeft) other.scrollLeft = scroll.scrollLeft;
-          });
-        });
+        scroll.addEventListener('scroll', () => scrollCharts(scroll.scrollLeft));
         const table = node('table', 'compare-table');
         const caption = node('caption', 'sr', `${point.name}: daily sunlight and Earth visibility in hours, UTC`);
         const head = node('thead', ''), dates = node('tr', '');
@@ -105,7 +162,7 @@ export function createComparePanel({ root, selection, window: getWindow, onChang
           for (const day of result.series) {
             const cell = node('td', '', key === 'go' ? (day.go ? 'Yes' : '—') : day[key] == null ? 'Unknown' : String(Number(day[key].toFixed(trip ? 1 : 0))));
             if (trip) cell.title = `${day.startUtc} – ${day.endUtc} · ${day.durationHours.toFixed(2)} h · ${day.quality}`;
-            tr.append(cell);
+            cell.dataset.date = day.date; tr.append(cell);
           }
           body.append(tr);
         }
@@ -124,6 +181,7 @@ export function createComparePanel({ root, selection, window: getWindow, onChang
       const scroll = row.querySelector('.compare-forecast');
       if (scroll) scroll.scrollLeft = positions.get(row.dataset.site) || 0;
     });
+    syncCharts(selectedUtc || selection().instantUtc, true);
     if (focused) slots.querySelector(`[data-focus="${focused}"]`)?.focus({ preventScroll: true });
   }
   async function refresh() {
@@ -154,35 +212,37 @@ export function createComparePanel({ root, selection, window: getWindow, onChang
     if (points.some(p => sameSite(p, point))) {
       status.textContent = 'This location is already in the comparison.'; return false;
     }
-    const index = armed >= 0 ? armed : points.findIndex(p => !p);
+    const index = points.findIndex(p => !p);
     if (index < 0) return false;
-    points[index] = { ...point }; armed = -1; refresh(); onChange(); return true;
+    points[index] = { ...point }; armed = -1; publish(); refresh(); onChange(); return true;
+  }
+  function removeSite(point) {
+    const i = points.findIndex(p => sameSite(p, point));
+    if (i < 0) return false;
+    points.splice(i, 1); points.push(null); armed = -1;
+    publish(); draw(); onChange();
+    slots.querySelector('.compare-add')?.focus();
+    return true;
   }
   return {
     get active() { return active; },
     get fromTravel() { return active && !!trip; },
     contains(point) { return points.some(p => sameSite(p, point)); },
-    remove(point) {
-      const index = points.findIndex(p => sameSite(p, point));
-      if (index < 0 || (index === 0 && !trip)) return false;
-      points[index] = null; armed = -1; draw(); onChange(); return true;
-    },
     get picking() { return armed >= 0; },
-    action(point) { return points.some(p => sameSite(p, point)) ? (trip ? 'Remove site' : 'Site added') : points.filter(Boolean).length === 3 ? 'Comparison full' : 'Add site'; },
-    open(point = selection().point, travel = null) { trip = travel; active = true; armed = -1; points = [{ ...point }, null, null]; results.clear(); refresh(); },
-    close() { active = false; armed = -1; ++generation; controller?.abort(); source?.dispose(); },
-    add,
+    action(point) { return points.some(p => sameSite(p, point)) ? 'Remove site' : points.filter(Boolean).length === 3 ? 'Comparison full' : 'Add site'; },
+    open(point = selection().point, travel = null) { trip = travel; active = true; armed = -1; selectedUtc = selection().instantUtc; points = [{ ...point }, null, null]; results.clear(); publish(); refresh(); },
+    close() { active = false; armed = -1; ++generation; controller?.abort(); source?.dispose(); cancelAnimationFrame(followFrame); publish(); },
+    add, remove: removeSite,
     cancelPick() { armed = -1; draw(); onChange(); },
-    sync() {
+    sync(utc = selection().instantUtc) {
       if (!active) return;
+      slots.querySelectorAll('.compare-site-select').forEach(button => {
+        button.setAttribute('aria-pressed', String(sameSite(points[Number(button.dataset.slot)], selection().point)));
+      });
+      selectedUtc = utc;
       const window = getWindow();
       if (!trip && `${window.startUtc}:${window.days}` !== windowKey) refresh();
-      else slots.querySelectorAll('.compare-table button').forEach(b => {
-        const current = b.getAttribute('aria-label') === selection().instantUtc.slice(0, 10);
-        b.tabIndex = current ? 0 : -1;
-        if (current) b.setAttribute('aria-current', 'date');
-        else b.removeAttribute('aria-current');
-      });
+      else syncCharts(utc);
     },
   };
 }

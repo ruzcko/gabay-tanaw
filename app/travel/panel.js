@@ -15,7 +15,7 @@ export function createTravelPanel(host) {
   root.setAttribute('aria-labelledby', 'travel-title');
   root.innerHTML = `
     <div class="travel-main">
-      <div class="travel-head"><h2 id="travel-title" tabindex="-1">Travel</h2><button type="button" class="btn" data-close>Close</button></div>
+      <div class="travel-head"><h2 id="travel-title" tabindex="-1">Travel</h2><button type="button" class="btn travel-expand" data-expand aria-expanded="false" aria-label="Expand Travel" title="Expand Travel"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button><button type="button" class="btn" data-close>Close</button></div>
       <form class="travel-form">
         <div class="travel-date-heading"><span>Dates · UTC</span><p data-trip></p></div>
         <div class="travel-pair"><label><span data-start-label>Arrival</span><input name="arrival" aria-label="Arrival · UTC" type="datetime-local" min="1969-01-01T00:00" max="2100-12-31T23:59" required></label><label><span data-end-label>Departure</span><input name="departure" aria-label="Departure · UTC" type="datetime-local" min="1969-01-01T00:00" max="2101-01-01T00:00" required></label></div>
@@ -171,18 +171,26 @@ export function createTravelPanel(host) {
     else { autoRefresh = false; clearTimeout(refreshTimer); refreshTimer = null; jobs.cancel(); setBusy(false); $('.travel-filters').hidden = true; root.classList.remove('filters-open'); hud.classList.remove('travel-filters-open'); $('[data-filters]').setAttribute('aria-expanded', 'false'); trigger.focus(); }
     publish(); host.frame();
   }
-  async function choose(result) {
+  async function choose(result, { preserveTime = false } = {}) {
     state.selected = pointKey(result.point);
     state.expected = `${state.selected}@${Date.parse(result.startUtc)}`;
-    input('arrival').value = result.startUtc.slice(0, 16); input('departure').value = result.endUtc.slice(0, 16);
+    if (!preserveTime) { input('arrival').value = result.startUtc.slice(0, 16); input('departure').value = result.endUtc.slice(0, 16); }
     tripText();
     publish(); renderResults();
-    await host.select(result);
+    await host.select(result, { preserveTime });
   }
   function updateCompareAction(row, result) {
     const action = host.compareAction(result.point), control = row.querySelector('.travel-compare');
     control.textContent = action;
-    control.disabled = action === 'Comparison full';
+    const full = action === 'Comparison full';
+    control.hidden = full;
+    let capacity = row.querySelector('.compare-capacity');
+    if (!capacity) {
+      capacity = node('div', 'compare-capacity'); capacity.setAttribute('role', 'status');
+      capacity.append(node('span', '', 'Comparison full'), node('small', '', 'Remove a site from the comparison to add this location.'));
+      control.after(capacity);
+    }
+    capacity.hidden = !full;
     control.setAttribute('aria-pressed', String(action === 'Remove site'));
   }
   function resultRow(result, index) {
@@ -346,6 +354,14 @@ export function createTravelPanel(host) {
   root.querySelectorAll('[data-criteria][type="number"]').forEach(field => { field.required = true; });
   $('[data-reset]').addEventListener('click', () => { state.criteria = { ...TRAVEL_DEFAULTS }; state.knownFirst = true; $('[data-known]').checked = true; state.sortField = 'sunlight'; state.sortDirection = 'desc'; $('[data-sort-field]').value = state.sortField; $('[data-sort-direction]').value = state.sortDirection; writeCriteria(); setDeparture(); filtersChanged(); });
   $('[data-close]').addEventListener('click', () => setOpen(false));
+  $('[data-expand]').addEventListener('click', () => {
+    const expanded = root.classList.toggle('is-expanded');
+    $('[data-expand]').setAttribute('aria-expanded', String(expanded));
+    $('[data-expand]').setAttribute('aria-label', expanded ? 'Collapse Travel' : 'Expand Travel');
+    $('[data-expand]').title = expanded ? 'Back to comparison' : 'Expand Travel';
+    if (!expanded) $('.travel-main').scrollTop = 0;
+    host.frame();
+  });
   $('[data-filters]').addEventListener('click', () => setFilters($('[data-filters]').getAttribute('aria-expanded') !== 'true'));
   $('[data-filter-close]').addEventListener('click', () => setFilters(false));
   $('[data-cancel]').addEventListener('click', () => {
@@ -372,7 +388,7 @@ export function createTravelPanel(host) {
     const candidates = [...state.results, ...state.sampled].filter(r => pointKey(r.point) === event.detail.key);
     const result = candidates.find(r => Date.parse(r.startUtc) === Date.parse(input('arrival').value + 'Z')) || candidates[0];
     if (!result) return;
-    choose(result); [...root.querySelectorAll('.travel-result')].find(n => n.dataset.point === event.detail.key)?.scrollIntoView({ block: 'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+    choose(result, { preserveTime: !!event.detail.preserveTime }); [...root.querySelectorAll('.travel-result')].find(n => n.dataset.point === event.detail.key)?.scrollIntoView({ block: 'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
   });
   const resize = new ResizeObserver(() => host.frame()); resize.observe(root); resize.observe($('.travel-filters'));
   window.addEventListener('pagehide', () => { clearTimeout(refreshTimer); jobs.cancel(); resize.disconnect(); }, { once: true });
@@ -380,6 +396,12 @@ export function createTravelPanel(host) {
     get active() { return state.open; },
     resultFor(point) { return [...state.results, ...state.sampled].find(r => r.status === 'pass' && pointKey(r.point) === pointKey(point)); },
     syncComparison() {
+      if (!host.comparing()) {
+        root.classList.remove('is-expanded');
+        $('[data-expand]').setAttribute('aria-expanded', 'false');
+        $('[data-expand]').setAttribute('aria-label', 'Expand Travel');
+        $('[data-expand]').title = 'Expand Travel';
+      }
       for (const row of root.querySelectorAll('.travel-result')) {
         const result = [...state.results, ...state.sampled].find(r => pointKey(r.point) === row.dataset.point);
         if (result) updateCompareAction(row, result);

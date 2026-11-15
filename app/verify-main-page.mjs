@@ -177,9 +177,8 @@ try {
   // A visited site's panel shows its landing day: the touchdown in UTC and the estimated sky.
   await page.setViewportSize({ width: 1280, height: 800 });
   await pick(page, 'apollo-11');
-  // The landing sky is worked out once its box is in view; the Forecast panel left open above
-  // makes the site panel shorter, so scroll to it.
-  await page.locator('#panel .landing').scrollIntoViewIfNeeded();
+  // The open Forecast panel can leave this lazy-loaded section below the site's photo.
+  await page.locator('#panel .landing[data-site="apollo-11"]').scrollIntoViewIfNeeded();
   await page.waitForFunction(() => {
     const box = document.querySelector('#panel .landing');
     return box && /20:17 UTC/.test(box.textContent) && /Sun (up|hidden)/.test(box.textContent) && /Earth (up|hidden)/.test(box.textContent);
@@ -188,6 +187,7 @@ try {
   log('a visited site shows its landing day at 20:17 UTC with the Sun and Earth');
   // A far-side site's Earth never rises.
   await pick(page, 'change-4');
+  await page.locator('#panel .landing[data-site="change-4"]').scrollIntoViewIfNeeded();
   await page.waitForFunction(() => /Earth hidden, [^·]*· never rises here/.test(document.querySelector('#panel .landing')?.textContent || ''),
     null, { timeout: 60000 }).catch(async () => assert.fail(`Chang'e 4's landing day: ${await page.locator('#panel').innerText()}`));
   log('landing day says how long sunlight lasts, and a far-side Earth never rises');
@@ -201,7 +201,8 @@ try {
   await link.click();
   await page.waitForURL(url => new URL(url).pathname === '/observer/');
   await page.waitForFunction(() => document.querySelector('#forecast-status')?.textContent.match(/ · Sun (in view|hidden by terrain) · Earth /), null, { timeout: 60000 });
-  assert.equal(await page.locator('#catalog-site').inputValue(), href.searchParams.get('site'));
+  assert.equal(new URL(page.url()).searchParams.get('site'), href.searchParams.get('site'));
+  assert.ok(await page.locator('#moon-navigator').isVisible());
   log('top-bar Observer view opens the observer at the selected site');
 
   // A page opened as an estimate link can still change site: the arrows and a pin click.
@@ -234,7 +235,7 @@ try {
   const at = new URL(page.url()).searchParams;
   assert.equal(at.get('lat'), '-85.5'); assert.equal(at.get('lon'), '30.25');
   assert.equal(new Date(at.get('t')).toISOString(), new Date(handoffUtc).toISOString());
-  assert.equal(await page.locator('#catalog-site').evaluate(el => el.selectedOptions[0].textContent), '85.50° S, 30.25° E');
+  assert.match(await page.locator('.observer-site').textContent(), /^85\.50° S, 30\.25° E/);
   log('Observer view from a typed place keeps the point, the date and the estimate');
 
   // A click on the Moon's face, away from pins, opens that point as an estimate named by its

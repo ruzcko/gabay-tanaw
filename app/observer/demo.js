@@ -34,7 +34,7 @@ let sites = [], scrubber, controller, generation = 0, firstSnapshot = true, acce
 let windowSupported = false, quickPanel, estimateMode = false, travelTrip = null;
 let readyEstimateWindow, estimateRun;
 let hoursSite, lastRouteWrite = 0;
-let horizonLineVisible = true;
+let horizonLineVisible = true, selectedSiteId = 'custom';
 const playback = createPlayback($('#observer-play'), {
   state: () => scrubber?.state,
   speedButton: $('#observer-speed'),
@@ -50,7 +50,7 @@ function prepareHours(site) {
 }
 const estimateSource = createForecastSource();
 const estimateTerrain = createLocalTerrainProvider();
-const customServiceMessage = "Custom locations need the forecast service, which isn't available on this site. Pick a listed site.";
+const customServiceMessage = "Custom locations need the forecast service, which isn't available on this site. Choose another location on the Moon navigator.";
 const serviceUnavailable = error => error?.serviceUnavailable || error instanceof TypeError || error instanceof SyntaxError || error?.code === 'UPSTREAM';
 function showCustomServiceUnavailable() {
   serviceAvailable = false; windowSupported = false;
@@ -63,7 +63,7 @@ function showCustomServiceUnavailable() {
   $('#retry').hidden = false;
 }
 const progressive = createProgressiveForecast(readLocalObserverWindow, () => {
-  if (!scrubber || $('#catalog-site').value !== 'custom') return;
+  if (!scrubber || selectedSiteId !== 'custom') return;
   showWindow();
   scrubber.setLoading(!!progressive.state?.loading);
 });
@@ -81,7 +81,7 @@ const observer = createObserverView({
         : 'Detailed terrain is unavailable here. Showing coarse terrain.'
       : info.state === 'error' ? 'Detailed terrain could not load. The current terrain remains visible.' : '';
     const busy = ['loading', 'refining'].includes(info.state);
-    $('#terrain-work').hidden = !busy || $('#mode').value === 'overview';
+    $('#terrain-work').hidden = !busy;
     terrainWork.set(info.state === 'refining' ? 'Loading detailed terrain…' : 'Loading terrain mesh…', busy);
     terrainStatus.set(info.state === 'ready' ? `${info.source} · ${info.resolutionM.toFixed(1)} m terrain sampling` :
       info.state === 'error' ? info.message : 'Loading terrain mesh…', busy);
@@ -103,7 +103,7 @@ function sceneNotice(message, busy = false) {
 const locationGlobe = createLocationGlobe($('.observer-viewport'), selectCoordinates);
 $('.observer-controls').insertBefore($('#quick-estimate'), $('.observer-controls nav'));
 function useQuickEstimateForCustomSite() {
-  if (estimateMode || serviceAvailable || $('#catalog-site').value !== 'custom') return;
+  if (estimateMode || serviceAvailable || selectedSiteId !== 'custom') return;
   const { instantUtc, rangeDays, startUtc } = scrubber.state;
   estimateMode = true;
   configureScrubber(instantUtc, rangeDays, startUtc);
@@ -113,24 +113,21 @@ function selectCoordinates(coordinates) {
   locationGlobe.beginSelection(coordinates, true);
   const saved = catalogSiteAt(sites, coordinates);
   if (saved) {
-    $('#catalog-site').value = saved.id; scrubber.setCustomLocation(false);
-    setPresentation('observer'); update(); return;
+    selectedSiteId = saved.id; scrubber.setCustomLocation(false);
+    update(); return;
   }
   const next = { latitudeDeg: Number(coordinates.latitudeDeg.toFixed(6)), longitudeEastDeg: Number(coordinates.longitudeEastDeg.toFixed(6)) };
   const changed = JSON.stringify(next) !== JSON.stringify(customSite);
   customSite = next;
-  let option = $('#catalog-site option[value="custom"]');
-  if (!option) { option = new Option('', 'custom'); $('#catalog-site').append(option); }
-  option.textContent = customName(); // named by its coordinates, as on the main page
-  $('#catalog-site').value = 'custom';
+  selectedSiteId = 'custom';
   useQuickEstimateForCustomSite();
   scrubber.setCustomLocation(!estimateMode, changed);
-  setPresentation('observer'); update();
+  update();
 }
 
 function showWindow() {
   if (estimateMode) { $('#window-status').hidden = true; return; }
-  const custom = $('#catalog-site').value === 'custom';
+  const custom = selectedSiteId === 'custom';
   $('#window-status').hidden = !custom;
   if (!custom) return;
   const state = scrubber.state, progress = progressive.state;
@@ -151,7 +148,7 @@ async function update() {
   if (!scrubber) return;
   // Static catalog selections need the same coherent product as minute playback:
   // the legacy hourly provider supplies visibility but no geometric lighting.
-  const staticCatalog = !serviceAvailable && sites.some(site => site.id === $('#catalog-site').value);
+  const staticCatalog = !serviceAvailable && sites.some(site => site.id === selectedSiteId);
   if (estimateMode || staticCatalog || Date.parse(scrubber.instantUtc) % 3600000) return updateEstimate();
   showWindow();
   const current = ++generation;
@@ -159,7 +156,7 @@ async function update() {
   const signal = controller.signal;
   const stale = () => current !== generation || lifecycle.signal.aborted;
   clearTimeout(scrubTimer); scrubTimer = null;
-  const selected = sites.find(site => site.id === $('#catalog-site').value), instantUtc = scrubber.instantUtc;
+  const selected = sites.find(site => site.id === selectedSiteId), instantUtc = scrubber.instantUtc;
   const requested = selected ? { id: selected.id, latitudeDeg: selected.lat, longitudeEastDeg: selected.lon } : customSite;
   prepareHours(requested);
   locationGlobe.beginSelection(requested);
@@ -225,12 +222,11 @@ function displaySnapshot(result, selected, requested, name, frameUpdate = false)
   accepted = snapshot;
   $('#observer-play').disabled = false;
   sceneNotice(siteChanged ? `Site selected · ${formatLatLon(snapshot.site.latitudeDeg, snapshot.site.longitudeEastDeg)}` : '');
-  document.querySelectorAll('[data-look]').forEach(button => button.disabled = $('#mode').value === 'overview');
+  document.querySelectorAll('[data-look]').forEach(button => button.disabled = false);
   locationGlobe.update(snapshot);
-  locationGlobe.setVisible($('#mode').value === 'observer');
+  locationGlobe.setVisible(true);
   siteReadout.replaceChildren(document.createTextNode(name));
   const coords = document.createElement('small'); coords.textContent = formatLatLon(snapshot.site.latitudeDeg, snapshot.site.longitudeEastDeg); siteReadout.append(coords);
-  if ($('#mode').value === 'overview' && siteChanged) observer.setMode('overview', { focusSite: true });
   if (firstSnapshot) { observer.frameOpening(); firstSnapshot = false; }
   const visibility = name => `${name === 'sun' ? 'Sun' : 'Earth'} ${snapshot.bodies[name].centerVisible ? 'in view' : 'hidden by terrain'}`;
   forecastStatus.set(`${snapshot.quality === 'estimate' ? 'Estimate · ' : snapshot.interpolated ? 'Accurate forecast (interpolated) \u00b7 ' : estimateMode ? 'Accurate forecast · ' : ''}${snapshot.instantUtc.slice(11, 16)} UTC · ${visibility('sun')} · ${visibility('earth')}`);
@@ -260,7 +256,7 @@ function cancelSelection() {
 }
 async function updateEstimate() {
   const selectionGeneration = generation;
-  const selected = sites.find(site => site.id === $('#catalog-site').value);
+  const selected = sites.find(site => site.id === selectedSiteId);
   const requested = selected ? { id: selected.id, latitudeDeg: selected.lat, longitudeEastDeg: selected.lon } : customSite;
   prepareHours(requested);
   const instantUtc = scrubber.instantUtc, start = Date.parse(scrubber.state.startUtc), end = Date.parse(scrubber.state.endUtc) + 86400000;
@@ -310,7 +306,7 @@ async function updateEstimate() {
 async function updatePlayback(current, instantUtc) {
   if (estimateRun) await estimateRun.done.catch(() => {});
   if (current !== generation || lifecycle.signal.aborted) return false;
-  const selected = sites.find(site => site.id === $('#catalog-site').value);
+  const selected = sites.find(site => site.id === selectedSiteId);
   const requested = selected ? { id: selected.id, latitudeDeg: selected.lat, longitudeEastDeg: selected.lon } : customSite;
   const name = selected?.name || customName();
   const request = { id: selected?.id, name, lat: requested.latitudeDeg, lon: requested.longitudeEastDeg,
@@ -352,27 +348,14 @@ function configureScrubber(initialUtc, rangeDays = 30, windowStartUtc) {
       $('#error').textContent = ''; $('#retry').hidden = true;
       $('#observer-play').disabled = !accepted;
       // Keep the summary of the displayed snapshot until its replacement is ready.
-      if (!estimateMode && $('#catalog-site').value === 'custom') {
+      if (!estimateMode && selectedSiteId === 'custom') {
         clearTimeout(scrubTimer); scrubTimer = null; update();
       } else if (!scrubTimer) scrubTimer = setTimeout(() => { scrubTimer = null; update(); }, 60);
     }
   });
-  scrubber.setCustomLocation(!estimateMode && $('#catalog-site').value === 'custom');
+  scrubber.setCustomLocation(!estimateMode && selectedSiteId === 'custom');
 }
 
-function setPresentation(mode, focusSite = false) {
-  $('#mode').value = mode;
-  const overview = mode === 'overview'; observer.setMode(mode, { focusSite: focusSite || overview });
-  locationGlobe.setVisible(!overview);
-  $('h1').textContent = overview ? 'Lunar overview' : 'Observer view';
-  document.title = `${$('h1').textContent} · Tanaw`;
-  document.querySelectorAll('[data-look], [data-option], #size, #relief').forEach(control => control.disabled = overview || (!accepted && control.hasAttribute('data-look')));
-  $('#terrain-status').hidden = overview;
-  if (overview) $('#terrain-work').hidden = true;
-  $('.look-controls').hidden = overview;
-  $('#horizon-toggle').hidden = overview;
-  $('#observer-back').hidden = !overview;
-}
 document.querySelectorAll('[data-look]').forEach(button => {
   button.disabled = true;
   button.addEventListener('click', () => observer.lookToward(button.dataset.look));
@@ -381,20 +364,9 @@ document.querySelectorAll('[data-option]').forEach(input => input.addEventListen
 $('#size').addEventListener('change', event => observer.setOptions({ bodySize: event.target.value }));
 $('#quality').addEventListener('change', event => observer.setOptions({ quality: event.target.value }));
 $('#relief').addEventListener('change', event => observer.setOptions({ verticalExaggeration: Number(event.target.value) }));
-$('#mode').addEventListener('change', event => setPresentation(event.target.value));
-$('#catalog-site').addEventListener('change', () => {
-  playback.pause();
-  useQuickEstimateForCustomSite();
-  scrubber.setCustomLocation(!estimateMode && $('#catalog-site').value === 'custom'); update();
-});
 $('#day').addEventListener('pointerdown', () => playback.pause());
 document.addEventListener('visibilitychange', () => { if (document.hidden) playback.pause(); }, { signal: lifecycle.signal });
 $('#retry').addEventListener('click', () => { progressive.retry(); scrubber ? update() : initialize(); });
-$('#observer-back').addEventListener('click', () => {
-  setPresentation('observer');
-  if (!$('#view-options').hidden) showOptions(false);
-  $('.location-map canvas').focus();
-});
 $('#star-brightness').addEventListener('input', event => observer.setOptions({ starBrightness: Number(event.target.value) }));
 function showOptions(open) {
   $('#view-options').hidden = !open;
@@ -442,10 +414,8 @@ async function initialize() {
     if (Math.abs(customSite.latitudeDeg) >= 90) throw new Error('Choose a location away from the exact pole.');
     const saved = catalogSiteAt(sites, customSite);
     if (route.site.id && saved?.id !== route.site.id) throw new Error('Site ID and coordinates disagree.');
-    const options = sites.map(site => new Option(site.name, site.id));
-    $('#catalog-site').replaceChildren(...options);
-    if (saved) { $('#catalog-site').value = saved.id; customSite = undefined; }
-    else { $('#catalog-site').append(new Option(customName(), 'custom')); $('#catalog-site').value = 'custom'; }
+    selectedSiteId = saved?.id || 'custom';
+    if (saved) customSite = undefined;
     estimateMode = Date.parse(route.instantUtc) % 3600000 !== 0 || (!saved && !serviceAvailable) || params.get('estimate') === '1' || route.instantUtc < '2026-12-01' || route.instantUtc >= '2027-12-01';
     if (travelTrip && Date.parse(travelTrip.endUtc) > Date.parse('2027-12-01T00:00:00Z')) estimateMode = true;
     if (route.range && (Date.parse(route.range.startUtc) < Date.parse('2026-12-01T00:00:00Z') || Date.parse(route.range.startUtc) + route.range.days * 86400000 > Date.parse('2027-12-01T00:00:00Z'))) estimateMode = true;
@@ -463,7 +433,7 @@ async function initialize() {
       note.textContent = `Travel stay: ${travelTrip.startUtc.slice(0, 16).replace('T', ' ')} to ${travelTrip.endUtc.slice(0, 16).replace('T', ' ')} UTC. Scene visibility is not landing qualification.`;
       $('#date-scrubber').before(note);
     }
-    $('#catalog-site').disabled = false; $('#day').disabled = false;
+    $('#day').disabled = false;
     await update();
   } catch (error) {
     if (lifecycle.signal.aborted) return;

@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { TrackballControls } from 'three/addons/controls/TrackballControls.js';
 import { createTravelGlobe } from './travel/globe-layer.js';
+import { createCompareGlobe } from './compare/globe-layer.js';
 import { configureTravelThumbnails } from './travel/thumbnail.js';
 import { LAYER_GLSL, layerGlsl, layerSlotUniforms, setLayerSlots, loadLayer } from './map-layers.js';
 import { createMoonSky } from './moon-sky.js';
@@ -733,9 +734,8 @@ gridRow.addEventListener('click', () => {
 const starsRow = document.createElement('button');
 starsRow.type = 'button'; starsRow.className = 'btn'; starsRow.id = 'show-stars';
 starsRow.setAttribute('role', 'menuitemcheckbox'); starsRow.dataset.toggleDot = '';
-starsRow.setAttribute('aria-checked', 'false'); starsRow.textContent = 'Stars';
-starsRow.addEventListener('click', async () => {
-  const enabled = starsRow.getAttribute('aria-checked') !== 'true';
+starsRow.textContent = 'Stars';
+async function setStarsEnabled(enabled) {
   starsRow.setAttribute('aria-checked', String(enabled));
   document.dispatchEvent(new CustomEvent('tanaw:stars-change', { detail: enabled }));
   starsRow.setAttribute('aria-busy', String(enabled));
@@ -746,7 +746,9 @@ starsRow.addEventListener('click', async () => {
     document.dispatchEvent(new CustomEvent('tanaw:stars-change', { detail: false }));
     status.textContent = 'Stars could not load. Select Stars to retry.';
   } finally { starsRow.setAttribute('aria-busy', 'false'); }
-});
+}
+starsRow.addEventListener('click', () => setStarsEnabled(starsRow.getAttribute('aria-checked') !== 'true'));
+setStarsEnabled(true);
 viewMenu.append(gridRow, starsRow, document.getElementById('cinematic-mode'));
 // Under the button, right-aligned with it and kept on screen; the first row takes focus.
 viewMenu.addEventListener('beforetoggle', (e) => {
@@ -1752,6 +1754,18 @@ function contactLine(box, keep, poleSign) {
 }
 
 const travelGlobe = createTravelGlobe({ moon, camera, canvas, moonVector });
+const compareGlobe = createCompareGlobe({ moon, camera, canvas, moonVector, underFront });
+document.addEventListener('tanaw:compare-pick', event => {
+  // Explicit navigation also recentres the current site after a manual globe rotation.
+  if (mode !== 'close') setMode('close');
+  flyTo(moonVector(event.detail.lat, event.detail.lon), camera.position.length());
+  redraw = true;
+});
+document.addEventListener('tanaw:compare', event => {
+  pins.key = ''; redraw = true;
+  if (pinList.matches(':popover-open')) pinList.hidePopover();
+  if (event.detail.active && mode !== 'close') setMode('close');
+});
 document.addEventListener('tanaw:travel', () => { redraw = true; });
 // Arrival: the Moon is first drawn only once the host has sent the band, so its first frame is
 // already framed (never the whole window), and from ARRIVE_FROM times further out, gliding in
@@ -1792,6 +1806,7 @@ renderer.setAnimationLoop((now) => {
   }
   placePins();
   travelGlobe.render({ hidden: covered || siteVisible || mode !== 'close', band: band || { left: 0, top: 0, right: innerWidth, bottom: innerHeight } });
+  compareGlobe.render({ hidden: covered || siteVisible || mode !== 'close', band: band || { left: 0, top: 0, right: innerWidth, bottom: innerHeight } });
   if (announce && descent) {
     document.dispatchEvent(new CustomEvent('tanaw:dive', { detail: { site: descent.site, ringFill: DIVE_FILL, north: northOnScreen() } }));
   }

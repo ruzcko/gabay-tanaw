@@ -6,6 +6,8 @@
 .observer-viewport canvas:focus-visible { outline: 2px solid var(--sel, #f2f4f8); outline-offset: -3px; }
 .observer-readout { display: flex; flex-wrap: wrap; gap: 8px 24px; padding: 12px 16px 8px; }
 .observer-body { display: flex; align-items: center; gap: 8px; font-size: 13px; font-variant-numeric: tabular-nums; }
+.observer-body[role="button"]:not([aria-disabled="true"]) { cursor: pointer; }
+.observer-body:focus-visible { outline: 1px solid currentColor; outline-offset: 3px; }
 .observer-body[data-body="sun"] { color: var(--sun, #ffc861); }
 .observer-body[data-body="earth"] { color: var(--earth, #8cc4ff); }
 .observer-body[hidden] { display: none; }

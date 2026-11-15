@@ -66,8 +66,9 @@ explicit synthetic UI fixtures: this tests orchestration, races, errors, coverag
 checks, boundary dates, catalog behavior, accessibility and 320/375 px layouts, not
 scientific accuracy. Real service checks remain separate.
 
-Stage 3 adds the integrated [lunar overview](STAGE3.md), using the same snapshot and
-computation provider. Select the presentation in the demo's bottom control bar.
+The renderer retains the [lunar overview API](STAGE3.md) for integration checks.
+The Observer page stays in Observer view; site selection uses the Moon navigator,
+without a duplicate catalog picker or presentation dropdown.
 
 The demo follows the Moon page's Atkinson typography, black background and outlined
 controls. View options opens secondary settings beside the scene on desktop and replaces
@@ -177,6 +178,12 @@ observer.setOptions({ earthPointer: true, belowHorizonCutaway: false });
 // Before removing the container:
 observer.dispose();
 ```
+
+The Sun and Earth readouts and Look toward controls share a 650 ms camera turn along the
+shorter azimuth arc. Readouts retain their plain text appearance and support Enter/Space.
+Dragging or using arrow keys interrupts the turn; retargeting starts from the current view.
+Reduced-motion preferences skip the animation. Hosts that need immediate framing can call
+`lookToward('earth', { animate: false })`; snapshot updates still own all body positions.
 
 `integration.js` defaults to saved forecasts and accepts coordinates plus UTC. Call its
 `update(site, utc)` on host selection changes. Changed heights require corresponding

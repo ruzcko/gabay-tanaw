@@ -1,5 +1,7 @@
 # Tanaw
 
+![Tanaw](docs/tanaw-typemark.png)
+
 Sunlight and Earth contact forecasts for lunar landing sites.
 
 - **App:** [gabay-tanaw.app](https://gabay-tanaw.app)

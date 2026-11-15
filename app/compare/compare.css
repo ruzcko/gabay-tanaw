@@ -1,27 +1,40 @@
 /* Comparison stays below the Moon; sky details recede to leave room for picking. */
-section.compare { display: none; min-width: 0; }
-.hud.compare section.compare {
-  display: flex;
+section.compare {
+  display: none;
+  min-width: 0;
   flex-direction: column;
   gap: 12px;
   width: min(1120px, 100%);
-  max-height: min(46vh, 440px);
+  max-height: 0;
   margin-inline: auto;
-  overflow: auto;
+  overflow: clip;
   overscroll-behavior: contain;
   scrollbar-color: var(--line) var(--space);
   scrollbar-width: thin;
-  animation: compare-enter 260ms cubic-bezier(.16, 1, .3, 1);
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 180ms ease-out, transform 260ms cubic-bezier(.16, 1, .3, 1), max-height 260ms cubic-bezier(.16, 1, .3, 1), display 260ms allow-discrete;
 }
+.hud.compare section.compare { display: flex; max-height: min(46vh, 440px); overflow: auto; opacity: 1; transform: none; pointer-events: auto; }
+@starting-style { .hud.compare section.compare { max-height: 0; opacity: 0; transform: translateY(12px); } }
 .compare h2 { font-size: 16px; }
-.compare .chead { flex: none; }
+.compare .chead { flex: none; position: sticky; top: 0; z-index: 2; background: var(--space); }
 .compare-slots { display: grid; gap: 8px; padding: 3px; }
 .compare-site { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 16px; align-items: center; padding: 8px 0; border-top: 1px solid var(--edge); }
 .compare-info { min-width: 0; }
 .compare-info h3 { margin: 0 0 4px; font-size: 14px; font-weight: 600; overflow-wrap: anywhere; }
+.compare-site-select { display: inline-flex; align-items: center; min-height: 44px; max-width: 100%; padding: 0; border: 0; background: transparent; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+.compare-site-select .compare-site-number { flex: none; }
+.compare-site-select:is(:hover, :focus-visible) .compare-site-name { text-decoration: underline; text-underline-offset: 3px; }
+.compare-site-select[aria-pressed="true"] .compare-site-number { background: var(--text); color: var(--space); }
+.compare-site-select:focus-visible { outline: 2px solid var(--sel); outline-offset: 3px; border-radius: 3px; }
+.compare-site-number { display: inline-grid; place-items: center; width: 24px; height: 24px; margin-right: 8px; border: 1px solid var(--text); border-radius: 50%; font-size: 12px; }
 .compare-quality { margin: 3px 0; color: var(--muted); font-size: 12px; }
 .compare-remove.btn { min-height: 44px; padding: 0 8px; margin: 4px 0; font-size: 12px; }
 .compare-loading, .compare-error { margin: 0; color: var(--muted); font-size: 13px; }
+.compare-loading { display: flex; align-items: center; gap: 10px; min-height: 112px; }
+.compare-loading::before { content: ''; flex: none; width: 18px; height: 18px; border: 2px solid var(--edge); border-top-color: var(--text); border-radius: 50%; animation: compare-loading 800ms linear infinite; }
 .compare-error p { margin: 0 0 6px; }
 .compare-add {
   display: flex;
@@ -40,8 +53,15 @@ section.compare { display: none; min-width: 0; }
 .compare-add svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; }
 .compare-add:is(:hover, [aria-pressed="true"]) { border-color: var(--text); }
 .compare-add[aria-pressed="true"] { outline: 1px solid var(--text); }
-.compare-add:focus-visible, .compare-forecast:focus-visible, .compare-table button:focus-visible { outline: 2px solid var(--sel); outline-offset: 2px; }
-.compare-forecast { min-width: 0; overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--line) var(--space); }
+.compare-add:focus-visible, .compare-forecast:focus-visible, .compare-scrollbar:focus-visible, .compare-table button:focus-visible { outline: 2px solid var(--sel); outline-offset: 2px; }
+.compare-forecast { min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.compare-forecast::-webkit-scrollbar { display: none; }
+.compare-scrollbar { appearance: none; position: sticky; bottom: 0; z-index: 2; align-self: flex-end; flex: none; height: 24px; max-width: calc(100% - 6px); margin: 0 3px 0 0; padding: 0; border: 0; border-radius: 0; background: var(--space); cursor: ew-resize; }
+.compare-scrollbar::-webkit-slider-runnable-track { height: 3px; border-radius: 2px; background: var(--edge); }
+.compare-scrollbar::-webkit-slider-thumb { appearance: none; width: var(--thumb-width); height: 8px; margin-top: -2.5px; border: 0; border-radius: 4px; background: var(--muted); }
+.compare-scrollbar::-moz-range-track { height: 3px; border-radius: 2px; background: var(--edge); }
+.compare-scrollbar::-moz-range-thumb { width: var(--thumb-width); height: 8px; border: 0; border-radius: 4px; background: var(--muted); }
+.compare-scrollbar[hidden] { display: none; }
 .compare-table { border-collapse: collapse; width: 100%; font-size: 12px; font-variant-numeric: tabular-nums; text-align: center; }
 .compare-table th, .compare-table td { min-width: 28px; padding: 3px 4px; white-space: nowrap; font-weight: 400; }
 .compare-table th:first-child { position: sticky; left: 0; z-index: 1; min-width: 62px; text-align: left; background: var(--space); }
@@ -49,6 +69,25 @@ section.compare { display: none; min-width: 0; }
 .compare-table button:is(:hover, [aria-current="date"]) { border-color: var(--text); }
 .compare-table .sun td { background: color-mix(in srgb, var(--sun) 12%, var(--space)); }
 .compare-table .earth td { background: color-mix(in srgb, var(--earth) 12%, var(--space)); }
+.compare-table td[data-selected] { box-shadow: inset 1px 0 var(--line), inset -1px 0 var(--line); }
+#pins { transition: opacity 180ms ease-out, display 180ms allow-discrete; }
+.stage:has(.hud.compare) :is(#pins, .pick) { display: none; opacity: 0; }
+.stage:has(.hud.compare) #pins .pin { pointer-events: none; }
+@starting-style { #pins { opacity: 0; } }
+.compare-markers { position: absolute; inset: 0; z-index: 3; pointer-events: none; overflow: hidden; opacity: 1; transition: opacity 180ms ease-out, display 180ms allow-discrete; }
+.compare-markers[hidden] { display: none; opacity: 0; }
+.compare-markers[hidden] .compare-marker { pointer-events: none; }
+.compare-marker-links { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.compare-marker-links line { stroke: var(--muted); stroke-width: 1; }
+.compare-marker { position: absolute; left: 0; top: 0; width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border: 0; background: transparent; color: var(--text); font: 600 13px var(--font); pointer-events: auto; cursor: pointer; }
+.compare-marker b { display: grid; place-items: center; width: 26px; height: 26px; border: 2px solid var(--text); border-radius: 50%; background: var(--glass-solid); }
+.compare-marker[aria-pressed="true"] b { background: var(--text); color: var(--space); }
+.compare-marker[data-far-side="true"] b { border-style: dashed; }
+.compare-marker[data-far-side="true"]::after { content: 'Far side'; position: absolute; bottom: 38px; padding: 2px 4px; border-radius: 4px; white-space: nowrap; background: var(--glass-solid); color: var(--muted); font-size: 11px; }
+.compare-marker span { position: absolute; left: 38px; padding: 3px 6px; border-radius: 4px; background: var(--glass-solid); white-space: nowrap; visibility: hidden; }
+.compare-marker:is(:hover, :focus-visible) { z-index: 1; }
+.compare-marker:is(:hover, :focus-visible) span { visibility: visible; }
+.compare-marker:focus-visible { outline: 2px solid var(--sel); outline-offset: 2px; border-radius: 50%; }
 .ring { transition: opacity 200ms ease-out, transform 280ms cubic-bezier(.16, 1, .3, 1), visibility 280ms; }
 .hud.compare .ring { opacity: 0; transform: translateX(-48px); visibility: hidden; pointer-events: none; }
 .hud.compare :is(#wait, #move, .switch, #fc-btn, #times-btn, #info-btn) { display: none; }
@@ -57,10 +96,14 @@ section.compare { display: none; min-width: 0; }
 .hud.compare #compare-btn { border-color: var(--text); }
 .hud.compare .panel-actions { position: sticky; bottom: 0; background: var(--space); padding-block: 8px; }
 .panel-actions { display: flex; gap: 8px; }
+.panel-actions [hidden] { display: none; }
+.compare-capacity { display: grid; gap: 4px; padding-block: 6px; color: var(--muted); font-size: 14px; }
+.compare-capacity[hidden] { display: none; }
+.compare-capacity small { max-width: 34ch; font-size: 12px; line-height: 1.45; }
 .hud.compare #panel-close { display: inline-flex; }
 .stage:has(.compare-picking) #moon { cursor: crosshair; }
 .hud.compare .ring .sem, .hud.compare .side { display: block; }
-@keyframes compare-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes compare-loading { to { transform: rotate(360deg); } }
 @media (max-width: 1023px) {
   .hud.compare.panel .bar { visibility: visible; }
   .hud.compare.panel section.compare { visibility: hidden; }
@@ -68,7 +111,7 @@ section.compare { display: none; min-width: 0; }
   .hud.compare .grab { display: none; }
 }
 @media (max-width: 760px) {
-  .hud.compare section.compare { max-height: 43vh; gap: 8px; }
+  .hud.compare section.compare { max-height: min(43vh, max(140px, calc(100dvh - 390px))); gap: 8px; }
   .hud.compare .ring { position: absolute; left: var(--pad-l); top: calc(var(--pad-t) + 56px); }
   .hud.compare .plan { flex-wrap: nowrap; gap: 8px; }
   .hud.compare .views { flex: none; flex-wrap: nowrap; margin-left: auto; }
@@ -84,5 +127,6 @@ section.compare { display: none; min-width: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .ring { transition: none; }
-  .hud.compare section.compare { animation: none; }
+  section.compare, #pins, .compare-markers { transition: none; }
+  .compare-loading::before { animation: none; }
 }

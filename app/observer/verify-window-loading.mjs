@@ -14,6 +14,18 @@ await mkdir(output, { recursive: true });
 const data = new URL('../data/', import.meta.url);
 const provider = createStaticForecastProvider({ baseUrl: data, fetcher: async url => new Response(await readFile(url)) });
 const requests = [], held = [], errors = [];
+const catalog = JSON.parse(await readFile(new URL('sites.json', data)));
+async function wireSelection(context) {
+  // Exercise the same callback as the navigator at exact catalog coordinates.
+  await context.route('**/observer/demo.js', async route => {
+    const source = await readFile(new URL('demo.js', import.meta.url), 'utf8');
+    await route.fulfill({ contentType: 'text/javascript', body: `${source}\nglobalThis.testSelectCoordinates = selectCoordinates;` });
+  });
+}
+const pickCatalog = (page, id) => {
+  const site = catalog.find(site => site.id === id);
+  return page.evaluate(point => globalThis.testSelectCoordinates(point), { latitudeDeg: site.lat, longitudeEastDeg: site.lon });
+};
 let supported = true, online = true;
 async function observation(params) {
   const site = { latitudeDeg: Number(params.get('lat')), longitudeEastDeg: Number(params.get('lon')) };
@@ -57,12 +69,13 @@ try {
     return route.fulfill({ json: url.pathname === '/api/observer-window'
       ? { coverage: { startUtc: params.get('startUtc'), endUtc: params.get('endUtc'), stepSeconds: 3600, sampleCount: outcome.invalidCoverage ? 719 : 720 }, observation: result, observations } : result });
   });
+  await wireSelection(context);
   const page = await context.newPage();
   page.on('pageerror', error => errors.push(error.message));
   const ready = () => page.waitForFunction(() => document.querySelector('#forecast-status').textContent.match(/ · Sun (in view|hidden by terrain) · Earth /));
-  const pick = async () => { await page.locator('.location-map canvas').focus(); await page.keyboard.press('ArrowRight'); await page.keyboard.press('Enter'); };
+  const pick = async () => { assert.ok(await page.locator('#moon-navigator').isVisible()); await page.locator('.location-map canvas').focus(); await page.keyboard.press('ArrowRight'); await page.keyboard.press('Enter'); };
   const scrub = async value => page.locator('#day').evaluate((el, n) => { el.value = n; el.dispatchEvent(new Event('input', { bubbles: true })); }, value);
-  const awaitHeld = async count => { for (let i = 0; held.length < count && i < 200; i++) await new Promise(resolve => setTimeout(resolve, 20)); assert.equal(held.length, count); };
+  const awaitHeld = async count => { for (let i = 0; held.length < count && i < 200; i++) await new Promise(resolve => setTimeout(resolve, 20)); assert.equal(held.length, count, JSON.stringify({ errors, status: await page.locator('#forecast-status').textContent(), error: await page.locator('#error').textContent(), url: page.url() })); };
   const utcAt = (day, hour = 14) => new Date(Date.parse('2026-12-01T00:00:00Z') + day*86400000 + hour*3600000).toISOString();
   const selectedTime = expected => page.waitForFunction(utc => new URL(location.href).searchParams.get('t') === utc, expected);
   const status = () => page.locator('#window-status').textContent();
@@ -122,7 +135,7 @@ try {
   log('selecting an unavailable date prioritizes its chunk and preserves the UTC hour');
 
   held[3].release({ error: true });
-  await page.waitForFunction(() => document.querySelector('#error').textContent.includes('Pick a listed site.'));
+  await page.waitForFunction(() => document.querySelector('#error').textContent.includes('Choose another location on the Moon navigator.'));
   assert.equal(new URL(page.url()).searchParams.get('t'), utcAt(364));
   assert.equal(await page.locator('#observer-range').getAttribute('aria-busy'), 'false');
   assert.match(await status(), /Loading paused/);
@@ -149,13 +162,13 @@ try {
   assert.match(await status(), /^30 of 30 days ready/);
   assert.equal(requests.length, annualCount);
   assert.equal(new URL(page.url()).searchParams.get('t'), utcAt(61));
-  await page.locator('#catalog-site').selectOption('shackleton-rim'); await ready();
+  await pickCatalog(page, 'shackleton-rim'); await ready();
   assert.equal(await page.locator('#observer-range').getAttribute('aria-expanded'), 'false');
   log('range switches reuse available dates and preserve the shared selected date and range');
 
   holdWindows = true; let n = held.length;
   await pick(); await awaitHeld(n+1);
-  await page.locator('#catalog-site').selectOption('connecting-ridge'); await ready();
+  await pickCatalog(page, 'connecting-ridge'); await ready();
   const catalogUrl = page.url(); held[n].release(); await page.waitForTimeout(100);
   assert.equal(page.url(), catalogUrl);
   assert.equal(await page.locator('#moon-navigator').getAttribute('data-selection'), 'ready');
@@ -211,27 +224,31 @@ try {
   assert.equal(requests.length, count);
   supported = true; await page.locator('#retry').click(); await ready();
   await page.goto(`${base}/observer/?lat=-89.4398&lon=-137.17&t=2027-02-28T14:00:00Z`); await ready();
-  assert.equal(await page.locator('#catalog-site').inputValue(), 'connecting-ridge');
+  assert.equal(new URL(page.url()).searchParams.get('site'), 'connecting-ridge');
   assert.equal(requests.at(-1).path, '/api/observer');
   online = false; await page.goto(`${base}/observer/`); await ready();
   assert.doesNotMatch(await page.locator('#forecast-status').textContent(), /service/i);
   online = true;
   log('older service fails explicitly, Retry detects upgrade, and static catalog forecasts still work');
 
-  const unavailable = "Custom locations need the forecast service, which isn't available on this site. Pick a listed site.";
+  const unavailable = "Custom locations need the forecast service, which isn't available on this site. Choose another location on the Moon navigator.";
   const staticContext = await browser.newContext();
+  await wireSelection(staticContext);
   const staticPage = await staticContext.newPage();
   staticPage.on('pageerror', error => errors.push(error.message));
   const staticRequests = [];
   staticPage.on('request', request => staticRequests.push(new URL(request.url()).pathname));
-  const staticReady = () => staticPage.waitForFunction(() => document.querySelector('#forecast-status').textContent.match(/ · Sun (in view|hidden by terrain) · Earth /));
+  const staticReady = () => staticPage.waitForFunction(() => document.querySelector('#forecast-status').textContent.match(/ · Sun (in view|hidden by terrain) · Earth /)).catch(async error => {
+    console.error({ errors, status: await staticPage.locator('#forecast-status').textContent(), error: await staticPage.locator('#error').textContent() });
+    throw error;
+  });
   const estimateShown = async expectedUtc => {
     await staticPage.waitForFunction(utc => document.querySelector('#forecast-status').textContent.startsWith('Estimate · ') &&
       /^Daily totals · Sun above terrain /.test(document.querySelector('[data-result]').textContent) &&
       /\d+\.\d\d° [NS], \d+\.\d\d° [EW]/.test(document.querySelector('.observer-site').textContent) &&
       new URL(location.href).searchParams.get('t') === utc, expectedUtc);
     assert.equal(await staticPage.locator('#error').textContent(), '');
-    assert.equal(await staticPage.locator('#catalog-site').inputValue(), 'custom');
+    assert.equal(new URL(staticPage.url()).searchParams.has('site'), false);
     assert.equal(await staticPage.locator('#view').getAttribute('aria-busy'), 'false');
     assert.equal(await staticPage.locator('#moon-navigator').getAttribute('aria-busy'), 'false');
     assert.equal(await staticPage.locator('#window-status').isVisible(), false);
@@ -255,7 +272,7 @@ try {
   await estimateShown('2027-02-28T14:00:00.000Z');
   assert.equal(await staticPage.locator('#observer-range').getAttribute('aria-expanded'), 'false', 'Custom estimate preserves selected range');
   assert.ok(!staticRequests.some(path => path.startsWith('/api/observer')), 'Static custom pick never requires an observer API');
-  await staticPage.locator('#catalog-site').selectOption('shackleton-rim');
+  await pickCatalog(staticPage, 'shackleton-rim');
   await staticPage.waitForFunction(() => document.querySelector('#forecast-status').textContent.startsWith('Accurate forecast · ') &&
     document.querySelector('.observer-site').textContent.includes('Shackleton'));
   assert.match(await staticPage.locator('.observer-site').textContent(), /Shackleton/);
@@ -269,6 +286,7 @@ try {
 
   for (const failure of ['health-network', 'no-service', 'window-network', 'window-404', 'window-json-404']) {
     await staticContext.unrouteAll();
+    await wireSelection(staticContext);
     await staticContext.route('**/api/health', route => failure === 'health-network' ? route.abort('failed') :
       route.fulfill({ json: failure === 'no-service' ? {} : { service: 'tanaw-observer', observerWindow: { durationDays: 30 } } }));
     await staticContext.route('**/api/observer-window?*', route => failure === 'window-network' ? route.abort('failed') :
@@ -277,7 +295,7 @@ try {
     await staticPage.goto(`${base}/observer/?lat=1&lon=2`);
     if (failure === 'health-network' || failure === 'no-service') await estimateShown('2026-12-01T00:00:00.000Z');
     else { await unavailableShown(); assert.equal(await staticPage.locator('.observer-site').textContent(), ''); }
-    await staticPage.locator('#catalog-site').selectOption('connecting-ridge');
+    await pickCatalog(staticPage, 'connecting-ridge');
     await staticPage.waitForFunction(() => document.querySelector('.observer-site').textContent.includes('Connecting Ridge') &&
       document.querySelector('#forecast-status').textContent.match(/ · Sun (in view|hidden by terrain) · Earth /));
     assert.match(await staticPage.locator('.observer-site').textContent(), /Connecting Ridge/);
@@ -295,7 +313,7 @@ try {
   assert.equal(handoff.pathname, '/observer/');
   for (const key of ['site', 'lat', 'lon', 't']) assert.ok(handoff.searchParams.get(key), `link carries ${key}`);
   await link.click(); await page.waitForURL(url => new URL(url).pathname === '/observer/'); await ready();
-  assert.equal(await page.locator('#catalog-site').inputValue(), handoff.searchParams.get('site'));
+  assert.equal(new URL(page.url()).searchParams.get('site'), handoff.searchParams.get('site'));
   assert.equal(new Date(new URL(page.url()).searchParams.get('t')).toISOString(), new Date(handoff.searchParams.get('t')).toISOString());
   log('Moon page Observer view opens the observer at the selected site and UTC');
 
