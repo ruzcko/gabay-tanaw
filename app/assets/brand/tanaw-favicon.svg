@@ -1,6 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Tanaw">
+<defs><linearGradient id="arc" gradientUnits="userSpaceOnUse" x1="12" y1="0" x2="88" y2="0"><stop offset="0" stop-color="#f2f4f8" stop-opacity="0"/><stop offset=".3" stop-color="#f2f4f8"/><stop offset=".7" stop-color="#f2f4f8"/><stop offset="1" stop-color="#f2f4f8" stop-opacity="0"/></linearGradient></defs>
 <rect width="100" height="100" rx="22" fill="#0d121c"/>
-<path d="M12 78 Q50 2 88 78 Q50 10 12 78 Z" fill="#f2f4f8" stroke="#f2f4f8" stroke-width="3.5" stroke-linejoin="round"/>
-<circle cx="42" cy="66" r="11" fill="#8cc4ff"/>
-<circle cx="66" cy="30" r="9" fill="#ffc861"/>
+<path d="M12 76.7 A38.56 38.56 0 0 1 88 76.7 A39.79 39.79 0 0 0 12 76.7 Z" fill="url(#arc)" stroke="url(#arc)" stroke-width="6" stroke-linejoin="round"/>
+<circle cx="42" cy="66.5" r="11" fill="#8cc4ff"/>
+<circle cx="66" cy="31.5" r="9" fill="#ffc861"/>
 </svg>

@@ -69,7 +69,12 @@ section.compare {
 .compare-table button:is(:hover, [aria-current="date"]) { border-color: var(--text); }
 .compare-table .sun td { background: color-mix(in srgb, var(--sun) 12%, var(--space)); }
 .compare-table .earth td { background: color-mix(in srgb, var(--earth) 12%, var(--space)); }
-.compare-table td[data-selected] { box-shadow: inset 1px 0 var(--line), inset -1px 0 var(--line); }
+/* The selected day: one 2 px --sel box down the whole column, from the date to the last row, as
+   in the Forecast table. It follows the timeline in every site's table. */
+.compare-table button[aria-current="date"] { border-color: transparent; }
+.compare-table th:has(> button[aria-current="date"]) { box-shadow: inset 2px 0 var(--sel), inset -2px 0 var(--sel), inset 0 2px var(--sel); }
+.compare-table td[data-selected] { box-shadow: inset 2px 0 var(--sel), inset -2px 0 var(--sel); }
+.compare-table tbody tr:last-child td[data-selected] { box-shadow: inset 2px 0 var(--sel), inset -2px 0 var(--sel), inset 0 -2px var(--sel); }
 #pins { transition: opacity 180ms ease-out, display 180ms allow-discrete; }
 .stage:has(.hud.compare) :is(#pins, .pick) { display: none; opacity: 0; }
 .stage:has(.hud.compare) #pins .pin { pointer-events: none; }

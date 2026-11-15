@@ -145,8 +145,8 @@ at every width and the loading screen. The SVG is inline, with every colour a to
 (gradient stops through `style="stop-color: var(--text)"`) and its own gradient id per copy.
 Michroma is loaded for the five letters only, with `display=block`: while the font arrives,
 T, N and W stay invisible for up to about 3 s rather than showing in a fallback font beside
-the drawn A's; on a connection slower than that, the fallback letters show until it lands. The small icon (a tapered arc with the
-Sun near its top and Earth under it, on a rounded `--glass-solid` tile) is used only as the
+the drawn A's; on a connection slower than that, the fallback letters show until it lands. The small icon (a round arc that fades out at both ends, with
+the Sun near its top and Earth under it, centred on a rounded `--glass-solid` tile) is used only as the
 favicon, `assets/brand/tanaw-favicon.svg`, a standalone file with its own colours and a
 slightly thicker arc for 16–32 px. The page title is "Tanaw".
 - Top bar: the page heading (h1, read as "Tanaw") is the logo (`role="img"`), 40 px tall
