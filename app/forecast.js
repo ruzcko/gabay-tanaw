@@ -3036,6 +3036,7 @@ function leaveQuick(utc, window = null) {
   for (const key of ['estimate', 'lat', 'lon']) url.searchParams.delete(key);
   url.searchParams.set('site', state.site); url.searchParams.set('t', new Date(parseUtc(utc)).toISOString());
   if (live.on) url.searchParams.delete('t'); // live time stays out of the link, so it reopens live
+  if (live.on && state.site === DEFAULT_SITE) url.searchParams.delete('site'); // the opening view keeps a plain address
   history.replaceState(null, '', url);
   render();
 }
@@ -3139,6 +3140,7 @@ function renderQuick() {
   quickSky(utc, snapshot);
   const url = new URL(location.href); if (site.id.startsWith('custom-')) { url.searchParams.delete('site'); url.searchParams.set('lat',site.lat); url.searchParams.set('lon',site.lon); } else { url.searchParams.set('site',site.id); url.searchParams.delete('lat'); url.searchParams.delete('lon'); } url.searchParams.set('t',utc); url.searchParams.set('estimate','1');
   if (live.on) { url.searchParams.delete('t'); url.searchParams.delete('estimate'); } // live time stays out of the link, so it reopens live
+  if (live.on && site.id === DEFAULT_SITE) url.searchParams.delete('site'); // the opening view keeps a plain address
   history.replaceState(null,'',url);
 }
 // The estimate's call, clock, times and status line for one instant (renderQuick, and each day
