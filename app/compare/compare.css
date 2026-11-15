@@ -1,0 +1,88 @@
+/* Comparison stays below the Moon; sky details recede to leave room for picking. */
+section.compare { display: none; min-width: 0; }
+.hud.compare section.compare {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: min(1120px, 100%);
+  max-height: min(46vh, 440px);
+  margin-inline: auto;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: var(--line) var(--space);
+  scrollbar-width: thin;
+  animation: compare-enter 260ms cubic-bezier(.16, 1, .3, 1);
+}
+.compare h2 { font-size: 16px; }
+.compare .chead { flex: none; }
+.compare-slots { display: grid; gap: 8px; padding: 3px; }
+.compare-site { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 16px; align-items: center; padding: 8px 0; border-top: 1px solid var(--edge); }
+.compare-info { min-width: 0; }
+.compare-info h3 { margin: 0 0 4px; font-size: 14px; font-weight: 600; overflow-wrap: anywhere; }
+.compare-quality { margin: 3px 0; color: var(--muted); font-size: 12px; }
+.compare-remove.btn { min-height: 44px; padding: 0 8px; margin: 4px 0; font-size: 12px; }
+.compare-loading, .compare-error { margin: 0; color: var(--muted); font-size: 13px; }
+.compare-error p { margin: 0 0 6px; }
+.compare-add {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: min(340px, 100%);
+  min-height: 48px;
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--space);
+  color: var(--text);
+  font: 400 14px/1.3 var(--font);
+  cursor: pointer;
+}
+.compare-add svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; }
+.compare-add:is(:hover, [aria-pressed="true"]) { border-color: var(--text); }
+.compare-add[aria-pressed="true"] { outline: 1px solid var(--text); }
+.compare-add:focus-visible, .compare-forecast:focus-visible, .compare-table button:focus-visible { outline: 2px solid var(--sel); outline-offset: 2px; }
+.compare-forecast { min-width: 0; overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--line) var(--space); }
+.compare-table { border-collapse: collapse; width: 100%; font-size: 12px; font-variant-numeric: tabular-nums; text-align: center; }
+.compare-table th, .compare-table td { min-width: 28px; padding: 3px 4px; white-space: nowrap; font-weight: 400; }
+.compare-table th:first-child { position: sticky; left: 0; z-index: 1; min-width: 62px; text-align: left; background: var(--space); }
+.compare-table button { min-width: 26px; min-height: 26px; padding: 0 3px; border: 1px solid transparent; border-radius: 3px; background: transparent; color: var(--text); font: inherit; cursor: pointer; }
+.compare-table button:is(:hover, [aria-current="date"]) { border-color: var(--text); }
+.compare-table .sun td { background: color-mix(in srgb, var(--sun) 12%, var(--space)); }
+.compare-table .earth td { background: color-mix(in srgb, var(--earth) 12%, var(--space)); }
+.ring { transition: opacity 200ms ease-out, transform 280ms cubic-bezier(.16, 1, .3, 1), visibility 280ms; }
+.hud.compare .ring { opacity: 0; transform: translateX(-48px); visibility: hidden; pointer-events: none; }
+.hud.compare :is(#wait, #move, .switch, #fc-btn, #times-btn, #info-btn) { display: none; }
+.hud.compare .plan { display: flex; }
+.hud.compare .call { font-size: 14px; }
+.hud.compare #compare-btn { border-color: var(--text); }
+.hud.compare .panel-actions { position: sticky; bottom: 0; background: var(--space); padding-block: 8px; }
+.panel-actions { display: flex; gap: 8px; }
+.hud.compare #panel-close { display: inline-flex; }
+.stage:has(.compare-picking) #moon { cursor: crosshair; }
+.hud.compare .ring .sem, .hud.compare .side { display: block; }
+@keyframes compare-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@media (max-width: 1023px) {
+  .hud.compare.panel .bar { visibility: visible; }
+  .hud.compare.panel section.compare { visibility: hidden; }
+  .hud.compare.panel section.panel { z-index: 4; top: auto; bottom: var(--compare-bottom); height: var(--compare-height); padding-top: 12px; }
+  .hud.compare .grab { display: none; }
+}
+@media (max-width: 760px) {
+  .hud.compare section.compare { max-height: 43vh; gap: 8px; }
+  .hud.compare .ring { position: absolute; left: var(--pad-l); top: calc(var(--pad-t) + 56px); }
+  .hud.compare .plan { flex-wrap: nowrap; gap: 8px; }
+  .hud.compare .views { flex: none; flex-wrap: nowrap; margin-left: auto; }
+  .hud.compare .call { flex: 1; min-width: 0; font-size: 12px; }
+  .hud.compare .call .why { display: none; }
+  .compare-site { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .compare-info { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; }
+  .compare-info h3 { flex: 1 1 100%; }
+  .compare-quality { margin: 0; }
+  .compare-remove.btn { margin: 0 0 0 auto; min-height: 44px; }
+  .compare-table button { min-height: 44px; min-width: 44px; }
+  .compare .csub { font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ring { transition: none; }
+  .hud.compare section.compare { animation: none; }
+}

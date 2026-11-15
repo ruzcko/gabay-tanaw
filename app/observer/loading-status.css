@@ -1,0 +1,16 @@
+/* One small indicator beside the real work label; no implied percentage. */
+.loading-indicator { display: none; }
+.is-loading > .loading-indicator {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 8px;
+  border: 1.5px solid var(--line);
+  border-right-color: var(--text);
+  border-radius: 50%;
+  vertical-align: -1px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .is-loading > .loading-indicator { animation: loading-turn 1s linear infinite; }
+  @keyframes loading-turn { to { transform: rotate(360deg); } }
+}

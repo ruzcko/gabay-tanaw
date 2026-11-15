@@ -1,0 +1,377 @@
+{
+  "seed": 20261115,
+  "points": [
+    {
+      "id": "random-00",
+      "lat": -84.51984633006772,
+      "lon": 171.25004062687367,
+      "group": "random-area"
+    },
+    {
+      "id": "random-01",
+      "lat": -81.24897473264876,
+      "lon": 237.99307330133428,
+      "group": "random-area"
+    },
+    {
+      "id": "random-02",
+      "lat": -82.22560352043291,
+      "lon": 126.58254998815151,
+      "group": "random-area"
+    },
+    {
+      "id": "random-03",
+      "lat": -81.65196656466759,
+      "lon": 280.5883950586093,
+      "group": "random-area"
+    },
+    {
+      "id": "random-04",
+      "lat": -83.27936072413294,
+      "lon": 69.24854524971988,
+      "group": "random-area"
+    },
+    {
+      "id": "random-05",
+      "lat": -80.26052897013439,
+      "lon": 357.1910568638413,
+      "group": "random-area"
+    },
+    {
+      "id": "random-06",
+      "lat": -80.62768881384879,
+      "lon": 86.33209665014375,
+      "group": "random-area"
+    },
+    {
+      "id": "random-07",
+      "lat": -81.74548116906982,
+      "lon": 54.01883414665967,
+      "group": "random-area"
+    },
+    {
+      "id": "random-08",
+      "lat": -82.63014358115757,
+      "lon": 178.17581129983515,
+      "group": "random-area"
+    },
+    {
+      "id": "random-09",
+      "lat": -80.67018517143987,
+      "lon": 297.0520648387068,
+      "group": "random-area"
+    },
+    {
+      "id": "random-10",
+      "lat": -81.5296771519765,
+      "lon": 121.14506365720547,
+      "group": "random-area"
+    },
+    {
+      "id": "random-11",
+      "lat": -80.77252431470842,
+      "lon": 278.410251810323,
+      "group": "random-area"
+    },
+    {
+      "id": "random-12",
+      "lat": -83.9640256921814,
+      "lon": 131.95957109382368,
+      "group": "random-area"
+    },
+    {
+      "id": "random-13",
+      "lat": -82.07408877898828,
+      "lon": 196.1178902963143,
+      "group": "random-area"
+    },
+    {
+      "id": "random-14",
+      "lat": -82.18891491352743,
+      "lon": 2.9607091069743863,
+      "group": "random-area"
+    },
+    {
+      "id": "random-15",
+      "lat": -80.38069681245503,
+      "lon": 107.76826350124652,
+      "group": "random-area"
+    },
+    {
+      "id": "grid-80-0",
+      "lat": -80,
+      "lon": 0,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-80-90",
+      "lat": -80,
+      "lon": 90,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-80-180",
+      "lat": -80,
+      "lon": 180,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-80-270",
+      "lat": -80,
+      "lon": 270,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-82.5-0",
+      "lat": -82.5,
+      "lon": 0,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-82.5-90",
+      "lat": -82.5,
+      "lon": 90,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-82.5-180",
+      "lat": -82.5,
+      "lon": 180,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-82.5-270",
+      "lat": -82.5,
+      "lon": 270,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-85-0",
+      "lat": -85,
+      "lon": 0,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-85-90",
+      "lat": -85,
+      "lon": 90,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-85-180",
+      "lat": -85,
+      "lon": 180,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-85-270",
+      "lat": -85,
+      "lon": 270,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-87-0",
+      "lat": -87,
+      "lon": 0,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-87-90",
+      "lat": -87,
+      "lon": 90,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-87-180",
+      "lat": -87,
+      "lon": 180,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-87-270",
+      "lat": -87,
+      "lon": 270,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-87.49-0",
+      "lat": -87.49,
+      "lon": 0,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-87.49-90",
+      "lat": -87.49,
+      "lon": 90,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-87.49-180",
+      "lat": -87.49,
+      "lon": 180,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-87.49-270",
+      "lat": -87.49,
+      "lon": 270,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-87.51-0",
+      "lat": -87.51,
+      "lon": 0,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-87.51-90",
+      "lat": -87.51,
+      "lon": 90,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-87.51-180",
+      "lat": -87.51,
+      "lon": 180,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-87.51-270",
+      "lat": -87.51,
+      "lon": 270,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-88-0",
+      "lat": -88,
+      "lon": 0,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-88-90",
+      "lat": -88,
+      "lon": 90,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-88-180",
+      "lat": -88,
+      "lon": 180,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-88-270",
+      "lat": -88,
+      "lon": 270,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-89.5-0",
+      "lat": -89.5,
+      "lon": 0,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-89.5-90",
+      "lat": -89.5,
+      "lon": 90,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-89.5-180",
+      "lat": -89.5,
+      "lon": 180,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "grid-89.5-270",
+      "lat": -89.5,
+      "lon": 270,
+      "group": "boundary-grid"
+    },
+    {
+      "id": "connecting-ridge-offset-0",
+      "lat": -89.42949207925753,
+      "lon": 222.03755756752884,
+      "group": "random-local",
+      "offsetM": 392.3166382778966
+    },
+    {
+      "id": "connecting-ridge-offset-1",
+      "lat": -89.43334112042712,
+      "lon": 222.5846537314051,
+      "group": "random-local",
+      "offsetM": 209.0721284641856
+    },
+    {
+      "id": "connecting-ridge-offset-2",
+      "lat": -89.42809902036598,
+      "lon": 223.54148650482222,
+      "group": "random-local",
+      "offsetM": 413.9037739220573
+    },
+    {
+      "id": "connecting-ridge-offset-3",
+      "lat": -89.43920039929841,
+      "lon": 222.3468225044527,
+      "group": "random-local",
+      "offsetM": 144.4757794415669
+    },
+    {
+      "id": "malapert-massif-offset-0",
+      "lat": -85.96988348666247,
+      "lon": 357.66151840370384,
+      "group": "random-local",
+      "offsetM": 65.47128135911984
+    },
+    {
+      "id": "malapert-massif-offset-1",
+      "lat": -85.9604649426948,
+      "lon": 357.65848140178423,
+      "group": "random-local",
+      "offsetM": 250.18384893510924
+    },
+    {
+      "id": "malapert-massif-offset-2",
+      "lat": -85.9693215942208,
+      "lon": 357.458046136783,
+      "group": "random-local",
+      "offsetM": 484.64284916438294
+    },
+    {
+      "id": "malapert-massif-offset-3",
+      "lat": -85.96715188118728,
+      "lon": 357.8889005604081,
+      "group": "random-local",
+      "offsetM": 436.46926139074
+    },
+    {
+      "id": "nobile-rim-1-offset-0",
+      "lat": -85.3076121722557,
+      "lon": 37.087646536863176,
+      "group": "random-local",
+      "offsetM": 100.83381571379346
+    },
+    {
+      "id": "nobile-rim-1-offset-1",
+      "lat": -85.30293314024297,
+      "lon": 36.92442645177847,
+      "group": "random-local",
+      "offsetM": 328.4775958494649
+    },
+    {
+      "id": "nobile-rim-1-offset-2",
+      "lat": -85.29955518768645,
+      "lon": 37.05032269926329,
+      "group": "random-local",
+      "offsetM": 207.5617003703488
+    },
+    {
+      "id": "nobile-rim-1-offset-3",
+      "lat": -85.30851783854516,
+      "lon": 37.11253486227357,
+      "group": "random-local",
+      "offsetM": 168.35698939779334
+    }
+  ]
+}

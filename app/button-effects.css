@@ -1,0 +1,55 @@
+/* No geometry changes: decorations stay inside each existing control. */
+.eclipse-control {
+  isolation: isolate;
+  --button-eclipse-from: ellipse(90% 100% at 50% 205%);
+  --button-eclipse-to: ellipse(90% 100% at 50% 50%);
+}
+.pin-list .eclipse-control, .eclipse-control[role^="menuitem"] {
+  --button-eclipse-from: ellipse(100% 90% at -105% 50%);
+  --button-eclipse-to: ellipse(100% 90% at 50% 50%);
+}
+.eclipse-control[data-centre] > .button-eclipse { display: none; }
+.eclipse-relative { position: relative; }
+.eclipse-control > span.button-eclipse {
+  visibility: visible;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+  background: var(--sel);
+  mix-blend-mode: difference;
+  clip-path: var(--button-eclipse-from);
+  transition: clip-path 494ms cubic-bezier(.2,.7,.2,1);
+}
+.eclipse-control > span.button-toggle-dot {
+  display: none;
+  visibility: visible;
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  z-index: 2;
+  width: 5px;
+  height: 5px;
+  translate: -50% 0;
+  pointer-events: none;
+  border-radius: 50%;
+  background: var(--sun);
+  opacity: 0;
+  transition: opacity 160ms ease-out;
+}
+/* Opt in only actual display switches; opening a picker or tooltip is not a toggle. */
+.eclipse-control[data-toggle-dot] > span.button-toggle-dot { display: block; }
+.eclipse-control[data-toggle-dot]:is([aria-pressed="true"], [aria-checked="true"]) > .button-toggle-dot { opacity: 1; }
+.eclipse-control:not(:disabled, [aria-disabled="true"]):focus-visible > .button-eclipse { clip-path: var(--button-eclipse-to); }
+.eclipse-control[data-toggle-dot]:not(:disabled, [aria-disabled="true"]):focus-visible > .button-toggle-dot { animation: button-toggle-hint 1.4s ease-in-out infinite; }
+@media (hover: hover) {
+  .eclipse-control:not(:disabled, [aria-disabled="true"]):hover > .button-eclipse { clip-path: var(--button-eclipse-to); }
+  .eclipse-control[data-toggle-dot]:not(:disabled, [aria-disabled="true"]):hover > .button-toggle-dot { animation: button-toggle-hint 1.4s ease-in-out infinite; }
+}
+@keyframes button-toggle-hint { 0%, 100% { opacity: .2; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .eclipse-control > span.button-eclipse,
+  .eclipse-control > span.button-toggle-dot { transition: none; }
+  .eclipse-control[data-toggle-dot]:not(:disabled, [aria-disabled="true"]):is(:hover, :focus-visible) > .button-toggle-dot { animation: none; }
+}

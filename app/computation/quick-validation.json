@@ -1,0 +1,2724 @@
+{
+  "model": "Tanaw-DE440-ME421-v1",
+  "baseline": "published app/data/forecast at f6d7fac",
+  "window": {
+    "start": "2026-12-01T00:00:00Z",
+    "end": "2027-12-01T00:00:00Z"
+  },
+  "cadenceMinutes": 10,
+  "samplesPerBody": 52561,
+  "sites": 30,
+  "referenceMeaning": "Published Python Horizons/terrain forecasts, not independent ground truth",
+  "angleComparison": "Unrounded estimate versus saved hourly 0.01-degree values; azimuth differences wrapped",
+  "eventMatching": "Same kind, unique nearest match within 24 hours; unmatched counts retained",
+  "hardware": {
+    "cpu": "AMD Ryzen 5 3600 6-Core Processor              ",
+    "logicalCpus": 12,
+    "memoryGiB": 15.949703216552734,
+    "node": "v24.13.0"
+  },
+  "elapsedMs": 29092.076200000003,
+  "peakRssBytes": 332627968,
+  "rows": [
+    {
+      "id": "connecting-ridge",
+      "name": "Connecting Ridge",
+      "groundM": 1957.9595427743943,
+      "publishedGroundM": 1958.5030063044646,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 0.22380821917808214,
+        "median": 0,
+        "max": 9.38
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 0.054054794520547955,
+        "median": 0,
+        "max": 1.0999999999999996
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 16,
+          "mean": 39.139583333333334,
+          "median": 21.733333333333334,
+          "max": 304.8833333333333,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 7
+        },
+        "sunset": {
+          "count": 16,
+          "mean": 126.67916666666666,
+          "median": 56.03333333333333,
+          "max": 500.65,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 7
+        },
+        "earthrise": {
+          "count": 13,
+          "mean": 39.85641025641026,
+          "median": 31.8,
+          "max": 66.25,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthset": {
+          "count": 13,
+          "mean": 51.064102564102576,
+          "median": 54.93333333333333,
+          "max": 72.58333333333333,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.0024871800328683247,
+          "median": 0.0024712298515510156,
+          "max": 0.004999934865169919
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.002501108756064311,
+          "median": 0.002486608841932858,
+          "max": 0.004998942577347565
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.0025031228122171833,
+          "median": 0.0025141855969081917,
+          "max": 0.0049997771640732935
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.0024760771896402724,
+          "median": 0.0024611669535450353,
+          "max": 0.004998826187986083
+        }
+      },
+      "timings": {
+        "totalMs": 1729.4307999999999,
+        "terrainLoadMs": 586.1907,
+        "horizonMs": 944.9575,
+        "ephemerisLoadMs": 57.72279999999999,
+        "ephemerisMs": 161.83159999999998,
+        "forecastMs": 35.57999999999993,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 58625972,
+        "coefficientBytes": 164501
+      }
+    },
+    {
+      "id": "connecting-ridge-extension",
+      "name": "Connecting Ridge Extension",
+      "groundM": 1692.497224556728,
+      "publishedGroundM": 1692.8769314610943,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 0.0898356164383562,
+        "median": 0,
+        "max": 8.27
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 0.04841095890410958,
+        "median": 0,
+        "max": 1.08
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 34,
+          "mean": 27.317647058823532,
+          "median": 3.3,
+          "max": 513.5833333333334,
+          "unmatchedEstimate": 1,
+          "unmatchedReference": 1
+        },
+        "sunset": {
+          "count": 34,
+          "mean": 15.253921568627451,
+          "median": 3.716666666666667,
+          "max": 142.78333333333333,
+          "unmatchedEstimate": 1,
+          "unmatchedReference": 1
+        },
+        "earthrise": {
+          "count": 13,
+          "mean": 43.053846153846166,
+          "median": 43.333333333333336,
+          "max": 64.35,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthset": {
+          "count": 13,
+          "mean": 38.312820512820515,
+          "median": 37.583333333333336,
+          "max": 59.71666666666667,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.0025048755707978076,
+          "median": 0.002513526299452451,
+          "max": 0.004999421741061383
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.0024726941012482634,
+          "median": 0.0024634220274344365,
+          "max": 0.00499978467482598
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.002496669606673912,
+          "median": 0.0025031782427475946,
+          "max": 0.005000264569673618
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.0024937763756031485,
+          "median": 0.0024999079654897116,
+          "max": 0.004999727351135075
+        }
+      },
+      "timings": {
+        "totalMs": 1100.6351999999997,
+        "terrainLoadMs": 1.1239000000000487,
+        "horizonMs": 917.7248000000002,
+        "ephemerisLoadMs": 0.6071000000001732,
+        "ephemerisMs": 153.97920000000022,
+        "forecastMs": 27.50630000000001,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 0,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "shackleton-rim",
+      "name": "Shackleton rim",
+      "groundM": 1728.942950066299,
+      "publishedGroundM": 1729.7369271543803,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 0.4215342465753423,
+        "median": 0,
+        "max": 19.82
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 0.01027397260273973,
+        "median": 0,
+        "max": 0.41000000000000014
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 43,
+          "mean": 132.4093023255814,
+          "median": 11.316666666666666,
+          "max": 1427.25,
+          "unmatchedEstimate": 7,
+          "unmatchedReference": 5
+        },
+        "sunset": {
+          "count": 43,
+          "mean": 78.2441860465116,
+          "median": 5.616666666666666,
+          "max": 854.95,
+          "unmatchedEstimate": 7,
+          "unmatchedReference": 5
+        },
+        "earthrise": {
+          "count": 13,
+          "mean": 10.556410256410258,
+          "median": 10.933333333333334,
+          "max": 24.85,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthset": {
+          "count": 13,
+          "mean": 6.814102564102564,
+          "median": 5.033333333333333,
+          "max": 24.033333333333335,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.002473603037167729,
+          "median": 0.0024529869700131712,
+          "max": 0.004999817784637983
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.002499559997692934,
+          "median": 0.0024980112865644506,
+          "max": 0.0049999540854297475
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.002500276538509184,
+          "median": 0.002469127751311362,
+          "max": 0.004999651745833944
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.0025024542795239794,
+          "median": 0.002474650038208459,
+          "max": 0.004999301765629127
+        }
+      },
+      "timings": {
+        "totalMs": 1083.1345999999999,
+        "terrainLoadMs": 1.0846000000001368,
+        "horizonMs": 907.7093999999997,
+        "ephemerisLoadMs": 0.45919999999978245,
+        "ephemerisMs": 151.98119999999972,
+        "forecastMs": 22.07510000000002,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 0,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "peak-near-shackleton",
+      "name": "Peak near Shackleton",
+      "groundM": 1647.6066372799219,
+      "publishedGroundM": 1648.1989842896974,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 0.07257534246575346,
+        "median": 0,
+        "max": 6.23
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 0.03906849315068492,
+        "median": 0,
+        "max": 0.99
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 27,
+          "mean": 12.691975308641974,
+          "median": 5.466666666666667,
+          "max": 72.43333333333334,
+          "unmatchedEstimate": 1,
+          "unmatchedReference": 1
+        },
+        "sunset": {
+          "count": 27,
+          "mean": 56.603703703703694,
+          "median": 22.55,
+          "max": 600.7666666666667,
+          "unmatchedEstimate": 1,
+          "unmatchedReference": 1
+        },
+        "earthrise": {
+          "count": 13,
+          "mean": 35.38974358974359,
+          "median": 37.25,
+          "max": 50.916666666666664,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthset": {
+          "count": 13,
+          "mean": 30.551282051282048,
+          "median": 37.31666666666667,
+          "max": 71.6,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.0024860109795295598,
+          "median": 0.002475724273956814,
+          "max": 0.004999933395879452
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.00253395338307304,
+          "median": 0.0025647864342430715,
+          "max": 0.004999475214653021
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.0024943482717862753,
+          "median": 0.002479094643007329,
+          "max": 0.004999161409415365
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.0024878104624443047,
+          "median": 0.0024691306663378043,
+          "max": 0.004999735448622644
+        }
+      },
+      "timings": {
+        "totalMs": 1156.339,
+        "terrainLoadMs": 2.471400000000358,
+        "horizonMs": 960.6229000000003,
+        "ephemerisLoadMs": 2.1220000000002983,
+        "ephemerisMs": 167.4426999999996,
+        "forecastMs": 25.558100000000195,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 0,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "de-gerlache-rim",
+      "name": "de Gerlache rim",
+      "groundM": 1813.0995429133282,
+      "publishedGroundM": 1813.1461022314534,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 0.13736986301369866,
+        "median": 0,
+        "max": 5.130000000000001
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 0.05008219178082192,
+        "median": 0,
+        "max": 1.5
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 25,
+          "mean": 106.47466666666668,
+          "median": 25.35,
+          "max": 885,
+          "unmatchedEstimate": 3,
+          "unmatchedReference": 8
+        },
+        "sunset": {
+          "count": 25,
+          "mean": 54.36066666666667,
+          "median": 12.566666666666666,
+          "max": 578.9833333333333,
+          "unmatchedEstimate": 3,
+          "unmatchedReference": 8
+        },
+        "earthrise": {
+          "count": 13,
+          "mean": 46.306410256410246,
+          "median": 41.96666666666667,
+          "max": 89.66666666666667,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthset": {
+          "count": 14,
+          "mean": 35.28571428571429,
+          "median": 34.6,
+          "max": 69.38333333333334,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.0025118707004943225,
+          "median": 0.0025177205846205197,
+          "max": 0.004999410796528991
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.0025219912560631086,
+          "median": 0.0025460182854460944,
+          "max": 0.004998571826760334
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.0025372927772932593,
+          "median": 0.0025477825608533067,
+          "max": 0.005000230127862437
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.002521527732529179,
+          "median": 0.0025692576843745485,
+          "max": 0.004999683510463093
+        }
+      },
+      "timings": {
+        "totalMs": 1296.2983999999997,
+        "terrainLoadMs": 1.081199999999626,
+        "horizonMs": 1107.4559,
+        "ephemerisLoadMs": 0.4647000000004482,
+        "ephemerisMs": 163.91139999999996,
+        "forecastMs": 23.50970000000052,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 0,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "malapert-massif",
+      "name": "Malapert massif",
+      "groundM": 4806.063847999889,
+      "publishedGroundM": 4987.88725389259,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 2.015643835616438,
+        "median": 0,
+        "max": 24
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 9.650739726027398,
+        "median": 0,
+        "max": 24
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 18,
+          "mean": 230.0111111111111,
+          "median": 276.71666666666664,
+          "max": 586.6333333333333,
+          "unmatchedEstimate": 11,
+          "unmatchedReference": 12
+        },
+        "sunset": {
+          "count": 19,
+          "mean": 430.8500000000001,
+          "median": 437.45,
+          "max": 1089.1666666666667,
+          "unmatchedEstimate": 10,
+          "unmatchedReference": 11
+        },
+        "earthrise": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 13
+        },
+        "earthset": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 14
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.0025053733195503558,
+          "median": 0.0025100755893276983,
+          "max": 0.004999513568321845
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.0025015961574032263,
+          "median": 0.0024989827137122944,
+          "max": 0.004999258399801754
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.0024870016367379,
+          "median": 0.0024824376555807603,
+          "max": 0.004999758794099307
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.002506901420454293,
+          "median": 0.002509011713350162,
+          "max": 0.005025671603299919
+        }
+      },
+      "timings": {
+        "totalMs": 1370.3437000000004,
+        "terrainLoadMs": 1.1273000000001048,
+        "horizonMs": 1178.3954999999996,
+        "ephemerisLoadMs": 0.6432999999997264,
+        "ephemerisMs": 164.6203999999998,
+        "forecastMs": 25.93079999999918,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 0,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "leibnitz-beta-plateau",
+      "name": "Mons Mouton",
+      "groundM": 6346.490507839943,
+      "publishedGroundM": 6456.183085072104,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 5.905041095890413,
+        "median": 0,
+        "max": 24
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 2.7142465753424663,
+        "median": 0,
+        "max": 24
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 1,
+          "mean": 1126.7166666666667,
+          "median": 1126.7166666666667,
+          "max": 1126.7166666666667,
+          "unmatchedEstimate": 9,
+          "unmatchedReference": 23
+        },
+        "sunset": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 10,
+          "unmatchedReference": 24
+        },
+        "earthrise": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 13,
+          "unmatchedReference": 14
+        },
+        "earthset": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 13,
+          "unmatchedReference": 14
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.0024855877968045026,
+          "median": 0.0024743367968227403,
+          "max": 0.0049999347187963394
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.0024791682942532545,
+          "median": 0.0024555065923164143,
+          "max": 0.004999232577264201
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.002519411291770281,
+          "median": 0.0025196441100661104,
+          "max": 0.005000344679842783
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.002490460176567956,
+          "median": 0.0024912810842874222,
+          "max": 0.005015036978955223
+        }
+      },
+      "timings": {
+        "totalMs": 1419.1962999999996,
+        "terrainLoadMs": 1.0518000000001848,
+        "horizonMs": 1237.8994999999995,
+        "ephemerisLoadMs": 0.44689999999991414,
+        "ephemerisMs": 160.51800000000003,
+        "forecastMs": 19.526200000000244,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 0,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "im2-mons-mouton",
+      "name": "IM-2 Athena, Mons Mouton",
+      "groundM": 5280.288331199985,
+      "publishedGroundM": 5320.65432492338,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 0.36964383561643827,
+        "median": 0,
+        "max": 13.17
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 2.4112054794520548,
+        "median": 0,
+        "max": 24
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 12,
+          "mean": 67.66250000000001,
+          "median": 39.53333333333333,
+          "max": 181.1,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 2
+        },
+        "sunset": {
+          "count": 12,
+          "mean": 491.60833333333335,
+          "median": 556.3,
+          "max": 937.0333333333333,
+          "unmatchedEstimate": 1,
+          "unmatchedReference": 2
+        },
+        "earthrise": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 14,
+          "unmatchedReference": 14
+        },
+        "earthset": {
+          "count": 2,
+          "mean": 1416.4083333333333,
+          "median": 1430.75,
+          "max": 1430.75,
+          "unmatchedEstimate": 12,
+          "unmatchedReference": 12
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.002513070150182217,
+          "median": 0.00251546342960296,
+          "max": 0.004999726802573434
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.0025036871569014195,
+          "median": 0.002511520951036239,
+          "max": 0.004999509469216568
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.0024947991875226465,
+          "median": 0.0024973478330139187,
+          "max": 0.0049993671011066
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.002483810265039997,
+          "median": 0.002465309707067931,
+          "max": 0.005005852152359935
+        }
+      },
+      "timings": {
+        "totalMs": 1400.3922999999995,
+        "terrainLoadMs": 8.413699999999153,
+        "horizonMs": 1219.9357,
+        "ephemerisLoadMs": 0.4295000000001892,
+        "ephemerisMs": 150.3094999999994,
+        "forecastMs": 21.520400000001246,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 718430,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "im1-malapert-a",
+      "name": "IM-1 Odysseus, near Malapert A",
+      "groundM": 2619.9657999999927,
+      "publishedGroundM": 2588.0619571261104,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 1.1815890410958905,
+        "median": 0,
+        "max": 24
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 0,
+        "median": 0,
+        "max": 0
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 1,
+          "mean": 1431.8,
+          "median": 1431.8,
+          "max": 1431.8,
+          "unmatchedEstimate": 11,
+          "unmatchedReference": 11
+        },
+        "sunset": {
+          "count": 13,
+          "mean": 476.8230769230768,
+          "median": 410.6333333333333,
+          "max": 675.85,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthrise": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthset": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.0025050060406480116,
+          "median": 0.00251761670008932,
+          "max": 0.004999843714116992
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.0025102549732715818,
+          "median": 0.002513233693488104,
+          "max": 0.0049990980490681736
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.002448025827392951,
+          "median": 0.0024092406714544268,
+          "max": 0.004998985226982278
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.0025047633380342973,
+          "median": 0.0025077080072488656,
+          "max": 0.00500395033412282
+        }
+      },
+      "timings": {
+        "totalMs": 632.9099999999999,
+        "terrainLoadMs": 0.9375,
+        "horizonMs": 448.21550000000025,
+        "ephemerisLoadMs": 0.43550000000141154,
+        "ephemerisMs": 159.000399999999,
+        "forecastMs": 24.41699999999946,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 0,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "chandrayaan-3",
+      "name": "Chandrayaan-3",
+      "groundM": 535.5931999999998,
+      "publishedGroundM": 529.5401699809181,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 0.13608219178082187,
+        "median": 0,
+        "max": 2.8000000000000007
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 0,
+        "median": 0,
+        "max": 0
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 12,
+          "mean": 150.12222222222223,
+          "median": 151.76666666666668,
+          "max": 167.88333333333333,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "sunset": {
+          "count": 12,
+          "mean": 98.47222222222223,
+          "median": 108.41666666666667,
+          "max": 143.13333333333333,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthrise": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthset": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.002504002030646176,
+          "median": 0.0025004879969401372,
+          "max": 0.004999215626568798
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.002503854903075223,
+          "median": 0.0025004793461134156,
+          "max": 0.004998224634976012
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.002535586347696098,
+          "median": 0.0025569387959762935,
+          "max": 0.004999829544203749
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.002504118008080201,
+          "median": 0.002510492381585294,
+          "max": 0.0049999994075697884
+        }
+      },
+      "timings": {
+        "totalMs": 614.8783999999996,
+        "terrainLoadMs": 3.390400000000227,
+        "horizonMs": 433.9951000000001,
+        "ephemerisLoadMs": 0.40869999999995343,
+        "ephemerisMs": 157.96639999999934,
+        "forecastMs": 19.286299999999756,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 177360,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "apollo-11",
+      "name": "Apollo 11",
+      "groundM": -1921.6185920256003,
+      "publishedGroundM": -1926.5672941046034,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 0.029780821917808214,
+        "median": 0,
+        "max": 0.79
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 0,
+        "median": 0,
+        "max": 0
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 12,
+          "mean": 14.7125,
+          "median": 15.016666666666667,
+          "max": 17.966666666666665,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "sunset": {
+          "count": 12,
+          "mean": 39.73055555555556,
+          "median": 45.13333333333333,
+          "max": 47.21666666666667,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthrise": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthset": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.0025107221241072943,
+          "median": 0.0025020384799319118,
+          "max": 0.004999641751837203
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.002464461562437334,
+          "median": 0.0024508597194028425,
+          "max": 0.004997801366329213
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.002482245849901097,
+          "median": 0.0024497572981090343,
+          "max": 0.004999742532959317
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.00248720554716324,
+          "median": 0.0024916759716973047,
+          "max": 0.005000033325750053
+        }
+      },
+      "timings": {
+        "totalMs": 605.2307999999994,
+        "terrainLoadMs": 7.76089999999931,
+        "horizonMs": 423.46609999999964,
+        "ephemerisLoadMs": 0.6526000000012573,
+        "ephemerisMs": 152.29559999999947,
+        "forecastMs": 21.37159999999858,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 167258,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "peak-near-cabeus-b",
+      "name": "Peak near Cabeus B",
+      "groundM": 4444.381917119959,
+      "publishedGroundM": 4577.533406563005,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 4.0325205479452055,
+        "median": 0,
+        "max": 24
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 2.867780821917808,
+        "median": 0,
+        "max": 24
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 6,
+          "mean": 34.38055555555555,
+          "median": 29.05,
+          "max": 59.766666666666666,
+          "unmatchedEstimate": 12,
+          "unmatchedReference": 22
+        },
+        "sunset": {
+          "count": 19,
+          "mean": 109.91403508771928,
+          "median": 19.35,
+          "max": 616.7333333333333,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 10
+        },
+        "earthrise": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 13,
+          "unmatchedReference": 13
+        },
+        "earthset": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 13,
+          "unmatchedReference": 14
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.002478712266966693,
+          "median": 0.002456293488535266,
+          "max": 0.004999819197337274
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.00251860062475294,
+          "median": 0.002535476351346766,
+          "max": 0.00499946113725791
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.002511478365125213,
+          "median": 0.0025241900927710503,
+          "max": 0.004999753049318656
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.0025010495351545734,
+          "median": 0.002502086743335852,
+          "max": 0.005018276051399706
+        }
+      },
+      "timings": {
+        "totalMs": 1614.4583999999995,
+        "terrainLoadMs": 6.011799999998402,
+        "horizonMs": 1367.3606,
+        "ephemerisLoadMs": 0.9266000000006898,
+        "ephemerisMs": 208.58050000000003,
+        "forecastMs": 32.19449999999961,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 311020,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "haworth",
+      "name": "Haworth",
+      "groundM": 1763.4782288000843,
+      "publishedGroundM": 1834.9839969877605,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 3.1475342465753418,
+        "median": 0,
+        "max": 24
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 1.9933424657534249,
+        "median": 0,
+        "max": 24
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 27,
+          "mean": 417.0555555555555,
+          "median": 143.06666666666666,
+          "max": 1196.8166666666666,
+          "unmatchedEstimate": 19,
+          "unmatchedReference": 20
+        },
+        "sunset": {
+          "count": 25,
+          "mean": 519.7766666666665,
+          "median": 655.25,
+          "max": 1282.6,
+          "unmatchedEstimate": 21,
+          "unmatchedReference": 22
+        },
+        "earthrise": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 13,
+          "unmatchedReference": 13
+        },
+        "earthset": {
+          "count": 5,
+          "mean": 1392.1866666666667,
+          "median": 1384.3333333333333,
+          "max": 1438.5666666666666,
+          "unmatchedEstimate": 8,
+          "unmatchedReference": 9
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.0025051696972018143,
+          "median": 0.002493775151265254,
+          "max": 0.004999614360400528
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.0024848331177866586,
+          "median": 0.0024977800896726077,
+          "max": 0.0049998781907349965
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.0024925348433536185,
+          "median": 0.0024668029563272853,
+          "max": 0.00499901150003268
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.002497793322328377,
+          "median": 0.002487446630423662,
+          "max": 0.005009502514088382
+        }
+      },
+      "timings": {
+        "totalMs": 1331.2474000000002,
+        "terrainLoadMs": 1.1543000000001484,
+        "horizonMs": 1159.9109000000008,
+        "ephemerisLoadMs": 0.5245999999988271,
+        "ephemerisMs": 147.34979999999996,
+        "forecastMs": 22.61499999999978,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 0,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "mons-mouton-plateau",
+      "name": "Mons Mouton Plateau",
+      "groundM": 5136.49519007999,
+      "publishedGroundM": 5233.378493242478,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 4.40841095890411,
+        "median": 0,
+        "max": 24
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 10.353561643835615,
+        "median": 0,
+        "max": 24
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 12,
+          "mean": 153.3402777777778,
+          "median": 84.96666666666667,
+          "max": 516.3666666666667,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "sunset": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 12,
+          "unmatchedReference": 13
+        },
+        "earthrise": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 13,
+          "unmatchedReference": 0
+        },
+        "earthset": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 14,
+          "unmatchedReference": 0
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.0025031692411803517,
+          "median": 0.0024755883101761356,
+          "max": 0.004999874970479823
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.002495909379027499,
+          "median": 0.002515676527072852,
+          "max": 0.00499936332561024
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.002515705277889106,
+          "median": 0.0025150097492883106,
+          "max": 0.00499812581574588
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.0025219332566720942,
+          "median": 0.002547050678971541,
+          "max": 0.005014106514586558
+        }
+      },
+      "timings": {
+        "totalMs": 1422.7747,
+        "terrainLoadMs": 0.7386000000005879,
+        "horizonMs": 1250.381400000002,
+        "ephemerisLoadMs": 0.417699999999968,
+        "ephemerisMs": 153.04089999999997,
+        "forecastMs": 18.40139999999883,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 0,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "nobile-rim-1",
+      "name": "Nobile Rim 1",
+      "groundM": 6607.229019200013,
+      "publishedGroundM": 6742.716260145465,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 7.612657534246575,
+        "median": 0,
+        "max": 24
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 3.4529589041095887,
+        "median": 0,
+        "max": 24
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 14,
+          "mean": 78.48333333333335,
+          "median": 53.38333333333333,
+          "max": 373.48333333333335,
+          "unmatchedEstimate": 9,
+          "unmatchedReference": 7
+        },
+        "sunset": {
+          "count": 9,
+          "mean": 94.1537037037037,
+          "median": 44.68333333333333,
+          "max": 304.18333333333334,
+          "unmatchedEstimate": 14,
+          "unmatchedReference": 12
+        },
+        "earthrise": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 13,
+          "unmatchedReference": 13
+        },
+        "earthset": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 13,
+          "unmatchedReference": 13
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.00247905911148899,
+          "median": 0.002450955601069893,
+          "max": 0.004999475429769973
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.0025190314279600994,
+          "median": 0.0025240587102541845,
+          "max": 0.0049994595174194245
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.002516708981585517,
+          "median": 0.002515053934075695,
+          "max": 0.004999522180412441
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.0025104869438967196,
+          "median": 0.0024936086078657382,
+          "max": 0.0050198180674412285
+        }
+      },
+      "timings": {
+        "totalMs": 1400.765800000001,
+        "terrainLoadMs": 0.9425999999984924,
+        "horizonMs": 1228.7996999999996,
+        "ephemerisLoadMs": 0.45060000000012224,
+        "ephemerisMs": 152.51239999999962,
+        "forecastMs": 18.328999999997905,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 0,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "nobile-rim-2",
+      "name": "Nobile Rim 2",
+      "groundM": 1359.545067200035,
+      "publishedGroundM": 1452.735389039465,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 1.041780821917808,
+        "median": 0,
+        "max": 24
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 0.28468493150684937,
+        "median": 0,
+        "max": 6.300000000000001
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 3,
+          "mean": 16.27777777777778,
+          "median": 13.133333333333333,
+          "max": 29.283333333333335,
+          "unmatchedEstimate": 13,
+          "unmatchedReference": 13
+        },
+        "sunset": {
+          "count": 15,
+          "mean": 33.097777777777786,
+          "median": 27.783333333333335,
+          "max": 59.166666666666664,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthrise": {
+          "count": 14,
+          "mean": 273.4095238095238,
+          "median": 283.3,
+          "max": 478.7,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthset": {
+          "count": 14,
+          "mean": 171.74285714285716,
+          "median": 181.91666666666666,
+          "max": 253.7,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.0025033175980840377,
+          "median": 0.0025132524282440727,
+          "max": 0.004999417325052491
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.0024926072715964094,
+          "median": 0.002473583398543866,
+          "max": 0.0049997852549079624
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.0025098087094104003,
+          "median": 0.002480511364240101,
+          "max": 0.004998951550930997
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.0024875129053020823,
+          "median": 0.002484780747550097,
+          "max": 0.005013266617019507
+        }
+      },
+      "timings": {
+        "totalMs": 1450.6247999999978,
+        "terrainLoadMs": 2.5366999999969266,
+        "horizonMs": 1264.1036000000022,
+        "ephemerisLoadMs": 0.5709000000024389,
+        "ephemerisMs": 164.3024000000005,
+        "forecastMs": 19.52860000000146,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 45549,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "apollo-12",
+      "name": "Apollo 12",
+      "groundM": -1426.8326409600072,
+      "publishedGroundM": -1423.338394634453,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 0.002082191780821925,
+        "median": 0,
+        "max": 0.05999999999999872
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 0,
+        "median": 0,
+        "max": 0
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 12,
+          "mean": 1.998611111111111,
+          "median": 1.8166666666666667,
+          "max": 3.0833333333333335,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "sunset": {
+          "count": 13,
+          "mean": 1.5474358974358973,
+          "median": 1.6666666666666667,
+          "max": 3.1666666666666665,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthrise": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthset": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.0024939109682723323,
+          "median": 0.0025041031948376258,
+          "max": 0.004999396912594989
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.002507835403771551,
+          "median": 0.002500732283316154,
+          "max": 0.004999796418374558
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.0025202844423126954,
+          "median": 0.0025255331951115068,
+          "max": 0.004999566214266338
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.002500813587501596,
+          "median": 0.002501621403453669,
+          "max": 0.004999983396061225
+        }
+      },
+      "timings": {
+        "totalMs": 589.5473999999995,
+        "terrainLoadMs": 3.7885999999998603,
+        "horizonMs": 418.6138000000028,
+        "ephemerisLoadMs": 0.6815999999998894,
+        "ephemerisMs": 149.25369999999748,
+        "forecastMs": 17.655399999999645,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 150908,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "apollo-14",
+      "name": "Apollo 14",
+      "groundM": -1047.7652180480113,
+      "publishedGroundM": -1061.96506789086,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 0.17463013698630137,
+        "median": 0,
+        "max": 3.74
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 0,
+        "median": 0,
+        "max": 0
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 12,
+          "mean": 216.97083333333333,
+          "median": 216.93333333333334,
+          "max": 224.91666666666666,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "sunset": {
+          "count": 13,
+          "mean": 93.7948717948718,
+          "median": 93.7,
+          "max": 95.15,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthrise": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthset": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.0025134944283529055,
+          "median": 0.0025315097461628966,
+          "max": 0.004997432971890703
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.002507309601969687,
+          "median": 0.00249756926370992,
+          "max": 0.0049998984892951626
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.0025049956526903036,
+          "median": 0.0024983735905692583,
+          "max": 0.004999267169978339
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.0025132343357086857,
+          "median": 0.0025101804656699755,
+          "max": 0.004999687807355713
+        }
+      },
+      "timings": {
+        "totalMs": 592.7435000000005,
+        "terrainLoadMs": 0.8744000000006054,
+        "horizonMs": 407.1333000000013,
+        "ephemerisLoadMs": 0.4844999999986612,
+        "ephemerisMs": 160.4323000000004,
+        "forecastMs": 24.102700000003097,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 0,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "apollo-15",
+      "name": "Apollo 15",
+      "groundM": -1938.0456756479957,
+      "publishedGroundM": -1926.3280988033596,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 0.0694246575342466,
+        "median": 0,
+        "max": 1.8300000000000018
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 0,
+        "median": 0,
+        "max": 0
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 12,
+          "mean": 8.234722222222222,
+          "median": 6.333333333333333,
+          "max": 18.75,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "sunset": {
+          "count": 13,
+          "mean": 109.20512820512819,
+          "median": 109.28333333333333,
+          "max": 109.75,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthrise": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthset": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.0024982369654842395,
+          "median": 0.00249071741222906,
+          "max": 0.004999179889352945
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.0024933933068845473,
+          "median": 0.0024909858104642524,
+          "max": 0.004999879201726287
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.0025274373923663347,
+          "median": 0.0025282789472385048,
+          "max": 0.004997897757732517
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.002536739244725048,
+          "median": 0.002558619393646211,
+          "max": 0.004998640829967371
+        }
+      },
+      "timings": {
+        "totalMs": 567.7784000000029,
+        "terrainLoadMs": 3.8034000000006927,
+        "horizonMs": 395.48739999999816,
+        "ephemerisLoadMs": 0.5774999999994179,
+        "ephemerisMs": 150.40810000000056,
+        "forecastMs": 17.878100000001723,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 160628,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "apollo-16",
+      "name": "Apollo 16",
+      "groundM": 7.113185280001398,
+      "publishedGroundM": 12.174124200352702,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 0.016410958904109603,
+        "median": 0,
+        "max": 0.5
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 0,
+        "median": 0,
+        "max": 0
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 12,
+          "mean": 12.393055555555556,
+          "median": 11.683333333333334,
+          "max": 29.933333333333334,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "sunset": {
+          "count": 12,
+          "mean": 17.715277777777775,
+          "median": 18.066666666666666,
+          "max": 23.016666666666666,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthrise": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthset": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.0024932504299216415,
+          "median": 0.0025036074432591704,
+          "max": 0.004999062191075154
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.0024975377906699212,
+          "median": 0.002479158284179661,
+          "max": 0.00499989512032073
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.0024669017590735996,
+          "median": 0.0024396708197400585,
+          "max": 0.005000059835367665
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.0025232445228409966,
+          "median": 0.0025428585947651072,
+          "max": 0.004999747781127439
+        }
+      },
+      "timings": {
+        "totalMs": 587.4327000000012,
+        "terrainLoadMs": 2.980100000000675,
+        "horizonMs": 412.96359999999913,
+        "ephemerisLoadMs": 0.5137999999969907,
+        "ephemerisMs": 152.2415000000001,
+        "forecastMs": 19.0554000000011,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 90834,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "apollo-17",
+      "name": "Apollo 17",
+      "groundM": -2617.2057932799885,
+      "publishedGroundM": -2627.9831825398455,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 0.06254794520547943,
+        "median": 0,
+        "max": 2.1700000000000017
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 0,
+        "median": 0,
+        "max": 0
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 12,
+          "mean": 96.99305555555554,
+          "median": 94.46666666666667,
+          "max": 130.46666666666667,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "sunset": {
+          "count": 12,
+          "mean": 17.150000000000002,
+          "median": 13.966666666666667,
+          "max": 39.333333333333336,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthrise": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthset": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.00251546874059884,
+          "median": 0.0025194288292595957,
+          "max": 0.004999680211881241
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.0025145175668960544,
+          "median": 0.0025021492394863287,
+          "max": 0.004999520945247582
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.002533925140454744,
+          "median": 0.0025546211152516207,
+          "max": 0.004999542604934959
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.0024985183969092072,
+          "median": 0.0025175733374069864,
+          "max": 0.004999823525970726
+        }
+      },
+      "timings": {
+        "totalMs": 613.360099999998,
+        "terrainLoadMs": 2.6467000000011467,
+        "horizonMs": 415.2317000000003,
+        "ephemerisLoadMs": 0.4268999999985681,
+        "ephemerisMs": 177.51610000000073,
+        "forecastMs": 17.773600000000442,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 158916,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "luna-24",
+      "name": "Luna 24",
+      "groundM": -3669.414828160002,
+      "publishedGroundM": -3673.539561089687,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 0.015506849315068483,
+        "median": 0,
+        "max": 0.3099999999999996
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 0,
+        "median": 0,
+        "max": 0
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 13,
+          "mean": 15.793589743589745,
+          "median": 15.616666666666667,
+          "max": 18.55,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "sunset": {
+          "count": 12,
+          "mean": 11.305555555555555,
+          "median": 11.033333333333333,
+          "max": 13.266666666666667,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthrise": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthset": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.0025225555390123128,
+          "median": 0.002513183090073312,
+          "max": 0.004999506568083234
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.002493945320966763,
+          "median": 0.002509825609003258,
+          "max": 0.004999752287446313
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.002479706699157015,
+          "median": 0.0024704383858420442,
+          "max": 0.004999227933865313
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.002487253670390283,
+          "median": 0.0024751176883199832,
+          "max": 0.005000201747574096
+        }
+      },
+      "timings": {
+        "totalMs": 625.3538000000008,
+        "terrainLoadMs": 3.0921999999991385,
+        "horizonMs": 427.4311000000016,
+        "ephemerisLoadMs": 0.4741000000030908,
+        "ephemerisMs": 175.95520000000033,
+        "forecastMs": 18.65980000000127,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 164669,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "change-3",
+      "name": "Chang'e 3",
+      "groundM": -2631.3459999999977,
+      "publishedGroundM": -2630.090499923114,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 0.0008219178082191776,
+        "median": 0,
+        "max": 0.03999999999999915
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 0,
+        "median": 0,
+        "max": 0
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 12,
+          "mean": 0.5680555555555556,
+          "median": 0.5333333333333333,
+          "max": 1.4833333333333334,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "sunset": {
+          "count": 13,
+          "mean": 0.6512820512820513,
+          "median": 0.48333333333333334,
+          "max": 1.8833333333333333,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthrise": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthset": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.002479192194693266,
+          "median": 0.0024667558112696497,
+          "max": 0.00499977126563067
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.0024919043744929133,
+          "median": 0.002498188578409888,
+          "max": 0.004999941902653404
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.002485445394023944,
+          "median": 0.0024817872835001253,
+          "max": 0.004998509664972062
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.002496033035180752,
+          "median": 0.0024776368420162953,
+          "max": 0.00499980872752559
+        }
+      },
+      "timings": {
+        "totalMs": 582.8680999999997,
+        "terrainLoadMs": 2.8312999999980093,
+        "horizonMs": 413.66479999999865,
+        "ephemerisLoadMs": 0.4805000000014843,
+        "ephemerisMs": 148.6330999999991,
+        "forecastMs": 17.558999999997468,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 134998,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "change-4",
+      "name": "Chang'e 4",
+      "groundM": -5929.761304000001,
+      "publishedGroundM": -5926.740277453121,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 0.02175342465753427,
+        "median": 0,
+        "max": 0.4500000000000002
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 0,
+        "median": 0,
+        "max": 0
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 13,
+          "mean": 14.662820512820513,
+          "median": 14.816666666666666,
+          "max": 25.55,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "sunset": {
+          "count": 12,
+          "mean": 23.92638888888889,
+          "median": 24.133333333333333,
+          "max": 26.816666666666666,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthrise": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthset": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.00251056446763509,
+          "median": 0.002539214242347043,
+          "max": 0.0049999363719450685
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.002504822031986771,
+          "median": 0.002517048147343104,
+          "max": 0.004999116965143102
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.00250823069743906,
+          "median": 0.0025111311231000855,
+          "max": 0.004998543627721119
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.0024958586356346717,
+          "median": 0.0024774454592417783,
+          "max": 0.004999760201236825
+        }
+      },
+      "timings": {
+        "totalMs": 587.7314000000006,
+        "terrainLoadMs": 3.7818000000006577,
+        "horizonMs": 411.75620000000345,
+        "ephemerisLoadMs": 0.6656000000002678,
+        "ephemerisMs": 153.03849999999875,
+        "forecastMs": 18.888300000002346,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 174237,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "change-5",
+      "name": "Chang'e 5",
+      "groundM": -2544.1783779200077,
+      "publishedGroundM": -2546.7444290228173,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 0.015753424657534258,
+        "median": 0,
+        "max": 0.2900000000000027
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 0,
+        "median": 0,
+        "max": 0
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 12,
+          "mean": 15.244444444444445,
+          "median": 15.583333333333334,
+          "max": 17.366666666666667,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "sunset": {
+          "count": 13,
+          "mean": 12.402564102564101,
+          "median": 12.6,
+          "max": 13.766666666666667,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthrise": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthset": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.0025023519960360413,
+          "median": 0.0024938833065277777,
+          "max": 0.004999705729574089
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.002500127480082446,
+          "median": 0.002480511144490549,
+          "max": 0.004999665672968945
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.002506306293654441,
+          "median": 0.0025114444416374226,
+          "max": 0.004999043815416826
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.0025005041902836406,
+          "median": 0.0024936744742021233,
+          "max": 0.0049989194930262215
+        }
+      },
+      "timings": {
+        "totalMs": 591.3044999999984,
+        "terrainLoadMs": 2.9724000000023807,
+        "horizonMs": 421.9193000000014,
+        "ephemerisLoadMs": 0.4393000000018219,
+        "ephemerisMs": 147.70999999999913,
+        "forecastMs": 18.480899999998655,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 146142,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "change-6",
+      "name": "Chang'e 6",
+      "groundM": -5255.374,
+      "publishedGroundM": -5255.599352195308,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 0.017232876712328787,
+        "median": 0,
+        "max": 0.4800000000000004
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 0,
+        "median": 0,
+        "max": 0
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 12,
+          "mean": 25.650000000000002,
+          "median": 26.216666666666665,
+          "max": 29.066666666666666,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "sunset": {
+          "count": 12,
+          "mean": 5.673611111111112,
+          "median": 5.333333333333333,
+          "max": 9.716666666666667,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthrise": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthset": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.002471804536536481,
+          "median": 0.0024616855623094125,
+          "max": 0.004998737918242568
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.0024714557976349178,
+          "median": 0.002452524106260512,
+          "max": 0.004999481960268781
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.002494350515527254,
+          "median": 0.0024810344595778133,
+          "max": 0.004999837311345345
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.0024918975058546293,
+          "median": 0.002476280171258338,
+          "max": 0.004999741304771987
+        }
+      },
+      "timings": {
+        "totalMs": 602.3525000000009,
+        "terrainLoadMs": 3.477900000001682,
+        "horizonMs": 432.0381000000016,
+        "ephemerisLoadMs": 0.49420000000100117,
+        "ephemerisMs": 147.52630000000136,
+        "forecastMs": 19.06340000000273,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 263513,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "slim",
+      "name": "SLIM",
+      "groundM": -910.378488000008,
+      "publishedGroundM": -913.7892614921911,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 0.06427397260273973,
+        "median": 0,
+        "max": 1.2700000000000014
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 0,
+        "median": 0,
+        "max": 0
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 12,
+          "mean": 64.73333333333333,
+          "median": 67.06666666666666,
+          "max": 69.61666666666666,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "sunset": {
+          "count": 12,
+          "mean": 52.69583333333333,
+          "median": 59.233333333333334,
+          "max": 76.2,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthrise": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthset": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.002497070215916933,
+          "median": 0.0024876760506913342,
+          "max": 0.004999213223300103
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.0024809248736091913,
+          "median": 0.0024767227144817383,
+          "max": 0.004999640142798967
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.0025257760821814847,
+          "median": 0.0025648916973182168,
+          "max": 0.004999893457579674
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.0024706512014823537,
+          "median": 0.002452239006984769,
+          "max": 0.005000316985722009
+        }
+      },
+      "timings": {
+        "totalMs": 593.0629000000008,
+        "terrainLoadMs": 2.376800000001822,
+        "horizonMs": 403.6208000000006,
+        "ephemerisLoadMs": 0.4969999999993888,
+        "ephemerisMs": 167.56009999999878,
+        "forecastMs": 19.27850000000035,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 80993,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "blue-ghost-1",
+      "name": "Blue Ghost Mission 1",
+      "groundM": -3645.620396480001,
+      "publishedGroundM": -3652.037083412656,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 0.0312876712328767,
+        "median": 0,
+        "max": 0.5200000000000005
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 0,
+        "median": 0,
+        "max": 0
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 13,
+          "mean": 24.27051282051282,
+          "median": 23.933333333333334,
+          "max": 29.7,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "sunset": {
+          "count": 12,
+          "mean": 30.64027777777778,
+          "median": 30.766666666666666,
+          "max": 31.366666666666667,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthrise": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthset": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.0025145819317346093,
+          "median": 0.002524112524227462,
+          "max": 0.004999264881803356
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.0025155172052875596,
+          "median": 0.002514649773402766,
+          "max": 0.004999712355989061
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.0025161258846889936,
+          "median": 0.0025512186863352326,
+          "max": 0.004999383430003945
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.0025017360156839403,
+          "median": 0.002496916582728659,
+          "max": 0.005001070118776596
+        }
+      },
+      "timings": {
+        "totalMs": 637.196100000001,
+        "terrainLoadMs": 2.76680000000124,
+        "horizonMs": 465.97060000000056,
+        "ephemerisLoadMs": 0.3963000000003376,
+        "ephemerisMs": 150.5686999999998,
+        "forecastMs": 17.713800000001356,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 87553,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "im3-reiner-gamma",
+      "name": "Reiner Gamma",
+      "groundM": -1763.9540000000004,
+      "publishedGroundM": -1763.3248630371215,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 0.021945205479452053,
+        "median": 0,
+        "max": 0.5899999999999999
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 0,
+        "median": 0,
+        "max": 0
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 12,
+          "mean": 32.298611111111114,
+          "median": 32,
+          "max": 35.36666666666667,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "sunset": {
+          "count": 13,
+          "mean": 7.196153846153846,
+          "median": 7.283333333333333,
+          "max": 8.016666666666667,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthrise": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthset": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.0025278414805902628,
+          "median": 0.0025514121457490546,
+          "max": 0.004997494043948336
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.0025105667929573874,
+          "median": 0.0025021951032613288,
+          "max": 0.004997740432742148
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.0024892353785783993,
+          "median": 0.002493412411311624,
+          "max": 0.00499957337048329
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.0024789328360740855,
+          "median": 0.002484660537898975,
+          "max": 0.004999977271971545
+        }
+      },
+      "timings": {
+        "totalMs": 669.9105999999992,
+        "terrainLoadMs": 3.138699999999517,
+        "horizonMs": 474.0517,
+        "ephemerisLoadMs": 0.4488999999994121,
+        "ephemerisMs": 172.8712000000014,
+        "forecastMs": 19.66830000000118,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 148999,
+        "coefficientBytes": 0
+      }
+    },
+    {
+      "id": "blue-ghost-3",
+      "name": "Mons Gruithuisen Gamma",
+      "groundM": -625.6199421440064,
+      "publishedGroundM": -514.5297527482456,
+      "sunHoursPerDay": {
+        "count": 365,
+        "mean": 0.09997260273972601,
+        "median": 0,
+        "max": 3.120000000000001
+      },
+      "earthHoursPerDay": {
+        "count": 365,
+        "mean": 0,
+        "median": 0,
+        "max": 0
+      },
+      "eventsMinutes": {
+        "sunrise": {
+          "count": 12,
+          "mean": 10.498611111111112,
+          "median": 10.816666666666666,
+          "max": 23.55,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "sunset": {
+          "count": 13,
+          "mean": 158.85256410256412,
+          "median": 163.96666666666667,
+          "max": 187.55,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthrise": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        },
+        "earthset": {
+          "count": 0,
+          "mean": null,
+          "median": null,
+          "max": null,
+          "unmatchedEstimate": 0,
+          "unmatchedReference": 0
+        }
+      },
+      "anglesDegrees": {
+        "sunAz": {
+          "count": 8760,
+          "mean": 0.0025223306156701023,
+          "median": 0.0025190453471282126,
+          "max": 0.004999975667317358
+        },
+        "sunEl": {
+          "count": 8760,
+          "mean": 0.002476669188895291,
+          "median": 0.0024786627939903383,
+          "max": 0.0049994757876241636
+        },
+        "earthAz": {
+          "count": 8760,
+          "mean": 0.0025107158996050655,
+          "median": 0.002523551223021059,
+          "max": 0.004999563552203767
+        },
+        "earthEl": {
+          "count": 8760,
+          "mean": 0.002477209671616633,
+          "median": 0.0024759935375229247,
+          "max": 0.0050145149257119215
+        }
+      },
+      "timings": {
+        "totalMs": 673.3064999999988,
+        "terrainLoadMs": 4.6141999999999825,
+        "horizonMs": 477.40220000000045,
+        "ephemerisLoadMs": 0.5542999999997846,
+        "ephemerisMs": 166.4998999999989,
+        "forecastMs": 24.587399999996705,
+        "horizonCacheHit": false,
+        "samplesPerBody": 52561,
+        "terrainBytes": 77603,
+        "coefficientBytes": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Tanaw</title>
+  <meta name="description" content="Sunlight and Earth contact forecasts for lunar landing sites.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600&family=Atkinson+Hyperlegible+Mono:wght@500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&text=TANAW&display=block">
+  <link rel="icon" href="assets/brand/tanaw-favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="quick-estimate.css">
+  <link rel="stylesheet" href="compare/compare.css">
+  <link rel="stylesheet" href="travel/travel.css">
+  <link rel="stylesheet" href="range-picker.css">
+  <link rel="stylesheet" href="button-effects.css">
+  <script type="importmap">
+    { "imports": {
+      "three": "./vendor/three/three.module.js",
+      "three/addons/": "./vendor/three/addons/"
+    } }
+  </script>
+</head>
+<body>
+  <main class="stage">
+    <canvas id="moon" role="img" aria-label="Rotatable Moon globe, south pole facing you"></canvas>
+    <canvas id="site" role="img" aria-label="3D terrain around the selected site"></canvas>
+    <span class="site-scale" id="site-scale" aria-hidden="true" hidden>5 km</span>
+    <div class="bodies" id="bodies"></div>
+    <div class="pins" id="pins" aria-label="Sites on the globe"></div>
+    <div class="pin-list" id="pin-list" popover aria-label="Sites here"></div>
+    <div class="pin-list" id="go-list" popover aria-label="Sites Go on this date"></div>
+    <div class="pin-list" id="view-menu" popover role="menu" aria-label="View">
+      <button class="btn" id="cinematic-mode" type="button" role="menuitem">Cinematic mode</button>
+    </div>
+    <div class="pin-list" id="layer-menu" popover role="menu" aria-label="Layers"></div>
+    <p class="status" id="status" role="status"><svg viewBox="88 88 407 80" width="326" height="64" aria-hidden="true"><defs><linearGradient id="load-arc" gradientUnits="userSpaceOnUse" x1="167.48" y1="0" x2="378.01" y2="0"><stop offset="0" style="stop-color: var(--text); stop-opacity: 0"/><stop offset=".5" style="stop-color: var(--text)"/><stop offset="1" style="stop-color: var(--text); stop-opacity: 0"/></linearGradient></defs><text x="300" y="158" text-anchor="middle" font-family="Michroma" font-size="54" letter-spacing="17.28" fill="var(--text)">T<tspan fill="none">A</tspan>N<tspan fill="none">A</tspan>W</text><path d="M170.01 158 L196.17 117.5 L222.33 158 M323.16 158 L349.32 117.5 L375.48 158" fill="none" stroke="var(--text)" stroke-width="5.06" stroke-miterlimit="10"/><path d="M167.48 158 Q272.74 35.96 378.01 158" fill="none" stroke="url(#load-arc)" stroke-width="2.53"/><circle cx="196.2" cy="148.4" r="8.1" fill="var(--earth)"/><circle cx="349.3" cy="148.4" r="8.1" fill="var(--sun)"/></svg>Loading the Moon</p>
+    <div class="hud">
+      <button class="btn" id="cinematic-back" type="button" aria-label="Back to full view" title="Exit cinematic mode · Esc" hidden><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6l6 6"/></svg>Back</button>
+      <div class="topbar">
+        <h1 class="brand ov">
+          <svg viewBox="88 88 407 80" width="204" height="40" role="img" aria-label="Tanaw"><defs><linearGradient id="brand-arc" gradientUnits="userSpaceOnUse" x1="167.48" y1="0" x2="378.01" y2="0"><stop offset="0" style="stop-color: var(--text); stop-opacity: 0"/><stop offset=".5" style="stop-color: var(--text)"/><stop offset="1" style="stop-color: var(--text); stop-opacity: 0"/></linearGradient></defs><text x="300" y="158" text-anchor="middle" font-family="Michroma" font-size="54" letter-spacing="17.28" fill="var(--text)">T<tspan fill="none">A</tspan>N<tspan fill="none">A</tspan>W</text><path d="M170.01 158 L196.17 117.5 L222.33 158 M323.16 158 L349.32 117.5 L375.48 158" fill="none" stroke="var(--text)" stroke-width="5.06" stroke-miterlimit="10"/><path d="M167.48 158 Q272.74 35.96 378.01 158" fill="none" stroke="url(#brand-arc)" stroke-width="2.53"/><circle cx="196.2" cy="148.4" r="8.1" fill="var(--earth)"/><circle cx="349.3" cy="148.4" r="8.1" fill="var(--sun)"/></svg>
+        </h1>
+        <div class="tools">
+          <button class="btn icon" id="search-btn" type="button" aria-label="Search sites" data-tip="Search sites" aria-controls="picker" aria-expanded="false"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M21 21l-6 -6"/></svg></button>
+          <a class="btn icon" id="observer-top" href="observer/" aria-label="Observer view" data-tip="Observer view"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g stroke-width="1.25"><path d="M4.5 5.5c.7-.8 3.5-.9 3.5 1.1c0 1.1-.9 1.7-2 1.7c1.2 0 2 .6 2 1.8c0 2-2.8 2.1-3.6 1"/><path d="M13.1 5.3c-2.5-1.1-3.6 1.3-3.6 4c0 3.2 3.8 3.2 3.8.4c0-2.3-3.8-2.3-3.8 0"/><rect x="15.2" y="4.9" width="3.6" height="7.1" rx="1.8"/><circle cx="21" cy="4.4" r="1"/></g><path d="M3.5 13.5C-1 16 3.2 19.5 11 19.5m-2.5-2.3L11 19.5l-2.5 2.3M20.5 13.5c4.5 2.5 1.1 5.5-5.5 5.9"/></svg></a>
+          <button class="btn icon" id="mode-es" type="button" aria-pressed="false" aria-label="Earth &amp; Sun" data-tip="Earth &amp; Sun"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18.816 13.58c2.292 2.138 3.546 4 3.092 4.9c-.745 1.46 -5.783 -.259 -11.255 -3.838c-5.47 -3.579 -9.304 -7.664 -8.56 -9.123c.464 -.91 2.926 -.444 5.803 .805"/><path d="M12 12m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/></svg></button>
+          <button class="btn icon" id="layers-btn" type="button" popovertarget="layer-menu" aria-haspopup="menu" aria-expanded="false" aria-pressed="false" aria-label="Layers" data-tip="Layers"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4l-8 4l8 4l8 -4l-8 -4"/><path d="M4 12l8 4l8 -4"/><path d="M4 16l8 4l8 -4"/></svg></button>
+          <button class="btn icon" id="reset" type="button" popovertarget="view-menu" aria-haspopup="menu" aria-expanded="false" aria-label="View" data-tip="View"><svg class="i-view" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"/></svg><svg class="i-whole" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M7 10l6 0"/><path d="M21 21l-6 -6"/></svg></button>
+          <button class="btn icon" id="about-btn" type="button" aria-label="About Tanaw" data-tip="About" aria-haspopup="dialog"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"/><path d="M12 9h.01"/><path d="M11 12h1v4h1"/></svg></button>
+        </div>
+      </div>
+      <section class="ring ov" id="ring" aria-label="Sky from the site">
+        <div class="site-head" id="site-head" role="group" aria-label="Site, time and call"></div>
+        <button class="clock" id="clock" type="button" aria-expanded="false" aria-label="Enlarge the sky clock"></button>
+        <div class="side" id="side" aria-hidden="true"></div>
+        <h2>Sky from the site</h2>
+        <ul class="legend">
+          <li><span class="key sun" aria-hidden="true"></span>Sun</li>
+          <li><span class="key sun hidden" aria-hidden="true"></span>Sun hidden</li>
+          <li><span class="key earth" aria-hidden="true"></span>Earth</li>
+        </ul>
+        <button class="btn shut" id="clock-close" type="button">Close</button>
+        <div class="sem" id="sem">
+          <button class="sem-fig" id="sem-btn" type="button" aria-label="Earth &amp; Sun view" aria-pressed="false"></button>
+          <div class="sem-fig" id="sem-box" aria-hidden="true" hidden></div>
+          <p class="sem-phase" id="sem-phase"></p>
+        </div>
+      </section>
+      <section class="times ov" id="times" aria-label="Rise and set times"></section>
+      <div class="view-3d" id="view-3d" role="group" aria-label="3D view" hidden>
+        <button class="btn" id="show-ring" type="button" aria-pressed="true" data-toggle-dot>5 km ring</button>
+        <button class="btn" id="show-spots" type="button" aria-pressed="true" data-toggle-dot>Spots</button>
+        <button class="btn" id="show-horizon" type="button" aria-pressed="false" data-toggle-dot>Horizon</button>
+        <div class="layer-row" id="layer-row" role="group" aria-label="Map layers">
+          <button class="btn icon" type="button" data-layer="slope" aria-pressed="false" aria-label="Slope" data-tip="Slope"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 19h-18l9 -15"/><path d="M20.615 15.171h.015"/><path d="M19.515 11.771h.015"/><path d="M17.715 8.671h.015"/><path d="M15.415 5.971h.015"/></svg></button>
+          <button class="btn icon" type="button" data-layer="sunlight" aria-pressed="false" aria-label="Sunlight" data-tip="Sunlight"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"/></svg></button>
+          <button class="btn icon" type="button" data-layer="shadow" aria-pressed="false" aria-label="Permanent shadow" data-tip="Permanent shadow"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/><path d="M13 12h5"/><path d="M13 15h4"/><path d="M13 18h1"/><path d="M13 9h4"/><path d="M13 6h1"/></svg></button>
+        </div>
+      </div>
+      <section class="panel ov" id="panel" aria-labelledby="panel-name">
+        <button class="grab" id="panel-grab" type="button" aria-label="Expand details" aria-expanded="false" aria-controls="panel"></button>
+        <div class="p-top">
+          <div class="p-id" id="panel-id"></div>
+          <button class="btn" id="panel-close" type="button">Close</button>
+        </div>
+        <div class="p-more" id="panel-more"></div>
+        <div class="panel-actions"><button class="btn" id="panel-compare" type="button" aria-controls="compare" aria-expanded="false">Compare</button></div>
+        <section class="p-spots" id="panel-spots" aria-label="Nearby spots" hidden></section>
+      </section>
+      <section class="picker" id="picker" aria-labelledby="picker-heading">
+        <div class="pk">
+          <div class="pk-head">
+            <button class="btn" id="picker-back" type="button" hidden>Back to sites</button>
+            <div class="pk-title">
+              <h2 id="picker-heading" tabindex="-1">Choose a site</h2>
+              <p class="csub" id="picker-sub"></p>
+            </div>
+            <button class="btn" id="picker-close" type="button">Close</button>
+          </div>
+          <div class="pk-body" id="picker-body"></div>
+        </div>
+      </section>
+      <section class="bar ov" aria-label="Plan">
+        <div class="plan" id="plan">
+          <div class="switch">
+            <button class="btn step" id="prev" type="button" aria-label="Previous site"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6l6 6"/></svg></button>
+            <button class="now" id="now" type="button" aria-expanded="false" aria-controls="picker"><span class="now-name" id="now-name"></span></button>
+            <button class="btn step" id="next" type="button" aria-label="Next site"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6l-6 6"/></svg></button>
+          </div>
+          <p class="call" id="call"></p>
+          <div class="chips" id="wait"></div>
+          <div class="chips" id="move"></div>
+          <div class="views">
+            <button class="btn" id="info-btn" type="button" aria-expanded="false" aria-controls="panel">Site info</button>
+            <button class="btn icon" id="fc-btn" type="button" aria-expanded="false" aria-controls="fpanel" aria-label="Forecast" data-tip="Forecast"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-14"/><path d="M3 10h18"/><path d="M10 3v18"/></svg></button>
+            <button class="btn" id="times-btn" type="button" aria-expanded="false" aria-controls="times" hidden>Times</button>
+            <button class="btn icon" id="compare-btn" type="button" aria-expanded="false" aria-controls="compare" aria-label="Compare" data-tip="Compare"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -6"/><path d="M15 9a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -10"/><path d="M9 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -14"/><path d="M4 20h14"/></svg></button>
+          </div>
+        </div>
+      <section class="compare ov" id="compare" aria-labelledby="compare-heading">
+        <div class="chead">
+          <div>
+            <h2 id="compare-heading">Compare sites</h2>
+            <p class="csub" id="compare-sub" role="status"></p>
+          </div>
+          <button class="btn" id="compare-close" type="button">Done</button>
+        </div>
+        <div id="compare-slots" class="compare-slots"></div>
+      </section>
+        <section class="fpanel" id="fpanel" aria-label="Forecast by day" hidden>
+          <div class="fp-table" id="fp-table"></div>
+        </section>
+        <form id="quick-estimate" class="quick-estimate" novalidate>
+    <div class="dayctl" id="dayctl">
+          <button class="btn play" id="play" type="button" aria-label="Play"><svg class="i-play" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v16l13 -8z"/></svg><svg class="i-pause" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z"/><path d="M14 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z"/></svg></button>
+          <button class="btn speed" id="speed" type="button" aria-label="Playback speed 1×">1×</button>
+          <output id="day-out" for="day"></output>
+          <input id="estimate-date" type="date" required aria-label="Date (UTC)" aria-describedby="estimate-coverage estimate-status">
+          <label class="sr" for="day">Day</label>
+          <input id="day" type="range" min="0" max="29" step="1" value="0">
+          <button class="btn range-btn" id="range-btn" type="button" aria-haspopup="dialog" aria-expanded="false"><span class="sr">Range: </span><span id="range-text" data-range-label>30 days</span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6l6 -6"/></svg></button>
+        </div>
+      <p class="sr" id="estimate-coverage" data-coverage></p>
+      <p id="estimate-status" role="status" aria-live="polite"></p>
+      <p data-result aria-live="polite"></p>
+    </form>
+    <div class="layer-key" id="layer-key" role="group" aria-label="Map layer key" hidden></div>
+
+
+      </section>
+    </div>
+    <dialog class="about" id="about" aria-labelledby="about-heading">
+      <div class="about-head">
+        <h2 id="about-heading">About Tanaw</h2>
+        <button class="btn" id="about-close" type="button">Close</button>
+      </div>
+      <p>Sunlight and Earth contact forecasts for lunar landing sites. All times are UTC.</p>
+      <p>Made by Team Gabay · from the Philippines. The code is under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>.</p>
+      <p id="about-repo" hidden><a>Source code</a></p>
+      <h3>Go / No-go</h3>
+      <p id="about-go"></p>
+      <h3>Accurate forecast or estimate</h3>
+      <p>Dates from 1 Dec 2026 to 30 Nov 2027 at the listed sites use the published forecast, worked out ahead with NASA/JPL Horizons and detailed terrain. Other dates (1969 to 2100) and coordinates you enter use a quick estimate made in your browser from JPL DE440 and coarser terrain; they are labelled "Estimate".</p>
+      <h3>Key</h3>
+      <ul class="legend" aria-label="Sky clock">
+        <li><span class="key sun" aria-hidden="true"></span>Sun</li>
+        <li><span class="key sun hidden" aria-hidden="true"></span>Sun hidden</li>
+        <li><span class="key earth" aria-hidden="true"></span>Earth</li>
+      </ul>
+      <ul class="legend" aria-label="Height lines in the forecast panel">
+        <li><span class="line-key sun" aria-hidden="true"></span>Sun</li>
+        <li><span class="line-key earth" aria-hidden="true"></span>Earth</li>
+        <li><span class="line-key hid" aria-hidden="true"></span>Hidden</li>
+      </ul>
+      <ul class="legend" aria-label="Sites on the globe">
+        <li><span class="mark" aria-hidden="true"></span>Base candidate</li>
+        <li><span class="mark visited" aria-hidden="true"></span>Past landing</li>
+        <li><span class="mark upcoming" aria-hidden="true"></span>Upcoming landing</li>
+        <li><span class="mark terrain" aria-hidden="true"></span>3D terrain</li>
+      </ul>
+      <ul class="legend" aria-label="Nearby spots in the 3D view">
+        <li><span class="spot-key" style="--pct: 0" aria-hidden="true"></span>No sunlight</li>
+        <li><span class="spot-key" style="--pct: 1" aria-hidden="true"></span>Sunlit all year</li>
+        <li><span class="spot-key steep" style="--pct: .5" aria-hidden="true"></span>Too steep to land</li>
+      </ul>
+      <h3>Scale</h3>
+      <ul class="about-list">
+        <li>The Sun–Earth–Moon diagram and the Earth drawn beside the globe are not to scale.</li>
+        <li>Heights in the 3D site view are exaggerated 1.5×.</li>
+        <li>Nearby spots are 500 m apart, with north up.</li>
+        <li>The Sunlight layer is the share of time the Sun is up at ground level, averaged over 18.6 years. The forecast's Sun hours are 2 m above the ground over one year, so the two differ.</li>
+      </ul>
+      <h3>Data and credits</h3>
+      <ul class="about-list">
+        <li>Moon imagery and global terrain: <a href="https://svs.gsfc.nasa.gov/4720">NASA Scientific Visualization Studio</a>, CGI Moon Kit, from LRO camera and LOLA data</li>
+        <li>Polar terrain: <a href="https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/polar/img/">NASA LRO LOLA</a> polar elevation, NASA PDS Geosciences Node</li>
+        <li>Site terrain at 5 m: <a href="https://pgda.gsfc.nasa.gov/products/78">NASA PGDA</a> high-resolution LOLA topography, Barker et al. 2021</li>
+        <li>Sunlight and permanent shadow layers: <a href="https://pgda.gsfc.nasa.gov/products/69">NASA PGDA</a> lunar polar illumination, Mazarico et al. 2011; slope layer from the LOLA polar elevation</li>
+        <li>Terrain between 60°S and 60°N: <a href="https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/sldem2015/global/float_img/">SLDEM2015</a>, LOLA and SELENE, Barker et al. 2016</li>
+        <li>Sun and Earth positions: <a href="https://ssd.jpl.nasa.gov/horizons/">NASA/JPL Horizons</a>, Solar System Dynamics Group</li>
+        <li>Estimates outside the forecast year: <a href="https://naif.jpl.nasa.gov/naif/">JPL DE440</a> via NASA NAIF</li>
+        <li>Earth: <a href="https://svs.gsfc.nasa.gov/2915">NASA Blue Marble</a>, NASA Goddard SVS and NASA Earth Observatory</li>
+        <li>Site photos: <a href="https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/BROWSE/NAC_ROI/">LROC</a> NAC mosaics, NASA/GSFC/Arizona State University</li>
+        <li>Stars in the observer view: ESA Hipparcos, via <a href="https://heasarc.gsfc.nasa.gov/W3Browse/star-catalog/hipparcos.html">NASA HEASARC</a></li>
+        <li>Landing site coordinates: LROC, NASA and the published papers cited for each site</li>
+        <li>Fonts: <a href="https://fonts.google.com/specimen/Atkinson+Hyperlegible+Next">Atkinson Hyperlegible</a> by the Braille Institute and <a href="https://fonts.google.com/specimen/Michroma">Michroma</a> by Vernon Adams, SIL Open Font License 1.1</li>
+        <li>Icons: <a href="https://tabler.io/icons">Tabler Icons</a>, MIT</li>
+        <li>3D: <a href="https://threejs.org">three.js</a>, MIT</li>
+      </ul>
+    </dialog>
+  </main>
+  <script type="module" src="globe.js"></script>
+  <script type="module" src="site.js"></script>
+  <script type="module" src="forecast.js"></script>
+  <script type="module" src="button-effects.js"></script>
+</body>
+</html>

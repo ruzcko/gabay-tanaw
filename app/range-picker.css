@@ -1,0 +1,12 @@
+.range-popover { position: fixed; inset: auto; margin: 0; padding: 12px; width: 216px; max-width: calc(100vw - 16px); box-sizing: border-box; border: 1px solid var(--line); border-radius: var(--r); background: var(--glass-solid); color: var(--text); font: 14px/1.4 var(--font); }
+.range-wheels { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 12px; }
+.range-wheel { height: 132px; padding: 44px 0; box-sizing: border-box; overflow-y: auto; overscroll-behavior: contain; scroll-snap-type: y mandatory; scrollbar-width: none; cursor: grab; touch-action: none; user-select: none; }
+.range-wheel::-webkit-scrollbar { display: none; }
+.range-wheel [role="option"] { height: 44px; display: grid; place-items: center; scroll-snap-align: center; color: var(--muted); font-size: 18px; }
+.range-wheel:first-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.range-wheel [aria-selected="true"] { background: var(--sel); color: var(--space); font-weight: 600; }
+.range-wheel.dragging { cursor: grabbing; scroll-snap-type: none; }
+.range-wheel:focus-visible { outline-offset: -2px; }
+.range-limit { margin: 8px 0; color: var(--muted); text-align: center; font-size: 13px; }
+.range-confirm { width: 100%; min-height: 44px; border: 1px solid var(--line); border-radius: var(--r); background: transparent; color: var(--text); font: 600 14px var(--font); cursor: pointer; }
+.range-confirm:hover { border-color: var(--text); }

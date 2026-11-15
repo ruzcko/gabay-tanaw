@@ -1,0 +1,2150 @@
+{
+  "baselineCode": "f2ec6c5",
+  "window": {
+    "start": "2026-12-01T00:00:00Z",
+    "end": "2027-12-01T00:00:00Z"
+  },
+  "cadenceMinutes": 10,
+  "samplesPerBody": 52561,
+  "seed": 20261115,
+  "terrainReferenceInputs": [
+    {
+      "file": "ldem_75s_240m.img",
+      "sha256": "d031efe2611b17dfbf3c158f5e15dc04cd5719349dcbf6384bb21fd97697c490"
+    },
+    {
+      "file": "Site01.tif",
+      "sha256": "3ba7b97cb00a2bcf21189c3aeb535f65afc21207154ab9f0d43c5bdc1f7e747e"
+    },
+    {
+      "file": "Site04.tif",
+      "sha256": "38ff70dbdf2f066c2cfa94a646c3a59d653ce7f6b4528b15fc1b43ee397ce758"
+    },
+    {
+      "file": "Site07.tif",
+      "sha256": "38aaee10bb4da4d63e7427aa1ca25c79bdbc649d212079a04990e135462091f8"
+    },
+    {
+      "file": "Site11.tif",
+      "sha256": "58f3372c35bbd6baf38ffd5633c1c96b59bd89dbd252150581d12893a43136e5"
+    },
+    {
+      "file": "Site20.tif",
+      "sha256": "e51451f3629ba7cd5cfc1b32c8c0ee3c5c454607488b00ea00cd06a9e301a892"
+    },
+    {
+      "file": "Site23.tif",
+      "sha256": "12d280a59cd7580415f6bada638d0abe025ce6727541fddf68d5dc371a6c94cf"
+    },
+    {
+      "file": "SL3.tif",
+      "sha256": "a18c153dab5c9e7e0b4d8a5f1547bd7ef5e31fba7dd1c3252d84060aebf0283b"
+    }
+  ],
+  "savedSiteIsolation": [
+    {
+      "id": "connecting-ridge",
+      "lat": -89.4398,
+      "lon": 222.83,
+      "groundDifferenceM": -0.5434635300703121,
+      "maskErrorDeg": {
+        "mean": 0.12658929146574863,
+        "max": 0.7528012475938559
+      },
+      "errors": {
+        "native": {
+          "sunHours": {
+            "mean": 0.22380821917808214,
+            "max": 9.38
+          },
+          "earthHours": {
+            "mean": 0.054054794520547955,
+            "max": 1.0999999999999996
+          }
+        },
+        "groundOnly": {
+          "sunHours": {
+            "mean": 0.22380821917808214,
+            "max": 9.38
+          },
+          "earthHours": {
+            "mean": 0.054054794520547955,
+            "max": 1.0999999999999996
+          }
+        },
+        "horizonOnly": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        },
+        "both": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "connecting-ridge-extension",
+      "lat": -89.313,
+      "lon": 245.98,
+      "groundDifferenceM": -0.37970690436623045,
+      "maskErrorDeg": {
+        "mean": 0.024009020087280945,
+        "max": 0.17164293011558196
+      },
+      "errors": {
+        "native": {
+          "sunHours": {
+            "mean": 0.0898356164383562,
+            "max": 8.27
+          },
+          "earthHours": {
+            "mean": 0.04841095890410958,
+            "max": 1.08
+          }
+        },
+        "groundOnly": {
+          "sunHours": {
+            "mean": 0.0898356164383562,
+            "max": 8.27
+          },
+          "earthHours": {
+            "mean": 0.04841095890410958,
+            "max": 1.08
+          }
+        },
+        "horizonOnly": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        },
+        "both": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "shackleton-rim",
+      "lat": -89.6866,
+      "lon": 197.19,
+      "groundDifferenceM": -0.793977088081192,
+      "maskErrorDeg": {
+        "mean": 0.07442646032715479,
+        "max": 0.8463237401561727
+      },
+      "errors": {
+        "native": {
+          "sunHours": {
+            "mean": 0.4215342465753423,
+            "max": 19.82
+          },
+          "earthHours": {
+            "mean": 0.01027397260273973,
+            "max": 0.41000000000000014
+          }
+        },
+        "groundOnly": {
+          "sunHours": {
+            "mean": 0.4215342465753423,
+            "max": 19.82
+          },
+          "earthHours": {
+            "mean": 0.01027397260273973,
+            "max": 0.41000000000000014
+          }
+        },
+        "horizonOnly": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        },
+        "both": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "peak-near-shackleton",
+      "lat": -88.8092,
+      "lon": 123.7076,
+      "groundDifferenceM": -0.5923470097754944,
+      "maskErrorDeg": {
+        "mean": 0.10076007554209121,
+        "max": 0.5742022035705907
+      },
+      "errors": {
+        "native": {
+          "sunHours": {
+            "mean": 0.07257534246575346,
+            "max": 6.23
+          },
+          "earthHours": {
+            "mean": 0.03906849315068492,
+            "max": 0.99
+          }
+        },
+        "groundOnly": {
+          "sunHours": {
+            "mean": 0.07257534246575346,
+            "max": 6.23
+          },
+          "earthHours": {
+            "mean": 0.03906849315068492,
+            "max": 0.99
+          }
+        },
+        "horizonOnly": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        },
+        "both": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "de-gerlache-rim",
+      "lat": -88.6705,
+      "lon": 291.6273,
+      "groundDifferenceM": -0.04655931812521885,
+      "maskErrorDeg": {
+        "mean": 0.06185645103059628,
+        "max": 0.30933097162561274
+      },
+      "errors": {
+        "native": {
+          "sunHours": {
+            "mean": 0.13736986301369866,
+            "max": 5.130000000000001
+          },
+          "earthHours": {
+            "mean": 0.05008219178082192,
+            "max": 1.5
+          }
+        },
+        "groundOnly": {
+          "sunHours": {
+            "mean": 0.13736986301369866,
+            "max": 5.130000000000001
+          },
+          "earthHours": {
+            "mean": 0.05008219178082192,
+            "max": 1.5
+          }
+        },
+        "horizonOnly": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        },
+        "both": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "malapert-massif",
+      "lat": -85.9685,
+      "lon": 357.6851,
+      "groundDifferenceM": -181.82340589270098,
+      "maskErrorDeg": {
+        "mean": 1.8819366386892264,
+        "max": 5.936404411247077
+      },
+      "errors": {
+        "native": {
+          "sunHours": {
+            "mean": 2.015643835616438,
+            "max": 24
+          },
+          "earthHours": {
+            "mean": 9.650739726027398,
+            "max": 24
+          }
+        },
+        "groundOnly": {
+          "sunHours": {
+            "mean": 2.015643835616438,
+            "max": 24
+          },
+          "earthHours": {
+            "mean": 9.650739726027398,
+            "max": 24
+          }
+        },
+        "horizonOnly": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        },
+        "both": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "leibnitz-beta-plateau",
+      "lat": -85.4118,
+      "lon": 31.7296,
+      "groundDifferenceM": -109.69257723216106,
+      "maskErrorDeg": {
+        "mean": 1.4993097752359632,
+        "max": 2.920314524225477
+      },
+      "errors": {
+        "native": {
+          "sunHours": {
+            "mean": 5.905041095890413,
+            "max": 24
+          },
+          "earthHours": {
+            "mean": 2.7142465753424663,
+            "max": 24
+          }
+        },
+        "groundOnly": {
+          "sunHours": {
+            "mean": 5.905041095890413,
+            "max": 24
+          },
+          "earthHours": {
+            "mean": 2.7142465753424663,
+            "max": 24
+          }
+        },
+        "horizonOnly": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        },
+        "both": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "im2-mons-mouton",
+      "lat": -84.7906,
+      "lon": 29.1957,
+      "groundDifferenceM": -40.36599372339515,
+      "maskErrorDeg": {
+        "mean": 0.6548368787675325,
+        "max": 2.817674811580479
+      },
+      "errors": {
+        "native": {
+          "sunHours": {
+            "mean": 0.36964383561643827,
+            "max": 13.17
+          },
+          "earthHours": {
+            "mean": 2.4112054794520548,
+            "max": 24
+          }
+        },
+        "groundOnly": {
+          "sunHours": {
+            "mean": 0.36964383561643827,
+            "max": 13.17
+          },
+          "earthHours": {
+            "mean": 2.411232876712329,
+            "max": 24
+          }
+        },
+        "horizonOnly": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 5.4794520547944035e-05,
+            "max": 0.009999999999999787
+          }
+        },
+        "both": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "im1-malapert-a",
+      "lat": -80.13,
+      "lon": 1.44,
+      "groundDifferenceM": 31.90384287388224,
+      "maskErrorDeg": {
+        "mean": 3.1759186868349647,
+        "max": 7.354132888874901
+      },
+      "errors": {
+        "native": {
+          "sunHours": {
+            "mean": 1.1815890410958905,
+            "max": 24
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        },
+        "groundOnly": {
+          "sunHours": {
+            "mean": 1.1815890410958905,
+            "max": 24
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        },
+        "horizonOnly": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        },
+        "both": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "peak-near-cabeus-b",
+      "lat": -83.6179,
+      "lon": 291.4021,
+      "groundDifferenceM": -133.15148944304565,
+      "maskErrorDeg": {
+        "mean": 1.508442140998761,
+        "max": 4.347502932682103
+      },
+      "errors": {
+        "native": {
+          "sunHours": {
+            "mean": 4.0325205479452055,
+            "max": 24
+          },
+          "earthHours": {
+            "mean": 2.867780821917808,
+            "max": 24
+          }
+        },
+        "groundOnly": {
+          "sunHours": {
+            "mean": 4.0325205479452055,
+            "max": 24
+          },
+          "earthHours": {
+            "mean": 2.8678082191780816,
+            "max": 24
+          }
+        },
+        "horizonOnly": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 2.7397260273976886e-05,
+            "max": 0.010000000000001563
+          }
+        },
+        "both": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "haworth",
+      "lat": -86.9272,
+      "lon": 337.012,
+      "groundDifferenceM": -71.50576818767627,
+      "maskErrorDeg": {
+        "mean": 0.6173878125008347,
+        "max": 2.4546250155499356
+      },
+      "errors": {
+        "native": {
+          "sunHours": {
+            "mean": 3.1475342465753418,
+            "max": 24
+          },
+          "earthHours": {
+            "mean": 1.9933424657534249,
+            "max": 24
+          }
+        },
+        "groundOnly": {
+          "sunHours": {
+            "mean": 3.1475342465753418,
+            "max": 24
+          },
+          "earthHours": {
+            "mean": 1.9933424657534249,
+            "max": 24
+          }
+        },
+        "horizonOnly": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        },
+        "both": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "mons-mouton-plateau",
+      "lat": -84.2387,
+      "lon": 29.1177,
+      "groundDifferenceM": -96.88330316248812,
+      "maskErrorDeg": {
+        "mean": 3.416794175730849,
+        "max": 10.614950712902377
+      },
+      "errors": {
+        "native": {
+          "sunHours": {
+            "mean": 4.40841095890411,
+            "max": 24
+          },
+          "earthHours": {
+            "mean": 10.353561643835615,
+            "max": 24
+          }
+        },
+        "groundOnly": {
+          "sunHours": {
+            "mean": 4.40841095890411,
+            "max": 24
+          },
+          "earthHours": {
+            "mean": 10.353561643835615,
+            "max": 24
+          }
+        },
+        "horizonOnly": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        },
+        "both": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "nobile-rim-1",
+      "lat": -85.3064,
+      "lon": 37.0498,
+      "groundDifferenceM": -135.48724094545196,
+      "maskErrorDeg": {
+        "mean": 1.535857225277342,
+        "max": 4.31098662030026
+      },
+      "errors": {
+        "native": {
+          "sunHours": {
+            "mean": 7.612657534246575,
+            "max": 24
+          },
+          "earthHours": {
+            "mean": 3.4529589041095887,
+            "max": 24
+          }
+        },
+        "groundOnly": {
+          "sunHours": {
+            "mean": 7.612657534246575,
+            "max": 24
+          },
+          "earthHours": {
+            "mean": 3.4529589041095887,
+            "max": 24
+          }
+        },
+        "horizonOnly": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        },
+        "both": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "nobile-rim-2",
+      "lat": -84.0547,
+      "lon": 59.2472,
+      "groundDifferenceM": -93.19032183943,
+      "maskErrorDeg": {
+        "mean": 0.46076315468979273,
+        "max": 2.188299891570469
+      },
+      "errors": {
+        "native": {
+          "sunHours": {
+            "mean": 1.041780821917808,
+            "max": 24
+          },
+          "earthHours": {
+            "mean": 0.28468493150684937,
+            "max": 6.300000000000001
+          }
+        },
+        "groundOnly": {
+          "sunHours": {
+            "mean": 1.041780821917808,
+            "max": 24
+          },
+          "earthHours": {
+            "mean": 0.2847123287671233,
+            "max": 6.300000000000001
+          }
+        },
+        "horizonOnly": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        },
+        "both": {
+          "sunHours": {
+            "mean": 0,
+            "max": 0
+          },
+          "earthHours": {
+            "mean": 0,
+            "max": 0
+          }
+        }
+      }
+    }
+  ],
+  "randomPoints": {
+    "method": "Fresh Python horizon.py and build_forecast.build_tables. DE440 quick ephemeris evaluated at reference terrain height is shared to isolate terrain; not independent ephemeris ground truth. 365 days, 10-minute cadence.",
+    "rows": [
+      {
+        "id": "random-00",
+        "lat": -84.51984633006772,
+        "lon": 171.25004062687367,
+        "group": "random-area",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": 30.750066181631155,
+        "maskMeanErrorDeg": 0.8096672081792742,
+        "sun": {
+          "mean": 0.6647397260273973,
+          "max": 24.0,
+          "daysOverHalfHour": 27
+        },
+        "earth": {
+          "mean": 0.024082191780821924,
+          "max": 0.4399999999999995,
+          "daysOverHalfHour": 0
+        }
+      },
+      {
+        "id": "random-01",
+        "lat": -81.24897473264876,
+        "lon": 237.99307330133428,
+        "group": "random-area",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": 1.532897422213864,
+        "maskMeanErrorDeg": 0.19705928217029445,
+        "sun": {
+          "mean": 0.18252054794520545,
+          "max": 10.079999999999998,
+          "daysOverHalfHour": 24
+        },
+        "earth": {
+          "mean": 1.404082191780822,
+          "max": 23.55,
+          "daysOverHalfHour": 47
+        }
+      },
+      {
+        "id": "random-02",
+        "lat": -82.22560352043291,
+        "lon": 126.58254998815151,
+        "group": "random-area",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": 3.503270914434779,
+        "maskMeanErrorDeg": 1.1937231600592633,
+        "sun": {
+          "mean": 0.21904109589041093,
+          "max": 8.54,
+          "daysOverHalfHour": 24
+        },
+        "earth": {
+          "mean": 0.12350684931506849,
+          "max": 17.76,
+          "daysOverHalfHour": 4
+        }
+      },
+      {
+        "id": "random-03",
+        "lat": -81.65196656466759,
+        "lon": 280.5883950586093,
+        "group": "random-area",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": -15.605980960004217,
+        "maskMeanErrorDeg": 0.35446415755482596,
+        "sun": {
+          "mean": 0.07367123287671233,
+          "max": 4.15,
+          "daysOverHalfHour": 11
+        },
+        "earth": {
+          "mean": 0.24947945205479452,
+          "max": 4.86,
+          "daysOverHalfHour": 30
+        }
+      },
+      {
+        "id": "random-04",
+        "lat": -83.27936072413294,
+        "lon": 69.24854524971988,
+        "group": "random-area",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": -34.30582947120604,
+        "maskMeanErrorDeg": 0.5348151203940658,
+        "sun": {
+          "mean": 0.37043835616438353,
+          "max": 19.06,
+          "daysOverHalfHour": 28
+        },
+        "earth": {
+          "mean": 0.11578082191780824,
+          "max": 2.93,
+          "daysOverHalfHour": 25
+        }
+      },
+      {
+        "id": "random-05",
+        "lat": -80.26052897013439,
+        "lon": 357.1910568638413,
+        "group": "random-area",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": 21.427492887431754,
+        "maskMeanErrorDeg": 0.9219899990465156,
+        "sun": {
+          "mean": 0.2714246575342466,
+          "max": 5.75,
+          "daysOverHalfHour": 30
+        },
+        "earth": {
+          "mean": 0.6410410958904109,
+          "max": 10.98,
+          "daysOverHalfHour": 36
+        }
+      },
+      {
+        "id": "random-06",
+        "lat": -80.62768881384879,
+        "lon": 86.33209665014375,
+        "group": "random-area",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": -1.9777053206041062,
+        "maskMeanErrorDeg": 0.28344313089414414,
+        "sun": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        },
+        "earth": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        }
+      },
+      {
+        "id": "random-07",
+        "lat": -81.74548116906982,
+        "lon": 54.01883414665967,
+        "group": "random-area",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": -73.8681653057024,
+        "maskMeanErrorDeg": 0.7166867994586467,
+        "sun": {
+          "mean": 0.08232876712328767,
+          "max": 4.54,
+          "daysOverHalfHour": 19
+        },
+        "earth": {
+          "mean": 0.027780821917808216,
+          "max": 0.9899999999999984,
+          "daysOverHalfHour": 10
+        }
+      },
+      {
+        "id": "random-08",
+        "lat": -82.63014358115757,
+        "lon": 178.17581129983515,
+        "group": "random-area",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": -5.913888379143373,
+        "maskMeanErrorDeg": 0.25319304650082414,
+        "sun": {
+          "mean": 0.15663013698630138,
+          "max": 4.68,
+          "daysOverHalfHour": 24
+        },
+        "earth": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        }
+      },
+      {
+        "id": "random-09",
+        "lat": -80.67018517143987,
+        "lon": 297.0520648387068,
+        "group": "random-area",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": -35.32379138372312,
+        "maskMeanErrorDeg": 0.6854226524955989,
+        "sun": {
+          "mean": 0.07465753424657534,
+          "max": 2.950000000000001,
+          "daysOverHalfHour": 14
+        },
+        "earth": {
+          "mean": 0.6370958904109589,
+          "max": 12.97,
+          "daysOverHalfHour": 34
+        }
+      },
+      {
+        "id": "random-10",
+        "lat": -81.5296771519765,
+        "lon": 121.14506365720547,
+        "group": "random-area",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": -8.289674755557826,
+        "maskMeanErrorDeg": 0.6294219782338658,
+        "sun": {
+          "mean": 0.3570684931506849,
+          "max": 24.0,
+          "daysOverHalfHour": 32
+        },
+        "earth": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        }
+      },
+      {
+        "id": "random-11",
+        "lat": -80.77252431470842,
+        "lon": 278.410251810323,
+        "group": "random-area",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": -2.690306617697388,
+        "maskMeanErrorDeg": 1.0834275094690626,
+        "sun": {
+          "mean": 2.282602739726028,
+          "max": 24.0,
+          "daysOverHalfHour": 55
+        },
+        "earth": {
+          "mean": 0.05997260273972605,
+          "max": 2.1900000000000013,
+          "daysOverHalfHour": 16
+        }
+      },
+      {
+        "id": "random-12",
+        "lat": -83.9640256921814,
+        "lon": 131.95957109382368,
+        "group": "random-area",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": 244.10499212847753,
+        "maskMeanErrorDeg": 8.086864128752284,
+        "sun": {
+          "mean": 5.871260273972602,
+          "max": 24.0,
+          "daysOverHalfHour": 103
+        },
+        "earth": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        }
+      },
+      {
+        "id": "random-13",
+        "lat": -82.07408877898828,
+        "lon": 196.1178902963143,
+        "group": "random-area",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": 34.93041432175414,
+        "maskMeanErrorDeg": 0.5950023914084055,
+        "sun": {
+          "mean": 0.21786301369863012,
+          "max": 6.319999999999999,
+          "daysOverHalfHour": 27
+        },
+        "earth": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        }
+      },
+      {
+        "id": "random-14",
+        "lat": -82.18891491352743,
+        "lon": 2.9607091069743863,
+        "group": "random-area",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": -1.8416626456173617,
+        "maskMeanErrorDeg": 0.2357934323072694,
+        "sun": {
+          "mean": 0.0701917808219178,
+          "max": 2.639999999999999,
+          "daysOverHalfHour": 12
+        },
+        "earth": {
+          "mean": 0.16301369863013698,
+          "max": 3.64,
+          "daysOverHalfHour": 28
+        }
+      },
+      {
+        "id": "random-15",
+        "lat": -80.38069681245503,
+        "lon": 107.76826350124652,
+        "group": "random-area",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": 71.40488418363111,
+        "maskMeanErrorDeg": 0.7783578995829714,
+        "sun": {
+          "mean": 0.20186301369863016,
+          "max": 9.430000000000001,
+          "daysOverHalfHour": 24
+        },
+        "earth": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        }
+      },
+      {
+        "id": "grid-80-0",
+        "lat": -80,
+        "lon": 0,
+        "group": "boundary-grid",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": 145.58720760851384,
+        "maskMeanErrorDeg": 4.725681083335994,
+        "sun": {
+          "mean": 1.891041095890411,
+          "max": 24.0,
+          "daysOverHalfHour": 53
+        },
+        "earth": {
+          "mean": 8.299506849315069,
+          "max": 24.0,
+          "daysOverHalfHour": 142
+        }
+      },
+      {
+        "id": "grid-80-90",
+        "lat": -80,
+        "lon": 90,
+        "group": "boundary-grid",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": 10.22001670808504,
+        "maskMeanErrorDeg": 0.46467732584533666,
+        "sun": {
+          "mean": 0.6392602739726027,
+          "max": 18.37,
+          "daysOverHalfHour": 32
+        },
+        "earth": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        }
+      },
+      {
+        "id": "grid-80-180",
+        "lat": -80,
+        "lon": 180,
+        "group": "boundary-grid",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": 123.07600248509425,
+        "maskMeanErrorDeg": 4.73428605394108,
+        "sun": {
+          "mean": 1.6969041095890411,
+          "max": 24.0,
+          "daysOverHalfHour": 53
+        },
+        "earth": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        }
+      },
+      {
+        "id": "grid-80-270",
+        "lat": -80,
+        "lon": 270,
+        "group": "boundary-grid",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": -12.239866335332408,
+        "maskMeanErrorDeg": 0.48076076003837565,
+        "sun": {
+          "mean": 0.24975342465753425,
+          "max": 8.609999999999998,
+          "daysOverHalfHour": 23
+        },
+        "earth": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        }
+      },
+      {
+        "id": "grid-82.5-0",
+        "lat": -82.5,
+        "lon": 0,
+        "group": "boundary-grid",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": -15.674231550315199,
+        "maskMeanErrorDeg": 0.7626125276576351,
+        "sun": {
+          "mean": 0.08504109589041095,
+          "max": 7.359999999999999,
+          "daysOverHalfHour": 11
+        },
+        "earth": {
+          "mean": 0.7223013698630136,
+          "max": 12.91,
+          "daysOverHalfHour": 37
+        }
+      },
+      {
+        "id": "grid-82.5-90",
+        "lat": -82.5,
+        "lon": 90,
+        "group": "boundary-grid",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": 43.27635251738684,
+        "maskMeanErrorDeg": 0.3505674623489942,
+        "sun": {
+          "mean": 0.1587671232876712,
+          "max": 4.090000000000002,
+          "daysOverHalfHour": 27
+        },
+        "earth": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        }
+      },
+      {
+        "id": "grid-82.5-180",
+        "lat": -82.5,
+        "lon": 180,
+        "group": "boundary-grid",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": 11.047126044122251,
+        "maskMeanErrorDeg": 0.4549225571118853,
+        "sun": {
+          "mean": 0.45495890410958906,
+          "max": 11.59,
+          "daysOverHalfHour": 32
+        },
+        "earth": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        }
+      },
+      {
+        "id": "grid-82.5-270",
+        "lat": -82.5,
+        "lon": 270,
+        "group": "boundary-grid",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": 230.8384887156359,
+        "maskMeanErrorDeg": 3.632482666525338,
+        "sun": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        },
+        "earth": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        }
+      },
+      {
+        "id": "grid-85-0",
+        "lat": -85,
+        "lon": 0,
+        "group": "boundary-grid",
+        "terrain": "PGDA5m+LOLA240m",
+        "groundDifferenceM": -173.27173619219525,
+        "maskMeanErrorDeg": 3.4984613275964707,
+        "sun": {
+          "mean": 0.19690410958904106,
+          "max": 12.31,
+          "daysOverHalfHour": 23
+        },
+        "earth": {
+          "mean": 0.334082191780822,
+          "max": 7.930000000000001,
+          "daysOverHalfHour": 31
+        }
+      },
+      {
+        "id": "grid-85-90",
+        "lat": -85,
+        "lon": 90,
+        "group": "boundary-grid",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": -13.021736192195021,
+        "maskMeanErrorDeg": 0.10809296210575851,
+        "sun": {
+          "mean": 0.21810958904109584,
+          "max": 12.18,
+          "daysOverHalfHour": 27
+        },
+        "earth": {
+          "mean": 0.06098630136986303,
+          "max": 2.21,
+          "daysOverHalfHour": 17
+        }
+      },
+      {
+        "id": "grid-85-180",
+        "lat": -85,
+        "lon": 180,
+        "group": "boundary-grid",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": 70.80787307317496,
+        "maskMeanErrorDeg": 1.1202597320050505,
+        "sun": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        },
+        "earth": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        }
+      },
+      {
+        "id": "grid-85-270",
+        "lat": -85,
+        "lon": 270,
+        "group": "boundary-grid",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": 15.297038766831065,
+        "maskMeanErrorDeg": 0.47942253819289976,
+        "sun": {
+          "mean": 1.1217808219178083,
+          "max": 24.0,
+          "daysOverHalfHour": 39
+        },
+        "earth": {
+          "mean": 0.058164383561643836,
+          "max": 2.0600000000000005,
+          "daysOverHalfHour": 17
+        }
+      },
+      {
+        "id": "grid-87-0",
+        "lat": -87,
+        "lon": 0,
+        "group": "boundary-grid",
+        "terrain": "PGDA5m+LOLA240m",
+        "groundDifferenceM": -1.3723490497161492,
+        "maskMeanErrorDeg": 0.5557951069736857,
+        "sun": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        },
+        "earth": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        }
+      },
+      {
+        "id": "grid-87-90",
+        "lat": -87,
+        "lon": 90,
+        "group": "boundary-grid",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": 64.65381428308729,
+        "maskMeanErrorDeg": 0.3424994875847753,
+        "sun": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        },
+        "earth": {
+          "mean": 0.3427123287671233,
+          "max": 5.67,
+          "daysOverHalfHour": 29
+        }
+      },
+      {
+        "id": "grid-87-180",
+        "lat": -87,
+        "lon": 180,
+        "group": "boundary-grid",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": -3.432863528147209,
+        "maskMeanErrorDeg": 0.06057656261449473,
+        "sun": {
+          "mean": 0.047616438356164394,
+          "max": 1.879999999999999,
+          "daysOverHalfHour": 12
+        },
+        "earth": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        }
+      },
+      {
+        "id": "grid-87-270",
+        "lat": -87,
+        "lon": 270,
+        "group": "boundary-grid",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": 36.88819914739247,
+        "maskMeanErrorDeg": 0.7694046918619802,
+        "sun": {
+          "mean": 0.20419178082191786,
+          "max": 6.999999999999999,
+          "daysOverHalfHour": 26
+        },
+        "earth": {
+          "mean": 0.2432876712328767,
+          "max": 6.54,
+          "daysOverHalfHour": 32
+        }
+      },
+      {
+        "id": "grid-87.49-0",
+        "lat": -87.49,
+        "lon": 0,
+        "group": "boundary-grid",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": 11.841247456428846,
+        "maskMeanErrorDeg": 1.4124290848157435,
+        "sun": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        },
+        "earth": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        }
+      },
+      {
+        "id": "grid-87.49-90",
+        "lat": -87.49,
+        "lon": 90,
+        "group": "boundary-grid",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": 19.845121672455207,
+        "maskMeanErrorDeg": 0.7101059873851023,
+        "sun": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        },
+        "earth": {
+          "mean": 0.09947945205479451,
+          "max": 2.6400000000000006,
+          "daysOverHalfHour": 23
+        }
+      },
+      {
+        "id": "grid-87.49-180",
+        "lat": -87.49,
+        "lon": 180,
+        "group": "boundary-grid",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": 9.557860034841724,
+        "maskMeanErrorDeg": 0.12586252399119033,
+        "sun": {
+          "mean": 0.20583561643835616,
+          "max": 9.34,
+          "daysOverHalfHour": 28
+        },
+        "earth": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        }
+      },
+      {
+        "id": "grid-87.49-270",
+        "lat": -87.49,
+        "lon": 270,
+        "group": "boundary-grid",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": -94.88942189893748,
+        "maskMeanErrorDeg": 3.8404555591669687,
+        "sun": {
+          "mean": 1.27213698630137,
+          "max": 24.0,
+          "daysOverHalfHour": 43
+        },
+        "earth": {
+          "mean": 0.08123287671232877,
+          "max": 2.6499999999999986,
+          "daysOverHalfHour": 17
+        }
+      },
+      {
+        "id": "grid-87.51-0",
+        "lat": -87.51,
+        "lon": 0,
+        "group": "boundary-grid",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": 0.2107016545000988,
+        "maskMeanErrorDeg": 0.07392625388371646,
+        "sun": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        },
+        "earth": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        }
+      },
+      {
+        "id": "grid-87.51-90",
+        "lat": -87.51,
+        "lon": 90,
+        "group": "boundary-grid",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": -2.9692883984525906,
+        "maskMeanErrorDeg": 0.760206540189646,
+        "sun": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        },
+        "earth": {
+          "mean": 0.05101369863013699,
+          "max": 1.7700000000000005,
+          "daysOverHalfHour": 19
+        }
+      },
+      {
+        "id": "grid-87.51-180",
+        "lat": -87.51,
+        "lon": 180,
+        "group": "boundary-grid",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": 1.2264209926956937,
+        "maskMeanErrorDeg": 0.11567160190323818,
+        "sun": {
+          "mean": 0.3791232876712329,
+          "max": 13.32,
+          "daysOverHalfHour": 32
+        },
+        "earth": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        }
+      },
+      {
+        "id": "grid-87.51-270",
+        "lat": -87.51,
+        "lon": 270,
+        "group": "boundary-grid",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": 0.08072265390620714,
+        "maskMeanErrorDeg": 0.3029321128052354,
+        "sun": {
+          "mean": 0.6303013698630137,
+          "max": 24.0,
+          "daysOverHalfHour": 30
+        },
+        "earth": {
+          "mean": 0.05942465753424657,
+          "max": 1.85,
+          "daysOverHalfHour": 17
+        }
+      },
+      {
+        "id": "grid-88-0",
+        "lat": -88,
+        "lon": 0,
+        "group": "boundary-grid",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": -2.290186289288613,
+        "maskMeanErrorDeg": 0.0795868477124183,
+        "sun": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        },
+        "earth": {
+          "mean": 0.2403561643835616,
+          "max": 4.499999999999999,
+          "daysOverHalfHour": 30
+        }
+      },
+      {
+        "id": "grid-88-90",
+        "lat": -88,
+        "lon": 90,
+        "group": "boundary-grid",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": 2.8927645286298684,
+        "maskMeanErrorDeg": 0.13516667791374537,
+        "sun": {
+          "mean": 0.02832876712328769,
+          "max": 2.91,
+          "daysOverHalfHour": 6
+        },
+        "earth": {
+          "mean": 0.03493150684931506,
+          "max": 1.1100000000000003,
+          "daysOverHalfHour": 10
+        }
+      },
+      {
+        "id": "grid-88-180",
+        "lat": -88,
+        "lon": 180,
+        "group": "boundary-grid",
+        "terrain": "LOLA240m",
+        "groundDifferenceM": -2.0026726215609187,
+        "maskMeanErrorDeg": 0.3412460751785499,
+        "sun": {
+          "mean": 0.038328767123287664,
+          "max": 1.4800000000000004,
+          "daysOverHalfHour": 12
+        },
+        "earth": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        }
+      },
+      {
+        "id": "grid-88-270",
+        "lat": -88,
+        "lon": 270,
+        "group": "boundary-grid",
+        "terrain": "PGDA5m+LOLA240m",
+        "groundDifferenceM": 2.2737580714533863,
+        "maskMeanErrorDeg": 0.2965796636725436,
+        "sun": {
+          "mean": 0.4402191780821918,
+          "max": 15.48,
+          "daysOverHalfHour": 26
+        },
+        "earth": {
+          "mean": 0.07956164383561644,
+          "max": 1.8600000000000012,
+          "daysOverHalfHour": 26
+        }
+      },
+      {
+        "id": "grid-89.5-0",
+        "lat": -89.5,
+        "lon": 0,
+        "group": "boundary-grid",
+        "terrain": "PGDA5m+LOLA240m",
+        "groundDifferenceM": -2.7341667133636065,
+        "maskMeanErrorDeg": 0.22376811326784513,
+        "sun": {
+          "mean": 0.2551506849315069,
+          "max": 22.75,
+          "daysOverHalfHour": 11
+        },
+        "earth": {
+          "mean": 0.12997260273972602,
+          "max": 14.870000000000001,
+          "daysOverHalfHour": 20
+        }
+      },
+      {
+        "id": "grid-89.5-90",
+        "lat": -89.5,
+        "lon": 90,
+        "group": "boundary-grid",
+        "terrain": "PGDA5m+LOLA240m",
+        "groundDifferenceM": 7.6313096105672,
+        "maskMeanErrorDeg": 0.9210989590806176,
+        "sun": {
+          "mean": 0.021917808219178082,
+          "max": 2.6499999999999986,
+          "daysOverHalfHour": 5
+        },
+        "earth": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        }
+      },
+      {
+        "id": "grid-89.5-180",
+        "lat": -89.5,
+        "lon": 180,
+        "group": "boundary-grid",
+        "terrain": "PGDA5m+LOLA240m",
+        "groundDifferenceM": -5.1558926870553705,
+        "maskMeanErrorDeg": 0.3235523414064066,
+        "sun": {
+          "mean": 0.04547945205479454,
+          "max": 1.3800000000000026,
+          "daysOverHalfHour": 12
+        },
+        "earth": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        }
+      },
+      {
+        "id": "grid-89.5-270",
+        "lat": -89.5,
+        "lon": 270,
+        "group": "boundary-grid",
+        "terrain": "PGDA5m+LOLA240m",
+        "groundDifferenceM": -0.6946427570715059,
+        "maskMeanErrorDeg": 0.021831177513909495,
+        "sun": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        },
+        "earth": {
+          "mean": 0.06068493150684929,
+          "max": 1.1999999999999993,
+          "daysOverHalfHour": 24
+        }
+      },
+      {
+        "id": "connecting-ridge-offset-0",
+        "lat": -89.42949207925753,
+        "lon": 222.03755756752884,
+        "group": "random-local",
+        "terrain": "PGDA5m+LOLA240m",
+        "groundDifferenceM": -0.15340187740798683,
+        "maskMeanErrorDeg": 0.22238779676422374,
+        "sun": {
+          "mean": 0.8462739726027397,
+          "max": 22.57,
+          "daysOverHalfHour": 38
+        },
+        "earth": {
+          "mean": 0.059999999999999984,
+          "max": 1.9100000000000001,
+          "daysOverHalfHour": 15
+        }
+      },
+      {
+        "id": "connecting-ridge-offset-1",
+        "lat": -89.43334112042712,
+        "lon": 222.5846537314051,
+        "group": "random-local",
+        "terrain": "PGDA5m+LOLA240m",
+        "groundDifferenceM": 0.20695404402158601,
+        "maskMeanErrorDeg": 0.3081397372570237,
+        "sun": {
+          "mean": 0.7351232876712327,
+          "max": 16.98,
+          "daysOverHalfHour": 38
+        },
+        "earth": {
+          "mean": 0.3018082191780822,
+          "max": 6.109999999999999,
+          "daysOverHalfHour": 30
+        }
+      },
+      {
+        "id": "connecting-ridge-offset-2",
+        "lat": -89.42809902036598,
+        "lon": 223.54148650482222,
+        "group": "random-local",
+        "terrain": "PGDA5m+LOLA240m",
+        "groundDifferenceM": -0.6992515411805016,
+        "maskMeanErrorDeg": 0.13129523222869222,
+        "sun": {
+          "mean": 0.3972876712328768,
+          "max": 14.33,
+          "daysOverHalfHour": 23
+        },
+        "earth": {
+          "mean": 0.068958904109589,
+          "max": 1.8599999999999994,
+          "daysOverHalfHour": 23
+        }
+      },
+      {
+        "id": "connecting-ridge-offset-3",
+        "lat": -89.43920039929841,
+        "lon": 222.3468225044527,
+        "group": "random-local",
+        "terrain": "PGDA5m+LOLA240m",
+        "groundDifferenceM": 0.06544208589866685,
+        "maskMeanErrorDeg": 0.1015100676370957,
+        "sun": {
+          "mean": 0.39301369863013697,
+          "max": 24.0,
+          "daysOverHalfHour": 21
+        },
+        "earth": {
+          "mean": 0.1036712328767123,
+          "max": 2.5199999999999996,
+          "daysOverHalfHour": 25
+        }
+      },
+      {
+        "id": "malapert-massif-offset-0",
+        "lat": -85.96988348666247,
+        "lon": 357.66151840370384,
+        "group": "random-local",
+        "terrain": "PGDA5m+LOLA240m",
+        "groundDifferenceM": -177.79354749673985,
+        "maskMeanErrorDeg": 1.0038354493991941,
+        "sun": {
+          "mean": 5.025698630136986,
+          "max": 24.0,
+          "daysOverHalfHour": 122
+        },
+        "earth": {
+          "mean": 0.18545205479452054,
+          "max": 5.860000000000001,
+          "daysOverHalfHour": 26
+        }
+      },
+      {
+        "id": "malapert-massif-offset-1",
+        "lat": -85.9604649426948,
+        "lon": 357.65848140178423,
+        "group": "random-local",
+        "terrain": "PGDA5m+LOLA240m",
+        "groundDifferenceM": -219.94078568230907,
+        "maskMeanErrorDeg": 2.0081205454338322,
+        "sun": {
+          "mean": 1.8272876712328767,
+          "max": 24.0,
+          "daysOverHalfHour": 51
+        },
+        "earth": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        }
+      },
+      {
+        "id": "malapert-massif-offset-2",
+        "lat": -85.9693215942208,
+        "lon": 357.458046136783,
+        "group": "random-local",
+        "terrain": "PGDA5m+LOLA240m",
+        "groundDifferenceM": -170.47055511793587,
+        "maskMeanErrorDeg": 1.7919775556629955,
+        "sun": {
+          "mean": 5.728383561643836,
+          "max": 24.0,
+          "daysOverHalfHour": 132
+        },
+        "earth": {
+          "mean": 2.4614794520547947,
+          "max": 24.0,
+          "daysOverHalfHour": 61
+        }
+      },
+      {
+        "id": "malapert-massif-offset-3",
+        "lat": -85.96715188118728,
+        "lon": 357.8889005604081,
+        "group": "random-local",
+        "terrain": "PGDA5m+LOLA240m",
+        "groundDifferenceM": -180.16733575390572,
+        "maskMeanErrorDeg": 2.063016587581097,
+        "sun": {
+          "mean": 2.0274246575342465,
+          "max": 24.0,
+          "daysOverHalfHour": 57
+        },
+        "earth": {
+          "mean": 0.0,
+          "max": 0.0,
+          "daysOverHalfHour": 0
+        }
+      },
+      {
+        "id": "nobile-rim-1-offset-0",
+        "lat": -85.3076121722557,
+        "lon": 37.087646536863176,
+        "group": "random-local",
+        "terrain": "PGDA5m+LOLA240m",
+        "groundDifferenceM": -134.20690096926137,
+        "maskMeanErrorDeg": 0.85893105938679,
+        "sun": {
+          "mean": 1.9798356164383561,
+          "max": 24.0,
+          "daysOverHalfHour": 56
+        },
+        "earth": {
+          "mean": 0.15145205479452056,
+          "max": 4.91,
+          "daysOverHalfHour": 24
+        }
+      },
+      {
+        "id": "nobile-rim-1-offset-1",
+        "lat": -85.30293314024297,
+        "lon": 36.92442645177847,
+        "group": "random-local",
+        "terrain": "PGDA5m+LOLA240m",
+        "groundDifferenceM": -125.83516372296344,
+        "maskMeanErrorDeg": 1.6741141403665265,
+        "sun": {
+          "mean": 8.492876712328767,
+          "max": 24.0,
+          "daysOverHalfHour": 158
+        },
+        "earth": {
+          "mean": 3.839068493150685,
+          "max": 24.0,
+          "daysOverHalfHour": 80
+        }
+      },
+      {
+        "id": "nobile-rim-1-offset-2",
+        "lat": -85.29955518768645,
+        "lon": 37.05032269926329,
+        "group": "random-local",
+        "terrain": "PGDA5m+LOLA240m",
+        "groundDifferenceM": -120.5891187621728,
+        "maskMeanErrorDeg": 1.7880616918436476,
+        "sun": {
+          "mean": 9.095342465753426,
+          "max": 24.0,
+          "daysOverHalfHour": 164
+        },
+        "earth": {
+          "mean": 4.1481369863013695,
+          "max": 24.0,
+          "daysOverHalfHour": 90
+        }
+      },
+      {
+        "id": "nobile-rim-1-offset-3",
+        "lat": -85.30851783854516,
+        "lon": 37.11253486227357,
+        "group": "random-local",
+        "terrain": "PGDA5m+LOLA240m",
+        "groundDifferenceM": -131.41392135286878,
+        "maskMeanErrorDeg": 1.192708444844418,
+        "sun": {
+          "mean": 2.515178082191781,
+          "max": 24.0,
+          "daysOverHalfHour": 67
+        },
+        "earth": {
+          "mean": 1.581753424657534,
+          "max": 22.17,
+          "daysOverHalfHour": 48
+        }
+      }
+    ]
+  },
+  "twoMetreSeam": [
+    {
+      "lon": 0,
+      "insideM": -3422.7351311333878,
+      "outsideM": -3437.8782977886176,
+      "referenceInsideM": -3430.573809397326,
+      "referenceOutsideM": -3430.6759413341497
+    },
+    {
+      "lon": 30,
+      "insideM": -872.7616864190315,
+      "outsideM": -857.3619407570734,
+      "referenceInsideM": -874.24742757209,
+      "referenceOutsideM": -874.2648393891965
+    },
+    {
+      "lon": 60,
+      "insideM": -423.8569737429954,
+      "outsideM": -441.2211389944764,
+      "referenceInsideM": -424.25901302039654,
+      "referenceOutsideM": -423.57538431459784
+    },
+    {
+      "lon": 90,
+      "insideM": -2167.836442467267,
+      "outsideM": -2164.876555315768,
+      "referenceInsideM": -2166.3141391673016,
+      "referenceOutsideM": -2166.9394367396912
+    },
+    {
+      "lon": 120,
+      "insideM": -1188.7074376045657,
+      "outsideM": -1181.3643151648782,
+      "referenceInsideM": -1190.7492677948171,
+      "referenceOutsideM": -1190.7246647373688
+    },
+    {
+      "lon": 150,
+      "insideM": -160.35940359015638,
+      "outsideM": -177.0601516643892,
+      "referenceInsideM": -162.0909436693627,
+      "referenceOutsideM": -162.21893112221116
+    },
+    {
+      "lon": 180,
+      "insideM": -2083.2351311333887,
+      "outsideM": -2076.6786879986985,
+      "referenceInsideM": -2084.0234692251333,
+      "referenceOutsideM": -2084.154781715335
+    },
+    {
+      "lon": 210,
+      "insideM": -1423.988279228452,
+      "outsideM": -1434.301973148617,
+      "referenceInsideM": -1427.2581703604083,
+      "referenceOutsideM": -1427.3454127249029
+    },
+    {
+      "lon": 240,
+      "insideM": -1917.1308009288496,
+      "outsideM": -1949.1823815219518,
+      "referenceInsideM": -1914.573447730031,
+      "referenceOutsideM": -1914.822380235703
+    },
+    {
+      "lon": 270,
+      "insideM": -193.7946065998378,
+      "outsideM": -275.10376224129584,
+      "referenceInsideM": -196.7946065998476,
+      "referenceOutsideM": -196.6445351824741
+    },
+    {
+      "lon": 300,
+      "insideM": -1839.5691176810774,
+      "outsideM": -1801.7513191154471,
+      "referenceInsideM": -1838.1714832472767,
+      "referenceOutsideM": -1838.3330955367585
+    },
+    {
+      "lon": 330,
+      "insideM": -816.3468112098986,
+      "outsideM": -866.4437259147957,
+      "referenceInsideM": -815.7050357405768,
+      "referenceOutsideM": -815.9918219777368
+    }
+  ],
+  "previousIndependentAstronomyCheck": {
+    "method": "Verified CSPICE DE440/ME421 CN+S at each model ground + 2m; no gravitational deflection. Python hourly reference is rounded to 0.01 deg. Same underlying JPL model, not measured ground truth.",
+    "rows": [
+      {
+        "id": "connecting-ridge",
+        "samplesPerBody": 24,
+        "maxDirectionErrorDeg": {
+          "quickSun": 3.3595465198512915e-08,
+          "quickEarth": 1.3951154831125924e-07,
+          "pythonSun": 0.005952113304418404,
+          "pythonEarth": 0.006517828313643616
+        }
+      },
+      {
+        "id": "connecting-ridge-extension",
+        "samplesPerBody": 24,
+        "maxDirectionErrorDeg": {
+          "quickSun": 3.359550597320646e-08,
+          "quickEarth": 1.3950726624981756e-07,
+          "pythonSun": 0.005613910792370577,
+          "pythonEarth": 0.006634940791416712
+        }
+      },
+      {
+        "id": "shackleton-rim",
+        "samplesPerBody": 24,
+        "maxDirectionErrorDeg": {
+          "quickSun": 3.3594610868212654e-08,
+          "quickEarth": 1.3951238043528294e-07,
+          "pythonSun": 0.00631431922899346,
+          "pythonEarth": 0.006081906270908309
+        }
+      },
+      {
+        "id": "peak-near-shackleton",
+        "samplesPerBody": 24,
+        "maxDirectionErrorDeg": {
+          "quickSun": 3.359235267924423e-08,
+          "quickEarth": 1.395172467595439e-07,
+          "pythonSun": 0.006098936780565361,
+          "pythonEarth": 0.005646927953569809
+        }
+      },
+      {
+        "id": "de-gerlache-rim",
+        "samplesPerBody": 24,
+        "maxDirectionErrorDeg": {
+          "quickSun": 3.359572909758287e-08,
+          "quickEarth": 1.3950424181445561e-07,
+          "pythonSun": 0.00631096074433807,
+          "pythonEarth": 0.005691257030925928
+        }
+      },
+      {
+        "id": "malapert-massif",
+        "samplesPerBody": 24,
+        "maxDirectionErrorDeg": {
+          "quickSun": 3.358942802041971e-08,
+          "quickEarth": 1.3950847532624293e-07,
+          "pythonSun": 0.006403211399038342,
+          "pythonEarth": 0.0057891558948534524
+        }
+      },
+      {
+        "id": "leibnitz-beta-plateau",
+        "samplesPerBody": 24,
+        "maxDirectionErrorDeg": {
+          "quickSun": 3.358458466738255e-08,
+          "quickEarth": 1.3951921750488906e-07,
+          "pythonSun": 0.0061113381572607825,
+          "pythonEarth": 0.00591348022128295
+        }
+      },
+      {
+        "id": "im2-mons-mouton",
+        "samplesPerBody": 24,
+        "maxDirectionErrorDeg": {
+          "quickSun": 3.35809509092167e-08,
+          "quickEarth": 1.395192414629592e-07,
+          "pythonSun": 0.005523466402901861,
+          "pythonEarth": 0.005375023967522256
+        }
+      },
+      {
+        "id": "im1-malapert-a",
+        "samplesPerBody": 24,
+        "maxDirectionErrorDeg": {
+          "quickSun": 3.3558755672349595e-08,
+          "quickEarth": 1.3950256552029341e-07,
+          "pythonSun": 0.006306637983294313,
+          "pythonEarth": 0.0060987970287936805
+        }
+      },
+      {
+        "id": "peak-near-cabeus-b",
+        "samplesPerBody": 24,
+        "maxDirectionErrorDeg": {
+          "quickSun": 3.359484455574025e-08,
+          "quickEarth": 1.3948550584847096e-07,
+          "pythonSun": 0.006881033086602588,
+          "pythonEarth": 0.006323542206815901
+        }
+      },
+      {
+        "id": "haworth",
+        "samplesPerBody": 24,
+        "maxDirectionErrorDeg": {
+          "quickSun": 3.3591332399418895e-08,
+          "quickEarth": 1.3950525957716006e-07,
+          "pythonSun": 0.006132694444055038,
+          "pythonEarth": 0.006061660923342583
+        }
+      },
+      {
+        "id": "mons-mouton-plateau",
+        "samplesPerBody": 24,
+        "maxDirectionErrorDeg": {
+          "quickSun": 3.357814055590815e-08,
+          "quickEarth": 1.3952026914989091e-07,
+          "pythonSun": 0.0064717654609233585,
+          "pythonEarth": 0.005997910002761146
+        }
+      },
+      {
+        "id": "nobile-rim-1",
+        "samplesPerBody": 24,
+        "maxDirectionErrorDeg": {
+          "quickSun": 3.3583851278888556e-08,
+          "quickEarth": 1.3952093205967915e-07,
+          "pythonSun": 0.005768993250115059,
+          "pythonEarth": 0.00618350517613791
+        }
+      },
+      {
+        "id": "nobile-rim-2",
+        "samplesPerBody": 24,
+        "maxDirectionErrorDeg": {
+          "quickSun": 3.357079115835983e-08,
+          "quickEarth": 1.3953099661868408e-07,
+          "pythonSun": 0.006531542672821122,
+          "pythonEarth": 0.005874018167910058
+        }
+      }
+    ]
+  }
+}

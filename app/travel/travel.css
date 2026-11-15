@@ -1,0 +1,196 @@
+/* Travel extends the existing Moon-first shell. Every rule is scoped to the new surface. */
+.travel[hidden], .travel [hidden], .travel-markers[hidden] { display: none !important; }
+.travel {
+  position: absolute; top: calc(var(--pad-t) + 60px); right: var(--pad-r);
+  bottom: var(--below, 180px); width: 320px; max-width: calc(100% - 2 * var(--pad));
+  color: var(--text); pointer-events: auto; font-size: 14px; line-height: 1.4;
+}
+@media (min-width: 1024px) {
+  .travel-open { --travel-width: 320px; }
+  .travel-open .plan, .travel-open #fpanel { margin-right: calc(var(--travel-width) + 16px); }
+  .travel-open .travel { bottom: var(--travel-bottom, 100px); }
+  .hud .plan, .hud #fpanel { transition: margin-right 240ms cubic-bezier(.2,.7,.2,1); }
+  .travel-filters { bottom: max(0px, calc(var(--below, 180px) - var(--travel-bottom, 100px))); }
+  .travel-open .plan { gap: 4px 8px; }
+  .travel-open .switch { flex-basis: 212px; width: 212px; }
+  .travel-open .now-name { font-size: 14px; }
+  .travel-open .plan :is(.call, .plain) { font-size: 12px; }
+  .travel-open .plan .verdict { font-size: 16px; }
+  .travel-open .views { gap: 4px; }
+  .travel-open .plan .btn:not(.step) { padding-inline: 9px; font-size: 12px; }
+  .travel-open .fp-table { grid-template-rows: 32px 18px 20px 20px 48px; }
+  .travel-open .fp-l, .travel-open .fp-c { font-size: 12px; }
+}
+.travel-main { height: 100%; display: flex; flex-direction: column; gap: 8px; min-height: 0; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--line) var(--space); padding: 0 4px 8px 0; }
+.travel-main > * { flex-shrink: 0; }
+.travel h2, .travel h3, .travel p { margin: 0; }
+.travel h2 { font-size: 19px; font-weight: 600; }
+.travel h3 { font-size: 16px; font-weight: 600; }
+.travel-head, .travel-search-row, .travel-actions { display: flex; align-items: center; gap: 8px; }
+.travel-head { justify-content: space-between; }
+.travel-main > .travel-head, .travel-filters > .travel-head { position: sticky; top: 0; z-index: 5; background: var(--space); padding-bottom: 4px; }
+.travel .btn[aria-pressed="true"], .travel-result.selected { border-color: var(--text); }
+.travel-form { display: grid; gap: 6px; }
+.travel label { display: grid; gap: 4px; font-size: 13px; color: var(--muted); min-width: 0; }
+.travel input:not([type="checkbox"]):not([type="range"]), .travel select {
+  color: var(--text); background: var(--space); border: 1px solid var(--line); border-radius: var(--r);
+  font: inherit; min-height: 44px; padding: 7px 9px; width: 100%; min-width: 0; font-variant-numeric: tabular-nums;
+}
+.travel input[type="datetime-local"] { font-size: 12px; padding: 6px; }
+.travel input[type="checkbox"] { accent-color: var(--text); width: 20px; height: 20px; margin: 0; }
+.travel :is(button, a, input, select, summary):focus-visible, .travel-results:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+.travel ::selection { background: var(--text); color: var(--space); }
+.travel-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.travel-date-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; color: var(--muted); font-size: 12px; }
+.travel-date-heading [data-trip] { text-align: right; font-variant-numeric: tabular-nums; }
+.travel-search-row { padding-top: 2px; }
+.travel-search-row .btn { padding-inline: 10px; font-size: 13px; }
+.travel-filter-toggle { display: flex; align-items: center; gap: 6px; margin-right: auto; text-align: left; }
+.travel-filter-toggle svg { flex: none; }
+.travel-filter-toggle[aria-expanded="true"] { border-color: var(--text); }
+.travel-map-controls { display: flex; align-items: end; gap: 8px; }
+.travel-map-controls label { flex: 1; }
+.travel-note, .travel-result-detail, .travel-limits { font-size: 12px; color: var(--muted); line-height: 1.5; }
+.travel-note { overflow-wrap: anywhere; }
+.travel-status { font-size: 13px; }
+.travel-error { border: 1px solid var(--line); padding: 10px; border-radius: var(--r); }
+.travel-results { min-height: 48px; outline: none; container-type: inline-size; container-name: travel-results; }
+.travel-results > h3 { margin-bottom: 4px; }
+.travel-result { position: relative; display: grid; gap: 10px; border: 1px solid transparent; border-bottom-color: var(--edge); padding: 12px 4px; scroll-margin-block: 8px; }
+.travel-result.selected { border-radius: var(--r); }
+.travel-result-pick { display: flex; align-items: center; gap: 8px; width: calc(100% - 36px); min-height: 60px; border: 0; padding: 0; background: transparent; color: var(--text); text-align: left; font: inherit; cursor: pointer; }
+.travel-result-title { display: grid; gap: 4px; min-width: 0; }
+.travel-result-title strong { font-size: 15px; font-weight: 600; }
+.travel-quality { color: var(--muted); font-size: 11px; }
+.travel-thumbnail { flex: 0 0 60px; height: 60px; display: grid; place-items: center; border: 1px solid var(--edge); border-radius: 4px; overflow: hidden; background: var(--space); }
+.travel-thumbnail :is(img, canvas) { width: 100%; height: 100%; object-fit: cover; }
+.travel-thumbnail-diamond { width: 12px; height: 12px; border: 1px solid var(--muted); transform: rotate(45deg); }
+.travel-metrics { margin-top: 8px; font-size: 13px; font-variant-numeric: tabular-nums; }
+.travel-sun { color: var(--sun); }
+.travel-earth { color: var(--earth); }
+.travel-actions { margin-top: 8px; flex-wrap: wrap; justify-content: flex-end; }
+.travel-result-preview { min-width: 0; }
+.travel-mini { margin: 0; min-width: 0; font-variant-numeric: tabular-nums; }
+.travel-mini-caption { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 4px; font-size: 11px; color: var(--muted); }
+.travel-mini-scroll { overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--line) var(--space); }
+.travel-mini-scroll:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+.travel-mini-table { width: 100%; border-collapse: collapse; font-size: 10px; text-align: center; }
+.travel-mini-table th { font-weight: 400; color: var(--muted); min-width: 28px; height: 20px; padding: 0 2px; }
+.travel-mini-table tbody th { text-align: left; min-width: 35px; padding-right: 4px; }
+.travel-mini-table .travel-sun { color: var(--sun); }
+.travel-mini-table .travel-earth { color: var(--earth); }
+.travel-mini-value { position: relative; height: 26px; padding: 0 2px; border-left: 1px solid var(--edge); border-bottom: 1px solid var(--edge); background: linear-gradient(to top, color-mix(in srgb, currentColor 32%, transparent) var(--hours), transparent var(--hours)); }
+.travel-mini-value span { position: relative; color: var(--text); }
+.travel-mini-value.is-unknown { background: repeating-linear-gradient(135deg, transparent 0 4px, var(--edge) 4px 5px); }
+@container travel-results (min-width: 560px) {
+  .travel-result { grid-template-columns: minmax(0, 1fr) minmax(260px, 1fr); column-gap: 20px; align-items: start; }
+  .travel-result-pick { width: 100%; align-items: flex-start; }
+  .travel-result-preview { padding-top: 44px; }
+}
+.travel-actions .btn { min-width: 70px; justify-content: center; }
+.travel-actions .btn.icon { min-width: 44px; width: 44px; padding: 0; }
+.travel-actions .btn.icon svg { width: 24px; height: 24px; }
+
+/* Travel and comparison share the Moon; filters overlay rather than reframe it. */
+.hud.travel-compare .plan, .hud.travel-compare #fpanel { display: none; }
+@media (min-width: 1024px) {
+  /* Keep the shared Compare tray in the planning bar, clear of Travel's right column. */
+  .hud.travel-compare section.compare { width: calc(100% - var(--travel-width) - 16px); margin-inline: 0; }
+}
+@media (max-width: 1023px) {
+  .hud.travel-compare .travel { height: 23dvh; max-height: none; bottom: var(--travel-bottom, 100px); }
+  .hud.travel-compare section.compare { position: absolute; top: auto; bottom: calc(var(--travel-bottom, 100px) + 23dvh + 8px); left: var(--pad-l); right: var(--pad-r); width: auto; height: 24dvh; border-top: 1px solid var(--edge); padding-top: 8px; }
+  .hud.travel-compare .compare .chead { gap: 4px; }
+  .hud.travel-compare .compare .csub { font-size: 11px; }
+  .hud.travel-compare .compare-info h3 { flex: 1; }
+  .hud.travel-compare .compare-remove { margin-block: 0; }
+}
+@media (max-width: 1023px) and (max-height: 640px) {
+  .hud.travel-compare .travel { height: 17dvh; }
+  .hud.travel-compare section.compare { height: 17dvh; bottom: calc(var(--travel-bottom, 100px) + 17dvh + 8px); }
+}
+.travel-info { position: absolute; right: 0; top: 0; }
+.travel .travel-info-button { justify-content: center; width: 44px; height: 44px; min-width: 44px; border: 0; padding: 0; background: transparent; font: 600 13px var(--font); }
+.travel-info-button::before { content: ''; position: absolute; width: 19px; height: 19px; border: 1px solid var(--muted); border-radius: 50%; }
+.travel-tooltip { position: absolute; z-index: 4; top: 38px; right: 4px; width: min(310px, calc(100vw - 70px)); padding: 12px; background: var(--space); border: 1px solid var(--line); border-radius: var(--r); box-shadow: 0 8px 24px #0009; visibility: hidden; opacity: 0; transform: translateY(-3px); transition: opacity 140ms ease-out, transform 140ms ease-out, visibility 140ms; pointer-events: none; }
+.travel-info:is(:hover, :focus-within, .is-open) .travel-tooltip { visibility: visible; opacity: 1; transform: translateY(0); pointer-events: auto; }
+.travel-tooltip.above { top: auto; bottom: 38px; }
+.travel-tooltip .travel-metrics { margin-top: 0; }
+.travel-tooltip > p { margin-top: 6px; }
+.travel button:disabled { color: var(--muted); border-color: var(--edge); opacity: .65; cursor: not-allowed; }
+.travel summary { min-height: 44px; padding: 12px 0; cursor: pointer; }
+.travel details p + p { margin-top: 8px; }
+.travel-limits { border-top: 1px solid var(--edge); }
+.travel-filters {
+  position: absolute; right: calc(100% + 12px); top: 0; width: 208px;
+  padding-right: 12px; border-right: 1px solid var(--edge); overflow-y: auto; scrollbar-width: thin;
+  scrollbar-color: var(--line) var(--space); background: var(--space);
+}
+.travel-filters fieldset { border: 0; border-top: 1px solid var(--edge); padding: 0 0 6px; margin: 6px 0 0; display: grid; gap: 0; }
+.travel-filters legend { padding: 0 8px 0 0; }
+.travel-filters legend label { display: flex; align-items: center; gap: 6px; min-height: 36px; color: var(--text); font-size: 13px; }
+.travel-filters > label { margin-top: 4px; }
+.travel-filters > .travel-note { margin-top: 12px; }
+.travel label.travel-known { display: flex; align-items: center; gap: 8px; min-height: 44px; color: var(--text); margin-top: 4px; }
+.travel-stay, .travel-hours-label { display: flex !important; justify-content: space-between; align-items: center; }
+.travel-stay span, .travel-hours-label span { display: flex; gap: 6px; align-items: center; font-variant-numeric: tabular-nums; }
+.travel .travel-filters :is(.travel-stay, .travel-hours-label) input { width: 64px; text-align: right; }
+@media (min-width: 1024px) {
+  .travel-filters [data-visibility] .travel-hours-label { margin-top: -36px; margin-left: auto; width: 66px; min-height: 36px; position: relative; font-size: 0; }
+  .travel-filters [data-visibility] .travel-hours-label span { gap: 3px; font-size: 11px; }
+  .travel .travel-filters [data-visibility] .travel-hours-label input { width: 45px; min-height: 28px; padding: 3px; font-size: 12px; }
+  .travel-filters [data-visibility] legend { width: 100%; }
+}
+.travel [data-visibility="sunlight"] { --range-color: var(--sun); }
+.travel [data-visibility="earth"] { --range-color: var(--earth); }
+.travel input[type="range"] { appearance: none; -webkit-appearance: none; width: 100%; height: 44px; margin: 0; padding: 0; background: transparent; cursor: pointer; accent-color: var(--range-color); }
+.travel input[type="range"]::-webkit-slider-runnable-track { height: 3px; border-radius: 2px; background: linear-gradient(to right, var(--range-color) var(--fill, 100%), var(--line) var(--fill, 100%)); }
+.travel input[type="range"]::-webkit-slider-thumb { appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--space); border: 2px solid var(--range-color); margin-top: -8.5px; }
+.travel input[type="range"]::-moz-range-track { height: 3px; background: var(--line); }
+.travel input[type="range"]::-moz-range-progress { height: 3px; background: var(--range-color); }
+.travel input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--space); border: 2px solid var(--range-color); }
+.travel input:disabled { opacity: .45; cursor: not-allowed; }
+.travel-range-labels { display: flex; justify-content: space-between; color: var(--muted); font-size: 11px; margin-top: -7px; }
+.travel-sort { display: grid; gap: 4px; margin-block: 8px; color: var(--muted); font-size: 13px; }
+.travel-sort-controls { display: grid; grid-template-columns: 70px minmax(0, 1fr); gap: 6px; }
+.travel .travel-sort select { padding-inline: 5px; font-size: 12px; }
+.travel-advanced { margin-bottom: 12px; color: var(--muted); font-size: 12px; }
+.travel-advanced label + label { margin-top: 8px; }
+.travel.is-loading .travel-status { display: flex; gap: 8px; align-items: center; }
+.travel.is-loading .travel-status::before { content: ''; flex: 0 0 13px; height: 13px; border: 2px solid var(--line); border-top-color: var(--text); border-radius: 50%; animation: travel-spin 800ms linear infinite; }
+.travel.is-loading .travel-results:empty::before { content: ''; display: block; height: 120px; background: linear-gradient(100deg, transparent 20%, color-mix(in srgb, var(--text) 7%, transparent) 50%, transparent 80%) 0 0 / 200% 100%, linear-gradient(var(--edge), var(--edge)) 0 0 / 100% 60px no-repeat, linear-gradient(var(--edge), var(--edge)) 0 72px / 72% 12px no-repeat, linear-gradient(var(--edge), var(--edge)) 0 96px / 90% 12px no-repeat; animation: travel-loading 1.4s ease-in-out infinite; border-radius: var(--r); }
+@keyframes travel-spin { to { transform: rotate(360deg); } }
+@keyframes travel-loading { from { background-position: 100% 0, 0 0, 0 72px, 0 96px; } to { background-position: -100% 0, 0 0, 0 72px, 0 96px; } }
+@keyframes travel-filter-in { from { opacity: 0; transform: translateX(8px); } to { opacity: 1; transform: translateX(0); } }
+/* Travel markers have their own shape, retaining every existing pin outside Travel mode. */
+.travel-markers { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
+.travel-marker { position: absolute; left: 0; top: 0; width: 44px; height: 44px; display: grid; place-items: center; background: transparent; border: 0; color: var(--text); pointer-events: auto; cursor: pointer; padding: 0; }
+.travel-marker[hidden] { display: none; }
+.travel-marker::before { content: ''; width: 13px; height: 13px; transform: rotate(45deg); border: 2px solid var(--text); background: var(--glass-solid); box-shadow: 0 0 5px 1px color-mix(in srgb, var(--text) 45%, transparent); }
+.travel-marker[aria-pressed="true"]::before { width: 17px; height: 17px; box-shadow: 0 0 7px 2px color-mix(in srgb, var(--text) 55%, transparent); }
+.travel-marker[data-status="unknown"]::before { border-style: dashed; }
+.travel-marker:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; border-radius: 4px; }
+.travel-marker span { position: absolute; left: 35px; padding: 2px 5px; border-radius: 4px; background: var(--glass-solid); font: 600 12px var(--font); white-space: nowrap; visibility: hidden; }
+.travel-marker:is(:hover, :focus-visible, [aria-pressed="true"]) span { visibility: visible; }
+.stage:has(.travel-open) #pins { visibility: hidden; }
+@media (min-width: 1440px) { .travel { width: 340px; } .travel-open { --travel-width: 340px; } }
+@media (min-width: 1024px) and (max-width: 1279px) { .travel { width: 300px; } .travel-open { --travel-width: 300px; } .travel-filters { width: 196px; } }
+@media (min-width: 1024px) and (pointer: fine) {
+  .travel .btn, .travel input:not([type="checkbox"]):not([type="range"]), .travel select { min-height: 36px; }
+  .travel .travel-info-button { min-height: 44px; }
+  .travel input[type="range"] { height: 32px; }
+  .travel summary { min-height: 36px; padding-block: 8px; }
+}
+@media (max-width: 1023px) {
+  /* Match the existing Compare sheet: preserve the shared date control while the
+     sheet owns the other planning controls. Closing restores the complete bar. */
+  .travel-open .plan, .travel-open #fpanel { display: none; }
+  .travel { top: auto; left: var(--pad-l); right: var(--pad-r); width: auto; max-width: none; height: 44dvh; max-height: calc(100dvh - var(--below, 180px) - var(--pad-t) - 160px); background: var(--space); border-top: 1px solid var(--edge); padding-top: 8px; }
+  .travel-main { padding-right: 2px; }
+  .travel-filters { right: 0; top: 0; bottom: 0; width: min(100%, 360px); border: 0; padding: 8px 4px 12px 12px; z-index: 1; }
+  .travel.filters-open .travel-main { visibility: hidden; pointer-events: none; }
+  .travel input[type="datetime-local"] { font-size: 13px; }
+  .travel-filters legend label { min-height: 44px; }
+}
+@media (max-width: 400px) { .travel input[type="datetime-local"] { font-size: 11px; } .travel-head h2 { font-size: 20px; } }
+@media (prefers-reduced-motion: reduce) { .travel-filters, .travel.is-loading .travel-status::before, .travel.is-loading .travel-results:empty::before { animation: none; } .hud .plan, .hud #fpanel, .travel-tooltip { transition: none; } }

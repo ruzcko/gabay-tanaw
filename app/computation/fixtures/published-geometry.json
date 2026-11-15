@@ -1,0 +1,2235 @@
+{
+  "source": "Direct CSPICE geometric NONE; DE440 / ME421",
+  "kernels": [
+    {
+      "file": "naif0012.tls",
+      "sha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b"
+    },
+    {
+      "file": "de440s.bsp",
+      "sha256": "c1c7feeab882263fc493a9d5a5b2ddd71b54826cdf65d8d17a76126b260a49f2"
+    },
+    {
+      "file": "moon_pa_de440_200625.bpc",
+      "sha256": "60cd55aa401ea2ea97360636f567554bfe4e37bb829f901b4460a455dfaf783f"
+    },
+    {
+      "file": "moon_de440_250416.tf",
+      "sha256": "a47c71e9c9f33796bdafb2c9d69a7ee447b6016ecad80f71cd6f3e479f9cf768"
+    },
+    {
+      "file": "pck00011.tpc",
+      "sha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
+    }
+  ],
+  "rows": [
+    {
+      "id": "apollo-17",
+      "instantUtc": "2026-12-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          0.9499356864109261,
+          0.28418107372229756,
+          0.12985880417224266
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          0.8064061753908699,
+          0.3451524146733527,
+          -0.48018630856847994
+        ],
+        "sunDirectionMoon": [
+          -0.21832703973276676,
+          -0.02378861190624657,
+          -0.9755856731549006
+        ],
+        "earthDirectionMoon": [
+          0.9936511356840675,
+          -0.023680801153858313,
+          0.10998472716915944
+        ],
+        "moonToLocal": [
+          -0.282758522895722,
+          -0.7129813162946312,
+          0.4974649840874763,
+          0.4052577574229164
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.7729261372929704,
+          -0.5893471641389859,
+          -0.2349142651109314,
+          0.008390140528907764
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "apollo-17",
+      "instantUtc": "2027-01-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          0.8184460180375399,
+          0.5347312972604936,
+          0.21025830611085122
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          0.8064061753908699,
+          0.3451524146733527,
+          -0.48018630856847994
+        ],
+        "sunDirectionMoon": [
+          0.07483381317166923,
+          -0.012769279794495079,
+          -0.9971142591998761
+        ],
+        "earthDirectionMoon": [
+          0.9855815062956593,
+          -0.10271758119610605,
+          0.1344551708235884
+        ],
+        "moonToLocal": [
+          -0.282758522895722,
+          -0.7129813162946312,
+          0.4974649840874763,
+          0.4052577574229164
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.9651646888963147,
+          -0.24058868586991167,
+          -0.10173885237785527,
+          0.014947021639978703
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "apollo-17",
+      "instantUtc": "2027-02-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          0.6146275939601347,
+          0.7411497433640932,
+          0.27005551031984976
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          0.8064061753908699,
+          0.3451524146733527,
+          -0.48018630856847994
+        ],
+        "sunDirectionMoon": [
+          0.3633006153629737,
+          0.0023539586596347793,
+          -0.9316689979577046
+        ],
+        "earthDirectionMoon": [
+          0.9899812672331335,
+          -0.11004331624202231,
+          0.08847349364604895
+        ],
+        "moonToLocal": [
+          -0.282758522895722,
+          -0.7129813162946312,
+          0.4974649840874763,
+          0.4052577574229164
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.9871826734022323,
+          0.15049919787710625,
+          0.04952679169272182,
+          0.019169185621586926
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "apollo-17",
+      "instantUtc": "2027-03-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          0.8392667814295499,
+          0.5153261829811869,
+          0.1734075970738428
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          0.8064061753908699,
+          0.3451524146733527,
+          -0.48018630856847994
+        ],
+        "sunDirectionMoon": [
+          0.0376047215967448,
+          0.015118891817328122,
+          -0.9991783144283343
+        ],
+        "earthDirectionMoon": [
+          0.9933776584524681,
+          -0.09795423391697347,
+          0.060048278453512786
+        ],
+        "moonToLocal": [
+          -0.282758522895722,
+          -0.7129813162946312,
+          0.4974649840874763,
+          0.4052577574229164
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.9718232012649828,
+          0.2218450826916587,
+          0.07714329593454741,
+          0.019832716933571255
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "apollo-17",
+      "instantUtc": "2027-04-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          0.632500877981106,
+          0.7350982858166629,
+          0.24407611424007505
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          0.8064061753908699,
+          0.3451524146733527,
+          -0.48018630856847994
+        ],
+        "sunDirectionMoon": [
+          0.3415719451386978,
+          0.024647906447233,
+          -0.9395323767715164
+        ],
+        "earthDirectionMoon": [
+          0.9997376604742572,
+          -0.0028421113369822074,
+          -0.02272735428084274
+        ],
+        "moonToLocal": [
+          -0.282758522895722,
+          -0.7129813162946312,
+          0.4974649840874763,
+          0.4052577574229164
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.7898076723829095,
+          0.5738678558893274,
+          0.2155584702782529,
+          0.020348722647292195
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "apollo-17",
+      "instantUtc": "2027-05-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          0.5463921650874579,
+          0.7948176428168819,
+          0.2640464288682116
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          0.8064061753908699,
+          0.3451524146733527,
+          -0.48018630856847994
+        ],
+        "sunDirectionMoon": [
+          0.4397067602054234,
+          0.02651705109232434,
+          -0.8977498599448609
+        ],
+        "earthDirectionMoon": [
+          0.9944120384870754,
+          0.07322083690408189,
+          -0.07604871304003241
+        ],
+        "moonToLocal": [
+          -0.282758522895722,
+          -0.7129813162946312,
+          0.4974649840874763,
+          0.4052577574229164
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.5668972681982586,
+          0.7693928288989984,
+          0.29379741206218624,
+          0.01858071079669101
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "apollo-17",
+      "instantUtc": "2027-06-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          0.24948609862161653,
+          0.915815582040265,
+          0.31470383900870236
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          0.8064061753908699,
+          0.3451524146733527,
+          -0.48018630856847994
+        ],
+        "sunDirectionMoon": [
+          0.7042050038071496,
+          0.020735442677043733,
+          -0.7096938452811604
+        ],
+        "earthDirectionMoon": [
+          0.988349794850929,
+          0.11617606576492182,
+          -0.09832499560900478
+        ],
+        "moonToLocal": [
+          -0.282758522895722,
+          -0.7129813162946312,
+          0.4974649840874763,
+          0.4052577574229164
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.17902714712966633,
+          0.9172990553101361,
+          0.355441158736653,
+          0.013164588625950168
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "apollo-17",
+      "instantUtc": "2027-07-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          0.1355509665394483,
+          0.933014616243845,
+          0.3333311586779306
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          0.8064061753908699,
+          0.3451524146733527,
+          -0.48018630856847994
+        ],
+        "sunDirectionMoon": [
+          0.7818898685526398,
+          0.009189237646166692,
+          -0.6233488520613621
+        ],
+        "earthDirectionMoon": [
+          0.9920546175822131,
+          0.09460224792636975,
+          -0.08293401245017956
+        ],
+        "moonToLocal": [
+          -0.282758522895722,
+          -0.7129813162946312,
+          0.4974649840874763,
+          0.4052577574229164
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          -0.12746015531596208,
+          0.923628134456999,
+          0.36139583215951243,
+          0.0076177781569285
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "apollo-17",
+      "instantUtc": "2027-08-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.19068000203375662,
+          0.919434167094378,
+          0.3439214288233198
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          0.8064061753908699,
+          0.3451524146733527,
+          -0.48018630856847994
+        ],
+        "sunDirectionMoon": [
+          0.9409863343847351,
+          -0.005437382316000745,
+          -0.3384008767345754
+        ],
+        "earthDirectionMoon": [
+          0.9997413773357194,
+          0.016268429323837125,
+          -0.01589077248638465
+        ],
+        "moonToLocal": [
+          -0.282758522895722,
+          -0.7129813162946312,
+          0.4974649840874763,
+          0.4052577574229164
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.5231850240824185,
+          -0.791983934966122,
+          -0.3147015107331813,
+          0.0013551655656170052
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "apollo-17",
+      "instantUtc": "2027-09-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.4915298731764263,
+          0.8107164759574885,
+          0.31802072163026884
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          0.8064061753908699,
+          0.3451524146733527,
+          -0.48018630856847994
+        ],
+        "sunDirectionMoon": [
+          0.9995583720164146,
+          -0.018652389698779363,
+          -0.023133293981182034
+        ],
+        "earthDirectionMoon": [
+          0.9959421045448075,
+          -0.07127968079001164,
+          0.05494116399689549
+        ],
+        "moonToLocal": [
+          -0.282758522895722,
+          -0.7129813162946312,
+          0.4974649840874763,
+          0.4052577574229164
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.8267404507105157,
+          -0.5207631223989981,
+          -0.212599947956121,
+          0.01035662287012464
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "apollo-17",
+      "instantUtc": "2027-10-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.5768547856548671,
+          0.7571916592711191,
+          0.3064300040748732
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          0.8064061753908699,
+          0.3451524146733527,
+          -0.48018630856847994
+        ],
+        "sunDirectionMoon": [
+          0.9966135358956788,
+          -0.02624808980977874,
+          0.07792623339319102
+        ],
+        "earthDirectionMoon": [
+          0.9907621126200741,
+          -0.10975648623835364,
+          0.07964891666066641
+        ],
+        "moonToLocal": [
+          -0.282758522895722,
+          -0.7129813162946312,
+          0.4974649840874763,
+          0.4052577574229164
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.9582308741466905,
+          -0.2620763716594399,
+          -0.11336369058115242,
+          0.01606987578400326
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "apollo-17",
+      "instantUtc": "2027-11-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.794967109700023,
+          0.5598893065284796,
+          0.23356210936333308
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          0.8064061753908699,
+          0.3451524146733527,
+          -0.48018630856847994
+        ],
+        "sunDirectionMoon": [
+          0.9274932083226192,
+          -0.0259575821662784,
+          0.37293773266256613
+        ],
+        "earthDirectionMoon": [
+          0.9936723632338196,
+          -0.09303041205645694,
+          0.062933115113761
+        ],
+        "moonToLocal": [
+          -0.282758522895722,
+          -0.7129813162946312,
+          0.4974649840874763,
+          0.4052577574229164
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.990802344577335,
+          0.12790417743299942,
+          0.038552428654855864,
+          0.02156259771123122
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "apollo-17",
+      "instantUtc": "2027-03-19T01:08:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          0.254221701340768,
+          0.9134100981470259,
+          0.3178888471941816
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          0.8064061753908699,
+          0.3451524146733527,
+          -0.48018630856847994
+        ],
+        "sunDirectionMoon": [
+          0.7007869741886239,
+          0.0169160235552519,
+          -0.7131700112558232
+        ],
+        "earthDirectionMoon": [
+          0.9998897452571245,
+          -0.013924319847141904,
+          -0.005158550807828654
+        ],
+        "moonToLocal": [
+          -0.282758522895722,
+          -0.7129813162946312,
+          0.4974649840874763,
+          0.4052577574229164
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.8035870556932395,
+          0.5569520048630227,
+          0.20892044640268323,
+          0.020113559511777783
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "apollo-17",
+      "instantUtc": "2027-03-19T01:00:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          0.255361518541246,
+          0.913127179856372,
+          0.3177880555588228
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          0.8064061753908699,
+          0.3451524146733527,
+          -0.48018630856847994
+        ],
+        "sunDirectionMoon": [
+          0.6999457859990151,
+          0.016912971378195796,
+          -0.713995691906738
+        ],
+        "earthDirectionMoon": [
+          0.9998880519875173,
+          -0.014088003435381498,
+          -0.005040997105005666
+        ],
+        "moonToLocal": [
+          -0.282758522895722,
+          -0.7129813162946312,
+          0.4974649840874763,
+          0.4052577574229164
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.8039668628580314,
+          0.5564744931252047,
+          0.20873136215510033,
+          0.020115674985897388
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "apollo-17",
+      "instantUtc": "2026-12-31T23:59:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.7917080530506885,
+          -0.5792291375516768,
+          -0.19414418596967725
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          0.8064061753908699,
+          0.3451524146733527,
+          -0.48018630856847994
+        ],
+        "sunDirectionMoon": [
+          -0.11960052766148131,
+          -0.01770500860708011,
+          0.9926642163658961
+        ],
+        "earthDirectionMoon": [
+          0.9867190169862728,
+          0.1044420878425407,
+          -0.12440832691076026
+        ],
+        "moonToLocal": [
+          -0.282758522895722,
+          -0.7129813162946312,
+          0.4974649840874763,
+          0.4052577574229164
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.3601495911821348,
+          0.8707191951445675,
+          0.3345701484193973,
+          0.014253805272986333
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "apollo-17",
+      "instantUtc": "2027-01-01T00:00:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.7916180219278952,
+          -0.5793386110391333,
+          -0.19418465726780285
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          0.8064061753908699,
+          0.3451524146733527,
+          -0.48018630856847994
+        ],
+        "sunDirectionMoon": [
+          -0.11974687337761036,
+          -0.017704809464451753,
+          0.9926465766012161
+        ],
+        "earthDirectionMoon": [
+          0.9867189255239158,
+          0.10445024672052987,
+          -0.12440220244412702
+        ],
+        "moonToLocal": [
+          -0.282758522895722,
+          -0.7129813162946312,
+          0.4974649840874763,
+          0.4052577574229164
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.36007510896968,
+          0.8707458079647188,
+          0.33458110132271535,
+          0.014252734826042451
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "shackleton-rim",
+      "instantUtc": "2026-12-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.9965311566210394,
+          0.023340213536562786,
+          0.07988046266516775
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.005225496860643997,
+          -0.9999850403428288,
+          0.0016165621269942508
+        ],
+        "sunDirectionMoon": [
+          -0.21832703973276676,
+          -0.02378861190624657,
+          -0.9755856731549006
+        ],
+        "earthDirectionMoon": [
+          0.9936511356840675,
+          -0.023680801153858313,
+          0.10998472716915944
+        ],
+        "moonToLocal": [
+          -0.8048389986783371,
+          0.0016231497446150794,
+          -0.5934869049758942,
+          0.0022011845656713528
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.3995895911735072,
+          0.5726104763487065,
+          -0.3895169468100266,
+          0.6006013229666513
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "shackleton-rim",
+      "instantUtc": "2027-01-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.9304567582942509,
+          0.010754328632587913,
+          0.3662438605085639
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.005225496860643997,
+          -0.9999850403428288,
+          0.0016165621269942508
+        ],
+        "sunDirectionMoon": [
+          0.07483381317166923,
+          -0.012769279794495079,
+          -0.9971142591998761
+        ],
+        "earthDirectionMoon": [
+          0.9855815062956593,
+          -0.10271758119610605,
+          0.1344551708235884
+        ],
+        "moonToLocal": [
+          -0.8048389986783371,
+          0.0016231497446150794,
+          -0.5934869049758942,
+          0.0022011845656713528
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.20283266641687164,
+          0.7697509733387301,
+          -0.5176783617680316,
+          0.3136103669132554
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "shackleton-rim",
+      "instantUtc": "2027-02-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.7826809092613556,
+          -0.005770212201521574,
+          0.6223964162243923
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.005225496860643997,
+          -0.9999850403428288,
+          0.0016165621269942508
+        ],
+        "sunDirectionMoon": [
+          0.3633006153629737,
+          0.0023539586596347793,
+          -0.9316689979577046
+        ],
+        "earthDirectionMoon": [
+          0.9899812672331335,
+          -0.11004331624202231,
+          0.08847349364604895
+        ],
+        "moonToLocal": [
+          -0.8048389986783371,
+          0.0016231497446150794,
+          -0.5934869049758942,
+          0.0022011845656713528
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.02955950138166741,
+          -0.831312808043557,
+          0.5542740410366814,
+          0.02873218567513556
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "shackleton-rim",
+      "instantUtc": "2027-03-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.9434310417269555,
+          -0.01694209098121818,
+          0.33113567470022853
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.005225496860643997,
+          -0.9999850403428288,
+          0.0016165621269942508
+        ],
+        "sunDirectionMoon": [
+          0.0376047215967448,
+          0.015118891817328122,
+          -0.9991783144283343
+        ],
+        "earthDirectionMoon": [
+          0.9933776584524681,
+          -0.09795423391697347,
+          0.060048278453512786
+        ],
+        "moonToLocal": [
+          -0.8048389986783371,
+          0.0016231497446150794,
+          -0.5934869049758942,
+          0.0022011845656713528
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.0732485078598135,
+          -0.8266760237120255,
+          0.5500695333086251,
+          0.09308553293405578
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "shackleton-rim",
+      "instantUtc": "2027-04-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.7966145456636492,
+          -0.027962802359947456,
+          0.6038404982454192
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.005225496860643997,
+          -0.9999850403428288,
+          0.0016165621269942508
+        ],
+        "sunDirectionMoon": [
+          0.3415719451386978,
+          0.024647906447233,
+          -0.9395323767715164
+        ],
+        "earthDirectionMoon": [
+          0.9997376604742572,
+          -0.0028421113369822074,
+          -0.02272735428084274
+        ],
+        "moonToLocal": [
+          -0.8048389986783371,
+          0.0016231497446150794,
+          -0.5934869049758942,
+          0.0022011845656713528
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.29454128876683044,
+          -0.7157709870190394,
+          0.47130485360604735,
+          0.42283455194762287
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "shackleton-rim",
+      "instantUtc": "2027-05-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.7276955678428455,
+          -0.030277085087879317,
+          0.6852316824698491
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.005225496860643997,
+          -0.9999850403428288,
+          0.0016165621269942508
+        ],
+        "sunDirectionMoon": [
+          0.4397067602054234,
+          0.02651705109232434,
+          -0.8977498599448609
+        ],
+        "earthDirectionMoon": [
+          0.9944120384870754,
+          0.07322083690408189,
+          -0.07604871304003241
+        ],
+        "moonToLocal": [
+          -0.8048389986783371,
+          0.0016231497446150794,
+          -0.5934869049758942,
+          0.0022011845656713528
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.4247613868235412,
+          -0.5537515917521566,
+          0.3601984864117921,
+          0.6190266466658354
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "shackleton-rim",
+      "instantUtc": "2027-06-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.46986997945727854,
+          -0.025573633013228188,
+          0.8823651124672379
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.005225496860643997,
+          -0.9999850403428288,
+          0.0016165621269942508
+        ],
+        "sunDirectionMoon": [
+          0.7042050038071496,
+          0.020735442677043733,
+          -0.7096938452811604
+        ],
+        "earthDirectionMoon": [
+          0.988349794850929,
+          0.11617606576492182,
+          -0.09832499560900478
+        ],
+        "moonToLocal": [
+          -0.8048389986783371,
+          0.0016231497446150794,
+          -0.5934869049758942,
+          0.0022011845656713528
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.536373905794917,
+          -0.2502351541917862,
+          0.15522526523660823,
+          0.7909428031287364
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "shackleton-rim",
+      "instantUtc": "2027-07-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.3644230111674238,
+          -0.014293955503998566,
+          0.9311238111914641
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.005225496860643997,
+          -0.9999850403428288,
+          0.0016165621269942508
+        ],
+        "sunDirectionMoon": [
+          0.7818898685526398,
+          0.009189237646166692,
+          -0.6233488520613621
+        ],
+        "earthDirectionMoon": [
+          0.9920546175822131,
+          0.09460224792636975,
+          -0.08293401245017956
+        ],
+        "moonToLocal": [
+          -0.8048389986783371,
+          0.0016231497446150794,
+          -0.5934869049758942,
+          0.0022011845656713528
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.5584502031502299,
+          0.001962163021991014,
+          -0.01350219488147064,
+          0.8294258322786462
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "shackleton-rim",
+      "instantUtc": "2027-08-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.04518415396679598,
+          -3.831555546886878e-05,
+          0.9989786738275364
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.005225496860643997,
+          -0.9999850403428288,
+          0.0016165621269942508
+        ],
+        "sunDirectionMoon": [
+          0.9409863343847351,
+          -0.005437382316000745,
+          -0.3384008767345754
+        ],
+        "earthDirectionMoon": [
+          0.9997413773357194,
+          0.016268429323837125,
+          -0.01589077248638465
+        ],
+        "moonToLocal": [
+          -0.8048389986783371,
+          0.0016231497446150794,
+          -0.5934869049758942,
+          0.0022011845656713528
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.5034812245391752,
+          0.34337631078222336,
+          -0.2397180594892746,
+          0.7557344888813924
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "shackleton-rim",
+      "instantUtc": "2027-09-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          0.27331091210132236,
+          0.01337999794871196,
+          0.9618326886632809
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.005225496860643997,
+          -0.9999850403428288,
+          0.0016165621269942508
+        ],
+        "sunDirectionMoon": [
+          0.9995583720164146,
+          -0.018652389698779363,
+          -0.023133293981182034
+        ],
+        "earthDirectionMoon": [
+          0.9959421045448075,
+          -0.07127968079001164,
+          0.05494116399689549
+        ],
+        "moonToLocal": [
+          -0.8048389986783371,
+          0.0016231497446150794,
+          -0.5934869049758942,
+          0.0022011845656713528
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.35972592584355656,
+          0.6244494844187237,
+          -0.42349217836989794,
+          0.5489211915609604
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "shackleton-rim",
+      "instantUtc": "2027-10-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          0.3689858340383389,
+          0.021154246369890363,
+          0.9291942488734815
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.005225496860643997,
+          -0.9999850403428288,
+          0.0016165621269942508
+        ],
+        "sunDirectionMoon": [
+          0.9966135358956788,
+          -0.02624808980977874,
+          0.07792623339319102
+        ],
+        "earthDirectionMoon": [
+          0.9907621126200741,
+          -0.10975648623835364,
+          0.07964891666066641
+        ],
+        "moonToLocal": [
+          -0.8048389986783371,
+          0.0016231497446150794,
+          -0.5934869049758942,
+          0.0022011845656713528
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.2132056125914453,
+          0.7621443013327152,
+          -0.511547732384116,
+          0.3346615427536348
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "shackleton-rim",
+      "instantUtc": "2027-11-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          0.6303913142948576,
+          0.021701739033547274,
+          0.7759741138623903
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.005225496860643997,
+          -0.9999850403428288,
+          0.0016165621269942508
+        ],
+        "sunDirectionMoon": [
+          0.9274932083226192,
+          -0.0259575821662784,
+          0.37293773266256613
+        ],
+        "earthDirectionMoon": [
+          0.9936723632338196,
+          -0.09303041205645694,
+          0.062933115113761
+        ],
+        "moonToLocal": [
+          -0.8048389986783371,
+          0.0016231497446150794,
+          -0.5934869049758942,
+          0.0022011845656713528
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.017321021652111763,
+          -0.8330236037339824,
+          0.5529282987342816,
+          0.006477213119016383
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "shackleton-rim",
+      "instantUtc": "2027-03-19T01:08:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.4742010509795034,
+          -0.02174226835412527,
+          0.8801480767556967
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.005225496860643997,
+          -0.9999850403428288,
+          0.0016165621269942508
+        ],
+        "sunDirectionMoon": [
+          0.7007869741886239,
+          0.0169160235552519,
+          -0.7131700112558232
+        ],
+        "earthDirectionMoon": [
+          0.9998897452571245,
+          -0.013924319847141904,
+          -0.005158550807828654
+        ],
+        "moonToLocal": [
+          -0.8048389986783371,
+          0.0016231497446150794,
+          -0.5934869049758942,
+          0.0022011845656713528
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.28353768234674837,
+          -0.7250889598797178,
+          0.4781089626971996,
+          0.40652700124172714
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "shackleton-rim",
+      "instantUtc": "2027-03-19T01:00:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.4752384540781164,
+          -0.021736155407820788,
+          0.879588512495206
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.005225496860643997,
+          -0.9999850403428288,
+          0.0016165621269942508
+        ],
+        "sunDirectionMoon": [
+          0.6999457859990151,
+          0.016912971378195796,
+          -0.713995691906738
+        ],
+        "earthDirectionMoon": [
+          0.9998880519875173,
+          -0.014088003435381498,
+          -0.005040997105005666
+        ],
+        "moonToLocal": [
+          -0.8048389986783371,
+          0.0016231497446150794,
+          -0.5934869049758942,
+          0.0022011845656713528
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.2832294984272191,
+          -0.7253493045400795,
+          0.47828881906358384,
+          0.406065565127913
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "shackleton-rim",
+      "instantUtc": "2026-12-31T23:59:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          0.912975182147094,
+          0.01992259400325713,
+          -0.40752841254526234
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.005225496860643997,
+          -0.9999850403428288,
+          0.0016165621269942508
+        ],
+        "sunDirectionMoon": [
+          -0.11960052766148131,
+          -0.01770500860708011,
+          0.9926642163658961
+        ],
+        "earthDirectionMoon": [
+          0.9867190169862728,
+          0.1044420878425407,
+          -0.12440832691076026
+        ],
+        "moonToLocal": [
+          -0.8048389986783371,
+          0.0016231497446150794,
+          -0.5934869049758942,
+          0.0022011845656713528
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.497983413332009,
+          -0.3934459057477509,
+          0.25375477892887083,
+          0.7299461291542639
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "shackleton-rim",
+      "instantUtc": "2027-01-01T00:00:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          0.9129150791373178,
+          0.019923131072729857,
+          -0.40766300682299267
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.005225496860643997,
+          -0.9999850403428288,
+          0.0016165621269942508
+        ],
+        "sunDirectionMoon": [
+          -0.11974687337761036,
+          -0.017704809464451753,
+          0.9926465766012161
+        ],
+        "earthDirectionMoon": [
+          0.9867189255239158,
+          0.10445024672052987,
+          -0.12440220244412702
+        ],
+        "moonToLocal": [
+          -0.8048389986783371,
+          0.0016231497446150794,
+          -0.5934869049758942,
+          0.0022011845656713528
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.49800388377911203,
+          -0.3933873975000226,
+          0.2537153298561059,
+          0.7299774096676467
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "change-4",
+      "instantUtc": "2026-12-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.965537587995731,
+          0.19874823960225996,
+          -0.16803661333884642
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.7008343451406343,
+          -0.7127132034886858,
+          -0.029514576808645793
+        ],
+        "sunDirectionMoon": [
+          -0.21832703973276676,
+          -0.02378861190624657,
+          -0.9755856731549006
+        ],
+        "earthDirectionMoon": [
+          0.9936511356840675,
+          -0.023680801153858313,
+          0.10998472716915944
+        ],
+        "moonToLocal": [
+          -0.6404390599143192,
+          0.27357573460400564,
+          -0.6679778531361696,
+          0.26229699901359105
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.6860748104589925,
+          0.5467885300752702,
+          -0.11930051599216578,
+          0.4648559397445472
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "change-4",
+      "instantUtc": "2027-01-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.9993797777710777,
+          -0.013927632930735965,
+          0.03234317274446015
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.7008343451406343,
+          -0.7127132034886858,
+          -0.029514576808645793
+        ],
+        "sunDirectionMoon": [
+          0.07483381317166923,
+          -0.012769279794495079,
+          -0.9971142591998761
+        ],
+        "earthDirectionMoon": [
+          0.9855815062956593,
+          -0.10271758119610605,
+          0.1344551708235884
+        ],
+        "moonToLocal": [
+          -0.6404390599143192,
+          0.27357573460400564,
+          -0.6679778531361696,
+          0.26229699901359105
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.43295601505100834,
+          0.8322398470895978,
+          -0.17548575403706207,
+          0.2985476110731387
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "change-4",
+      "instantUtc": "2027-02-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.9461276871802239,
+          -0.22880452735873122,
+          0.2291088994586368
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.7008343451406343,
+          -0.7127132034886858,
+          -0.029514576808645793
+        ],
+        "sunDirectionMoon": [
+          0.3633006153629737,
+          0.0023539586596347793,
+          -0.9316689979577046
+        ],
+        "earthDirectionMoon": [
+          0.9899812672331335,
+          -0.11004331624202231,
+          0.08847349364604895
+        ],
+        "moonToLocal": [
+          -0.6404390599143192,
+          0.27357573460400564,
+          -0.6679778531361696,
+          0.26229699901359105
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.10355867210987901,
+          0.9709752968171279,
+          -0.20038864325818942,
+          0.07954222812362702
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "change-4",
+      "instantUtc": "2027-03-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.9998756215152907,
+          -0.007651428511717135,
+          -0.013791197958875187
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.7008343451406343,
+          -0.7127132034886858,
+          -0.029514576808645793
+        ],
+        "sunDirectionMoon": [
+          0.0376047215967448,
+          0.015118891817328122,
+          -0.9991783144283343
+        ],
+        "earthDirectionMoon": [
+          0.9933776584524681,
+          -0.09795423391697347,
+          0.060048278453512786
+        ],
+        "moonToLocal": [
+          -0.6404390599143192,
+          0.27357573460400564,
+          -0.6679778531361696,
+          0.26229699901359105
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.038838353867619385,
+          0.9781457073165096,
+          -0.20096528919187398,
+          0.036544631167456966
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "change-4",
+      "instantUtc": "2027-04-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.9530698592106575,
+          -0.2292332597741309,
+          0.19776237275453368
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.7008343451406343,
+          -0.7127132034886858,
+          -0.029514576808645793
+        ],
+        "sunDirectionMoon": [
+          0.3415719451386978,
+          0.024647906447233,
+          -0.9395323767715164
+        ],
+        "earthDirectionMoon": [
+          0.9997376604742572,
+          -0.0028421113369822074,
+          -0.02272735428084274
+        ],
+        "moonToLocal": [
+          -0.6404390599143192,
+          0.27357573460400564,
+          -0.6679778531361696,
+          0.26229699901359105
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.3051067859222627,
+          -0.9139364144384101,
+          0.18360740751306276,
+          0.19472647342870808
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "change-4",
+      "instantUtc": "2027-05-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.9154528555271657,
+          -0.3005743473396044,
+          0.2675838766228805
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.7008343451406343,
+          -0.7127132034886858,
+          -0.029514576808645793
+        ],
+        "sunDirectionMoon": [
+          0.4397067602054234,
+          0.02651705109232434,
+          -0.8977498599448609
+        ],
+        "earthDirectionMoon": [
+          0.9944120384870754,
+          0.07322083690408189,
+          -0.07604871304003241
+        ],
+        "moonToLocal": [
+          -0.6404390599143192,
+          0.27357573460400564,
+          -0.6679778531361696,
+          0.26229699901359105
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.5247729523969231,
+          -0.7641370173379253,
+          0.15003075856250217,
+          0.34380043433898727
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "change-4",
+      "instantUtc": "2027-06-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.7386915130184765,
+          -0.48737183414328994,
+          0.4656216746225195
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.7008343451406343,
+          -0.7127132034886858,
+          -0.029514576808645793
+        ],
+        "sunDirectionMoon": [
+          0.7042050038071496,
+          0.020735442677043733,
+          -0.7096938452811604
+        ],
+        "earthDirectionMoon": [
+          0.988349794850929,
+          0.11617606576492182,
+          -0.09832499560900478
+        ],
+        "moonToLocal": [
+          -0.6404390599143192,
+          0.27357573460400564,
+          -0.6679778531361696,
+          0.26229699901359105
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.7424054655426212,
+          -0.44531326158707485,
+          0.08190318351792633,
+          0.49378344678285274
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "change-4",
+      "instantUtc": "2027-07-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.6556917696214964,
+          -0.5361347837048708,
+          0.5316274983034286
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.7008343451406343,
+          -0.7127132034886858,
+          -0.029514576808645793
+        ],
+        "sunDirectionMoon": [
+          0.7818898685526398,
+          0.009189237646166692,
+          -0.6233488520613621
+        ],
+        "earthDirectionMoon": [
+          0.9920546175822131,
+          0.09460224792636975,
+          -0.08293401245017956
+        ],
+        "moonToLocal": [
+          -0.6404390599143192,
+          0.27357573460400564,
+          -0.6679778531361696,
+          0.26229699901359105
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.8197630355700881,
+          -0.15997532737599401,
+          0.02240416269058821,
+          0.5494492821343855
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "change-4",
+      "instantUtc": "2027-08-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.3776915305469655,
+          -0.6456191362234838,
+          0.6637206028858326
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.7008343451406343,
+          -0.7127132034886858,
+          -0.029514576808645793
+        ],
+        "sunDirectionMoon": [
+          0.9409863343847351,
+          -0.005437382316000745,
+          -0.3384008767345754
+        ],
+        "earthDirectionMoon": [
+          0.9997413773357194,
+          0.016268429323837125,
+          -0.01589077248638465
+        ],
+        "moonToLocal": [
+          -0.6404390599143192,
+          0.27357573460400564,
+          -0.6679778531361696,
+          0.26229699901359105
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.8000111021583786,
+          0.2507901243821091,
+          -0.06131668081499077,
+          0.5415965422614653
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "change-4",
+      "instantUtc": "2027-09-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.06516990134196553,
+          -0.6865543313300633,
+          0.7241519413016911
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.7008343451406343,
+          -0.7127132034886858,
+          -0.029514576808645793
+        ],
+        "sunDirectionMoon": [
+          0.9995583720164146,
+          -0.018652389698779363,
+          -0.023133293981182034
+        ],
+        "earthDirectionMoon": [
+          0.9959421045448075,
+          -0.07127968079001164,
+          0.05494116399689549
+        ],
+        "moonToLocal": [
+          -0.6404390599143192,
+          0.27357573460400564,
+          -0.6679778531361696,
+          0.26229699901359105
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.6392234134191274,
+          0.6174374040318814,
+          -0.13400171818274187,
+          0.43841535028240514
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "change-4",
+      "instantUtc": "2027-10-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          0.03592323848340756,
+          -0.6820597854798982,
+          0.7304135609146227
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.7008343451406343,
+          -0.7127132034886858,
+          -0.029514576808645793
+        ],
+        "sunDirectionMoon": [
+          0.9966135358956788,
+          -0.02624808980977874,
+          0.07792623339319102
+        ],
+        "earthDirectionMoon": [
+          0.9907621126200741,
+          -0.10975648623835364,
+          0.07964891666066641
+        ],
+        "moonToLocal": [
+          -0.6404390599143192,
+          0.27357573460400564,
+          -0.6679778531361696,
+          0.26229699901359105
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.4487764027406784,
+          0.819035343704273,
+          -0.17244598656258833,
+          0.3131185523484922
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "change-4",
+      "instantUtc": "2027-11-15T13:37:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          0.33357957879469985,
+          -0.6425327368740817,
+          0.6898379133218562
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.7008343451406343,
+          -0.7127132034886858,
+          -0.029514576808645793
+        ],
+        "sunDirectionMoon": [
+          0.9274932083226192,
+          -0.0259575821662784,
+          0.37293773266256613
+        ],
+        "earthDirectionMoon": [
+          0.9936723632338196,
+          -0.09303041205645694,
+          0.062933115113761
+        ],
+        "moonToLocal": [
+          -0.6404390599143192,
+          0.27357573460400564,
+          -0.6679778531361696,
+          0.26229699901359105
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.12288670980794376,
+          0.9677412932555176,
+          -0.19804512192702237,
+          0.09567536548990684
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "change-4",
+      "instantUtc": "2027-03-19T01:08:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.742020724096674,
+          -0.4821518521193961,
+          0.46576263966626164
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.7008343451406343,
+          -0.7127132034886858,
+          -0.029514576808645793
+        ],
+        "sunDirectionMoon": [
+          0.7007869741886239,
+          0.0169160235552519,
+          -0.7131700112558232
+        ],
+        "earthDirectionMoon": [
+          0.9998897452571245,
+          -0.013924319847141904,
+          -0.005158550807828654
+        ],
+        "moonToLocal": [
+          -0.6404390599143192,
+          0.27357573460400564,
+          -0.6679778531361696,
+          0.26229699901359105
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.2873360300365153,
+          -0.9216864684922454,
+          0.1856899101417023,
+          0.18289701176540402
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "change-4",
+      "instantUtc": "2027-03-19T01:00:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          -0.74281028041255,
+          -0.48153578052913215,
+          0.46514103171363896
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.7008343451406343,
+          -0.7127132034886858,
+          -0.029514576808645793
+        ],
+        "sunDirectionMoon": [
+          0.6999457859990151,
+          0.016912971378195796,
+          -0.713995691906738
+        ],
+        "earthDirectionMoon": [
+          0.9998880519875173,
+          -0.014088003435381498,
+          -0.005040997105005666
+        ],
+        "moonToLocal": [
+          -0.6404390599143192,
+          0.27357573460400564,
+          -0.6679778531361696,
+          0.26229699901359105
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.2868382966861542,
+          -0.9218982414180982,
+          0.18573899732652255,
+          0.18256080876393496
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "change-4",
+      "instantUtc": "2026-12-31T23:59:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          0.9968182405719982,
+          0.06712896178716658,
+          -0.04297787514900043
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.7008343451406343,
+          -0.7127132034886858,
+          -0.029514576808645793
+        ],
+        "sunDirectionMoon": [
+          -0.11960052766148131,
+          -0.01770500860708011,
+          0.9926642163658961
+        ],
+        "earthDirectionMoon": [
+          0.9867190169862728,
+          0.1044420878425407,
+          -0.12440832691076026
+        ],
+        "moonToLocal": [
+          -0.6404390599143192,
+          0.27357573460400564,
+          -0.6679778531361696,
+          0.26229699901359105
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.6599260463717038,
+          -0.6005127501988571,
+          0.1166445884819981,
+          0.4362064765070347
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    },
+    {
+      "id": "change-4",
+      "instantUtc": "2027-01-01T00:00:00Z",
+      "lighting": {
+        "sunDirectionLocal": [
+          0.9968067752989295,
+          0.06723190474841816,
+          -0.04308275411402216
+        ]
+      },
+      "overview": {
+        "axisConvention": "x0-yNorth-zWest",
+        "moonRadiusM": 1737400,
+        "siteDirectionMoon": [
+          -0.7008343451406343,
+          -0.7127132034886858,
+          -0.029514576808645793
+        ],
+        "sunDirectionMoon": [
+          -0.11974687337761036,
+          -0.017704809464451753,
+          0.9926465766012161
+        ],
+        "earthDirectionMoon": [
+          0.9867189255239158,
+          0.10445024672052987,
+          -0.12440220244412702
+        ],
+        "moonToLocal": [
+          -0.6404390599143192,
+          0.27357573460400564,
+          -0.6679778531361696,
+          0.26229699901359105
+        ]
+      },
+      "sky": {
+        "catalogFrame": "ICRS-J1991.25",
+        "catalogToLocal": [
+          0.6599663453345334,
+          -0.6004509542047207,
+          0.11663146971668355,
+          0.43623408268055625
+        ],
+        "model": "DE440 lunar orientation; fixed Hipparcos J1991.25 catalog; no proper motion or aberration"
+      }
+    }
+  ]
+}

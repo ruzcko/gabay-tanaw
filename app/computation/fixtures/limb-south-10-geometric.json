@@ -1,0 +1,86 @@
+{
+  "query": {
+    "site": {
+      "id": "limb-south",
+      "latitudeDeg": -20,
+      "longitudeEastDeg": 90,
+      "surfaceElevationM": 100,
+      "observerHeightM": 2,
+      "referenceFrame": "MOON_ME_DE421",
+      "elevationDatum": "sphere-1737400m"
+    },
+    "instantsUtc": [
+      "2026-09-23T00:00:00Z",
+      "2026-09-23T01:00:00.000Z"
+    ],
+    "target": 10,
+    "kind": "geometric"
+  },
+  "result": {
+    "kind": "geometric",
+    "observerSamples": [],
+    "geometricSamples": [
+      {
+        "instantUtc": "2026-09-23T00:00:00.000Z",
+        "positionKm": [
+          -150409888.0582078,
+          1150772.665293263,
+          509787.5926628744
+        ],
+        "velocityKmPerSecond": [
+          -0.3711739934231232,
+          -27.8566226927593,
+          -12.17083926994828
+        ],
+        "frame": "ICRF",
+        "origin": "observer",
+        "correction": "NONE"
+      },
+      {
+        "instantUtc": "2026-09-23T01:00:00.000Z",
+        "positionKm": [
+          -150411174.5503438,
+          1050478.00636762,
+          465967.491021119
+        ],
+        "velocityKmPerSecond": [
+          -0.3435332110413246,
+          -27.8626224692666,
+          -12.17365608586559
+        ],
+        "frame": "ICRF",
+        "origin": "observer",
+        "correction": "NONE"
+      }
+    ],
+    "provenance": {
+      "parameters": {
+        "format": "json",
+        "COMMAND": "10",
+        "OBJ_DATA": "YES",
+        "MAKE_EPHEM": "YES",
+        "CENTER": "coord@301",
+        "COORD_TYPE": "GEODETIC",
+        "SITE_COORD": "90,-20,0.102",
+        "TLIST": "'2461306.500000000000','2461306.541666666511'",
+        "TLIST_TYPE": "JD",
+        "TIME_TYPE": "UT",
+        "REF_SYSTEM": "ICRF",
+        "CSV_FORMAT": "YES",
+        "CAL_TYPE": "GREGORIAN",
+        "TIME_DIGITS": "FRACSEC",
+        "EPHEM_TYPE": "VECTORS",
+        "REF_PLANE": "FRAME",
+        "VEC_CORR": "NONE",
+        "VEC_TABLE": "2",
+        "OUT_UNITS": "KM-S"
+      },
+      "endpoint": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "retrievedAtUtc": "2026-11-14T07:38:58.357Z",
+      "apiVersion": "1.2",
+      "source": "NASA/JPL Horizons API",
+      "rawResponse": "{\"signature\":{\"source\":\"NASA/JPL Horizons API\",\"version\":\"1.2\"},\"result\":\"*******************************************************************************\\n Revised: July 31, 2013                  Sun                                 10\\n\\n PHYSICAL PROPERTIES (updated 2024-Oct-30):\\n  GM, km^3/s^2          = 132712440041.93938  Mass, 10^24 kg        = ~1988410\\n  Vol. mean radius, km  = 695700              Volume, 10^12 km^3    = 1412000\\n  Solar radius (IAU2015)= 695700 km           Mean density, g/cm^3  = 1.408\\n  Radius (photosphere)  = 696500 km           Angular diam at 1 AU  = 1919.3\\\"\\n  Photosphere temp., K  = 6600 (bottom)       Photosphere temp., K  = 4400(top)\\n  Photospheric depth    = ~500 km             Chromospheric depth   = ~2500 km\\n  Flatness, f           = 0.00005             Adopted sid. rot. per.= 25.38 d\\n  Surface gravity       =  274.0 m/s^2        Escape speed, km/s    =  617.7\\n  Pole (RA,DEC), deg.   = (286.13, 63.87)     Obliquity to ecliptic = 7.25 deg.\\n  Solar constant (1 AU) = 1367.6 W/m^2        Luminosity, 10^24 J/s = 382.8\\n  Mass-energy conv rate = 4.260 x 10^9 kg/s   Effective temp, K     = 5772\\n  Sunspot cycle         = 11.4 yr             Cycle 24 sunspot min. = 2008 A.D.\\n\\n  Motion relative to nearby stars = apex : R.A.= 271 deg.; DEC.= +30 deg.\\n                                    speed: 19.4 km/s (0.0112 au/day)\\n  Motion relative to 2.73K BB/CBR = apex : l= 264.7 +- 0.8; b= 48.2 +- 0.5 deg.\\n                                    speed: 369 +-11 km/s\\n*******************************************************************************\\n\\nCalling TDBMUT with LBND,LMJD= 0.843393600000000E+09  0.613060000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.843397199999987E+09  0.613060416666665E+05\\n\\n*******************************************************************************\\nEphemeris / API_USER Fri Nov 13 23:39:00 2026 Pasadena, USA      / Horizons\\n*******************************************************************************\\nTarget body name: Sun (10)                        {source: DE441}\\nCenter body name: Moon (301)                      {source: DE441}\\nCenter-site name: (user defined site below)\\n*******************************************************************************\\nStart time      : A.D. 2026-Sep-23 00:00:00.0000 UT \\nStop  time      : A.D. 2026-Sep-23 01:00:00.0000 UT \\nStep-size       : DISCRETE TIME-LIST\\n*******************************************************************************\\nCenter geodetic : 90.0, -20.0, .102               {E-lon(deg),Lat(deg),Alt(km)}\\nCenter cylindric: 90.0, 1632.71781, -594.260683   {E-lon(deg),Dxy(km),Dz(km)}\\nCenter pole/equ : MEAN_ME (high precision)        {East-longitude positive}\\nCenter radii    : 1737.4, 1737.4, 1737.4 km       {Equator_a, b, pole_c}\\nOutput units    : KM-S\\nCalendar mode   : Gregorian\\nOutput type     : GEOMETRIC cartesian states\\nOutput format   : 2 (position and velocity)\\nEOP file        : eop.261113.p270209\\nEOP coverage    : DATA-BASED 1962-JAN-20 TO 2026-NOV-13. PREDICTS-> 2027-FEB-08\\nReference frame : ICRF\\n*******************************************************************************\\n            JDUT ,            Calendar Date (UT ),                      X,                      Y,                      Z,                     VX,                     VY,                     VZ,\\n**************************************************************************************************************************************************************************************************\\n$$SOE\\n2461306.500000000, A.D. 2026-Sep-23 00:00:00.0000, -1.504098880582078E+08,  1.150772665293263E+06,  5.097875926628744E+05, -3.711739934231232E-01, -2.785662269275930E+01, -1.217083926994828E+01,\\n2461306.541666667, A.D. 2026-Sep-23 01:00:00.0000, -1.504111745503438E+08,  1.050478006367620E+06,  4.659674910211190E+05, -3.435332110413246E-01, -2.786262246926660E+01, -1.217365608586559E+01,\\n$$EOE\\n**************************************************************************************************************************************************************************************************\\n \\nTIME\\n\\n Times PRIOR to 1962 are UT1, a mean-solar time closely related to the\\nprior but now-deprecated GMT. Times AFTER 1962 are in UTC, the current\\ncivil or \\\"wall-clock\\\" atomic time-scale. UTC is kept within 0.9 seconds\\nof UT1 using integer leap-seconds for 1972 and later years.\\n\\n  Conversion from the internal Barycentric Dynamical Time (TDB) of solar\\nsystem dynamics to the discontinuous civil UT time-scale has not been\\ndetermined for UTC times after the next July or January 1st. Therefore,\\nthe last known leap-second is used as a constant over future intervals,\\na condition noted here as \\\"UT~\\\".\\n\\n  Future but as yet undetermined leap-seconds can be expected to change\\ntime-tags in the \\\"UT~\\\" interval and, in general, the UT scale may not be\\nsuitable for purposes that assume time-tag continuity in the ephemeris.\\nOutput in continuous TDB and TT timescales may instead be requested,\\nthough these are not linked to Earth's rotation.\\n\\n  Time-tags refer to the UT time-scale conversion from TDB on Earth\\nregardless of observer location within the solar system, although clock\\nrates may differ due to the local gravity field and no analog to \\\"UT\\\"\\nmay be defined for that location.\\n \\nCALENDAR SYSTEM\\n\\n  Calendar dates are given in the modern Gregorian system, extended prior to\\nits 1582-Oct-15 adoption. The Gregorian calendar more closely corresponds to\\nphysical Earth seasons and orbital motion, but can differ by up to 10 days with\\nhistorical records made under the prior Julian calendar, more if the Julian\\ncalendar was extended prior to its 45-Jan-1 BC adoption to label the historical\\nevent. Select \\\"mixed\\\" calendar mode if correlation with historical dates prior\\nto A.D. 1582 is important.\\n\\nREFERENCE FRAME AND COORDINATES\\n\\n  International Celestial Reference Frame (ICRF)\\n\\n    The ICRF is an adopted reference frame whose axes are defined relative to \\n    fixed extragalactic radio sources distributed across the sky.\\n\\n    The ICRF was aligned with the prior FK5/J2000 dynamical system at the ~0.02 \\n    arcsecond level but is not identical and has no associated standard epoch.\\n\\n  Symbol meaning:\\n\\n    JDUT     Julian Day Number, Universal Time\\n      X      X-component of position vector (km)\\n      Y      Y-component of position vector (km)\\n      Z      Z-component of position vector (km)\\n      VX     X-component of velocity vector (km/sec)                           \\n      VY     Y-component of velocity vector (km/sec)                           \\n      VZ     Z-component of velocity vector (km/sec)                           \\n\\nABERRATIONS AND CORRECTIONS\\n\\n Geometric state vectors have NO corrections or aberrations applied.\\n\\nComputations by ...\\n\\n    Solar System Dynamics Group, Horizons On-Line Ephemeris System\\n    4800 Oak Grove Drive, Jet Propulsion Laboratory\\n    Pasadena, CA  91109   USA\\n\\n    General site: https://ssd.jpl.nasa.gov/\\n    Mailing list: https://ssd.jpl.nasa.gov/email_list.html\\n    System news : https://ssd.jpl.nasa.gov/horizons/news.html\\n    User Guide  : https://ssd.jpl.nasa.gov/horizons/manual.html\\n    Connect     : browser        https://ssd.jpl.nasa.gov/horizons/app.html#/x\\n                  API            https://ssd-api.jpl.nasa.gov/doc/horizons.html\\n                  command-line   telnet ssd.jpl.nasa.gov 6775\\n                  e-mail/batch   https://ssd.jpl.nasa.gov/ftp/ssd/horizons_batch.txt\\n                  scripts        https://ssd.jpl.nasa.gov/ftp/ssd/SCRIPTS\\n    Inquiries   : Jon.D.Giorgini@jpl.nasa.gov\\n*******************************************************************************\\n\"}\n",
+      "header": "*******************************************************************************\n Revised: July 31, 2013                  Sun                                 10\n\n PHYSICAL PROPERTIES (updated 2024-Oct-30):\n  GM, km^3/s^2          = 132712440041.93938  Mass, 10^24 kg        = ~1988410\n  Vol. mean radius, km  = 695700              Volume, 10^12 km^3    = 1412000\n  Solar radius (IAU2015)= 695700 km           Mean density, g/cm^3  = 1.408\n  Radius (photosphere)  = 696500 km           Angular diam at 1 AU  = 1919.3\"\n  Photosphere temp., K  = 6600 (bottom)       Photosphere temp., K  = 4400(top)\n  Photospheric depth    = ~500 km             Chromospheric depth   = ~2500 km\n  Flatness, f           = 0.00005             Adopted sid. rot. per.= 25.38 d\n  Surface gravity       =  274.0 m/s^2        Escape speed, km/s    =  617.7\n  Pole (RA,DEC), deg.   = (286.13, 63.87)     Obliquity to ecliptic = 7.25 deg.\n  Solar constant (1 AU) = 1367.6 W/m^2        Luminosity, 10^24 J/s = 382.8\n  Mass-energy conv rate = 4.260 x 10^9 kg/s   Effective temp, K     = 5772\n  Sunspot cycle         = 11.4 yr             Cycle 24 sunspot min. = 2008 A.D.\n\n  Motion relative to nearby stars = apex : R.A.= 271 deg.; DEC.= +30 deg.\n                                    speed: 19.4 km/s (0.0112 au/day)\n  Motion relative to 2.73K BB/CBR = apex : l= 264.7 +- 0.8; b= 48.2 +- 0.5 deg.\n                                    speed: 369 +-11 km/s\n*******************************************************************************\n\nCalling TDBMUT with LBND,LMJD= 0.843393600000000E+09  0.613060000000000E+05\nCalling TDBMUT with LBND,LMJD= 0.843397199999987E+09  0.613060416666665E+05\n\n*******************************************************************************\nEphemeris / API_USER Fri Nov 13 23:39:00 2026 Pasadena, USA      / Horizons\n*******************************************************************************\nTarget body name: Sun (10)                        {source: DE441}\nCenter body name: Moon (301)                      {source: DE441}\nCenter-site name: (user defined site below)\n*******************************************************************************\nStart time      : A.D. 2026-Sep-23 00:00:00.0000 UT \nStop  time      : A.D. 2026-Sep-23 01:00:00.0000 UT \nStep-size       : DISCRETE TIME-LIST\n*******************************************************************************\nCenter geodetic : 90.0, -20.0, .102               {E-lon(deg),Lat(deg),Alt(km)}\nCenter cylindric: 90.0, 1632.71781, -594.260683   {E-lon(deg),Dxy(km),Dz(km)}\nCenter pole/equ : MEAN_ME (high precision)        {East-longitude positive}\nCenter radii    : 1737.4, 1737.4, 1737.4 km       {Equator_a, b, pole_c}\nOutput units    : KM-S\nCalendar mode   : Gregorian\nOutput type     : GEOMETRIC cartesian states\nOutput format   : 2 (position and velocity)\nEOP file        : eop.261113.p270209\nEOP coverage    : DATA-BASED 1962-JAN-20 TO 2026-NOV-13. PREDICTS-> 2027-FEB-08\nReference frame : ICRF\n*******************************************************************************\n            JDUT ,            Calendar Date (UT ),                      X,                      Y,                      Z,                     VX,                     VY,                     VZ,\n**************************************************************************************************************************************************************************************************\n"
+    }
+  }
+}

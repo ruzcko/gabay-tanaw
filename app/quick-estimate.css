@@ -1,0 +1,104 @@
+.quick-estimate { margin: 0; min-width: 0; }
+.quick-estimate input[type="date"] { appearance: auto; flex: none; width: 152px; color-scheme: dark; min-height: 44px; max-width: 100%; padding: 0 12px; border: 1px solid var(--line); border-radius: var(--r); background: transparent; color: var(--text); font: 600 14px var(--font); font-variant-numeric: tabular-nums; }
+.quick-estimate input[type="date"]:hover { border-color: var(--text); }
+.quick-estimate input[type="date"]:focus-visible { outline: 2px solid var(--sel); outline-offset: 3px; }
+.date-field { display: flex; flex: none; align-items: center; width: 172px; border: 1px solid var(--line); border-radius: var(--r); }
+.quick-estimate .date-field input[type="date"] { width: 126px; min-width: 0; border: 0; padding: 0 0 0 12px; cursor: pointer; }
+.date-field input::-webkit-calendar-picker-indicator { display: none; }
+.date-trigger { flex: none; width: 44px; height: 44px; display: grid; place-items: center; border: 0; border-radius: var(--r); background: transparent; color: var(--text); cursor: pointer; }
+.date-field:hover { border-color: var(--text); }
+.date-trigger:focus-visible, .date-popover button:focus-visible { outline: 2px solid var(--sel); outline-offset: -3px; }
+.date-popover { position: fixed; inset: auto; margin: 0; width: 340px; max-width: calc(100vw - 4px); max-height: calc(100dvh - 4px); padding: 12px; overflow: auto; border: 1px solid var(--line); border-radius: var(--r); background: var(--glass-solid); color: var(--text); font: 14px var(--font); font-variant-numeric: tabular-nums; }
+.date-popover::backdrop { background: transparent; }
+.date-popover button { min-height: 44px; min-width: 44px; margin: 0; padding: 8px; border: 1px solid transparent; border-radius: var(--r); background: transparent; color: inherit; font: inherit; cursor: pointer; }
+.date-popover button:hover:not(:disabled) { border-color: var(--line); }
+.date-popover button:disabled { color: var(--muted); cursor: default; }
+.date-picker-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+.date-popover .date-heading { text-align: left; font-size: 16px; font-weight: 600; }
+.date-popover .date-heading:disabled { color: var(--text); opacity: 1; }
+.date-picker-title { padding-left: 8px; font-weight: 600; }
+.date-month-nav .date-heading { color: var(--text); text-align: center; }
+.date-close { display: grid; place-items: center; }
+.date-grid { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; max-height: min(264px, calc(100dvh - 180px)); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--line) var(--glass-solid); }
+.date-grid button[aria-pressed="true"] { border-color: var(--sel); background: var(--sel); color: var(--space); font-weight: 600; }
+.date-grid button[aria-pressed="true"]:focus-visible { outline-color: var(--space); outline-offset: -4px; }
+.date-grid[data-view="days"] { grid-template-columns: repeat(7, minmax(0, 1fr)); grid-template-rows: repeat(6, 44px); height: 264px; gap: 0; scrollbar-width: none; }
+.date-grid[data-view="days"] button { position: relative; padding: 0; }
+.date-grid button[aria-current="date"]:not([aria-pressed="true"]) { border-color: var(--line); font-weight: 600; }
+.date-weekdays { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); margin-bottom: 4px; color: var(--muted); font-size: 12px; text-align: center; }
+.date-month-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; color: var(--muted); }
+.date-month-nav button { display: grid; place-items: center; }
+.date-month-nav[hidden], .date-weekdays[hidden] { display: none; }
+.date-picker-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; }
+.date-picker-note { margin: 0 8px; color: var(--muted); font-size: 12px; }
+.date-popover ::selection { color: var(--space); background: var(--text); }
+#date-scrubber .range .btn[aria-pressed="true"] { background: var(--sel); color: var(--space); border-color: var(--sel); }
+@media (max-width: 360px) { .date-popover { padding: 2px; } }
+.quick-estimate p { margin: 4px 0 0; overflow-wrap: anywhere; font-size: 13px; }
+.quick-estimate p:empty { visibility: hidden; }
+.quick-estimate [role="status"], .quick-estimate [data-result] { min-height: 18px; line-height: 18px; }
+.quick-estimate [role="status"] { position: relative; padding-left: 20px; }
+.quick-estimate [role="status"]::before { content: ''; position: absolute; left: 0; top: 3px; width: 12px; height: 12px; box-sizing: border-box; border: 1.5px solid var(--line); border-top-color: var(--text); border-radius: 50%; visibility: hidden; }
+.quick-estimate[aria-busy="true"] [role="status"]::before { visibility: visible; animation: forecast-spin .8s linear infinite; }
+@keyframes forecast-spin { to { transform: rotate(1turn); } }
+@media (prefers-reduced-motion: reduce) { .quick-estimate[aria-busy="true"] [role="status"]::before { animation: none; } }
+.quick-estimate [role="status"] { color: var(--muted); }
+.quick-estimate [data-result] { font-variant-numeric: tabular-nums; }
+.observer-controls .quick-estimate { margin-bottom: 12px; }
+.observer-controls .quick-estimate .dayctl { margin-bottom: 0; }
+#play[hidden], #ring[hidden] { display: none; }
+/* Main bar: one date-and-time button (the shared picker's trigger) is the row's readout, a
+   ghost like Play: no outline until hover. A fixed width (the widest label, "30 Sept 2026 ·
+   00:00 UTC") keeps the timeline still while autoplay ticks the hour. */
+.hud .quick-estimate .date-field { position: relative; flex: none; width: auto; border: 0; }
+.hud .quick-estimate .date-field input[type="date"] { position: absolute; inset: 0; width: 44px; opacity: 0; pointer-events: none; }
+.hud .quick-estimate .date-field .date-trigger { position: relative; width: 226px; height: 44px; padding: 0 12px; border: 1px solid transparent; font: 600 16px/20px var(--font); font-variant-numeric: tabular-nums; color: var(--text); text-align: left; place-items: center start; }
+.hud .quick-estimate .date-field .date-trigger:hover, .hud .quick-estimate .date-field .date-trigger[aria-expanded="true"] { border-color: var(--line); }
+.hud .quick-estimate #day-out { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+/* Phones: the button takes the row's free width between Play and the range. Up to 400 px wide
+   the label doesn't fit on one line, so it always takes two 20 px lines, breaking after the
+   "·": a 124 px column is wider than the longest date ("30 Sept 2026 ·") and narrower than
+   the shortest date with its time, so the break never moves while autoplay runs. */
+@media (max-width: 760px) {
+  .hud .quick-estimate .date-field { flex: 1 1 0; min-width: 0; }
+  .hud .quick-estimate .date-field .date-trigger { width: 100%; padding: 0 8px; }
+}
+@media (max-width: 400px) {
+  .hud .quick-estimate .date-field .date-trigger { grid-template-columns: minmax(0, 124px); white-space: normal; }
+}
+.hud .quick-estimate input[type="date"] { width: 44px; padding: 0; color: transparent; cursor: pointer; }
+.hud .quick-estimate input[type="date"]::-webkit-datetime-edit { display: none; }
+.hud .quick-estimate input[type="date"]::-webkit-calendar-picker-indicator { margin: 0 auto; cursor: pointer; }
+/* Back on the published forecast the bar's own date says it all: the confirmation lines stay
+   for screen readers only. Estimates and errors still show. */
+.quick-estimate.published > p { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* One date-and-time control, with a draft selection committed together. */
+.quick-estimate .date-field { position: relative; width: auto; }
+.quick-estimate .date-field input[type="date"] { position: absolute; width: 1px; opacity: 0; pointer-events: none; }
+.quick-estimate .date-field .date-trigger { width: auto; padding: 0 12px; font: 600 14px var(--font); white-space: nowrap; }
+.date-time-row { position: relative; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--line); margin-top: 8px; padding: 8px; }
+.date-popover .date-time-value { font-weight: 600; background: var(--sel); color: var(--space); }
+.date-time-wheel { position: absolute; right: 8px; bottom: 60px; width: 116px; height: 132px; padding: 44px 0; box-sizing: border-box; overflow-y: auto; overscroll-behavior: contain; scroll-snap-type: y mandatory; scrollbar-width: thin; border: 1px solid var(--line); border-radius: var(--r); background: var(--glass-solid); }
+.date-time-wheel[hidden] { display: none; }
+.date-time-wheel button { display: block; width: 100%; height: 44px; scroll-snap-align: center; color: var(--muted); border-radius: 0; }
+.date-time-wheel button[aria-selected="true"] { background: var(--sel); color: var(--space); font-weight: 600; }
+.date-popover .date-confirm { width: 100%; font-weight: 600; border-top: 1px solid var(--line); border-radius: 0; }
+
+.date-time-editor { position: absolute; z-index: 1; right: 8px; bottom: 60px; display: flex; align-items: center; width: 164px; height: 134px; padding: 0 12px; border: 1px solid var(--line); border-radius: var(--r); background: var(--glass-solid); }
+.date-time-editor[hidden] { display: none; }
+.date-time-editor .date-time-wheel { position: static; width: 64px; flex: none; border: 0; border-radius: 0; }
+.date-time-colon { color: var(--muted); }
+.date-time-editor .date-time-wheel button { font-size: 18px; }
+.date-time-wheel:focus-visible { outline: 2px solid var(--sel); outline-offset: -2px; }
+
+.date-time-editor .date-time-wheel { scrollbar-width: none; }
+.date-time-editor .date-time-wheel::-webkit-scrollbar { display: none; }
+
+.date-time-editor .date-time-colon { flex: 1; text-align: center; }
+
+.date-time-editor .date-time-wheel button { box-sizing: border-box; min-height: 44px; height: 44px; }
+
+.date-time-editor .date-time-wheel { cursor: grab; touch-action: none; user-select: none; }
+.date-time-editor .date-time-wheel button { cursor: inherit; }
+.date-time-editor .date-time-wheel.dragging { cursor: grabbing; scroll-snap-type: none; }

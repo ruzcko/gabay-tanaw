@@ -1,0 +1,9 @@
+# Browser caching for Cloudflare Pages. Data and code libraries are revalidated on every
+# visit (cheap 304s), so new code never runs against old data. Images are used from the
+# cache at once and refreshed in the background.
+/data/*
+  Cache-Control: no-cache
+/assets/*
+  Cache-Control: private, max-age=0, stale-while-revalidate=604800
+/vendor/*
+  Cache-Control: no-cache

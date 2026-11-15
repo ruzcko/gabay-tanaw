@@ -1,0 +1,173 @@
+{
+  "source": "Direct NASA/JPL Horizons responses",
+  "cases": [
+    {
+      "file": "earth-horizon-10-geometric.json",
+      "site": "earth-horizon",
+      "target": 10,
+      "kind": "geometric"
+    },
+    {
+      "file": "earth-horizon-10-observer.json",
+      "site": "earth-horizon",
+      "target": 10,
+      "kind": "observer"
+    },
+    {
+      "file": "earth-horizon-399-geometric.json",
+      "site": "earth-horizon",
+      "target": 399,
+      "kind": "geometric"
+    },
+    {
+      "file": "earth-horizon-399-observer.json",
+      "site": "earth-horizon",
+      "target": 399,
+      "kind": "observer"
+    },
+    {
+      "file": "far-side-north-10-geometric.json",
+      "site": "far-side-north",
+      "target": 10,
+      "kind": "geometric"
+    },
+    {
+      "file": "far-side-north-10-observer.json",
+      "site": "far-side-north",
+      "target": 10,
+      "kind": "observer"
+    },
+    {
+      "file": "far-side-north-399-geometric.json",
+      "site": "far-side-north",
+      "target": 399,
+      "kind": "geometric"
+    },
+    {
+      "file": "far-side-north-399-observer.json",
+      "site": "far-side-north",
+      "target": 399,
+      "kind": "observer"
+    },
+    {
+      "file": "limb-south-10-geometric.json",
+      "site": "limb-south",
+      "target": 10,
+      "kind": "geometric"
+    },
+    {
+      "file": "limb-south-10-observer.json",
+      "site": "limb-south",
+      "target": 10,
+      "kind": "observer"
+    },
+    {
+      "file": "limb-south-399-geometric.json",
+      "site": "limb-south",
+      "target": 399,
+      "kind": "geometric"
+    },
+    {
+      "file": "limb-south-399-observer.json",
+      "site": "limb-south",
+      "target": 399,
+      "kind": "observer"
+    },
+    {
+      "file": "near-side-10-geometric.json",
+      "site": "near-side",
+      "target": 10,
+      "kind": "geometric"
+    },
+    {
+      "file": "near-side-10-observer.json",
+      "site": "near-side",
+      "target": 10,
+      "kind": "observer"
+    },
+    {
+      "file": "near-side-399-geometric.json",
+      "site": "near-side",
+      "target": 399,
+      "kind": "geometric"
+    },
+    {
+      "file": "near-side-399-observer.json",
+      "site": "near-side",
+      "target": 399,
+      "kind": "observer"
+    },
+    {
+      "file": "north-wrap-10-geometric.json",
+      "site": "north-wrap",
+      "target": 10,
+      "kind": "geometric"
+    },
+    {
+      "file": "north-wrap-10-observer.json",
+      "site": "north-wrap",
+      "target": 10,
+      "kind": "observer"
+    },
+    {
+      "file": "north-wrap-399-geometric.json",
+      "site": "north-wrap",
+      "target": 399,
+      "kind": "geometric"
+    },
+    {
+      "file": "north-wrap-399-observer.json",
+      "site": "north-wrap",
+      "target": 399,
+      "kind": "observer"
+    },
+    {
+      "file": "south-polar-10-geometric.json",
+      "site": "south-polar",
+      "target": 10,
+      "kind": "geometric"
+    },
+    {
+      "file": "south-polar-10-observer.json",
+      "site": "south-polar",
+      "target": 10,
+      "kind": "observer"
+    },
+    {
+      "file": "south-polar-399-geometric.json",
+      "site": "south-polar",
+      "target": 399,
+      "kind": "geometric"
+    },
+    {
+      "file": "south-polar-399-observer.json",
+      "site": "south-polar",
+      "target": 399,
+      "kind": "observer"
+    },
+    {
+      "file": "sun-horizon-10-geometric.json",
+      "site": "sun-horizon",
+      "target": 10,
+      "kind": "geometric"
+    },
+    {
+      "file": "sun-horizon-10-observer.json",
+      "site": "sun-horizon",
+      "target": 10,
+      "kind": "observer"
+    },
+    {
+      "file": "sun-horizon-399-geometric.json",
+      "site": "sun-horizon",
+      "target": 399,
+      "kind": "geometric"
+    },
+    {
+      "file": "sun-horizon-399-observer.json",
+      "site": "sun-horizon",
+      "target": 399,
+      "kind": "observer"
+    }
+  ]
+}

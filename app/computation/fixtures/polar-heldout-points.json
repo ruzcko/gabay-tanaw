@@ -1,0 +1,161 @@
+{
+  "seed": 20261116,
+  "points": [
+    {
+      "id": "held-area-00",
+      "lat": -85.41779871738741,
+      "lon": 77.02815494507472,
+      "group": "held-area"
+    },
+    {
+      "id": "held-area-01",
+      "lat": -83.64444578886393,
+      "lon": 334.9521786081825,
+      "group": "held-area"
+    },
+    {
+      "id": "held-area-02",
+      "lat": -82.90340160157086,
+      "lon": 115.81628476746491,
+      "group": "held-area"
+    },
+    {
+      "id": "held-area-03",
+      "lat": -88.85338994654937,
+      "lon": 67.97995632542127,
+      "group": "held-area"
+    },
+    {
+      "id": "held-area-04",
+      "lat": -89.18949136863661,
+      "lon": 187.70154074361093,
+      "group": "held-area"
+    },
+    {
+      "id": "held-area-05",
+      "lat": -82.07811816279738,
+      "lon": 356.9277773132039,
+      "group": "held-area"
+    },
+    {
+      "id": "held-area-06",
+      "lat": -82.91722518387307,
+      "lon": 88.1889820311392,
+      "group": "held-area"
+    },
+    {
+      "id": "held-area-07",
+      "lat": -82.7862997150614,
+      "lon": 202.08643114904902,
+      "group": "held-area"
+    },
+    {
+      "id": "held-area-08",
+      "lat": -82.53642376622349,
+      "lon": 299.66520454582013,
+      "group": "held-area"
+    },
+    {
+      "id": "held-area-09",
+      "lat": -81.59773529338621,
+      "lon": 80.70191745612323,
+      "group": "held-area"
+    },
+    {
+      "id": "held-area-10",
+      "lat": -83.41143294981153,
+      "lon": 164.69784909099096,
+      "group": "held-area"
+    },
+    {
+      "id": "held-area-11",
+      "lat": -86.50248159203522,
+      "lon": 167.80415358626064,
+      "group": "held-area"
+    },
+    {
+      "id": "held-connecting-ridge-0",
+      "lat": -89.43912985892665,
+      "lon": 223.30436389040813,
+      "group": "held-local",
+      "offsetM": 142.1812380313081
+    },
+    {
+      "id": "held-connecting-ridge-1",
+      "lat": -89.42956397590069,
+      "lon": 222.87282107123022,
+      "group": "held-local",
+      "offsetM": 310.6548089728001
+    },
+    {
+      "id": "held-connecting-ridge-2",
+      "lat": -89.44459139057375,
+      "lon": 222.87406992868262,
+      "group": "held-local",
+      "offsetM": 145.87231373779076
+    },
+    {
+      "id": "held-connecting-ridge-3",
+      "lat": -89.44041349369108,
+      "lon": 222.42651865272413,
+      "group": "held-local",
+      "offsetM": 120.99577998103443
+    },
+    {
+      "id": "held-malapert-massif-0",
+      "lat": -85.97373027624676,
+      "lon": 357.66909443074087,
+      "group": "held-local",
+      "offsetM": 162.2239226635271
+    },
+    {
+      "id": "held-malapert-massif-1",
+      "lat": -85.97252870281498,
+      "lon": 357.7309033226239,
+      "group": "held-local",
+      "offsetM": 156.36319218634205
+    },
+    {
+      "id": "held-malapert-massif-2",
+      "lat": -85.96491073975966,
+      "lon": 357.7136195479611,
+      "group": "held-local",
+      "offsetM": 124.68261172033912
+    },
+    {
+      "id": "held-malapert-massif-3",
+      "lat": -85.97683043946166,
+      "lon": 357.6873100966421,
+      "group": "held-local",
+      "offsetM": 252.6506818407468
+    },
+    {
+      "id": "held-nobile-rim-1-0",
+      "lat": -85.30570070663727,
+      "lon": 37.03087859954189,
+      "group": "held-local",
+      "offsetM": 51.51894977597732
+    },
+    {
+      "id": "held-nobile-rim-1-1",
+      "lat": -85.31695672011305,
+      "lon": 36.91454811146419,
+      "group": "held-local",
+      "offsetM": 463.51511839266885
+    },
+    {
+      "id": "held-nobile-rim-1-2",
+      "lat": -85.31085535170925,
+      "lon": 36.99450789650151,
+      "group": "held-local",
+      "offsetM": 192.50178620737046
+    },
+    {
+      "id": "held-nobile-rim-1-3",
+      "lat": -85.31718075819941,
+      "lon": 37.16016458621365,
+      "group": "held-local",
+      "offsetM": 426.24922402075657
+    }
+  ]
+}

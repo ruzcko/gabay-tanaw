@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Observer view · Tanaw</title>
+  <link rel="icon" href="../assets/brand/tanaw-favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600&family=Atkinson+Hyperlegible+Mono:wght@500;600&display=swap">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="observer.css">
+  <link rel="stylesheet" href="demo.css">
+  <link rel="stylesheet" href="../quick-estimate.css">
+  <link rel="stylesheet" href="../range-picker.css">
+  <link rel="stylesheet" href="loading-status.css">
+  <link rel="stylesheet" href="../button-effects.css">
+</head>
+<body class="observer-demo">
+  <header class="observer-topbar">
+    <div>
+      <h1 class="place">Observer view</h1>
+      <p class="fixture-notice" id="forecast-status" role="status">Loading saved forecasts…</p>
+      <p class="fixture-notice" id="terrain-work" role="status" hidden></p>
+    </div>
+    <div class="topbar-actions"><a class="btn" href="../">Back to Tanaw</a><button class="btn ui-toggle" type="button" id="ui-toggle" aria-label="Hide UI (cinematic mode)" aria-pressed="false" title="Hide UI · Cinematic mode">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/><path class="eye-slash" d="m3 3 18 18"/></svg>
+    </button></div>
+  </header>
+  <div class="observer-content">
+    <main id="view" aria-label="Lunar scene"></main>
+    <aside id="view-options" aria-labelledby="options-heading" hidden>
+      <div class="options-heading">
+        <h2 id="options-heading" tabindex="-1">View options</h2>
+        <button class="btn" id="options-close" type="button">Close</button>
+      </div>
+      <fieldset>
+        <legend>Terrain</legend>
+        <p class="fixture-notice" id="modeled-height">Height follows the saved forecast.</p>
+        <label class="option-field">Relief <select id="relief"><option value="1">Physical scale (1×)</option><option value="3">Exaggerated (3×)</option></select></label>
+        <p id="terrain-status" role="status">Loading terrain</p>
+        <p class="fixture-notice" id="terrain-note" role="status"></p>
+      </fieldset>
+      <fieldset>
+        <legend>Display</legend>
+        <label class="option-field">Body size <select id="size"><option value="physical">Physical size</option><option value="enhanced">Enhanced visibility</option></select></label>
+        <label class="option-field">Quality <select id="quality"><option value="auto">Auto</option><option value="low">Low</option><option value="high">High</option></select></label>
+        <label class="option-check"><input type="checkbox" data-option="sunPointer" checked>Sun pointer</label>
+        <label class="option-check"><input type="checkbox" data-option="earthPointer" checked>Earth pointer</label>
+        <label class="option-check"><input type="checkbox" data-option="belowHorizonCutaway">Below-horizon cutaway</label>
+        <label class="option-field">Star light <input id="star-brightness" type="range" min="0" max="2" step="0.1" value="1" aria-label="Star brightness"></label>
+        <label class="option-check"><input type="checkbox" data-option="autoStarExposure" checked>Adapt stars to sunlight</label>
+        <p class="fixture-notice">Exposure is a display approximation. Fainter stars fade in bright conditions; the lunar sky stays black.</p>
+      </fieldset>
+      <section class="observer-notes" aria-labelledby="notes-heading">
+        <h3 id="notes-heading">About this view</h3>
+        <p>Select a date to update the scene, Sun and Earth positions, and daily hours together. Estimates use pinned JPL DE440 coefficients and coarse LOLA terrain. Accurate forecasts replace estimates when available. The date line keeps the selected UTC hour; the default is 00:00 UTC.</p>
+        <p>Stars and the Milky Way follow the selected date and playback. Hipparcos catalog magnitudes set relative star brightness; the background uses NASA SVS / ESA Gaia imagery. Star positions are fixed at their catalog epoch; proper motion, parallax and stellar aberration are not modeled. This is a visual sky, not precision astrometry.</p>
+        <p>Earth uses the main Moon page's NASA Blue Marble imagery and diffuse sunlight style, with date-dependent, low-accuracy IAU orientation when available. Without dated orientation its rotation is illustrative; without sunlight data its texture is shown neutrally. Eclipses are not modeled. The Sun uses the same gold disc and soft glow as the main page; this is a display style, not a solar forecast.</p>
+        <p>The navigator places the Moon, Earth and Sun in one 3D scene using the selected UTC snapshot. The supplied sunlight direction lights the Moon and Earth as the date changes. Sizes and distances are schematic; Earth orientation is illustrative when dated orientation is unavailable. Click N, E, S or W to reorient the map. Hover the Moon to preview coordinates.</p>
+        <p>Coarse terrain appears first, then detailed relief loads for every catalog site and custom locations south of 60.3°S. Other custom locations retain coarse relief. Display terrain is aligned to the forecast ground height. Visibility uses the forecast horizon, independently of this display detail.</p>
+        <p>Drag or arrow keys to look; scroll or +/− to zoom.</p>
+        <p class="observer-credit">Forecasts: JPL Horizons · Terrain: NASA LRO LOLA / PGDA · Moon imagery: NASA SVS</p>
+        <p>Moon imagery: NASA SVS / LRO LROC and LOLA. Terrain: NASA LRO LOLA / PGDA. Fine ground grain is decorative; scientific visibility is unchanged.</p>
+      </section>
+    </aside>
+  </div>
+  <footer class="observer-controls">
+    <p id="error" role="alert"></p>
+    <button class="btn" id="retry" type="button" hidden>Retry forecast</button>
+    <nav aria-label="Observer controls">
+      <label class="site-picker"><span class="sr">Catalog site</span><select id="catalog-site" aria-label="Catalog site" disabled><option>Loading sites…</option></select></label>
+      <label class="presentation"><span class="sr">Presentation</span><select id="mode"><option value="observer">Observer view</option><option value="overview">Lunar overview</option></select></label>
+      <div class="look-controls" role="group" aria-label="Look toward">
+        <button class="btn" type="button" data-look="horizon">Horizon</button>
+        <button class="btn" type="button" data-look="sun">Sun</button>
+        <button class="btn" type="button" data-look="earth">Earth</button>
+      </div>
+      <button class="btn" id="observer-back" type="button" hidden>Back to observer</button>
+      <button class="btn horizon-toggle" id="horizon-toggle" type="button" aria-pressed="true" data-toggle-dot title="Show or hide the horizon guide">Horizon line</button>
+      <button class="btn" id="options-toggle" type="button" aria-expanded="false" aria-controls="view-options">View options</button>
+    </nav>
+    <form id="quick-estimate" class="quick-estimate" novalidate>
+    <div class="observer-hours" data-forecast-strip role="group" aria-label="Daily Sun and Earth hours, UTC"></div>
+    <div class="dayctl" id="date-scrubber" role="group" aria-label="Forecast date">
+      <div class="observer-playback-controls">
+      <button class="btn observer-play" id="observer-play" type="button" aria-label="Play" title="Play" disabled>
+        <svg class="play-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M7 4 20 12 7 20Z"/></svg>
+        <svg class="pause-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M6 4h4v16H6zm8 0h4v16h-4z"/></svg>
+      </button>
+      <button class="btn observer-speed" id="observer-speed" type="button" aria-label="Playback speed: 1×" title="Playback speed: 1×. Click for 2×.">1×</button>
+      </div>
+      <output class="sr" for="day" id="day-out">Loading dates…</output>
+      <input id="estimate-date" type="date" required aria-label="Date (UTC)" aria-describedby="estimate-coverage estimate-status">
+      <input type="range" id="day" aria-label="Forecast date (UTC)" aria-describedby="window-status" min="0" max="29" step="1" value="0" disabled>
+      <button class="btn observer-range-trigger" id="observer-range" type="button" aria-haspopup="dialog" aria-expanded="false" aria-label="Choose forecast range">
+        <span class="loading-indicator" aria-hidden="true"></span><span data-range-label>30 days</span>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+    </div>
+      <p class="sr" id="estimate-coverage" data-coverage></p>
+      <p id="estimate-status" role="status" aria-live="polite"></p>
+      <p data-result hidden></p>
+    </form>
+    <p class="fixture-notice" id="window-status" hidden></p>
+
+  </footer>
+  <script type="module" src="demo.js"></script>
+  <script type="module" src="../button-effects.js"></script>
+</body>
+</html>

@@ -1,0 +1,1239 @@
+/* Tanaw design tokens: see DESIGN.md section 2. Dark only: text and controls sit straight on
+   black space, with no fill behind them. */
+:root {
+  color-scheme: dark;
+  --font: "Atkinson Hyperlegible Next", sans-serif;
+  --mono: "Atkinson Hyperlegible Mono", monospace;
+  --space: #000000;
+  --glass-solid: #0d121c;
+  --edge: rgba(255, 255, 255, 0.16);
+  --line: rgba(255, 255, 255, 0.5);
+  --text: #f2f4f8;
+  --muted: #b8c1d0;
+  --terrain: rgba(255, 255, 255, 0.18);
+  --regolith: #9a9a96;
+  --sun: #ffc861;
+  --earth: #8cc4ff;
+  --go: #ffc861;
+  --go-text: #1a1204;
+  --nogo-edge: rgba(255, 255, 255, 0.45);
+  --sel: #f2f4f8;
+  /* The site view's pin head (site.js), ringed in --sel so it stays clear of Slope's red band. */
+  --pin: #ff3b30;
+  /* Map layers (Layers menu): slope bands, flat to steep, and permanent shadow. Sunlight runs
+     from --glass-solid to --sun, like the nearby spots. */
+  --layer-0: #7fd6a4;
+  --layer-1: #d9e87a;
+  --layer-2: #f59b5c;
+  --layer-3: #e8566c;
+  --layer-shadow: #8c9bff;
+  --scrim: rgba(0, 0, 0, 0.6);
+  --r: 14px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--space);
+  color: var(--text);
+  font-family: var(--font);
+}
+
+.stage { position: relative; height: 100dvh; overflow: hidden; }
+
+#moon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: grab;
+}
+
+#moon:active { cursor: grabbing; }
+
+/* Site view (site.js): the terrain disc on its own transparent canvas over the globe, hidden in
+   the globe view. site.js sets the fade length. While it is open (.dim) the globe stays behind
+   it, held still and dimmed to a dark backdrop; its pins and the Sun and Earth markers hide. */
+#site {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  touch-action: none;
+  cursor: grab;
+  /* Masked to the free band (site.js sets --band-t/-b/-l/-r in canvas px from tanaw:frame), with a
+     24 px soft edge inside it, so the terrain never draws under text or controls. */
+  mask-image:
+    linear-gradient(to right, transparent var(--band-l), var(--space) calc(var(--band-l) + 24px), var(--space) calc(var(--band-r) - 24px), transparent var(--band-r)),
+    linear-gradient(to bottom, transparent var(--band-t), var(--space) calc(var(--band-t) + 24px), var(--space) calc(var(--band-b) - 24px), transparent var(--band-b));
+  mask-composite: intersect;
+  transition: opacity .4s, --band-t .4s ease-in-out, --band-b .4s ease-in-out, --band-l .4s ease-in-out, --band-r .4s ease-in-out;
+}
+@property --band-t { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@property --band-l { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@property --band-b { syntax: "<length>"; inherits: false; initial-value: 100000px; }
+@property --band-r { syntax: "<length>"; inherits: false; initial-value: 100000px; }
+#site.on { opacity: 1; pointer-events: auto; }
+#site:active { cursor: grabbing; }
+/* Behind the site view: black sky. Its ground runs to the horizon (site.js, far ground), so the
+   whole Moon fades out while the view is in (dim) and comes back on the way out. Without far
+   ground (its terrain failed to load) the Moon stays, dimmed. */
+.stage:has(#site.dim.far) #moon { opacity: 0; }
+.stage:has(#site.dim:not(.far)) #moon { filter: brightness(.6); }
+.stage:has(#site:is(.on, .full)) :is(.pins, .bodies) { visibility: hidden; }
+@media (prefers-reduced-motion: reduce) {
+  #site { transition: none; }
+}
+/* The globe fades with the site view's fade in (0.4 s) and comes back while the view returns to
+   overhead on its way out (0.7 s, site.js FADE_IN and DEPART_MS). */
+@media (prefers-reduced-motion: no-preference) {
+  #moon { transition: opacity .7s ease-in-out, filter .7s ease-in-out; }
+  .stage:has(#site.dim) #moon { transition: opacity .4s, filter .4s; }
+}
+/* The site view's options: one row centred under its band (forecast.js places it), wrapping
+   where the row doesn't fit. */
+.view-3d { position: absolute; top: 0; left: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.view-3d .btn[hidden] { display: none; } /* "Spots" where a site has no nearby spots */
+.view-3d[hidden] { display: none; }
+/* Its map layer switches (the Layers menu's, icon buttons) wrap as one group; their names show
+   above them, since the bar is below. */
+.layer-row { display: flex; gap: 8px; }
+.layer-row [data-tip]::after { top: auto; bottom: calc(100% + 6px); right: auto; left: 50%; transform: translateX(-50%); }
+/* Phones use the top bar's Layers menu instead, so the short 3D band keeps its height. */
+@media (max-width: 760px) { .layer-row { display: none; } }
+/* "5 km" under the ring's nearest point (site.js places it). */
+.site-scale {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  padding: 3px 8px;
+  border: 1px solid var(--edge);
+  border-radius: 4px;
+  background: var(--glass-solid);
+  font: 600 12px/16px var(--font);
+  white-space: nowrap;
+  pointer-events: none;
+}
+.site-scale[hidden] { display: none; }
+
+/* While the Moon loads: a black cover over the whole screen, above the HUD and taking its taps,
+   with only the full Tanaw logo (64 px tall, 44 px on phones) centred over "Loading the Moon".
+   globe.js empties the status once the Moon is in, which removes the cover; if the Moon fails,
+   the error text replaces the logo on the cover. */
+.status {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 0;
+  padding: 16px;
+  background: var(--space);
+  text-align: center;
+  color: var(--muted);
+}
+.status svg { display: block; width: auto; height: 64px; }
+@media (max-width: 760px) {
+  .status svg { height: 44px; }
+}
+
+.status:empty { display: none; }
+
+/* Reveal around the first rendered Moon, preserving measured space and camera framing. */
+.stage:has(> #status:not(:empty)) .hud { visibility: hidden; }
+.stage[data-arrival="revealing"] :is(#moon, .topbar, .pins, .bodies, .hud > .ring, .plan, #quick-estimate) {
+  animation: scene-arrival 240ms cubic-bezier(.16, 1, .3, 1) var(--arrival-delay, 0ms) both;
+}
+.stage[data-arrival="revealing"] .topbar { --arrival-delay: 80ms; }
+.stage[data-arrival="revealing"] :is(.pins, .bodies, .hud > .ring) { --arrival-delay: 160ms; }
+.stage[data-arrival="revealing"] .plan { --arrival-delay: 220ms; }
+.stage[data-arrival="revealing"] #quick-estimate { --arrival-delay: 320ms; }
+@keyframes scene-arrival {
+  from { opacity: 0; visibility: hidden; }
+  to { opacity: 1; visibility: visible; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stage[data-arrival="revealing"] :is(#moon, .topbar, .pins, .bodies, .hud > .ring, .plan, #quick-estimate) { animation: none; }
+}
+
+/* Site pins on the globe (globe.js): a 44 px button around a small dot. */
+.pins { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
+.pin {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text);
+  pointer-events: auto;
+  cursor: pointer;
+}
+/* The mark: its shape says the kind of site, in --text on a 2 px dark rim, no new colours. A
+   filled dot for a base candidate (and any site without a kind), a ring for a past landing,
+   a diamond outline for an upcoming one. A thin ring outside the rim marks a site with 3D
+   terrain; the selected site's mark is larger, with a wider ring further out. Layers, inside
+   out: --mark-in (the outline of a hollow mark), the rim, --mark-3d, --mark-on. */
+.pin::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--text);
+  box-shadow: var(--mark-in, 0 0 transparent), 0 0 0 2px var(--glass-solid), var(--mark-3d, 0 0 transparent), var(--mark-on, 0 0 transparent);
+  transition: transform .12s;
+}
+.pin:is(.visited, .upcoming)::before { background: var(--glass-solid); --mark-in: inset 0 0 0 2px var(--text); }
+.pin.upcoming::before { width: 9px; height: 9px; border-radius: 1px; transform: rotate(45deg); }
+/* A typed or clicked point (globe.js placePick): the upcoming diamond, larger, with a dot inside,
+   so it reads as "here" without looking like a listed site. It takes no taps. */
+.pick { position: absolute; left: 0; top: 0; width: 18px; height: 18px; display: grid; place-items: center; pointer-events: none; }
+.pick[hidden] { display: none; }
+.pick.pending::before { border-style: dashed; }
+@media (prefers-reduced-motion: no-preference) {
+  .pick.pending::before { animation: pending-site 1400ms ease-in-out infinite; }
+  @keyframes pending-site { 50% { opacity: .35; } }
+}
+.pick::before { content: ""; position: absolute; width: 12px; height: 12px; border-radius: 1px; transform: rotate(45deg);
+  box-shadow: inset 0 0 0 2px var(--text), 0 0 0 2px var(--glass-solid); }
+.pick::after { content: ""; width: 4px; height: 4px; border-radius: 50%; background: var(--text); box-shadow: 0 0 0 1px var(--glass-solid); }
+.pin.terrain::before { --mark-3d: 0 0 0 3.5px var(--text); }
+.pin[aria-pressed="true"]::before { width: 16px; height: 16px; --mark-on: 0 0 0 5.5px var(--glass-solid), 0 0 0 7.5px var(--text); }
+.pin.upcoming[aria-pressed="true"]::before { width: 14px; height: 14px; }
+/* Hover (mouse) and keyboard focus: the mark grows and the site's name shows beside it, like
+   the selected site's label. The selected pin already has its label. */
+.pin:is(:hover, :focus-visible) { z-index: 1; }
+@media (hover: hover) {
+  .pin:hover::before { transform: scale(1.3); }
+  .pin.upcoming:hover::before { transform: rotate(45deg) scale(1.3); }
+}
+.pin:focus-visible::before { transform: scale(1.3); }
+.pin.upcoming:focus-visible::before { transform: rotate(45deg) scale(1.3); }
+.pin::after {
+  content: attr(data-name);
+  position: absolute;
+  left: calc(100% - 6px);
+  top: 50%;
+  translate: 0 -50%;
+  padding: 3px 8px;
+  border: 1px solid var(--edge);
+  border-radius: 4px;
+  background: var(--glass-solid);
+  color: var(--text);
+  font: 600 13px/18px var(--font);
+  white-space: nowrap;
+  pointer-events: none;
+  visibility: hidden;
+}
+@media (hover: hover) { .pin:not([aria-pressed="true"]):hover::after { visibility: visible; } }
+.pin:not([aria-pressed="true"]):focus-visible::after { visibility: visible; }
+@media (prefers-reduced-motion: reduce) { .pin::before { transition: none; } }
+.pin.many::before { content: none; }
+.pin.many span {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--glass-solid);
+  box-shadow: inset 0 0 0 2px var(--text);
+  font: 600 13px/1 var(--mono);
+}
+.pin.many[aria-pressed="true"] span { background: var(--text); color: var(--glass-solid); box-shadow: 0 0 0 2px var(--glass-solid); }
+.pin[hidden], .pin-label[hidden] { display: none; }
+/* Nearby spots on the site view's ground (site.js): 44 px buttons, each a 14 px dot filled from
+   --glass-solid (0% of the year in sunlight) to --sun (100%) on a dark rim and a thin --text
+   ring, so it reads on lit and shadowed ground; a dark slash across the dot where too steep to
+   land. The selected spot (where the pin stands) is 18 px with a --sel ring. Dense (closer
+   than 44 px on screen): 8 px dots that take no taps, and "Nearby spots" under them. */
+.spot-marks { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.spot-marks[hidden], .spot-marks .spot[hidden], .spot-go[hidden] { display: none; }
+.spot { position: absolute; left: -22px; top: -22px; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; background: none; pointer-events: auto; cursor: pointer; }
+.spot::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: color-mix(in srgb, var(--sun) calc(var(--pct, 0) * 100%), var(--glass-solid));
+  box-shadow: 0 0 0 1.5px var(--glass-solid), 0 0 0 2.5px var(--text);
+}
+.spot.steep::before { background-image: linear-gradient(135deg, transparent 38%, var(--glass-solid) 38% 62%, transparent 62%); }
+.spot[aria-pressed="true"]::before { width: 18px; height: 18px; box-shadow: 0 0 0 1.5px var(--glass-solid), 0 0 0 3.5px var(--sel); }
+.spot:focus-visible { outline: 2px solid var(--sel); outline-offset: -2px; border-radius: 50%; }
+.spot-marks.dense .spot { pointer-events: none; }
+/* Outside the free band (site.js): not drawn and not tappable, but still a keyboard stop. */
+.spot.out { opacity: 0; pointer-events: none; }
+.spot-marks.dense .spot::before { width: 8px; height: 8px; }
+.btn.spot-go { position: absolute; left: 0; top: 0; translate: -50% 0; pointer-events: auto; background: var(--glass-solid); }
+/* Earth & Sun view (globe.js): no pins; the selected site is a 10 px --text dot on a dark rim,
+   with a ring that grows and fades every 1.6 s. Under reduced motion the ring stays still. */
+.pins.es { visibility: hidden; }
+.site-pulse { position: absolute; left: -5px; top: -5px; width: 10px; height: 10px; border-radius: 50%; background: var(--text); box-shadow: 0 0 0 2px var(--glass-solid); pointer-events: none; }
+.site-pulse[hidden] { display: none; }
+.site-pulse::after { content: ""; position: absolute; inset: -2px; border: 2px solid var(--text); border-radius: 50%; animation: site-pulse 1.6s ease-out infinite; }
+@keyframes site-pulse { from { transform: scale(1); opacity: .9; } to { transform: scale(3); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .site-pulse::after { animation: none; transform: scale(1.8); opacity: .5; } }
+.pin-label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2; /* above every pin, numbered ones included (a hovered pin is 1) */
+  padding: 3px 8px;
+  border: 1px solid var(--edge);
+  border-radius: 4px;
+  background: var(--glass-solid);
+  font: 600 13px/18px var(--font);
+  white-space: nowrap;
+  pointer-events: none;
+}
+/* Sun and Earth (globe.js): rings on the Moon where each is overhead, markers at the edge of
+   the free band pointing to a body that isn't drawn, and the label beside the drawn Earth. They
+   sit under the pins, which stay tappable. */
+.bodies { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
+.overhead, .edge, .body-label { position: absolute; left: 0; top: 0; }
+.overhead {
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--glass-solid), inset 0 0 0 1px var(--glass-solid);
+  pointer-events: auto; /* for the hover title only */
+}
+.edge, .body-label {
+  padding: 3px 8px;
+  border: 1px solid var(--edge);
+  border-radius: 4px;
+  background: var(--glass-solid);
+  font: 600 12px/16px var(--font);
+  white-space: nowrap;
+  pointer-events: none;
+}
+.edge { display: inline-flex; align-items: center; gap: 4px; padding-left: 6px; }
+.edge svg { flex: none; }
+.body-label { font-weight: 400; color: var(--text); }
+.lat-readout { font-variant-numeric: tabular-nums; } /* the globe's lat/lon under the pointer */
+.overhead[hidden], .edge[hidden], .body-label[hidden] { display: none; }
+/* Earth & Sun view (globe.js): the equator plane's ring, the pole mark and the pole-to-Earth
+   line (dashed while Earth is out of view from the site), and the plane's label, on black
+   space. */
+.es-lines { position: absolute; inset: 0; width: 100%; height: 100%; }
+.es-lines path { fill: none; stroke-width: 1.5; }
+.es-lines .plane { stroke: var(--muted); stroke-opacity: 0.8; }
+/* The Sun's path round the Moon and Earth's libration loop over the shown range (globe.js),
+   faint, in the bodies' colours (60%: about 4:1 and 3:1 on black). */
+.es-lines .sun-path { stroke: var(--sun); stroke-opacity: 0.6; }
+.es-lines .earth-loop { stroke: var(--earth); stroke-opacity: 0.6; }
+.es-lines .pole { stroke: var(--muted); }
+.es-lines .contact { stroke: var(--earth); stroke-linecap: round; }
+.es-lines .contact.off { stroke-dasharray: 6 5; }
+.plane-label { position: absolute; left: 0; top: 0; font: 400 12px/16px var(--font); color: var(--muted); white-space: nowrap; }
+.plane-label[hidden] { display: none; }
+.pin-list {
+  position: fixed;
+  inset: auto;
+  margin: 0;
+  padding: 8px;
+  background: var(--glass-solid);
+  border: 1px solid var(--edge);
+  border-radius: var(--r);
+  color: var(--text);
+  flex-direction: column;
+  gap: 4px;
+}
+.pin-list:popover-open { display: flex; }
+.pin-list .btn { justify-content: flex-start; background: none; border: 0; }
+.pin-list .btn:is([aria-pressed="true"], [aria-checked="true"]) { box-shadow: inset 0 0 0 2px var(--sel); border-radius: var(--r); }
+
+/* HUD: the top bar, the sky clock top left, and the planning bar along the bottom; Times and
+   Compare open above the bar. The space between them passes drags to the globe. The ov class
+   marks blocks of overlay text, which the pins keep clear of (globe.js). */
+/* Edge spacing: 16 px on phones, 24 px from 768 px, 32 px from 1280 px, never less than the
+   device's safe area (notches, home bar). Everything that sits at a screen edge uses these. */
+.hud {
+  --pad: 16px;
+  --panel-w: 320px; /* the site panel column on wide screens */
+  --pad-t: max(var(--pad), env(safe-area-inset-top));
+  --pad-r: max(var(--pad), env(safe-area-inset-right));
+  --pad-b: max(var(--pad), env(safe-area-inset-bottom));
+  --pad-l: max(var(--pad), env(safe-area-inset-left));
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: var(--pad-t) var(--pad-r) var(--pad-b) var(--pad-l);
+  pointer-events: none;
+}
+@media (min-width: 768px) { .hud { --pad: 24px; } }
+@media (min-width: 1280px) { .hud { --pad: 32px; } }
+.hud > *, .topbar > * { pointer-events: auto; }
+
+.topbar {
+  position: absolute;
+  top: var(--pad-t);
+  left: var(--pad-l);
+  right: var(--pad-r);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+
+/* The page heading: the full Tanaw logo (TANAW in Michroma, loaded for these five letters
+   only, with Earth and the Sun in the two A's), top left at every width. 40 px tall on wider
+   screens. On phones it is at most 26 px tall and shrinks to the room the top bar's buttons
+   leave, 8 px clear of the first one, so the bar stays one row down to 320 px. */
+.brand { display: flex; align-items: center; min-height: 44px; margin: 0; font: inherit; }
+.brand svg { display: block; flex: none; }
+@media (max-width: 760px) {
+  .topbar .tools { flex: none; }
+  .brand { flex: 0 1 132px; min-width: 0; }
+  .brand svg { width: 100%; height: auto; }
+}
+@media (max-width: 374px) {
+  .topbar .tools { gap: 6px; }
+}
+
+.tools { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; margin-left: auto; }
+/* Observer view sits in the top bar from 768 px; on phones it is in the site panel only, so the
+   logo keeps its room. */
+@media (max-width: 767px) { #observer-top { display: none; } }
+.hud.panel #observer-top { display: none; } /* the open site panel has its own */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: transparent;
+  font: 600 14px/1 var(--font);
+  color: var(--text);
+  white-space: nowrap;
+  cursor: pointer;
+}
+/* An icon button: a 44 px square. */
+.btn.icon { width: 44px; padding: 0; justify-content: center; }
+.btn.icon svg { display: block; flex: none; }
+#reset .i-whole, #reset.whole .i-view { display: none; }
+#reset.whole .i-whole { display: block; }
+/* Tooltips: an icon button's name (data-tip, the same as its aria-label) in a small label under
+   it, right-aligned with it so it stays on screen. It shows after a short hover with a mouse,
+   and at once on keyboard focus; touch shows none, so these icons must read on their own. */
+[data-tip] { position: relative; }
+[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 5;
+  padding: 6px 10px;
+  border: 1px solid var(--edge);
+  border-radius: 8px;
+  background: var(--glass-solid);
+  color: var(--text);
+  font: 400 13px/16px var(--font);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+@media (hover: hover) {
+  [data-tip]:hover::after { opacity: 1; visibility: visible; transition: opacity .15s .3s, visibility 0s .3s; }
+}
+[data-tip]:focus-visible::after { opacity: 1; visibility: visible; }
+[data-tip][aria-expanded="true"]::after { display: none; } /* its menu is open below it */
+/* Pressed or open: a brighter outline, never a fill. */
+.btn[aria-pressed="true"], .btn[aria-expanded="true"], .btn.primary { border-color: var(--text); }
+button:focus-visible, input:focus-visible { outline: 2px solid var(--sel); outline-offset: 2px; }
+
+/* For screen readers only. */
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+h2 { margin: 0; font-size: 14px; font-weight: 600; color: var(--muted); }
+.note { margin: 0; font-size: 14px; color: var(--muted); }
+.error { margin: 0; font-size: 14px; }
+.credit { margin: 0; font-size: 12px; color: var(--muted); }
+.sun { color: var(--sun); }
+.earth { color: var(--earth); }
+
+/* Planning bar: the switcher, the call and the ways round a No-go day, then the day slider. */
+.bar { display: flex; flex-direction: column; gap: 8px; }
+
+/* Cinematic keeps the existing playback controls live and restores the previous panels. */
+#cinematic-back { position: absolute; top: var(--pad-t); right: var(--pad-r); gap: 4px; }
+#cinematic-back[hidden] { display: none; }
+.stage.moon-cinematic .hud { padding-top: var(--pad-t); pointer-events: none; }
+.stage.moon-cinematic .hud > :not(.bar):not(#cinematic-back),
+.stage.moon-cinematic .bar > :not(#quick-estimate),
+.stage.moon-cinematic #quick-estimate > :not(#dayctl),
+.stage.moon-cinematic :is(.pins, .bodies, .spot-marks, .site-scale, .lat-readout, .travel-markers) { display: none; }
+.stage.moon-cinematic .hud > .bar { display: flex; visibility: visible; }
+.stage.moon-cinematic:has(.hud) :is(canvas#moon, canvas#site) { visibility: visible; }
+.stage.moon-cinematic #quick-estimate { margin: 0; }
+.plan { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+
+/* Site switcher: previous, the selected site (opens the site picker), next. */
+.switch { display: flex; flex: 0 0 var(--site-selector-width, 238px); width: var(--site-selector-width, 238px); max-width: 100%; align-items: center; gap: 4px; min-width: 0; margin-left: 0; }
+.step { flex: 0 0 44px; width: 44px; height: 44px; padding: 0; justify-content: center; border-color: transparent; }
+.now {
+  position: relative;
+  flex: 1;
+  height: 44px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0 6px;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.now-name {
+  text-align: center;
+  display: block;
+  width: 100%;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: 600 16px/1.2 var(--font);
+}
+
+.now-name.two { white-space: normal; line-height: 1.15; text-overflow: clip; overflow-wrap: anywhere; }
+.now-name-out { position: absolute; inset: 0 6px; width: auto; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+
+/* The call: Go with a gold dot, No-go with a hollow one, then why. */
+.call { margin: 0; min-width: 0; font-size: 14px; line-height: 1.4; }
+.dot { display: inline-block; width: 12px; height: 12px; margin-right: 8px; border-radius: 50%; background: var(--go); vertical-align: -1px; }
+.dot.no { background: transparent; box-shadow: inset 0 0 0 2px var(--nogo-edge); }
+.verdict { font: 600 18px/1.2 var(--font); }
+.chips { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.chips:empty { display: none; }
+.pre { color: var(--muted); white-space: pre; }
+.plain { font-size: 14px; }
+.muted { color: var(--muted); }
+.views { display: flex; gap: 8px; margin-left: auto; }
+#fc-btn[hidden] { display: none; }
+
+/* Forecast panel (forecast.js): the shown window as a table, one column per day, between the
+   site row and the play bar. A sticky label column, then the days; it scrolls sideways when
+   wider than the bar, with no visible scrollbar. forecast.js sets --col (a day's width),
+   --label (the label column), and --n (the days). */
+.fpanel[hidden] { display: none; }
+.hud:is(.compare, .big, .picker) .fpanel, .hud.times:not(.col) .fpanel { display: none; }
+.fp-table {
+  display: grid;
+  grid-template-columns: var(--label, 96px) repeat(var(--n, 30), var(--col, 28px));
+  grid-template-rows: 44px 30px 30px 30px 80px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  position: relative;
+}
+.fp-table::-webkit-scrollbar { display: none; }
+/* "Estimate" in the panel's top-left corner while it shows an estimate's days. */
+.fp-l:first-child { font-weight: 600; color: var(--text); }
+.fp-l {
+  grid-column: 1;
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-right: 8px;
+  background: var(--space);
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.fp-k { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+.fp-k.sun { background: var(--sun); }
+.fp-k.earth { background: var(--earth); }
+.fp-c {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  border-left: 1px solid var(--edge);
+  font: 500 12px/1 var(--mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.fp-c.m { border-left-color: var(--line); } /* a month starts */
+.fp-day {
+  grid-row: 1;
+  align-content: center;
+  gap: 2px;
+  padding: 0;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 0;
+  background: none;
+  font: 400 11px/1.1 var(--font);
+  color: var(--muted);
+  cursor: pointer;
+}
+.fp-day b { font: 600 12px/1.1 var(--mono); color: var(--text); }
+.fp-day:focus-visible { outline: 2px solid var(--sel); outline-offset: -2px; }
+.fp-c.call .dot { width: 10px; height: 10px; margin: 0; }
+/* Hours: a fill from black (0 h) to 40% of the body's colour (24 h); 0 h gets a diagonal hatch,
+   so it doesn't read as an empty cell. */
+.fp-c.sun { background: color-mix(in srgb, var(--sun) calc(var(--f) * 40%), var(--space)); }
+.fp-c.earth { background: color-mix(in srgb, var(--earth) calc(var(--f) * 40%), var(--space)); }
+.fp-c.zero { color: var(--muted); background: repeating-linear-gradient(135deg, var(--edge) 0 1px, transparent 1px 6px), var(--space); }
+.fp-chart { grid-row: 5; grid-column: 2 / -1; overflow: hidden; }
+.fp-chart svg { display: block; }
+.fp-chart path { fill: none; stroke-width: 2; }
+.fp-chart path.sun { stroke: var(--sun); }
+.fp-chart path.earth { stroke: var(--earth); }
+.fp-chart .hid { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 2 3; }
+.fp-chart .lvl { stroke: var(--edge); }
+.fp-chart .now { stroke: var(--sel); }
+.fp-chart circle.sun { fill: var(--sun); stroke: var(--space); }
+.fp-chart circle.earth { fill: var(--earth); stroke: var(--space); }
+/* Highest-point labels, in strips above and below the lines. */
+.fp-chart text { font: 500 11px var(--font); font-variant-numeric: tabular-nums; }
+.fp-chart text.sun { fill: var(--sun); }
+.fp-chart text.earth { fill: var(--earth); }
+/* The planned day: one --sel outline down the whole column. */
+.fp-sel {
+  grid-row: 1 / -1;
+  z-index: 1;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 2px var(--sel);
+  pointer-events: none;
+}
+.fp-trip {
+  grid-row: 1 / -1;
+  border: 1px solid var(--sun);
+  border-radius: 3px;
+  pointer-events: none;
+  background: color-mix(in srgb, var(--sun) 4%, transparent);
+}
+.fp-trip[hidden] { display: none; }
+
+/* Day control: the planned date and the slider, whose track shows the selected site's Go days
+   in the window (forecast.js sets --go-track so day i's segment sits under the thumb at value
+   i). The main bar's own look is under "Main bar" below. */
+.dayctl { --thumb: 20px; display: flex; align-items: center; gap: 12px; }
+/* A range as three joined outlined buttons (Compare's modes, the observer's date range); the
+   pressed one's left edge is drawn over its neighbour's border, so hit areas never overlap. */
+.range { display: flex; flex: none; }
+.range .btn { border-radius: 0; }
+.range .btn:first-child { border-radius: var(--r) 0 0 var(--r); }
+.range .btn:last-child { border-radius: 0 var(--r) var(--r) 0; }
+.range .btn + .btn { border-left-width: 0; }
+.range .btn + .btn[aria-pressed="true"] { position: relative; box-shadow: -1px 0 0 var(--text); }
+/* The Earth & Sun toggle shows only with the globe, not the site view. */
+.hud.site #mode-es { display: none; }
+/* Play / Pause (autoplay, forecast.js): a 44 px outlined icon button before the date. */
+.btn.play { flex: none; width: 44px; height: 44px; padding: 0; justify-content: center; }
+/* Playback speed beside Play: 1×, 2×, 4×, 8× in turn (forecast.js). */
+.btn.speed { flex: none; min-width: 44px; height: 44px; padding: 0 8px; justify-content: center; font-variant-numeric: tabular-nums; }
+.play .i-pause, .play.on .i-play { display: none; }
+.play.on .i-pause { display: block; }
+.dayctl output { flex: none; width: 136px; font: 600 14px/1 var(--font); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.dayctl input {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.dayctl input::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: var(--go-track, var(--line)); }
+.dayctl input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: var(--thumb);
+  height: var(--thumb);
+  margin-top: calc((6px - var(--thumb)) / 2);
+  border: 0;
+  border-radius: 50%;
+  background: var(--go);
+}
+.dayctl input::-moz-range-track { height: 6px; border-radius: 3px; background: var(--go-track, var(--line)); }
+.dayctl input::-moz-range-thumb { width: var(--thumb); height: var(--thumb); border: 0; border-radius: 50%; background: var(--go); }
+
+/* Main bar: one calm row. Play / Pause, the date-and-time button (the row's main text,
+   quick-estimate.css), the timeline, then the range as a small menu. Play, the date and the
+   range are ghost buttons: no outline until hover. */
+#dayctl { --thumb: 14px; gap: 8px; }
+#dayctl :is(.play, .speed), #dayctl .range-btn { border-color: transparent; }
+#dayctl :is(.play, .speed):hover, #dayctl .range-btn:hover, #dayctl .range-btn[aria-expanded="true"] { border-color: var(--line); }
+#dayctl :is(.play, .speed):focus-visible, #dayctl .range-btn:focus-visible { outline: 2px solid var(--sel); outline-offset: 2px; }
+/* The timeline: a thin 4 px track and a 14 px thumb; the input stays 44 px tall, so the whole
+   strip takes taps. */
+#dayctl input[type="range"]::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; }
+#dayctl input[type="range"]::-webkit-slider-thumb { margin-top: calc((4px - var(--thumb)) / 2); }
+#dayctl input[type="range"]::-moz-range-track { height: 4px; border-radius: 2px; }
+/* The thumb shows what is in view at its instant (forecast.js thumbFill sets --thumb-fill):
+   --sun, --earth, both half and half, or --sel for neither. A 2 px --space ring keeps it apart
+   from the track's Go segments. */
+#dayctl input[type="range"]::-webkit-slider-thumb { background: var(--thumb-fill, var(--sel)); box-shadow: 0 0 0 2px var(--space); }
+#dayctl input[type="range"]::-moz-range-thumb { background: var(--thumb-fill, var(--sel)); box-shadow: 0 0 0 2px var(--space); }
+/* Shared duration picker; reserve room for its changing label. */
+.range-btn { flex: none; gap: 4px; min-width: 104px; justify-content: space-between; padding: 0 8px 0 12px; }
+.range-btn svg { flex: none; }
+
+/* Times: the next rise and set of each body, above the bar's left end (in the clock's column
+   while a site is focused on wide screens). A long value ("None before 1 Dec 2027") wraps. */
+section.times { display: none; align-self: flex-start; }
+.hud.times section.times, .hud.col section.times { display: block; }
+.counts { display: grid; grid-template-columns: auto auto; gap: 12px 24px; }
+.counts span { display: block; }
+.k { font-size: 13px; color: var(--muted); }
+/* "At <site>" above the countdowns while the site view's pin is on a nearby spot. */
+.at { margin-bottom: 8px; font-size: 13px; color: var(--muted); white-space: nowrap; }
+.v { font: 600 18px/1.25 var(--mono); font-variant-numeric: tabular-nums; overflow-wrap: break-word; }
+
+.chead { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.csub { margin: 2px 0 0; font-size: 13px; color: var(--muted); }
+
+/* Sky clock: top left, under the top bar, no box. The whole clock is a button that enlarges
+   it; the heading and key sit under the ring. */
+.ring { position: absolute; left: var(--pad-l); top: calc(var(--pad-t) + 56px); display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.clock { display: block; width: 160px; aspect-ratio: 1; padding: 0; border: 0; border-radius: 50%; background: none; color: inherit; font: inherit; cursor: pointer; }
+.clock svg { display: block; width: 100%; height: auto; overflow: visible; }
+/* The compass letters round the clock: at least 9 px on screen at each size (the clock's
+   200-unit drawing is 160 px wide, 88 px on phones; font sizes here are in its units). */
+.clock .compass { font-size: 12px; }
+/* Height strip: the clock unrolled into a side view, as wide as the clock (forecast.js draws
+   it in real pixels). */
+.side { width: 160px; height: 72px; }
+.side svg { display: block; }
+.hud.times .side { display: none; }
+.ring h2 { font-size: 13px; font-weight: 400; }
+/* The heading and the key show only in the enlarged clock; About has the key too. */
+.hud:not(.big) .ring :is(h2, .legend) { display: none; }
+.legend { list-style: none; margin: 0; padding: 0; display: flex; gap: 4px 12px; white-space: nowrap; }
+.legend li { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+.key { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+.key.sun { background: var(--sun); }
+.key.sun.hidden { background: transparent; box-shadow: inset 0 0 0 1.5px var(--sun); }
+.key.earth { background: var(--earth); }
+.ring .shut { display: none; }
+/* Sun–Earth–Moon diagram: last in the clock's column on wide screens, after the countdowns in
+   Times on narrower ones. On the globe the figure is the Earth & Sun button. */
+.sem-fig { display: block; width: 160px; height: 160px; padding: 0; border: 0; background: none; color: inherit; font: inherit; }
+button.sem-fig { cursor: pointer; }
+.sem-fig[hidden] { display: none; }
+.sem-fig svg { display: block; width: 100%; height: 100%; overflow: visible; transition: opacity .2s; } /* the Sun's glow may pass the edge */
+.sem-fig svg.out { opacity: 0; }
+.sem-phase { margin-top: 4px; font-size: 12px; color: var(--muted); white-space: nowrap; }
+/* The centre: joined segments (the day control's range) as wide as the drawing, drawn 22 px
+   tall (::before) inside 44 px buttons, so each hit area stays 44 px and they never overlap. */
+.sem-row { width: 160px; }
+.range.sem-row .btn { flex: 1 1 0; justify-content: center; padding: 0; border: 0; border-radius: 0; }
+.range.sem-row .btn + .btn[aria-pressed="true"] { box-shadow: none; } /* drawn on ::before instead */
+.sem-row .btn::before {
+  content: "";
+  position: absolute;
+  inset: 11px 0;
+  border: 1px solid var(--line);
+  pointer-events: none;
+}
+.sem-row .btn:first-child::before { border-radius: 8px 0 0 8px; }
+.sem-row .btn:last-child::before { border-radius: 0 8px 8px 0; }
+.sem-row .btn + .btn::before { border-left-width: 0; }
+.sem-row .btn[aria-pressed="true"]::before { z-index: 1; border-color: var(--text); }
+.sem-row .btn + .btn[aria-pressed="true"]::before { box-shadow: -1px 0 0 var(--text); }
+.sem-row .btn:focus-visible { outline: none; }
+.sem-row .btn:focus-visible::before { z-index: 2; outline: 2px solid var(--sel); outline-offset: 2px; }
+.sem-row svg { display: block; width: 16px; height: 16px; overflow: visible; }
+/* While the Sun centre's orbit is being worked out (quickOrbit), the drawing dims. */
+.sem[aria-busy="true"] .sem-fig svg { opacity: .5; transition: opacity .2s; } /* the Sun glyph's glow */
+/* The centre segments' tooltips sit above them, centred, inside the clock's column. */
+.sem-row [data-tip]::after { top: auto; bottom: calc(100% - 5px); right: auto; left: 50%; transform: translateX(-50%); }
+@media (prefers-reduced-motion: reduce) {
+  .sem-fig svg { transition: none; }
+}
+/* Narrower screens: Times is two columns, the countdowns and heights on the left and the
+   diagram (128 px) and its phase on the right, then the centre row across both, at most 45% of
+   the screen's height, scrolling inside itself when taller, so the globe or terrain stays
+   visible above it. Under 375 px wide, where the two don't fit side by side, the diagram goes
+   under the countdowns. */
+@media (max-width: 1023px) {
+  .hud.times section.times {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: start;
+    column-gap: 16px;
+    min-height: 0;
+    max-height: 45dvh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+  section.times > :not(.sem) { grid-column: 1; }
+  section.times .sem { display: contents; }
+  section.times .sem-fig { grid-column: 2; grid-row: 1 / span 2; width: 128px; height: 128px; }
+  section.times .sem-phase { grid-column: 2; grid-row: 3; }
+  section.times .sem-row { grid-column: 1 / -1; grid-row: 4; width: auto; }
+}
+@media (max-width: 374px) {
+  .hud.times section.times { grid-template-columns: auto; }
+  section.times :is(.sem-fig, .sem-phase, .sem-row) { grid-column: 1; grid-row: auto; }
+  section.times .sem-fig { width: 160px; height: 160px; margin-top: 16px; }
+}
+.hud.times .ring .sem, .hud.big .sem { display: none; }
+@media (min-width: 761px) {
+  /* The clock's column scrolls inside itself when taller, so on short screens the diagram
+     scrolls away first and the clock stays at the top. */
+  .hud:not(.big) .ring {
+    max-height: calc(100% - var(--pad-t) - 52px - var(--below, var(--pad-b)));
+    margin: -4px;
+    padding: 4px; /* keeps focus outlines inside the scroll */
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    /* No visible scrollbar: the bottom fade says there is more. Wheel, touch and keyboard
+       still scroll it. */
+    scrollbar-width: none;
+  }
+  .hud:not(.big) .ring::-webkit-scrollbar { display: none; }
+  .hud:not(.big) .ring > * { flex: none; }
+  /* While more of the column is below the fold (forecast.js sets .more), its last 40 px fade
+     out, so the cut reads as "scroll for more" even where the scrollbar hides until used. */
+  .hud:not(.big) .ring.more { mask-image: linear-gradient(to bottom, var(--space) calc(100% - 40px), transparent); }
+}
+/* Non-phone screens with Times open, or wide screens with a focused site: the column holds Times under the
+   key. It ends 12 px above the bar (forecast.js sets --below) and scrolls inside itself when
+   taller; its width follows the content plus the scrollbar gutter. */
+.hud.col .ring section.times { display: block; width: 232px; max-height: none; overflow: visible; }
+.hud.col .ring .at { white-space: normal; }
+.hud.col.times:not(.big) .ring .sem, .hud.col.times .side { display: block; }
+.hud.big .ring section.times { display: none; }
+
+/* Enlarged clock: centred on black, with its heading, key and Close; the globe hides. */
+.hud.big { pointer-events: auto; }
+.hud.big .bar, .hud.big section.times, .hud.big section.compare, .hud.big section.panel { visibility: hidden; }
+.hud.big .ring {
+  visibility: visible;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  width: min(360px, calc(100% - 48px));
+  align-items: center;
+  transform: translate(-50%, -50%);
+}
+.hud.big .clock, .hud.big .side { width: 100%; }
+.hud.big .ring .shut { display: inline-flex; }
+.stage:has(.hud.big) :is(#moon, #site, .site-scale, .pins, .bodies, .view-3d, .spot-marks) { visibility: hidden; }
+
+/* Site picker: a sheet on black (the globe hides), from under the top bar to the bottom of the screen,
+   with its own scroll. Filter chips, then a card per site (a grid; one sideways row on
+   phones), or one site's details. */
+section.picker {
+  display: none;
+  position: absolute;
+  inset: calc(var(--pad-t) + 52px) 0 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 16px 24px;
+}
+.hud.picker { pointer-events: auto; }
+.hud.picker section.picker { display: block; }
+.hud.picker .bar, .hud.picker .ring, .hud.picker section.times, .hud.picker section.compare, .hud.picker section.panel { visibility: hidden; }
+.stage:has(.hud.picker) :is(#moon, #site, .site-scale, .pins, .bodies, .view-3d, .spot-marks) { visibility: hidden; }
+.pk { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+.pk-head { display: flex; align-items: center; gap: 12px; }
+.pk-head .btn[hidden] { display: none; }
+.pk-title { flex: 1; min-width: 0; }
+.pk-head h2:focus { outline: none; }
+.pk-head h2:focus-visible { outline: 2px solid var(--sel); outline-offset: 2px; }
+.pk-body { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+/* Search: an outlined field with the search icon inside, up to 480 px wide. The text is 16 px
+   so phones don't zoom in on it. */
+.pk-find { display: flex; align-items: center; gap: 8px; width: 100%; max-width: 480px; min-height: 44px; padding: 0 12px; border: 1px solid var(--line); border-radius: var(--r); color: var(--muted); cursor: text; }
+.pk-find:hover { border-color: var(--text); }
+.pk-find:focus-within { border-color: var(--text); outline: 2px solid var(--sel); outline-offset: 2px; }
+.pk-find svg { flex: none; }
+.pk-find input { flex: 1; min-width: 0; height: 42px; padding: 0; border: 0; background: transparent; color: var(--text); font: 400 16px var(--font); }
+.pk-find input:focus-visible { outline: none; } /* the field's outline shows instead */
+.pk-find input::placeholder { color: var(--muted); }
+/* Go to coordinates: a short label, latitude and longitude fields (north and east positive,
+   with the sign hint as placeholder and label) and Go, wrapping on phones; errors under it. */
+.pk-go { display: flex; flex-direction: column; gap: 6px; }
+.pk-go-title { margin: 0; font-size: 13px; color: var(--muted); }
+.pk-go-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.pk-go input { width: 140px; min-height: 44px; padding: 0 12px; border: 1px solid var(--line); border-radius: var(--r); background: transparent; color: var(--text); font: 400 16px var(--font); font-variant-numeric: tabular-nums; }
+.pk-go input::placeholder { color: var(--muted); }
+.pk-go input:hover { border-color: var(--text); }
+.pk-go input[aria-invalid] { border-color: var(--text); border-width: 2px; }
+.pk-go-error { margin: 0; font-size: 13px; }
+.pk-go-error:empty { display: none; }
+.pk-results { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; min-width: 0; }
+.pk-results > .cards { align-self: stretch; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.filters .btn { font-weight: 400; }
+.filters .btn[aria-pressed="true"] { font-weight: 600; box-shadow: inset 0 0 0 1px var(--text); } /* 2 px with the border */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(232px, 1fr)); gap: 16px; }
+.card { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-width: 0; }
+.card-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r);
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+/* The hero: a photo, or a tile with the site's initials. */
+.hero {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin-bottom: 6px;
+  border-radius: var(--r);
+  overflow: hidden;
+  background: var(--glass-solid);
+}
+.hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero .initials { font: 600 32px/1 var(--font); color: var(--muted); }
+.card-main[aria-current="true"] .hero { outline: 2px solid var(--sel); outline-offset: 2px; }
+.cname { font: 600 16px/1.3 var(--font); }
+.cmeta { font-size: 13px; color: var(--muted); }
+.ccall { font-size: 14px; line-height: 1.4; }
+/* Details: one site in a single column. */
+.detail { display: flex; flex-direction: column; gap: 12px; max-width: 560px; }
+.detail h3 { margin: 0; font: 600 22px/28px var(--font); }
+.detail h3:focus { outline: none; }
+.summary { margin: 0; font-size: 14px; line-height: 1.5; }
+.facts { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 8px 16px; margin: 0; }
+.facts dt { font-size: 13px; line-height: 20px; color: var(--muted); }
+.facts dd { margin: 0; font-size: 14px; line-height: 20px; overflow-wrap: anywhere; }
+.sources { margin: 0; font-size: 13px; line-height: 1.5; color: var(--muted); overflow-wrap: anywhere; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; }
+a.btn { text-decoration: none; }
+a:focus-visible { outline: 2px solid var(--sel); outline-offset: 2px; }
+
+/* Site panel: the focused site's details, on black with no box. Wide screens: a right-hand
+   column from the sky clock's top to just above the bar (forecast.js sets --below). Narrower:
+   a sheet opened from the bar's "Site info". */
+section.panel { display: none; flex-direction: column; gap: 16px; }
+.p-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.p-id { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.p-name { margin: 0; font: 600 22px/28px var(--font); color: var(--text); overflow-wrap: anywhere; }
+.p-name:focus { outline: none; }
+.p-name:focus-visible { outline: 2px solid var(--sel); outline-offset: 2px; }
+.p-coords { margin: 0; font-size: 13px; line-height: 1.4; color: var(--muted); font-variant-numeric: tabular-nums; }
+.p-meta { margin: 0; font-size: 14px; line-height: 1.4; }
+.p-more { display: flex; flex-direction: column; gap: 12px; }
+/* On landing day (visited sites): a compact block under the summary. The touchdown in UTC,
+   the Sun and Earth at that instant (a dot in the body's colour, up or hidden, the height),
+   then a one-line caveat with the source as a small link. */
+.landing { display: flex; flex-direction: column; gap: 4px; }
+.landing h3 { margin: 0; font-size: 13px; font-weight: 600; color: var(--muted); }
+.l-when { margin: 0; font: 600 14px/1.4 var(--font); font-variant-numeric: tabular-nums; }
+.l-sky { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 0; font-size: 14px; line-height: 1.4; font-variant-numeric: tabular-nums; }
+.l-body { display: inline-flex; align-items: center; gap: 6px; }
+.l-k { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+.l-k.sun { background: var(--sun); }
+.l-k.earth { background: var(--earth); }
+.l-note { margin: 0; font-size: 12px; line-height: 1.4; color: var(--muted); }
+.l-note a { color: inherit; text-underline-offset: 2px; overflow-wrap: anywhere; }
+/* The photo at its own shape, never cropped. */
+.p-photo { display: flex; flex-direction: column; gap: 4px; margin: 0; }
+.p-photo img { display: block; width: 100%; height: auto; object-fit: contain; }
+/* The selected nearby spot (forecast.js), last in the panel in the site view: its readout and
+   "Back to site"; the spots themselves are buttons on the ground (.spot-marks). */
+.p-spots { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.p-spots[hidden], .p-spots .btn[hidden] { display: none; }
+.s-head { margin: 0; font-size: 13px; font-weight: 400; color: var(--muted); }
+.s-read { display: flex; flex-direction: column; gap: 4px; margin-top: 4px; }
+.s-read p { margin: 0; font-size: 14px; line-height: 1.4; }
+.s-read .s-where { font-weight: 600; }
+.s-read .s-slope { font-size: 13px; color: var(--muted); }
+.s-slope .steep { color: var(--text); }
+.s-year span { font-variant-numeric: tabular-nums; }
+/* "Site info" opens the sheet; it shows only while a site is focused on narrower screens. */
+#info-btn { display: none; }
+
+@media (min-width: 1024px) {
+  section.panel {
+    position: absolute;
+    top: calc(var(--pad-t) + 56px);
+    right: var(--pad-r);
+    bottom: var(--below, var(--pad-b));
+    width: var(--panel-w);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none; /* like the clock's column: the bottom fade says there is more */
+  }
+  section.panel::-webkit-scrollbar { display: none; }
+  section.panel.more { mask-image: linear-gradient(to bottom, var(--space) calc(100% - 40px), transparent); }
+  .hud.panel section.panel { display: flex; }
+  #panel-close, .hud.focus #times-btn { display: none; }
+}
+@media (min-width: 1440px) {
+  .hud { --panel-w: 360px; }
+}
+/* The sheet: a bottom sheet over the stage, full width, opening at half the screen's height
+   (the globe or site view stays visible and re-framed above it; forecast.js), or up to just
+   under the top bar when expanded. A solid black backing, its own scroll, a grab handle on top
+   (tap toggles half and full, drag moves it) and Close by the heading. */
+.grab { display: none; }
+@media (max-width: 1023px) {
+  section.panel {
+    --px: 16px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0 var(--px) 24px;
+    border-top: 1px solid var(--edge);
+    background: var(--space);
+    transition: top .25s ease-out;
+  }
+  section.panel.full { top: calc(var(--pad-t) + 52px); }
+  section.panel.drag { transition: none; }
+  @starting-style {
+    .hud.panel section.panel { top: 100%; }
+  }
+  .grab {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    flex: none;
+    height: 44px;
+    margin: 0 calc(-1 * var(--px)) -8px;
+    padding: 0;
+    border: 0;
+    background: var(--space);
+    touch-action: none;
+    cursor: grab;
+  }
+  .grab::before { content: ""; width: 36px; height: 4px; border-radius: 2px; background: var(--line); }
+  .p-id, .p-more, .p-spots { max-width: 560px; }
+  .hud.panel section.panel { display: flex; }
+  .hud.panel .bar, .hud.panel .ring, .hud.panel section.compare { visibility: hidden; }
+  .hud.focus #info-btn { display: inline-flex; }
+}
+@media (max-width: 1023px) and (prefers-reduced-motion: reduce) {
+  section.panel { transition: none; }
+}
+
+/* Phones: the bar stacks (switcher; clock beside the call; chips; Times and Compare; the day
+   control). Compare's lower tray and responsive adjustments are in compare/compare.css. */
+@media (max-width: 760px) {
+  .hud { gap: 8px; }
+  .switch { flex: 0 0 var(--site-selector-width, 238px); }
+  .now-name { max-width: none; }
+  /* forecast.js moves the clock into the bar here, before the call. */
+  .ring { position: static; flex: none; }
+  .clock { width: 88px; }
+  .hud:not(.big) .clock .compass { font-size: 21px; }
+  .hud:not(.big) .side { display: none; }
+  .call { flex: 1 1 calc(100% - 100px); }
+  .views { flex: 1 1 100%; flex-wrap: wrap; margin-left: 0; } /* four buttons wrap at 320 px */
+  /* Times stays under the top bar on short screens too. */
+  .hud.times { padding-top: calc(var(--pad-t) + 52px); }
+  /* The sheet needs the height: while it is open the bar keeps only the day control
+     (the sheet has its own Close). */
+
+  /* The day control: Play, the date-and-time button and the range on one row; the timeline
+     gets its own full-width row below. */
+  .dayctl { flex-wrap: wrap; row-gap: 8px; }
+  .range { flex: 1 0 calc(100% - 56px); }
+  #dayctl { gap: 4px; }
+  #dayctl input[type="range"] { order: 1; flex: 1 1 100%; }
+  #dayctl .range-btn { min-width: 0; padding: 0 4px 0 8px; }
+  section.picker { padding: 0 12px 24px; }
+  section.panel { --px: 12px; }
+  /* Cards: one sideways row inside the sheet, snapping card by card. */
+  .cards {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 4px;
+    margin: -4px;
+    scroll-padding: 4px;
+  }
+  .card { flex: 0 0 248px; scroll-snap-align: start; }
+}
+
+@media (max-width: 400px) {
+  .tools { flex-wrap: nowrap; }
+  .btn { padding: 0 10px; }
+  .v { font-size: 16px; }
+}
+
+/* About (the "i" button): credits, sources, the key and the scale notes, in a modal sheet
+   down the right edge, full width on phones. The page behind is dimmed and inert. */
+.about {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: min(440px, 100vw);
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: max(24px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) 24px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 0;
+  border-left: 1px solid var(--edge);
+  background: var(--glass-solid);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.about::backdrop { background: var(--scrim); }
+.about-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+.about h2 { font: 600 22px/28px var(--font); color: var(--text); }
+.about h3 { margin: 24px 0 8px; font-size: 14px; font-weight: 600; color: var(--muted); }
+.about p { margin: 0 0 8px; }
+.about a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.about .legend { flex-wrap: wrap; white-space: normal; }
+.about .legend li { font-size: 14px; color: var(--text); }
+.about .legend + .legend { margin-top: 8px; }
+/* The forecast panel's height lines, for the key: 16 px strokes as drawn there. */
+.line-key { flex: none; width: 16px; border-top: 2px solid; }
+.line-key.sun { border-color: var(--sun); }
+.line-key.earth { border-color: var(--earth); }
+.line-key.hid { border-top: 1px dashed var(--muted); }
+/* The nearby spots' dots, for the key, drawn as on the ground (.spot::before). */
+.spot-key { flex: none; width: 14px; height: 14px; margin: 0 2px; border-radius: 50%; background-color: color-mix(in srgb, var(--sun) calc(var(--pct, 0) * 100%), var(--glass-solid)); box-shadow: 0 0 0 1.5px var(--glass-solid), 0 0 0 2.5px var(--text); }
+.spot-key.steep { background-image: linear-gradient(135deg, transparent 38%, var(--glass-solid) 38% 62%, transparent 62%); }
+/* The globe's site marks, drawn as on the pins (.pin::before), for the key. */
+.about .mark { flex: none; width: 10px; height: 10px; margin: 0 2px; border-radius: 50%; background: var(--text); }
+.about .mark.visited, .about .mark.upcoming { background: transparent; box-shadow: inset 0 0 0 2px var(--text); }
+.about .mark.upcoming { width: 9px; height: 9px; border-radius: 1px; transform: rotate(45deg); }
+.about .mark.terrain { box-shadow: 0 0 0 2px var(--glass-solid), 0 0 0 3.5px var(--text); }
+.about-list { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+@media (max-width: 760px) {
+  .about { padding: max(16px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom)); border-left: 0; }
+}
+
+/* Date picker on the Moon page: the published forecast's days bright (600), the others muted,
+   with a one-line legend under the grid; Today stays inside the published days. */
+.date-popover.has-published .date-grid[data-view="days"] button:not(:disabled):not(.pub):not([aria-pressed="true"]) { color: var(--muted); }
+.date-popover.has-published .date-grid[data-view="days"] button.pub { font-weight: 600; }
+.date-picker-legend { margin: 8px 8px 0; font-size: 12px; line-height: 1.4; color: var(--muted); }
+/* The estimate's readout under the bar: one short status line; the full readout (the call has
+   its numbers) is for screen readers. */
+.hud .quick-estimate [data-result] { position: absolute; width: 1px; height: 1px; min-height: 0 !important; overflow: hidden; clip-path: inset(50%); white-space: nowrap; } /* !important: the panel keeps an inline min-height */
+.hud .quick-estimate [role="status"] { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Map layer key, under the bar while a layer is on (forecast.js): one line of swatches. */
+.layer-key { display: flex; flex-direction: column; gap: 4px; margin: 4px 0 0; font-size: 13px; line-height: 1.4; color: var(--muted); }
+.layer-line { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; }
+.layer-key[hidden] { display: none; }
+.layer-key b { font-weight: 600; color: var(--text); }
+.layer-key span { display: inline-flex; align-items: center; gap: 6px; }
+.layer-key i { display: inline-block; width: 12px; height: 12px; border-radius: 2px; }
+.layer-key .ramp { width: 64px; height: 8px; border-radius: 2px; background: linear-gradient(to right, var(--glass-solid), var(--sun)); box-shadow: 0 0 0 1px var(--edge); }
+.layer-key .l0 { background: var(--layer-0); }
+.layer-key .l1 { background: var(--layer-1); }
+.layer-key .l2 { background: var(--layer-2); }
+.layer-key .l3 { background: var(--layer-3); }
+.layer-key .ls { box-shadow: inset 0 0 0 2px var(--layer-shadow); } /* an outline, as drawn */
+
+/* Compare: Ranking (forecast.js drawRanking). Controls in one row; the sites as a disclosure of
+   chips; bars in the metric's body colour on a faint track, rounded at the data end, value in
+   text ink with tabular figures; a card per site, ruled at the top (no box behind the text). */
+.crank-ctl { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; width: 100%; max-width: 1000px; margin: 0 auto; }
+.crank-ctl .cfield { min-width: 220px; }
+.crank-chips { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; max-width: 1000px; margin: 0 auto; }
+.crank-chips[hidden] { display: none; }
+.crank-note { width: 100%; max-width: 1000px; margin: 0 auto; font-size: 13px; color: var(--muted); }
+.crank-bars { list-style: none; display: grid; grid-template-columns: minmax(120px, 220px) 1fr auto; gap: 8px 12px; align-items: center; width: 100%; max-width: 1000px; margin: 0 auto; padding: 0; }
+.crank-bars li { display: contents; }
+.crank-name { font-size: 14px; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.crank-bar { position: relative; height: 16px; border-radius: 0 4px 4px 0; background: var(--edge); }
+.crank-bar::before { content: ""; position: absolute; inset: 0 auto 0 0; width: var(--w); border-radius: 0 4px 4px 0; background: var(--bar); }
+.crank-bars.sun { --bar: var(--sun); }
+.crank-bars.earth { --bar: var(--earth); }
+.crank-bars.go { --bar: var(--go); }
+.crank-bars.muted { --bar: var(--muted); }
+.crank-err { font-size: 13px; color: var(--muted); }
+.crank-v { font: 600 14px/1 var(--mono); font-variant-numeric: tabular-nums; color: var(--text); text-align: right; min-width: 64px; }
+.crank-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px 32px; width: 100%; max-width: 1000px; margin: 8px auto 0; }
+.crank-card { border-top: 1px solid var(--line); padding-top: 12px; }
+.crank-hd { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+.crank-hd h3 { margin: 0; font: 600 16px/1.3 var(--font); color: var(--text); }
+.crank-card .badge { flex: none; padding: 2px 8px; border-radius: 4px; font: 600 12px/16px var(--font); color: var(--go-text); background: var(--go); }
+.crank-card .badge.est { color: var(--text); background: none; box-shadow: inset 0 0 0 1px var(--line); }
+.crank-card dl { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; margin: 0; }
+.crank-card dt { font-size: 13px; color: var(--muted); }
+.crank-card dd { margin: 0; font: 600 14px/1.4 var(--mono); font-variant-numeric: tabular-nums; color: var(--text); text-align: right; }
+@media (max-width: 760px) {
+  .crank-bars { grid-template-columns: minmax(96px, 128px) 1fr auto; }
+  .crank-cards { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* The site header (forecast.js layout): on wider screens, the site switch, the date and the call
+   at the top of the left column, above the sky clock. */
+.site-head { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 8px; }
+.site-head[hidden] { display: none; }
+.site-head .switch { flex: none; margin-left: -12px; }
+/* The date, as the bar shows it (quick-estimate.css), left-aligned under the name. */
+.site-head .date-field { position: relative; flex: none; width: auto; margin-left: -12px; border: 0; }
+.site-head .date-field input[type="date"] { position: absolute; inset: 0; width: 44px; opacity: 0; pointer-events: none; }
+.site-head .date-field .date-trigger { position: relative; width: auto; height: 44px; padding: 0 12px; border: 1px solid transparent; font: 600 16px/20px var(--font); font-variant-numeric: tabular-nums; color: var(--text); white-space: nowrap; place-items: center start; }
+.site-head .date-field .date-trigger:is(:hover, [aria-expanded="true"]) { border-color: var(--line); }
+.site-head .call { max-width: 320px; }
+
+/* The playhead's time bubble while the timeline is dragged (forecast.js showBubble). */
+.play-bubble { position: fixed; left: 0; top: 0; z-index: 30; padding: 4px 8px; border-radius: 4px; background: var(--sun); color: var(--go-text); font: 600 13px/16px var(--font); font-variant-numeric: tabular-nums; white-space: nowrap; pointer-events: none; }
+.play-bubble[hidden] { display: none; }
+
+/* Times inside the Forecast panel (forecast.js layout): its right-hand column on wider screens,
+   under the table on phones, where the Sun–Earth–Moon diagram sits beside the countdowns. */
+.fpanel:not([hidden]) { display: flex; align-items: flex-start; gap: 24px; }
+.fpanel .fp-table { flex: 1 1 auto; min-width: 0; }
+.fpanel section.times { display: block; flex: 0 0 auto; width: 232px; align-self: stretch; }
+.hud:not(.focus) .fpanel section.times .at { display: none; }
+@media (max-width: 760px) {
+  .fpanel:not([hidden]) { flex-direction: column; gap: 12px; }
+  .fpanel section.times { width: auto; display: grid; grid-template-columns: auto auto; align-items: start; column-gap: 16px; }
+}
+#times-btn { display: none; } /* Times lives in the Forecast panel */
+/* The bar's icon buttons (Forecast, Compare, Travel on phones) show their tooltips above them. */
+.views [data-tip]::after { top: auto; bottom: calc(100% + 6px); }

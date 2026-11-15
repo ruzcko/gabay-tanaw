@@ -1,0 +1,59 @@
+{
+  "description": "Full Float64 horizon hashes captured before lossless transport and sampling optimization; 1440 rays, 150 km, unchanged 20/60 m radial steps.",
+  "points": [
+    {
+      "lat": -89.44,
+      "lon": 222.83,
+      "sha256": "e7a8c12472d5923f2eee6128d5760430d6c578db5b615ec5b8c76251b3110483",
+      "surfaceElevation": 1957.8564673940755
+    },
+    {
+      "lat": -89.45,
+      "lon": 222.84,
+      "sha256": "177364a15c5f8bef7d7eacaf60780ffe752fe9b6f8e2b7631603c65b08ebc2d6",
+      "surfaceElevation": 1956.712086591784
+    },
+    {
+      "lat": -89.999,
+      "lon": 0,
+      "sha256": "502bd46c9268b8b985dc133e43c03cf1b1b38b92ab82672b2ddff58238014840",
+      "surfaceElevation": 1289.2661675212667
+    },
+    {
+      "lat": -87.5,
+      "lon": 180,
+      "sha256": "939e330cc93deffd1142af9d6090489153557fb0886298f438e7039e27918dac",
+      "surfaceElevation": -2083.260143036126
+    },
+    {
+      "lat": -87.4999,
+      "lon": 359.99,
+      "sha256": "7cbd369651abe95bef53b3493c47f9b4b765f2d8d3dc8021572f77ff0b1888df",
+      "surfaceElevation": -3437.363591999997
+    },
+    {
+      "lat": -85,
+      "lon": 90,
+      "sha256": "853d49b6818cbffcab0e2def57566749d1f185a000edf65ab1064a812968d2a4",
+      "surfaceElevation": -3736.5
+    },
+    {
+      "lat": 0.6,
+      "lon": 23.4,
+      "sha256": "97f1113d81b5b862fbe7499d70e2854240dac5c9eeb476bddabc08fae6ad2c48",
+      "surfaceElevation": -1872.3799999999878
+    },
+    {
+      "lat": 0,
+      "lon": -179.999,
+      "sha256": "c5d8b4df7b13642790ec0fbec69f4358d77eea8829b4560cd190b48f92bd7736",
+      "surfaceElevation": 2680.604999999953
+    },
+    {
+      "lat": 89.99,
+      "lon": 0,
+      "sha256": "9bd56202d160fae520a9f6f43a3e2698391903d5d04528548c660f5ca973c8ba",
+      "surfaceElevation": 7.75
+    }
+  ]
+}
