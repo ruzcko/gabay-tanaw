@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Tanaw">
+<rect width="100" height="100" rx="22" fill="#0d121c"/>
+<path d="M12 78 Q50 2 88 78 Q50 10 12 78 Z" fill="#f2f4f8" stroke="#f2f4f8" stroke-width="3.5" stroke-linejoin="round"/>
+<circle cx="42" cy="66" r="11" fill="#8cc4ff"/>
+<circle cx="66" cy="30" r="9" fill="#ffc861"/>
+</svg>

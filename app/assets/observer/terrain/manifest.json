@@ -1,0 +1,15 @@
+{
+  "source": "https://svs.gsfc.nasa.gov/4720/",
+  "license": "NASA media, free to use with attribution",
+  "referenceFrame": "LOLA-ME",
+  "elevationDatum": "sphere-1737400m",
+  "radiusM": 1737400,
+  "levels": [
+    4,
+    16
+  ],
+  "tileDegrees": 10,
+  "encoding": "gzip uint16 little-endian; metres = value / 2 - 10000",
+  "sourceSha256": "45a2b32d56e81ed30db07fead8abc842b249b6511219d9ca2c53f81bc2dc5d62",
+  "compressedBytes": 29898762
+}

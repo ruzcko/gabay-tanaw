@@ -1,0 +1,17 @@
+{
+  "product": "LDEM_875S_20M",
+  "version": "2.0",
+  "width": 7584,
+  "tileSize": 512,
+  "spacingM": 20,
+  "scaleM": 0.5,
+  "encoding": "int16-le",
+  "radiusM": 1737400,
+  "projection": "south-polar-stereographic",
+  "centerPixel": 3791.5,
+  "frame": "MEAN EARTH/POLAR AXIS OF DE421",
+  "coverageLatitudeMax": -87.5,
+  "source": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/polar/img/ldem_875s_20m.lbl",
+  "sourceSha256": "dc16bba853b22fa29e26dc26b411acc180de70478578b2c75c8e6f253f56a9d9",
+  "license": "NASA public-domain data; credit NASA/GSFC/LOLA"
+}
