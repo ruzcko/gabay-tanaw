@@ -1,0 +1,242 @@
+{
+ "sites": {
+  "connecting-ridge": {
+   "file": "connecting-ridge.bin",
+   "width": 257,
+   "height": 257,
+   "spacingM": 78.125,
+   "metadata": {
+    "projection": "local-orthographic-east-south",
+    "latitudeDeg": -89.4398,
+    "longitudeEastDeg": -137.17,
+    "radiusM": 1737400,
+    "referenceFrame": "MOON_ME_DE421",
+    "elevationDatum": "sphere-1737400m",
+    "noData": null,
+    "source": "PGDA LOLA 5 m (Site01, Site04, SL3) blended into LOLA LDEM_75S_240M",
+    "license": "NASA PDS / PGDA data, public domain; credit LRO LOLA (NASA GSFC)"
+   }
+  },
+  "connecting-ridge-extension": {
+   "file": "connecting-ridge-extension.bin",
+   "width": 257,
+   "height": 257,
+   "spacingM": 78.125,
+   "metadata": {
+    "projection": "local-orthographic-east-south",
+    "latitudeDeg": -89.313,
+    "longitudeEastDeg": -114.02000000000001,
+    "radiusM": 1737400,
+    "referenceFrame": "MOON_ME_DE421",
+    "elevationDatum": "sphere-1737400m",
+    "noData": null,
+    "source": "PGDA LOLA 5 m (Site01, SL3) blended into LOLA LDEM_75S_240M",
+    "license": "NASA PDS / PGDA data, public domain; credit LRO LOLA (NASA GSFC)"
+   }
+  },
+  "shackleton-rim": {
+   "file": "shackleton-rim.bin",
+   "width": 257,
+   "height": 257,
+   "spacingM": 78.125,
+   "metadata": {
+    "projection": "local-orthographic-east-south",
+    "latitudeDeg": -89.6866,
+    "longitudeEastDeg": -162.81,
+    "radiusM": 1737400,
+    "referenceFrame": "MOON_ME_DE421",
+    "elevationDatum": "sphere-1737400m",
+    "noData": null,
+    "source": "PGDA LOLA 5 m (Site04, Site01) blended into LOLA LDEM_75S_240M",
+    "license": "NASA PDS / PGDA data, public domain; credit LRO LOLA (NASA GSFC)"
+   }
+  },
+  "peak-near-shackleton": {
+   "file": "peak-near-shackleton.bin",
+   "width": 257,
+   "height": 257,
+   "spacingM": 78.125,
+   "metadata": {
+    "projection": "local-orthographic-east-south",
+    "latitudeDeg": -88.8092,
+    "longitudeEastDeg": 123.7076,
+    "radiusM": 1737400,
+    "referenceFrame": "MOON_ME_DE421",
+    "elevationDatum": "sphere-1737400m",
+    "noData": null,
+    "source": "PGDA LOLA 5 m (Site07) blended into LOLA LDEM_75S_240M",
+    "license": "NASA PDS / PGDA data, public domain; credit LRO LOLA (NASA GSFC)"
+   }
+  },
+  "de-gerlache-rim": {
+   "file": "de-gerlache-rim.bin",
+   "width": 257,
+   "height": 257,
+   "spacingM": 78.125,
+   "metadata": {
+    "projection": "local-orthographic-east-south",
+    "latitudeDeg": -88.6705,
+    "longitudeEastDeg": -68.37270000000001,
+    "radiusM": 1737400,
+    "referenceFrame": "MOON_ME_DE421",
+    "elevationDatum": "sphere-1737400m",
+    "noData": null,
+    "source": "PGDA LOLA 5 m (Site11, SL3) blended into LOLA LDEM_75S_240M",
+    "license": "NASA PDS / PGDA data, public domain; credit LRO LOLA (NASA GSFC)"
+   }
+  },
+  "malapert-massif": {
+   "file": "malapert-massif.bin",
+   "width": 257,
+   "height": 257,
+   "spacingM": 78.125,
+   "metadata": {
+    "projection": "local-orthographic-east-south",
+    "latitudeDeg": -85.9685,
+    "longitudeEastDeg": -2.314900000000023,
+    "radiusM": 1737400,
+    "referenceFrame": "MOON_ME_DE421",
+    "elevationDatum": "sphere-1737400m",
+    "noData": null,
+    "source": "PGDA LOLA 5 m (Site23) blended into LOLA LDEM_75S_240M",
+    "license": "NASA PDS / PGDA data, public domain; credit LRO LOLA (NASA GSFC)"
+   }
+  },
+  "leibnitz-beta-plateau": {
+   "file": "leibnitz-beta-plateau.bin",
+   "width": 257,
+   "height": 257,
+   "spacingM": 78.125,
+   "metadata": {
+    "projection": "local-orthographic-east-south",
+    "latitudeDeg": -85.4118,
+    "longitudeEastDeg": 31.7296,
+    "radiusM": 1737400,
+    "referenceFrame": "MOON_ME_DE421",
+    "elevationDatum": "sphere-1737400m",
+    "noData": null,
+    "source": "PGDA LOLA 5 m (Site20) blended into LOLA LDEM_75S_240M",
+    "license": "NASA PDS / PGDA data, public domain; credit LRO LOLA (NASA GSFC)"
+   }
+  },
+  "im2-mons-mouton": {
+   "file": "im2-mons-mouton.bin",
+   "width": 257,
+   "height": 257,
+   "spacingM": 78.125,
+   "metadata": {
+    "projection": "local-orthographic-east-south",
+    "latitudeDeg": -84.7906,
+    "longitudeEastDeg": 29.1957,
+    "radiusM": 1737400,
+    "referenceFrame": "MOON_ME_DE421",
+    "elevationDatum": "sphere-1737400m",
+    "noData": null,
+    "source": "PGDA LOLA 5 m (Site20) blended into LOLA LDEM_75S_240M",
+    "license": "NASA PDS / PGDA data, public domain; credit LRO LOLA (NASA GSFC)"
+   }
+  },
+  "im1-malapert-a": {
+   "file": "im1-malapert-a.bin",
+   "width": 257,
+   "height": 257,
+   "spacingM": 78.125,
+   "metadata": {
+    "projection": "local-orthographic-east-south",
+    "latitudeDeg": -80.13,
+    "longitudeEastDeg": 1.44,
+    "radiusM": 1737400,
+    "referenceFrame": "MOON_ME_DE421",
+    "elevationDatum": "sphere-1737400m",
+    "noData": null,
+    "source": "LOLA LDEM_75S_240M",
+    "license": "NASA PDS / PGDA data, public domain; credit LRO LOLA (NASA GSFC)"
+   }
+  },
+  "peak-near-cabeus-b": {
+   "file": "peak-near-cabeus-b.bin",
+   "width": 257,
+   "height": 257,
+   "spacingM": 78.125,
+   "metadata": {
+    "projection": "local-orthographic-east-south",
+    "latitudeDeg": -83.6179,
+    "longitudeEastDeg": -68.59789999999998,
+    "radiusM": 1737400,
+    "referenceFrame": "MOON_ME_DE421",
+    "elevationDatum": "sphere-1737400m",
+    "noData": null,
+    "source": "LOLA LDEM_75S_240M",
+    "license": "NASA PDS / PGDA data, public domain; credit LRO LOLA (NASA GSFC)"
+   }
+  },
+  "haworth": {
+   "file": "haworth.bin",
+   "width": 257,
+   "height": 257,
+   "spacingM": 78.125,
+   "metadata": {
+    "projection": "local-orthographic-east-south",
+    "latitudeDeg": -86.9272,
+    "longitudeEastDeg": -22.988,
+    "radiusM": 1737400,
+    "referenceFrame": "MOON_ME_DE421",
+    "elevationDatum": "sphere-1737400m",
+    "noData": null,
+    "source": "LOLA LDEM_75S_240M",
+    "license": "NASA PDS / PGDA data, public domain; credit LRO LOLA (NASA GSFC)"
+   }
+  },
+  "mons-mouton-plateau": {
+   "file": "mons-mouton-plateau.bin",
+   "width": 257,
+   "height": 257,
+   "spacingM": 78.125,
+   "metadata": {
+    "projection": "local-orthographic-east-south",
+    "latitudeDeg": -84.2387,
+    "longitudeEastDeg": 29.1177,
+    "radiusM": 1737400,
+    "referenceFrame": "MOON_ME_DE421",
+    "elevationDatum": "sphere-1737400m",
+    "noData": null,
+    "source": "LOLA LDEM_75S_240M",
+    "license": "NASA PDS / PGDA data, public domain; credit LRO LOLA (NASA GSFC)"
+   }
+  },
+  "nobile-rim-1": {
+   "file": "nobile-rim-1.bin",
+   "width": 257,
+   "height": 257,
+   "spacingM": 78.125,
+   "metadata": {
+    "projection": "local-orthographic-east-south",
+    "latitudeDeg": -85.3064,
+    "longitudeEastDeg": 37.0498,
+    "radiusM": 1737400,
+    "referenceFrame": "MOON_ME_DE421",
+    "elevationDatum": "sphere-1737400m",
+    "noData": null,
+    "source": "PGDA LOLA 5 m (Site20) blended into LOLA LDEM_75S_240M",
+    "license": "NASA PDS / PGDA data, public domain; credit LRO LOLA (NASA GSFC)"
+   }
+  },
+  "nobile-rim-2": {
+   "file": "nobile-rim-2.bin",
+   "width": 257,
+   "height": 257,
+   "spacingM": 78.125,
+   "metadata": {
+    "projection": "local-orthographic-east-south",
+    "latitudeDeg": -84.0547,
+    "longitudeEastDeg": 59.2472,
+    "radiusM": 1737400,
+    "referenceFrame": "MOON_ME_DE421",
+    "elevationDatum": "sphere-1737400m",
+    "noData": null,
+    "source": "LOLA LDEM_75S_240M",
+    "license": "NASA PDS / PGDA data, public domain; credit LRO LOLA (NASA GSFC)"
+   }
+  }
+ }
+}

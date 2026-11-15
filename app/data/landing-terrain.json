@@ -1,0 +1,276 @@
+{
+  "version": 1,
+  "referenceFrame": "MOON_ME_DE421",
+  "rows": [
+    {
+      "id": "connecting-ridge",
+      "lat": -89.4398,
+      "lon": 222.83,
+      "slopeDeg": 0.9429607275113057,
+      "baselineM": 100,
+      "resolutionM": 20,
+      "source": "NASA LOLA LDEM_875S_20M; central-difference slope"
+    },
+    {
+      "id": "connecting-ridge-extension",
+      "lat": -89.313,
+      "lon": 245.98,
+      "slopeDeg": 2.2213656702062314,
+      "baselineM": 100,
+      "resolutionM": 20,
+      "source": "NASA LOLA LDEM_875S_20M; central-difference slope"
+    },
+    {
+      "id": "shackleton-rim",
+      "lat": -89.6866,
+      "lon": 197.19,
+      "slopeDeg": 1.1404523116434961,
+      "baselineM": 100,
+      "resolutionM": 20,
+      "source": "NASA LOLA LDEM_875S_20M; central-difference slope"
+    },
+    {
+      "id": "peak-near-shackleton",
+      "lat": -88.8092,
+      "lon": 123.7076,
+      "slopeDeg": 2.562190583439005,
+      "baselineM": 100,
+      "resolutionM": 20,
+      "source": "NASA LOLA LDEM_875S_20M; central-difference slope"
+    },
+    {
+      "id": "de-gerlache-rim",
+      "lat": -88.6705,
+      "lon": 291.6273,
+      "slopeDeg": 2.6230099725584233,
+      "baselineM": 100,
+      "resolutionM": 20,
+      "source": "NASA LOLA LDEM_875S_20M; central-difference slope"
+    },
+    {
+      "id": "malapert-massif",
+      "lat": -85.9685,
+      "lon": 357.6851,
+      "slopeDeg": null,
+      "baselineM": 100,
+      "resolutionM": 1900,
+      "source": "NASA LOLA LDEM16; insufficient resolution for a 100 m footprint"
+    },
+    {
+      "id": "leibnitz-beta-plateau",
+      "lat": -85.4118,
+      "lon": 31.7296,
+      "slopeDeg": null,
+      "baselineM": 100,
+      "resolutionM": 1900,
+      "source": "NASA LOLA LDEM16; insufficient resolution for a 100 m footprint"
+    },
+    {
+      "id": "im2-mons-mouton",
+      "lat": -84.7906,
+      "lon": 29.1957,
+      "slopeDeg": null,
+      "baselineM": 100,
+      "resolutionM": 1900,
+      "source": "NASA LOLA LDEM16; insufficient resolution for a 100 m footprint"
+    },
+    {
+      "id": "im1-malapert-a",
+      "lat": -80.13,
+      "lon": 1.44,
+      "slopeDeg": null,
+      "baselineM": 100,
+      "resolutionM": 1900,
+      "source": "NASA LOLA LDEM16; insufficient resolution for a 100 m footprint"
+    },
+    {
+      "id": "chandrayaan-3",
+      "lat": -69.3741,
+      "lon": 32.32,
+      "slopeDeg": null,
+      "baselineM": 100,
+      "resolutionM": 1900,
+      "source": "NASA LOLA LDEM16; insufficient resolution for a 100 m footprint"
+    },
+    {
+      "id": "apollo-11",
+      "lat": 0.67416,
+      "lon": 23.47314,
+      "slopeDeg": null,
+      "baselineM": 100,
+      "resolutionM": 1900,
+      "source": "NASA LOLA LDEM16; insufficient resolution for a 100 m footprint"
+    },
+    {
+      "id": "peak-near-cabeus-b",
+      "lat": -83.6179,
+      "lon": 291.4021,
+      "slopeDeg": null,
+      "baselineM": 100,
+      "resolutionM": 1900,
+      "source": "NASA LOLA LDEM16; insufficient resolution for a 100 m footprint"
+    },
+    {
+      "id": "haworth",
+      "lat": -86.9272,
+      "lon": 337.012,
+      "slopeDeg": null,
+      "baselineM": 100,
+      "resolutionM": 1900,
+      "source": "NASA LOLA LDEM16; insufficient resolution for a 100 m footprint"
+    },
+    {
+      "id": "mons-mouton-plateau",
+      "lat": -84.2387,
+      "lon": 29.1177,
+      "slopeDeg": null,
+      "baselineM": 100,
+      "resolutionM": 1900,
+      "source": "NASA LOLA LDEM16; insufficient resolution for a 100 m footprint"
+    },
+    {
+      "id": "nobile-rim-1",
+      "lat": -85.3064,
+      "lon": 37.0498,
+      "slopeDeg": null,
+      "baselineM": 100,
+      "resolutionM": 1900,
+      "source": "NASA LOLA LDEM16; insufficient resolution for a 100 m footprint"
+    },
+    {
+      "id": "nobile-rim-2",
+      "lat": -84.0547,
+      "lon": 59.2472,
+      "slopeDeg": null,
+      "baselineM": 100,
+      "resolutionM": 1900,
+      "source": "NASA LOLA LDEM16; insufficient resolution for a 100 m footprint"
+    },
+    {
+      "id": "apollo-12",
+      "lat": -3.0128,
+      "lon": 336.5781,
+      "slopeDeg": null,
+      "baselineM": 100,
+      "resolutionM": 1900,
+      "source": "NASA LOLA LDEM16; insufficient resolution for a 100 m footprint"
+    },
+    {
+      "id": "apollo-14",
+      "lat": -3.64589,
+      "lon": 342.52806,
+      "slopeDeg": null,
+      "baselineM": 100,
+      "resolutionM": 1900,
+      "source": "NASA LOLA LDEM16; insufficient resolution for a 100 m footprint"
+    },
+    {
+      "id": "apollo-15",
+      "lat": 26.13239,
+      "lon": 3.6333,
+      "slopeDeg": null,
+      "baselineM": 100,
+      "resolutionM": 1900,
+      "source": "NASA LOLA LDEM16; insufficient resolution for a 100 m footprint"
+    },
+    {
+      "id": "apollo-16",
+      "lat": -8.9734,
+      "lon": 15.5011,
+      "slopeDeg": null,
+      "baselineM": 100,
+      "resolutionM": 1900,
+      "source": "NASA LOLA LDEM16; insufficient resolution for a 100 m footprint"
+    },
+    {
+      "id": "apollo-17",
+      "lat": 20.1911,
+      "lon": 30.7723,
+      "slopeDeg": null,
+      "baselineM": 100,
+      "resolutionM": 1900,
+      "source": "NASA LOLA LDEM16; insufficient resolution for a 100 m footprint"
+    },
+    {
+      "id": "luna-24",
+      "lat": 12.7142,
+      "lon": 62.2129,
+      "slopeDeg": null,
+      "baselineM": 100,
+      "resolutionM": 1900,
+      "source": "NASA LOLA LDEM16; insufficient resolution for a 100 m footprint"
+    },
+    {
+      "id": "change-3",
+      "lat": 44.1214,
+      "lon": 340.4883,
+      "slopeDeg": null,
+      "baselineM": 100,
+      "resolutionM": 1900,
+      "source": "NASA LOLA LDEM16; insufficient resolution for a 100 m footprint"
+    },
+    {
+      "id": "change-4",
+      "lat": -45.4561,
+      "lon": 177.5885,
+      "slopeDeg": null,
+      "baselineM": 100,
+      "resolutionM": 1900,
+      "source": "NASA LOLA LDEM16; insufficient resolution for a 100 m footprint"
+    },
+    {
+      "id": "change-5",
+      "lat": 43.0576,
+      "lon": 308.0839,
+      "slopeDeg": null,
+      "baselineM": 100,
+      "resolutionM": 1900,
+      "source": "NASA LOLA LDEM16; insufficient resolution for a 100 m footprint"
+    },
+    {
+      "id": "change-6",
+      "lat": -41.6385,
+      "lon": 206.0148,
+      "slopeDeg": null,
+      "baselineM": 100,
+      "resolutionM": 1900,
+      "source": "NASA LOLA LDEM16; insufficient resolution for a 100 m footprint"
+    },
+    {
+      "id": "slim",
+      "lat": -13.316,
+      "lon": 25.251,
+      "slopeDeg": null,
+      "baselineM": 100,
+      "resolutionM": 1900,
+      "source": "NASA LOLA LDEM16; insufficient resolution for a 100 m footprint"
+    },
+    {
+      "id": "blue-ghost-1",
+      "lat": 18.5623,
+      "lon": 61.8103,
+      "slopeDeg": null,
+      "baselineM": 100,
+      "resolutionM": 1900,
+      "source": "NASA LOLA LDEM16; insufficient resolution for a 100 m footprint"
+    },
+    {
+      "id": "im3-reiner-gamma",
+      "lat": 7.585,
+      "lon": 301.275,
+      "slopeDeg": null,
+      "baselineM": 100,
+      "resolutionM": 1900,
+      "source": "NASA LOLA LDEM16; insufficient resolution for a 100 m footprint"
+    },
+    {
+      "id": "blue-ghost-3",
+      "lat": 36.45715,
+      "lon": 319.20398,
+      "slopeDeg": null,
+      "baselineM": 100,
+      "resolutionM": 1900,
+      "source": "NASA LOLA LDEM16; insufficient resolution for a 100 m footprint"
+    }
+  ]
+}

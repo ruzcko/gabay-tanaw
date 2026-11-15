@@ -1,0 +1,494 @@
+{
+ "uvConvention": "u = 0 at column 0 (left), v = 1 at row 0 (top), as Three.js loads images (flipY); lat and lon in degrees, lon east",
+ "textures": {
+  "slope-global": {
+   "file": "slope-global.png",
+   "layer": "slope",
+   "width": 2880,
+   "height": 1440,
+   "projection": {
+    "name": "equirectangular",
+    "lonRangeDeg": [
+     -180,
+     180
+    ],
+    "latRangeDeg": [
+     -90,
+     90
+    ]
+   },
+   "uv": "u = lon / 360° + 0.5 (lon east, −180° to 180°), v = lat / 180° + 0.5, as globe.js lonLatUv; pixel centres at lon = −180° + (column + 0.5) / 8, lat = 90° − (row + 0.5) / 8",
+   "pixelDeg": 0.125,
+   "slopeBaselineM": 3790.4,
+   "slopeMethod": "heights 1895.2 m north, south, east and west of each 16 px/degree sample along the surface (bilinear), so one 3790.4 m baseline both ways at every latitude; then the mean of 2 × 2 samples per pixel",
+   "source": "LOLA global heights, 16 px/degree (NASA SVS CGI Moon Kit), as the observer's tiles"
+  },
+  "slope-south": {
+   "file": "slope-south.png",
+   "layer": "slope",
+   "width": 2048,
+   "height": 2048,
+   "projection": {
+    "name": "south polar stereographic",
+    "proj": "+proj=stere +lat_0=-90 +lon_0=0 +R=1737400 +units=m",
+    "halfExtentM": 457440,
+    "halfExtentRadii": 0.26329
+   },
+   "uv": "r = 2 tan(45° + lat/2) in Moon radii; u = 0.5 + r sin(lon) / (2 halfExtentRadii), v = 0.5 + r cos(lon) / (2 halfExtentRadii); lon 0 towards row 0, lon 90° E to the right",
+   "pixelM": 446.71875,
+   "slopeBaselineM": 480.0,
+   "slopeMethod": "central differences on the 240 m grid, corrected for the map's scale, then the area-weighted mean per pixel",
+   "source": "LOLA LDEM_75S_240M"
+  },
+  "sunlight-south": {
+   "file": "sunlight-south.png",
+   "layer": "sunlight",
+   "width": 2048,
+   "height": 2048,
+   "projection": {
+    "name": "south polar stereographic",
+    "proj": "+proj=stere +lat_0=-90 +lon_0=0 +R=1737400 +units=m",
+    "halfExtentM": 770400,
+    "halfExtentRadii": 0.44342
+   },
+   "uv": "r = 2 tan(45° + lat/2) in Moon radii; u = 0.5 + r sin(lon) / (2 halfExtentRadii), v = 0.5 + r cos(lon) / (2 halfExtentRadii); lon 0 towards row 0, lon 90° E to the right",
+   "pixelM": 752.34375,
+   "source": "NASA PGDA AVGVISIB_65S_240M_201608"
+  },
+  "shadow-south": {
+   "file": "shadow-south.png",
+   "layer": "shadow",
+   "width": 2048,
+   "height": 2048,
+   "projection": {
+    "name": "south polar stereographic",
+    "proj": "+proj=stere +lat_0=-90 +lon_0=0 +R=1737400 +units=m",
+    "halfExtentM": 770400,
+    "halfExtentRadii": 0.44342
+   },
+   "uv": "r = 2 tan(45° + lat/2) in Moon radii; u = 0.5 + r sin(lon) / (2 halfExtentRadii), v = 0.5 + r cos(lon) / (2 halfExtentRadii); lon 0 towards row 0, lon 90° E to the right",
+   "pixelM": 752.34375,
+   "source": "NASA PGDA AVGVISIB_65S_240M_201608"
+  },
+  "sunlight-north": {
+   "file": "sunlight-north.png",
+   "layer": "sunlight",
+   "width": 2048,
+   "height": 2048,
+   "projection": {
+    "name": "north polar stereographic",
+    "proj": "+proj=stere +lat_0=90 +lon_0=0 +R=1737400 +units=m",
+    "halfExtentM": 770400,
+    "halfExtentRadii": 0.44342
+   },
+   "uv": "r = 2 tan(45° − lat/2) in Moon radii; u = 0.5 + r sin(lon) / (2 halfExtentRadii), v = 0.5 − r cos(lon) / (2 halfExtentRadii); lon 180° towards row 0, lon 90° E to the right",
+   "pixelM": 752.34375,
+   "source": "NASA PGDA AVGVISIB_65N_240M_201608"
+  },
+  "shadow-north": {
+   "file": "shadow-north.png",
+   "layer": "shadow",
+   "width": 2048,
+   "height": 2048,
+   "projection": {
+    "name": "north polar stereographic",
+    "proj": "+proj=stere +lat_0=90 +lon_0=0 +R=1737400 +units=m",
+    "halfExtentM": 770400,
+    "halfExtentRadii": 0.44342
+   },
+   "uv": "r = 2 tan(45° − lat/2) in Moon radii; u = 0.5 + r sin(lon) / (2 halfExtentRadii), v = 0.5 − r cos(lon) / (2 halfExtentRadii); lon 180° towards row 0, lon 90° E to the right",
+   "pixelM": 752.34375,
+   "source": "NASA PGDA AVGVISIB_65N_240M_201608"
+  }
+ },
+ "layers": {
+  "slope": {
+   "globe": {
+    "global": "slope-global.png",
+    "south": "slope-south.png",
+    "southHalf": 0.26329,
+    "southEdge": 15
+   },
+   "siteChannel": "R",
+   "encoding": "slope band index",
+   "bands": [
+    {
+     "value": 0,
+     "minDeg": 0,
+     "maxDeg": 5,
+     "label": "Under 5°"
+    },
+    {
+     "value": 1,
+     "minDeg": 5,
+     "maxDeg": 10,
+     "label": "5–10°"
+    },
+    {
+     "value": 2,
+     "minDeg": 10,
+     "maxDeg": 20,
+     "label": "10–20°"
+    },
+    {
+     "value": 3,
+     "minDeg": 20,
+     "maxDeg": 90,
+     "label": "20° and over"
+    }
+   ],
+   "landingLimitDeg": 10,
+   "landingLimitLabel": "NASA Artemis landing limit: under 10° over 100 m",
+   "scaleNote": "Globe slope is over kilometres (3.8 km in slope-global, 480 m in slope-south), so it is much gentler than slope over 100 m",
+   "noData": 255,
+   "noDataLabel": "No data",
+   "source": "LOLA global 16 px/degree heights and LDEM_75S_240M; site tiles: PGDA 5 m maps (Barker et al. 2021), LDEM_75S_240M, SLDEM2015 and LDEM_60S_240M"
+  },
+  "sunlight": {
+   "globe": {
+    "south": "sunlight-south.png",
+    "north": "sunlight-north.png",
+    "southHalf": 0.44342,
+    "northHalf": 0.44342,
+    "southEdge": 25,
+    "northEdge": 25
+   },
+   "siteChannel": "G",
+   "encoding": "percent of time the Sun is visible, long-term average at ground level (average visible fraction of the Sun's disc)",
+   "values": {
+    "min": 0,
+    "max": 100,
+    "unit": "%"
+   },
+   "coverageDeg": {
+    "south": -65,
+    "north": 65
+   },
+   "coverageNote": "Complete from 65° to each pole; the corners of each square reach about 55° where the map has values. Between 65° S and 65° N there is no published map.",
+   "noData": 255,
+   "noDataLabel": "No published map here",
+   "source": "NASA PGDA lunar polar illumination (Mazarico et al. 2011), 240 m maps to 65° S and 65° N; site tiles use the 60 m map where it covers the whole tile"
+  },
+  "shadow": {
+   "globe": {
+    "south": "shadow-south.png",
+    "north": "shadow-north.png",
+    "southHalf": 0.44342,
+    "northHalf": 0.44342,
+    "southEdge": 25,
+    "northEdge": 25
+   },
+   "siteChannel": "B",
+   "encoding": "permanent shadow flag (globe: at least half of the 240 m cells never sunlit)",
+   "values": [
+    {
+     "value": 0,
+     "label": "Sunlit at some time"
+    },
+    {
+     "value": 1,
+     "label": "Permanently shadowed"
+    }
+   ],
+   "coverageDeg": {
+    "south": -65,
+    "north": 65
+   },
+   "coverageNote": "Complete from 65° to each pole; the corners of each square reach about 55° where the map has values. Between 65° S and 65° N there is no published map.",
+   "noData": 255,
+   "noDataLabel": "No published map here",
+   "source": "NASA PGDA lunar polar illumination (Mazarico et al. 2011)"
+  }
+ },
+ "sites": {
+  "grid": {
+   "width": 257,
+   "height": 257,
+   "spacingM": 78.125,
+   "projection": "local-orthographic-east-south",
+   "rows": "row 0 north",
+   "columns": "column 0 west"
+  },
+  "tiles": {
+   "connecting-ridge": {
+    "file": "sites/connecting-ridge.png",
+    "grid": "../terrain/index.json",
+    "slopeBaselineM": 100.0,
+    "slopeSourceResolutionM": [
+     5,
+     240
+    ],
+    "sunlightMap": "60 m"
+   },
+   "connecting-ridge-extension": {
+    "file": "sites/connecting-ridge-extension.png",
+    "grid": "../terrain/index.json",
+    "slopeBaselineM": 100.0,
+    "slopeSourceResolutionM": [
+     5,
+     240
+    ],
+    "sunlightMap": "60 m"
+   },
+   "shackleton-rim": {
+    "file": "sites/shackleton-rim.png",
+    "grid": "../terrain/index.json",
+    "slopeBaselineM": 100.0,
+    "slopeSourceResolutionM": [
+     5,
+     240
+    ],
+    "sunlightMap": "60 m"
+   },
+   "peak-near-shackleton": {
+    "file": "sites/peak-near-shackleton.png",
+    "grid": "../terrain/index.json",
+    "slopeBaselineM": 100.0,
+    "slopeSourceResolutionM": [
+     5,
+     240
+    ],
+    "sunlightMap": "60 m"
+   },
+   "de-gerlache-rim": {
+    "file": "sites/de-gerlache-rim.png",
+    "grid": "../terrain/index.json",
+    "slopeBaselineM": 100.0,
+    "slopeSourceResolutionM": [
+     5,
+     240
+    ],
+    "sunlightMap": "60 m"
+   },
+   "malapert-massif": {
+    "file": "sites/malapert-massif.png",
+    "grid": "../terrain/index.json",
+    "slopeBaselineM": 100.0,
+    "slopeSourceResolutionM": [
+     5,
+     240
+    ],
+    "sunlightMap": "60 m"
+   },
+   "leibnitz-beta-plateau": {
+    "file": "sites/leibnitz-beta-plateau.png",
+    "grid": "../terrain/index.json",
+    "slopeBaselineM": 100.0,
+    "slopeSourceResolutionM": [
+     5,
+     240
+    ],
+    "sunlightMap": "60 m"
+   },
+   "im2-mons-mouton": {
+    "file": "sites/im2-mons-mouton.png",
+    "grid": "../terrain/index.json",
+    "slopeBaselineM": 100.0,
+    "slopeSourceResolutionM": [
+     5,
+     240
+    ],
+    "sunlightMap": "60 m"
+   },
+   "im1-malapert-a": {
+    "file": "sites/im1-malapert-a.png",
+    "grid": "../terrain/index.json",
+    "slopeBaselineM": 100.0,
+    "slopeSourceResolutionM": [
+     240
+    ],
+    "sunlightMap": "240 m"
+   },
+   "chandrayaan-3": {
+    "file": "sites/chandrayaan-3.png",
+    "grid": "../../assets/observer/terrain/catalog/index.json",
+    "slopeBaselineM": 468.75,
+    "slopeSourceResolutionM": [
+     240
+    ],
+    "sunlightMap": "240 m"
+   },
+   "apollo-11": {
+    "file": "sites/apollo-11.png",
+    "grid": "../../assets/observer/terrain/catalog/index.json",
+    "slopeBaselineM": 468.75,
+    "slopeSourceResolutionM": [
+     236.9
+    ],
+    "sunlightMap": null
+   },
+   "peak-near-cabeus-b": {
+    "file": "sites/peak-near-cabeus-b.png",
+    "grid": "../terrain/index.json",
+    "slopeBaselineM": 100.0,
+    "slopeSourceResolutionM": [
+     240
+    ],
+    "sunlightMap": "240 m"
+   },
+   "haworth": {
+    "file": "sites/haworth.png",
+    "grid": "../terrain/index.json",
+    "slopeBaselineM": 100.0,
+    "slopeSourceResolutionM": [
+     240
+    ],
+    "sunlightMap": "60 m"
+   },
+   "mons-mouton-plateau": {
+    "file": "sites/mons-mouton-plateau.png",
+    "grid": "../terrain/index.json",
+    "slopeBaselineM": 100.0,
+    "slopeSourceResolutionM": [
+     240
+    ],
+    "sunlightMap": "240 m"
+   },
+   "nobile-rim-1": {
+    "file": "sites/nobile-rim-1.png",
+    "grid": "../terrain/index.json",
+    "slopeBaselineM": 100.0,
+    "slopeSourceResolutionM": [
+     5,
+     240
+    ],
+    "sunlightMap": "60 m"
+   },
+   "nobile-rim-2": {
+    "file": "sites/nobile-rim-2.png",
+    "grid": "../terrain/index.json",
+    "slopeBaselineM": 100.0,
+    "slopeSourceResolutionM": [
+     240
+    ],
+    "sunlightMap": "240 m"
+   },
+   "apollo-12": {
+    "file": "sites/apollo-12.png",
+    "grid": "../../assets/observer/terrain/catalog/index.json",
+    "slopeBaselineM": 468.75,
+    "slopeSourceResolutionM": [
+     236.9
+    ],
+    "sunlightMap": null
+   },
+   "apollo-14": {
+    "file": "sites/apollo-14.png",
+    "grid": "../../assets/observer/terrain/catalog/index.json",
+    "slopeBaselineM": 468.75,
+    "slopeSourceResolutionM": [
+     236.9
+    ],
+    "sunlightMap": null
+   },
+   "apollo-15": {
+    "file": "sites/apollo-15.png",
+    "grid": "../../assets/observer/terrain/catalog/index.json",
+    "slopeBaselineM": 468.75,
+    "slopeSourceResolutionM": [
+     236.9
+    ],
+    "sunlightMap": null
+   },
+   "apollo-16": {
+    "file": "sites/apollo-16.png",
+    "grid": "../../assets/observer/terrain/catalog/index.json",
+    "slopeBaselineM": 468.75,
+    "slopeSourceResolutionM": [
+     236.9
+    ],
+    "sunlightMap": null
+   },
+   "apollo-17": {
+    "file": "sites/apollo-17.png",
+    "grid": "../../assets/observer/terrain/catalog/index.json",
+    "slopeBaselineM": 468.75,
+    "slopeSourceResolutionM": [
+     236.9
+    ],
+    "sunlightMap": null
+   },
+   "luna-24": {
+    "file": "sites/luna-24.png",
+    "grid": "../../assets/observer/terrain/catalog/index.json",
+    "slopeBaselineM": 468.75,
+    "slopeSourceResolutionM": [
+     236.9
+    ],
+    "sunlightMap": null
+   },
+   "change-3": {
+    "file": "sites/change-3.png",
+    "grid": "../../assets/observer/terrain/catalog/index.json",
+    "slopeBaselineM": 468.75,
+    "slopeSourceResolutionM": [
+     236.9
+    ],
+    "sunlightMap": null
+   },
+   "change-4": {
+    "file": "sites/change-4.png",
+    "grid": "../../assets/observer/terrain/catalog/index.json",
+    "slopeBaselineM": 468.75,
+    "slopeSourceResolutionM": [
+     236.9
+    ],
+    "sunlightMap": null
+   },
+   "change-5": {
+    "file": "sites/change-5.png",
+    "grid": "../../assets/observer/terrain/catalog/index.json",
+    "slopeBaselineM": 468.75,
+    "slopeSourceResolutionM": [
+     236.9
+    ],
+    "sunlightMap": null
+   },
+   "change-6": {
+    "file": "sites/change-6.png",
+    "grid": "../../assets/observer/terrain/catalog/index.json",
+    "slopeBaselineM": 468.75,
+    "slopeSourceResolutionM": [
+     236.9
+    ],
+    "sunlightMap": null
+   },
+   "slim": {
+    "file": "sites/slim.png",
+    "grid": "../../assets/observer/terrain/catalog/index.json",
+    "slopeBaselineM": 468.75,
+    "slopeSourceResolutionM": [
+     236.9
+    ],
+    "sunlightMap": null
+   },
+   "blue-ghost-1": {
+    "file": "sites/blue-ghost-1.png",
+    "grid": "../../assets/observer/terrain/catalog/index.json",
+    "slopeBaselineM": 468.75,
+    "slopeSourceResolutionM": [
+     236.9
+    ],
+    "sunlightMap": null
+   },
+   "im3-reiner-gamma": {
+    "file": "sites/im3-reiner-gamma.png",
+    "grid": "../../assets/observer/terrain/catalog/index.json",
+    "slopeBaselineM": 468.75,
+    "slopeSourceResolutionM": [
+     236.9
+    ],
+    "sunlightMap": null
+   },
+   "blue-ghost-3": {
+    "file": "sites/blue-ghost-3.png",
+    "grid": "../../assets/observer/terrain/catalog/index.json",
+    "slopeBaselineM": 468.75,
+    "slopeSourceResolutionM": [
+     236.9
+    ],
+    "sunlightMap": null
+   }
+  }
+ }
+}

@@ -1,0 +1,66 @@
+{
+  "im2-mons-mouton": {
+    "landingUtc": "2025-03-06T17:30:00Z",
+    "landingSource": "NASA NSSDCA, Intuitive Machines 2 (PRIME 1): https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=PRIME-1"
+  },
+  "im1-malapert-a": {
+    "landingUtc": "2024-02-22T23:23:53Z",
+    "landingSource": "LROC (NASA/ASU), Intuitive Machines IM-1 On The Moon!: https://lroc.im-ldi.com/images/1360"
+  },
+  "chandrayaan-3": {
+    "landingUtc": "2023-08-23T12:33:00Z",
+    "landingSource": "NASA NSSDCA, Chandrayaan 3 (archived): https://web.archive.org/web/20250814165436/https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2023-098A"
+  },
+  "apollo-11": {
+    "landingUtc": "1969-07-20T20:17:40Z",
+    "landingSource": "NASA NSSDCA, Apollo 11 Lunar Module: https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+  },
+  "apollo-12": {
+    "landingUtc": "1969-11-19T06:54:35Z",
+    "landingSource": "NASA NSSDCA, Apollo 12 Lunar Module: https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
+  },
+  "apollo-14": {
+    "landingUtc": "1971-02-05T09:18:11Z",
+    "landingSource": "NASA NSSDCA, Apollo 14 Lunar Module: https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-008C"
+  },
+  "apollo-15": {
+    "landingUtc": "1971-07-30T22:16:29Z",
+    "landingSource": "NASA NSSDCA, Apollo 15 Lunar Module: https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C"
+  },
+  "apollo-16": {
+    "landingUtc": "1972-04-21T02:23:35Z",
+    "landingSource": "NASA NSSDCA, Apollo 16 Lunar Module: https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1972-031C"
+  },
+  "apollo-17": {
+    "landingUtc": "1972-12-11T19:54:57Z",
+    "landingSource": "NASA NSSDCA, Apollo 17 Lunar Module: https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1972-096C"
+  },
+  "luna-24": {
+    "landingUtc": "1976-08-18T06:36:00Z",
+    "landingSource": "NASA SP-2018-4041 Beyond Earth (Siddiqi), Luna 24: https://www.nasa.gov/wp-content/uploads/2018/09/beyond-earth-tagged.pdf"
+  },
+  "change-3": {
+    "landingUtc": "2013-12-14T13:11:00Z",
+    "landingSource": "NASA NSSDCA, Chang'e 3 (archived): https://web.archive.org/web/20250812161854/https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2013-070A"
+  },
+  "change-4": {
+    "landingUtc": "2019-01-03T02:26:00Z",
+    "landingSource": "NASA NSSDCA, Chang'e 4 (archived): https://web.archive.org/web/20250810214311/https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2018-103A"
+  },
+  "change-5": {
+    "landingUtc": "2020-12-01T15:13:00Z",
+    "landingSource": "NASA NSSDCA, Chang'e 5 (archived): https://web.archive.org/web/20250810214310/https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2020-087A"
+  },
+  "change-6": {
+    "landingUtc": "2024-06-01T22:23:00Z",
+    "landingSource": "NASA NSSDCA, Chang'e 6 (archived): https://web.archive.org/web/20250804213505/https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=CHANG-E-6"
+  },
+  "slim": {
+    "landingUtc": "2024-01-19T15:20:00Z",
+    "landingSource": "JAXA press release, 20 Jan 2024: https://global.jaxa.jp/press/2024/01/20240120-1_e.html"
+  },
+  "blue-ghost-1": {
+    "landingUtc": "2025-03-02T08:34:00Z",
+    "landingSource": "NASA news release: https://www.nasa.gov/news-release/touchdown-carrying-nasa-science-fireflys-blue-ghost-lands-on-moon/"
+  }
+}

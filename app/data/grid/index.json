@@ -1,0 +1,22 @@
+{
+  "spacingM": 500,
+  "n": 5,
+  "start": "2026-12-01",
+  "days": 365,
+  "sites": {
+    "connecting-ridge": "connecting-ridge.json",
+    "connecting-ridge-extension": "connecting-ridge-extension.json",
+    "shackleton-rim": "shackleton-rim.json",
+    "peak-near-shackleton": "peak-near-shackleton.json",
+    "de-gerlache-rim": "de-gerlache-rim.json",
+    "malapert-massif": "malapert-massif.json",
+    "leibnitz-beta-plateau": "leibnitz-beta-plateau.json",
+    "im2-mons-mouton": "im2-mons-mouton.json",
+    "im1-malapert-a": "im1-malapert-a.json",
+    "peak-near-cabeus-b": "peak-near-cabeus-b.json",
+    "haworth": "haworth.json",
+    "mons-mouton-plateau": "mons-mouton-plateau.json",
+    "nobile-rim-1": "nobile-rim-1.json",
+    "nobile-rim-2": "nobile-rim-2.json"
+  }
+}
