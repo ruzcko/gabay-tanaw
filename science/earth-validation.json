@@ -1,0 +1,415 @@
+{
+  "spiceypy": "8.4.0",
+  "kernels": [
+    {
+      "name": "naif0012.tls",
+      "sha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b"
+    },
+    {
+      "name": "de440s.bsp",
+      "sha256": "c1c7feeab882263fc493a9d5a5b2ddd71b54826cdf65d8d17a76126b260a49f2"
+    },
+    {
+      "name": "moon_pa_de440_200625.bpc",
+      "sha256": "60cd55aa401ea2ea97360636f567554bfe4e37bb829f901b4460a455dfaf783f"
+    },
+    {
+      "name": "moon_de440_250416.tf",
+      "sha256": "a47c71e9c9f33796bdafb2c9d69a7ee447b6016ecad80f71cd6f3e479f9cf768"
+    }
+  ],
+  "frame": "MOON_ME_DE440_ME421",
+  "correction": "CN+S; no gravitational deflection",
+  "published": [
+    {
+      "id": "connecting-ridge",
+      "referenceFrame": "unverified",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.0068891225979290475,
+      "maxRangeErrorKm": 0.4988451981334947,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 1
+    },
+    {
+      "id": "connecting-ridge-extension",
+      "referenceFrame": "unverified",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.006857828285441586,
+      "maxRangeErrorKm": 0.5000202027149498,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 1
+    },
+    {
+      "id": "shackleton-rim",
+      "referenceFrame": "unverified",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.006848137524496258,
+      "maxRangeErrorKm": 0.49990470480406657,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 0
+    },
+    {
+      "id": "peak-near-shackleton",
+      "referenceFrame": "MOON_ME_DE421",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.006760359236367063,
+      "maxRangeErrorKm": 0.49764035921543837,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 0
+    },
+    {
+      "id": "de-gerlache-rim",
+      "referenceFrame": "MOON_ME_DE421",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.006901997858286608,
+      "maxRangeErrorKm": 0.4980515689239837,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 0
+    },
+    {
+      "id": "malapert-massif",
+      "referenceFrame": "MOON_ME_DE421",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.00696053371789453,
+      "maxRangeErrorKm": 0.4993204323691316,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 0
+    },
+    {
+      "id": "leibnitz-beta-plateau",
+      "referenceFrame": "MOON_ME_DE421",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.006751847087290441,
+      "maxRangeErrorKm": 0.49828851834172383,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 1
+    },
+    {
+      "id": "im2-mons-mouton",
+      "referenceFrame": "unverified",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.006684016316814819,
+      "maxRangeErrorKm": 0.49906760442536324,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 1
+    },
+    {
+      "id": "im1-malapert-a",
+      "referenceFrame": "unverified",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.006881603691267798,
+      "maxRangeErrorKm": 0.49921375792473555,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 0
+    },
+    {
+      "id": "chandrayaan-3",
+      "referenceFrame": "unverified",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.00660479851378465,
+      "maxRangeErrorKm": 0.49728710716590285,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 0
+    },
+    {
+      "id": "apollo-11",
+      "referenceFrame": "MOON_ME_DE421",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.0051970828598562665,
+      "maxRangeErrorKm": 0.4998955783667043,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 0
+    },
+    {
+      "id": "peak-near-cabeus-b",
+      "referenceFrame": "MOON_ME_DE421",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.0066798322490320685,
+      "maxRangeErrorKm": 0.4997484483756125,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 0
+    },
+    {
+      "id": "haworth",
+      "referenceFrame": "MOON_ME_DE421",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.006647511484921406,
+      "maxRangeErrorKm": 0.4986120576504618,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 0
+    },
+    {
+      "id": "mons-mouton-plateau",
+      "referenceFrame": "MOON_ME_DE421",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.006725388762674435,
+      "maxRangeErrorKm": 0.49955493916058913,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 2
+    },
+    {
+      "id": "nobile-rim-1",
+      "referenceFrame": "MOON_ME_DE421",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.00662445137829922,
+      "maxRangeErrorKm": 0.49820224283030257,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 0
+    },
+    {
+      "id": "nobile-rim-2",
+      "referenceFrame": "MOON_ME_DE421",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.006914015856812451,
+      "maxRangeErrorKm": 0.4995443279040046,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 0
+    },
+    {
+      "id": "apollo-12",
+      "referenceFrame": "MOON_ME_DE421",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.005278707556473677,
+      "maxRangeErrorKm": 0.4993986655026674,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 0
+    },
+    {
+      "id": "apollo-14",
+      "referenceFrame": "MOON_ME_DE421",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.005254421595527734,
+      "maxRangeErrorKm": 0.49845579953398556,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 0
+    },
+    {
+      "id": "apollo-15",
+      "referenceFrame": "MOON_ME_DE421",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.00561533701213798,
+      "maxRangeErrorKm": 0.4980257675051689,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 0
+    },
+    {
+      "id": "apollo-16",
+      "referenceFrame": "MOON_ME_DE421",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.005265176668556614,
+      "maxRangeErrorKm": 0.49678950873203576,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 0
+    },
+    {
+      "id": "apollo-17",
+      "referenceFrame": "MOON_ME_DE421",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.005573700308716221,
+      "maxRangeErrorKm": 0.49760407535359263,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 0
+    },
+    {
+      "id": "luna-24",
+      "referenceFrame": "MOON_ME_DE421",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.0062173982480264725,
+      "maxRangeErrorKm": 0.4991179269272834,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 0
+    },
+    {
+      "id": "change-3",
+      "referenceFrame": "MOON_ME_DE421",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.006043035210236813,
+      "maxRangeErrorKm": 0.4996362557867542,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 0
+    },
+    {
+      "id": "change-4",
+      "referenceFrame": "unverified",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.005697092254313891,
+      "maxRangeErrorKm": 0.4995890731806867,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 0
+    },
+    {
+      "id": "change-5",
+      "referenceFrame": "unverified",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.006487027010397852,
+      "maxRangeErrorKm": 0.499372506106738,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 0
+    },
+    {
+      "id": "change-6",
+      "referenceFrame": "unverified",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.006273893447182459,
+      "maxRangeErrorKm": 0.49760978057747707,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 0
+    },
+    {
+      "id": "slim",
+      "referenceFrame": "unverified",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.005605624828732185,
+      "maxRangeErrorKm": 0.49692161742132157,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 0
+    },
+    {
+      "id": "blue-ghost-1",
+      "referenceFrame": "unverified",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.006589083185358852,
+      "maxRangeErrorKm": 0.49970411614049226,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 0
+    },
+    {
+      "id": "im3-reiner-gamma",
+      "referenceFrame": "unverified",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.006257511216388597,
+      "maxRangeErrorKm": 0.498856900841929,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 0
+    },
+    {
+      "id": "blue-ghost-2",
+      "referenceFrame": "unverified",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.005282545015373616,
+      "maxRangeErrorKm": 0.4978438824764453,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 0
+    },
+    {
+      "id": "blue-ghost-3",
+      "referenceFrame": "unverified",
+      "samples": 365,
+      "maxDirectionErrorDeg": 0.006343323966111634,
+      "maxRangeErrorKm": 0.500973139249254,
+      "visibilityDisagreements": 0,
+      "within001DegOfSkyline": 0
+    }
+  ],
+  "rebuilt": [
+    {
+      "id": "malapert-massif",
+      "altitudeKm": 4.98988725389259,
+      "fullPrecisionSamples": 745,
+      "maxDirectionErrorDeg": 5.422425718372969e-07,
+      "maxRangeErrorKm": 0.00018377893138676882,
+      "sampling": {
+        "10": {
+          "events": 3,
+          "referenceEvents": 3,
+          "maxErrorSeconds": 0.031627
+        },
+        "1": {
+          "events": 3,
+          "referenceEvents": 3,
+          "maxErrorSeconds": 0.002788
+        }
+      },
+      "horizonsEventMaxErrorSeconds": 0.028781,
+      "changeInRoundedDailyMinutes": {
+        "sun": 2.4,
+        "earth": -9.0
+      },
+      "earthHours": {
+        "center": 408.32573984722217,
+        "sphericalAnyDisc": 458.5367408786111,
+        "sphericalFullDisc": 361.00289561500006
+      },
+      "earthVariantHours": {
+        "legacy": 408.46613944222224,
+        "heightOnly": 408.42823586916666,
+        "unroundedOneDegree": 408.2913080038889,
+        "quarterDegree": 408.3257515436111
+      }
+    },
+    {
+      "id": "leibnitz-beta-plateau",
+      "altitudeKm": 6.458183085072104,
+      "fullPrecisionSamples": 745,
+      "maxDirectionErrorDeg": 5.41553843723394e-07,
+      "maxRangeErrorKm": 0.00018406385788694024,
+      "sampling": {
+        "10": {
+          "events": 3,
+          "referenceEvents": 3,
+          "maxErrorSeconds": 0.081584
+        },
+        "1": {
+          "events": 3,
+          "referenceEvents": 3,
+          "maxErrorSeconds": 0.003578
+        }
+      },
+      "horizonsEventMaxErrorSeconds": 0.07855,
+      "changeInRoundedDailyMinutes": {
+        "sun": 0.0,
+        "earth": 17.4
+      },
+      "earthHours": {
+        "center": 431.6469282852778,
+        "sphericalAnyDisc": 485.6992306188889,
+        "sphericalFullDisc": 381.4694275727778
+      },
+      "earthVariantHours": {
+        "legacy": 431.3645178991667,
+        "heightOnly": 431.31210923666663,
+        "unroundedOneDegree": 431.39280151055556,
+        "quarterDegree": 431.6469776852778
+      }
+    },
+    {
+      "id": "apollo-11",
+      "altitudeKm": 0.002,
+      "fullPrecisionSamples": 745,
+      "maxDirectionErrorDeg": 5.430791569163501e-07,
+      "maxRangeErrorKm": 0.00018874002853408456,
+      "sampling": {
+        "10": {
+          "events": 0,
+          "referenceEvents": 0,
+          "maxErrorSeconds": 0
+        },
+        "1": {
+          "events": 0,
+          "referenceEvents": 0,
+          "maxErrorSeconds": 0
+        }
+      },
+      "horizonsEventMaxErrorSeconds": 0,
+      "changeInRoundedDailyMinutes": {
+        "sun": 0.0,
+        "earth": 0.0
+      },
+      "earthHours": {
+        "center": 744.0,
+        "sphericalAnyDisc": 744.0,
+        "sphericalFullDisc": 744.0
+      },
+      "earthVariantHours": {
+        "legacy": 744.0,
+        "heightOnly": 744.0,
+        "unroundedOneDegree": 744.0,
+        "quarterDegree": 744.0
+      }
+    }
+  ],
+  "controls": {
+    "nearSideElevationDeg": 83.16516560846713,
+    "farSideElevationDeg": -83.22781619074254
+  }
+}

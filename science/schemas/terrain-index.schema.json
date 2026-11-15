@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "sites": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+\\.bin$"
+          },
+          "width": {
+            "type": "integer",
+            "minimum": 3,
+            "maximum": 513
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 3,
+            "maximum": 513
+          },
+          "spacingM": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "metadata": {
+            "type": "object",
+            "properties": {
+              "projection": {
+                "const": "local-orthographic-east-south"
+              },
+              "latitudeDeg": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "longitudeEastDeg": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              },
+              "radiusM": {
+                "const": 1737400
+              },
+              "referenceFrame": {
+                "const": "MOON_ME_DE421"
+              },
+              "elevationDatum": {
+                "const": "sphere-1737400m"
+              },
+              "noData": {
+                "type": ["number", "null"]
+              },
+              "source": {
+                "type": "string",
+                "minLength": 1
+              },
+              "license": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "projection",
+              "latitudeDeg",
+              "longitudeEastDeg",
+              "radiusM",
+              "referenceFrame",
+              "elevationDatum",
+              "noData",
+              "source",
+              "license"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "file",
+          "width",
+          "height",
+          "spacingM",
+          "metadata"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "sites"
+  ],
+  "additionalProperties": false
+}

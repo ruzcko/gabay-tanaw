@@ -1,0 +1,600 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "$defs": {
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "label": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 254
+        },
+        "label": {
+          "$ref": "#/$defs/text"
+        }
+      },
+      "required": [
+        "value",
+        "label"
+      ],
+      "additionalProperties": false
+    },
+    "band": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 254
+        },
+        "minDeg": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 90
+        },
+        "maxDeg": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 90
+        },
+        "label": {
+          "$ref": "#/$defs/text"
+        }
+      },
+      "required": [
+        "value",
+        "minDeg",
+        "maxDeg",
+        "label"
+      ],
+      "additionalProperties": false
+    },
+    "textureBase": {
+      "type": "object",
+      "properties": {
+        "file": {
+          "type": "string",
+          "pattern": "^[a-z]+-[a-z]+\\.png$"
+        },
+        "layer": {
+          "enum": [
+            "slope",
+            "sunlight",
+            "shadow"
+          ]
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "uv": {
+          "$ref": "#/$defs/text"
+        },
+        "source": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "polarTexture": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/textureBase"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "file": true,
+        "layer": true,
+        "width": true,
+        "height": true,
+        "uv": true,
+        "source": true,
+        "projection": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "enum": [
+                "south polar stereographic",
+                "north polar stereographic"
+              ]
+            },
+            "proj": {
+              "enum": [
+                "+proj=stere +lat_0=-90 +lon_0=0 +R=1737400 +units=m",
+                "+proj=stere +lat_0=90 +lon_0=0 +R=1737400 +units=m"
+              ]
+            },
+            "halfExtentM": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "halfExtentRadii": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          },
+          "required": [
+            "name",
+            "proj",
+            "halfExtentM",
+            "halfExtentRadii"
+          ],
+          "additionalProperties": false
+        },
+        "pixelM": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "slopeBaselineM": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "slopeMethod": {
+          "$ref": "#/$defs/text"
+        }
+      },
+      "required": [
+        "file",
+        "layer",
+        "width",
+        "height",
+        "projection",
+        "uv",
+        "pixelM",
+        "source"
+      ],
+      "additionalProperties": false
+    },
+    "globalTexture": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/textureBase"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "file": true,
+        "layer": {
+          "const": "slope"
+        },
+        "width": true,
+        "height": true,
+        "uv": true,
+        "source": true,
+        "projection": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "const": "equirectangular"
+            },
+            "lonRangeDeg": {
+              "const": [
+                -180,
+                180
+              ]
+            },
+            "latRangeDeg": {
+              "const": [
+                -90,
+                90
+              ]
+            }
+          },
+          "required": [
+            "name",
+            "lonRangeDeg",
+            "latRangeDeg"
+          ],
+          "additionalProperties": false
+        },
+        "pixelDeg": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "slopeBaselineM": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "slopeMethod": {
+          "$ref": "#/$defs/text"
+        }
+      },
+      "required": [
+        "file",
+        "layer",
+        "width",
+        "height",
+        "projection",
+        "uv",
+        "pixelDeg",
+        "slopeBaselineM",
+        "slopeMethod",
+        "source"
+      ],
+      "additionalProperties": false
+    },
+    "coverage": {
+      "type": "object",
+      "properties": {
+        "south": {
+          "const": -65
+        },
+        "north": {
+          "const": 65
+        }
+      },
+      "required": [
+        "south",
+        "north"
+      ],
+      "additionalProperties": false
+    },
+    "layerGlobe": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "global": {
+          "type": "string",
+          "pattern": "^[a-z]+-[a-z]+\\.png$"
+        },
+        "south": {
+          "type": "string",
+          "pattern": "^[a-z]+-[a-z]+\\.png$"
+        },
+        "north": {
+          "type": "string",
+          "pattern": "^[a-z]+-[a-z]+\\.png$"
+        },
+        "southHalf": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        },
+        "northHalf": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        },
+        "southEdge": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 90
+        },
+        "northEdge": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 90
+        }
+      },
+      "dependentRequired": {
+        "south": [
+          "southHalf",
+          "southEdge"
+        ],
+        "north": [
+          "northHalf",
+          "northEdge"
+        ]
+      }
+    }
+  },
+  "properties": {
+    "uvConvention": {
+      "$ref": "#/$defs/text"
+    },
+    "textures": {
+      "type": "object",
+      "properties": {
+        "slope-global": {
+          "$ref": "#/$defs/globalTexture"
+        },
+        "slope-south": {
+          "$ref": "#/$defs/polarTexture"
+        },
+        "sunlight-south": {
+          "$ref": "#/$defs/polarTexture"
+        },
+        "shadow-south": {
+          "$ref": "#/$defs/polarTexture"
+        },
+        "sunlight-north": {
+          "$ref": "#/$defs/polarTexture"
+        },
+        "shadow-north": {
+          "$ref": "#/$defs/polarTexture"
+        }
+      },
+      "required": [
+        "slope-global",
+        "slope-south",
+        "sunlight-south",
+        "shadow-south",
+        "sunlight-north",
+        "shadow-north"
+      ],
+      "additionalProperties": false
+    },
+    "layers": {
+      "type": "object",
+      "properties": {
+        "slope": {
+          "type": "object",
+          "properties": {
+            "globe": {
+              "$ref": "#/$defs/layerGlobe"
+            },
+            "siteChannel": {
+              "const": "R"
+            },
+            "encoding": {
+              "$ref": "#/$defs/text"
+            },
+            "bands": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/band"
+              }
+            },
+            "landingLimitDeg": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "landingLimitLabel": {
+              "$ref": "#/$defs/text"
+            },
+            "scaleNote": {
+              "$ref": "#/$defs/text"
+            },
+            "noData": {
+              "const": 255
+            },
+            "noDataLabel": {
+              "$ref": "#/$defs/text"
+            },
+            "source": {
+              "$ref": "#/$defs/text"
+            }
+          },
+          "required": [
+            "globe",
+            "siteChannel",
+            "encoding",
+            "bands",
+            "landingLimitDeg",
+            "landingLimitLabel",
+            "scaleNote",
+            "noData",
+            "noDataLabel",
+            "source"
+          ],
+          "additionalProperties": false
+        },
+        "sunlight": {
+          "type": "object",
+          "properties": {
+            "globe": {
+              "$ref": "#/$defs/layerGlobe"
+            },
+            "siteChannel": {
+              "const": "G"
+            },
+            "encoding": {
+              "$ref": "#/$defs/text"
+            },
+            "values": {
+              "type": "object",
+              "properties": {
+                "min": {
+                  "const": 0
+                },
+                "max": {
+                  "const": 100
+                },
+                "unit": {
+                  "const": "%"
+                }
+              },
+              "required": [
+                "min",
+                "max",
+                "unit"
+              ],
+              "additionalProperties": false
+            },
+            "coverageDeg": {
+              "$ref": "#/$defs/coverage"
+            },
+            "coverageNote": {
+              "$ref": "#/$defs/text"
+            },
+            "noData": {
+              "const": 255
+            },
+            "noDataLabel": {
+              "$ref": "#/$defs/text"
+            },
+            "source": {
+              "$ref": "#/$defs/text"
+            }
+          },
+          "required": [
+            "globe",
+            "siteChannel",
+            "encoding",
+            "values",
+            "coverageDeg",
+            "coverageNote",
+            "noData",
+            "noDataLabel",
+            "source"
+          ],
+          "additionalProperties": false
+        },
+        "shadow": {
+          "type": "object",
+          "properties": {
+            "globe": {
+              "$ref": "#/$defs/layerGlobe"
+            },
+            "siteChannel": {
+              "const": "B"
+            },
+            "encoding": {
+              "$ref": "#/$defs/text"
+            },
+            "values": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "$ref": "#/$defs/label"
+              }
+            },
+            "coverageDeg": {
+              "$ref": "#/$defs/coverage"
+            },
+            "coverageNote": {
+              "$ref": "#/$defs/text"
+            },
+            "noData": {
+              "const": 255
+            },
+            "noDataLabel": {
+              "$ref": "#/$defs/text"
+            },
+            "source": {
+              "$ref": "#/$defs/text"
+            }
+          },
+          "required": [
+            "globe",
+            "siteChannel",
+            "encoding",
+            "values",
+            "coverageDeg",
+            "coverageNote",
+            "noData",
+            "noDataLabel",
+            "source"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "slope",
+        "sunlight",
+        "shadow"
+      ],
+      "additionalProperties": false
+    },
+    "sites": {
+      "type": "object",
+      "properties": {
+        "grid": {
+          "type": "object",
+          "properties": {
+            "width": {
+              "const": 257
+            },
+            "height": {
+              "const": 257
+            },
+            "spacingM": {
+              "const": 78.125
+            },
+            "projection": {
+              "const": "local-orthographic-east-south"
+            },
+            "rows": {
+              "const": "row 0 north"
+            },
+            "columns": {
+              "const": "column 0 west"
+            }
+          },
+          "required": [
+            "width",
+            "height",
+            "spacingM",
+            "projection",
+            "rows",
+            "columns"
+          ],
+          "additionalProperties": false
+        },
+        "tiles": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "file": {
+                "type": "string",
+                "pattern": "^sites/[a-z0-9-]+\\.png$"
+              },
+              "grid": {
+                "enum": [
+                  "../terrain/index.json",
+                  "../../assets/observer/terrain/catalog/index.json"
+                ]
+              },
+              "slopeBaselineM": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "slopeSourceResolutionM": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                }
+              },
+              "sunlightMap": {
+                "enum": [
+                  "60 m",
+                  "240 m",
+                  null
+                ]
+              }
+            },
+            "required": [
+              "file",
+              "grid",
+              "slopeBaselineM",
+              "slopeSourceResolutionM",
+              "sunlightMap"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "grid",
+        "tiles"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "uvConvention",
+    "textures",
+    "layers",
+    "sites"
+  ],
+  "additionalProperties": false
+}

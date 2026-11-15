@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "start": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    },
+    "stepMinutes": {
+      "const": 60
+    },
+    "earthHelioLonDeg": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": 0,
+        "exclusiveMaximum": 360
+      },
+      "minItems": 1,
+      "maxItems": 744
+    },
+    "moonGeoLonDeg": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": 0,
+        "exclusiveMaximum": 360
+      },
+      "minItems": 1,
+      "maxItems": 744
+    },
+    "moonGeoLatDeg": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": -90,
+        "maximum": 90
+      },
+      "minItems": 1,
+      "maxItems": 744
+    }
+  },
+  "required": [
+    "start",
+    "stepMinutes",
+    "earthHelioLonDeg",
+    "moonGeoLonDeg",
+    "moonGeoLatDeg"
+  ],
+  "additionalProperties": false
+}

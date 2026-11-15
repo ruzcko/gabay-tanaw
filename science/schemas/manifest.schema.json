@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "window": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "additionalProperties": false
+    },
+    "completeCatalog": {
+      "const": true
+    },
+    "jsonHashConvention": {
+      "type": "string",
+      "minLength": 1
+    },
+    "catalogSha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "validationReportSha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "included": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "status": {
+            "const": "rebuilt"
+          },
+          "frameSupport": {
+            "const": "reviewed-catalog"
+          },
+          "frameEvidence": {
+            "type": "string",
+            "minLength": 1
+          },
+          "positionAccuracy": {
+            "const": "approximate"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "frameSupport",
+          "frameEvidence"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "excluded": {
+      "const": []
+    },
+    "filesSha256": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$"
+      },
+      "minProperties": 1
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "window",
+    "completeCatalog",
+    "jsonHashConvention",
+    "catalogSha256",
+    "validationReportSha256",
+    "included",
+    "excluded",
+    "filesSha256"
+  ],
+  "additionalProperties": false
+}

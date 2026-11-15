@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "spacingM": {"type": "number", "exclusiveMinimum": 0},
+    "n": {"type": "integer", "minimum": 1},
+    "start": {"type": "string", "format": "date"},
+    "days": {"type": "integer", "minimum": 1},
+    "sites": {
+      "type": "object",
+      "additionalProperties": {"type": "string", "pattern": "^[a-z0-9-]+\\.json$"}
+    }
+  },
+  "required": ["spacingM", "n", "start", "days", "sites"],
+  "additionalProperties": false
+}

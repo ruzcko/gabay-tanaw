@@ -1,0 +1,19 @@
+{
+  "id": "apollo-11",
+  "name": "Apollo 11",
+  "lat": 0.67416,
+  "lon": 23.47314,
+  "referenceFrame": "MOON_ME_DE421",
+  "elevationDatum": "sphere-1737400m",
+  "surfaceElevationM": -1921.6,
+  "elevationProduct": "LOLA LDEM_16 (16 px/degree, NASA CGI Moon Kit tiles)",
+  "note": "Tranquility Base, 20 July 1969. Equatorial contrast: the Sun rises and sets once a month, high in the sky. Horizon is a smooth sphere.",
+  "source": "LROC, Coordinates of Lunar Anthropogenic Targets, 28 July 2016, Apollo 11 LM; Wagner et al. 2017, Icarus 283, 92-103 (https://lroc.im-ldi.com/data/support/downloads/2016_LROC_Coordinates_of_Human_Features.pdf)",
+  "frameEvidence": "LROC states the mean Earth/polar axis (ME) system; DE421 is the ME realization the LRO project uses (Barker et al. 2021).",
+  "category": "visited",
+  "mission": "Apollo 11",
+  "agency": "NASA",
+  "date": "1969-07",
+  "summary": "First crewed Moon landing, in Mare Tranquillitatis.",
+  "link": "https://www.nasa.gov/mission/apollo-11/"
+}

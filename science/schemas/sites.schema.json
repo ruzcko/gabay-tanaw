@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "minLength": 1
+      },
+      "note": {
+        "type": "string",
+        "minLength": 1
+      },
+      "source": {
+        "type": "string",
+        "minLength": 1
+      },
+      "frameEvidence": {
+        "type": "string",
+        "minLength": 1
+      },
+      "elevationProduct": {
+        "type": "string",
+        "minLength": 1
+      },
+      "mission": {
+        "type": "string",
+        "minLength": 1
+      },
+      "agency": {
+        "type": "string",
+        "minLength": 1
+      },
+      "summary": {
+        "type": "string",
+        "minLength": 1
+      },
+      "link": {
+        "type": "string",
+        "minLength": 1
+      },
+      "image": {
+        "type": "string",
+        "minLength": 1
+      },
+      "imageCredit": {
+        "type": "string",
+        "minLength": 1
+      },
+      "id": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      },
+      "lat": {
+        "type": "number",
+        "exclusiveMinimum": -90,
+        "exclusiveMaximum": 90
+      },
+      "lon": {
+        "type": "number",
+        "minimum": 0,
+        "exclusiveMaximum": 360
+      },
+      "referenceFrame": {
+        "const": "MOON_ME_DE421"
+      },
+      "elevationDatum": {
+        "const": "sphere-1737400m"
+      },
+      "surfaceElevationM": {
+        "type": "number"
+      },
+      "category": {
+        "enum": [
+          "base-candidate",
+          "visited",
+          "upcoming"
+        ]
+      },
+      "date": {
+        "anyOf": [
+          {
+            "type": "null"
+          },
+          {
+            "type": "string",
+            "pattern": "^[0-9]{4}(-[0-9]{2})?$"
+          }
+        ]
+      },
+      "derived": {
+        "type": "boolean"
+      },
+      "positionAccuracy": {
+        "const": "approximate"
+      },
+      "regionCentre": {
+        "type": "object",
+        "properties": {
+          "lat": {
+            "type": "number",
+            "minimum": -90,
+            "maximum": 90
+          },
+          "lon": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360
+          },
+          "searchRadiusKm": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "extent": {
+            "type": "object",
+            "properties": {
+              "latMin": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "latMax": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "lonMin": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 360
+              },
+              "lonMax": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 360
+              }
+            },
+            "required": [
+              "latMin",
+              "latMax",
+              "lonMin",
+              "lonMax"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "lat",
+          "lon"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "name",
+      "note",
+      "source",
+      "frameEvidence",
+      "elevationProduct",
+      "mission",
+      "agency",
+      "summary",
+      "link",
+      "id",
+      "lat",
+      "lon",
+      "referenceFrame",
+      "elevationDatum",
+      "surfaceElevationM",
+      "category",
+      "date"
+    ],
+    "additionalProperties": false
+  },
+  "minItems": 1
+}

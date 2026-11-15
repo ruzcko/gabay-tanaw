@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "start": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    },
+    "stepMinutes": {
+      "const": 60
+    },
+    "sunAz": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 360
+      },
+      "minItems": 1,
+      "maxItems": 744
+    },
+    "sunEl": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": -90,
+        "maximum": 90
+      },
+      "minItems": 1,
+      "maxItems": 744
+    },
+    "sunRangeKm": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "exclusiveMinimum": 0
+      },
+      "minItems": 1,
+      "maxItems": 744
+    },
+    "sunAngularDiameterDeg": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 180
+      },
+      "minItems": 1,
+      "maxItems": 744
+    },
+    "sunVisible": {
+      "type": "array",
+      "items": {
+        "enum": [
+          0,
+          1
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 744
+    },
+    "earthAz": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 360
+      },
+      "minItems": 1,
+      "maxItems": 744
+    },
+    "earthEl": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": -90,
+        "maximum": 90
+      },
+      "minItems": 1,
+      "maxItems": 744
+    },
+    "earthRangeKm": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "exclusiveMinimum": 0
+      },
+      "minItems": 1,
+      "maxItems": 744
+    },
+    "earthAngularDiameterDeg": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 180
+      },
+      "minItems": 1,
+      "maxItems": 744
+    },
+    "earthVisible": {
+      "type": "array",
+      "items": {
+        "enum": [
+          0,
+          1
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 744
+    }
+  },
+  "required": [
+    "start",
+    "stepMinutes",
+    "sunAz",
+    "sunEl",
+    "sunRangeKm",
+    "sunAngularDiameterDeg",
+    "sunVisible",
+    "earthAz",
+    "earthEl",
+    "earthRangeKm",
+    "earthAngularDiameterDeg",
+    "earthVisible"
+  ],
+  "additionalProperties": false
+}

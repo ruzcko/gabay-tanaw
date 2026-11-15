@@ -1,0 +1,2 @@
+# Preserve the exact NASA bytes checked by observer_appearance.py on every platform.
+*.tpc -text

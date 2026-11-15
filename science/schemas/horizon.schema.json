@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "lat": {
+      "type": "number",
+      "exclusiveMinimum": -90,
+      "exclusiveMaximum": 90
+    },
+    "lon": {
+      "type": "number",
+      "minimum": 0,
+      "exclusiveMaximum": 360
+    },
+    "referenceFrame": {
+      "const": "MOON_ME_DE421"
+    },
+    "datum": {
+      "const": "sphere-1737400m"
+    },
+    "surfaceElevation": {
+      "type": "number"
+    },
+    "observerHeight": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100000
+    },
+    "step": {
+      "const": 1
+    },
+    "terrain": {
+      "enum": [
+        "LOLA 5 m + 240 m",
+        "LOLA 240 m",
+        "LOLA 240 m (60S map)",
+        "SLDEM2015 237 m",
+        "smooth"
+      ]
+    },
+    "elevations": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": -90,
+        "maximum": 90
+      },
+      "minItems": 360,
+      "maxItems": 360
+    },
+    "calculation": {
+      "type": "object",
+      "properties": {
+        "step": {
+          "enum": [
+            0.25,
+            0.5,
+            1
+          ]
+        },
+        "elevations": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": -90,
+            "maximum": 90
+          },
+          "minItems": 360,
+          "maxItems": 1440
+        }
+      },
+      "required": [
+        "step",
+        "elevations"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "id",
+    "lat",
+    "lon",
+    "referenceFrame",
+    "datum",
+    "surfaceElevation",
+    "observerHeight",
+    "step",
+    "terrain",
+    "elevations",
+    "calculation"
+  ],
+  "additionalProperties": false
+}

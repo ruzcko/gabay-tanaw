@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["version", "referenceFrame", "rows"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {"const": 1},
+    "referenceFrame": {"const": "MOON_ME_DE421"},
+    "rows": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "lat", "lon", "slopeDeg", "baselineM", "resolutionM", "source"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-zA-Z0-9_-]+$"},
+          "lat": {"type": "number", "exclusiveMinimum": -90, "exclusiveMaximum": 90},
+          "lon": {"type": "number", "minimum": 0, "exclusiveMaximum": 360},
+          "slopeDeg": {"type": ["number", "null"], "minimum": 0, "maximum": 90},
+          "baselineM": {"const": 100},
+          "resolutionM": {"type": "number", "exclusiveMinimum": 0},
+          "source": {"type": "string", "minLength": 1}
+        },
+        "if": {"properties": {"slopeDeg": {"type": "number"}}},
+        "then": {"properties": {"resolutionM": {"maximum": 20}}}
+      }
+    }
+  }
+}

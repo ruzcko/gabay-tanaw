@@ -1,0 +1,64 @@
+{
+  "method": "Synthetic long-term Sun-direction grid, visible disc at 2 m; not daily centre visibility",
+  "horizonStepDeg": 0.25,
+  "limitation": "Empirical consistency/sensitivity only; no measured frame registration or positional error bound",
+  "sites": [
+    {
+      "id": "connecting-ridge",
+      "publishedDiscPercent": 88.0,
+      "rebuiltDiscPercent": 86.09955451636134,
+      "differencePercentagePoints": -1.9004454836386628,
+      "offsetDistanceM": 100,
+      "offsetDiscPercentsNorthClockwise": [
+        77.50288634963181,
+        77.78110113529351,
+        57.18448572771278,
+        65.27650402340296,
+        64.94299023430618,
+        60.98643267601873,
+        84.28503598620105,
+        58.83559112640214
+      ],
+      "offsetMedianDiscPercent": 65.10974712885456,
+      "exactMinusOffsetMedianPoints": 20.989807387506772
+    },
+    {
+      "id": "connecting-ridge-extension",
+      "publishedDiscPercent": 78.1,
+      "rebuiltDiscPercent": 78.68927542909385,
+      "differencePercentagePoints": 0.5892754290938598,
+      "offsetDistanceM": 100,
+      "offsetDiscPercentsNorthClockwise": [
+        65.17329513775798,
+        60.52861465820022,
+        26.185329108482147,
+        32.90215442207688,
+        77.74397304822381,
+        56.344003865587354,
+        54.744335961657896,
+        1.8055715579294762
+      ],
+      "offsetMedianDiscPercent": 55.544169913622625,
+      "exactMinusOffsetMedianPoints": 23.14510551547123
+    },
+    {
+      "id": "shackleton-rim",
+      "publishedDiscPercent": 85.5,
+      "rebuiltDiscPercent": 84.1646876156726,
+      "differencePercentagePoints": -1.3353123843273949,
+      "offsetDistanceM": 100,
+      "offsetDiscPercentsNorthClockwise": [
+        56.97725689541817,
+        43.984517363194335,
+        50.119827896538446,
+        81.00441957086825,
+        45.378402660821685,
+        33.588448035469185,
+        51.44917149885537,
+        72.74629471935154
+      ],
+      "offsetMedianDiscPercent": 50.78449969769691,
+      "exactMinusOffsetMedianPoints": 33.3801879179757
+    }
+  ]
+}

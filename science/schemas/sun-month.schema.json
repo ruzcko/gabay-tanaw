@@ -1,0 +1,186 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "start": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    },
+    "stepMinutes": {
+      "const": 60
+    },
+    "subsolarLat": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": -90,
+        "maximum": 90
+      },
+      "minItems": 1,
+      "maxItems": 744
+    },
+    "subsolarLon": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": 0,
+        "exclusiveMaximum": 360
+      },
+      "minItems": 1,
+      "maxItems": 744
+    },
+    "subEarthLat": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": -90,
+        "maximum": 90
+      },
+      "minItems": 1,
+      "maxItems": 744
+    },
+    "subEarthLon": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": 0,
+        "exclusiveMaximum": 360
+      },
+      "minItems": 1,
+      "maxItems": 744
+    },
+    "geometric": {
+      "type": "object",
+      "properties": {
+        "frame": {
+          "const": "MOON_ME_DE440_ME421"
+        },
+        "origin": {
+          "const": "MOON"
+        },
+        "correction": {
+          "const": "NONE"
+        },
+        "units": {
+          "const": "km,km/s"
+        },
+        "interpolation": {
+          "const": "cubic-Hermite"
+        },
+        "model": {
+          "const": "CSPICE DE440 / MOON_ME_DE440_ME421; geometric states v1"
+        },
+        "kernels": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "properties": {
+              "file": {
+                "type": "string"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            },
+            "required": [
+              "file",
+              "sha256"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "sun": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 744,
+          "items": {
+            "type": "array",
+            "minItems": 6,
+            "maxItems": 6,
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "earth": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 744,
+          "items": {
+            "type": "array",
+            "minItems": 6,
+            "maxItems": 6,
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "sky": {
+          "type": "object",
+          "properties": {
+            "fromFrame": {
+              "const": "J2000"
+            },
+            "toFrame": {
+              "const": "MOON_ME_DE440_ME421"
+            },
+            "interpolation": {
+              "const": "slerp"
+            },
+            "quaternionOrder": {
+              "const": "xyzw"
+            },
+            "rotations": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 744,
+              "items": {
+                "type": "array",
+                "minItems": 4,
+                "maxItems": 4,
+                "items": {
+                  "type": "number",
+                  "minimum": -1,
+                  "maximum": 1
+                }
+              }
+            }
+          },
+          "required": [
+            "fromFrame",
+            "toFrame",
+            "interpolation",
+            "quaternionOrder",
+            "rotations"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "frame",
+        "origin",
+        "correction",
+        "units",
+        "interpolation",
+        "model",
+        "kernels",
+        "sun",
+        "earth"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "start",
+    "stepMinutes",
+    "subsolarLat",
+    "subsolarLon",
+    "subEarthLat",
+    "subEarthLon"
+  ],
+  "additionalProperties": false
+}

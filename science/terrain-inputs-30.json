@@ -1,0 +1,122 @@
+[
+  {
+    "name": "ldem_75s_240m.img",
+    "bytes": 29062688,
+    "sha256": "d031efe2611b17dfbf3c158f5e15dc04cd5719349dcbf6384bb21fd97697c490"
+  },
+  {
+    "name": "ldem_60s_240m.img",
+    "bytes": 120435200,
+    "sha256": "0f2766bd111bcf9ff05fc93515b79af49696d687a09a801622bae392e384df5a"
+  },
+  {
+    "name": "Site01.tif",
+    "bytes": 40980810,
+    "sha256": "3ba7b97cb00a2bcf21189c3aeb535f65afc21207154ab9f0d43c5bdc1f7e747e"
+  },
+  {
+    "name": "Site04.tif",
+    "bytes": 40980806,
+    "sha256": "38ff70dbdf2f066c2cfa94a646c3a59d653ce7f6b4528b15fc1b43ee397ce758"
+  },
+  {
+    "name": "Site07.tif",
+    "bytes": 40980808,
+    "sha256": "38aaee10bb4da4d63e7427aa1ca25c79bdbc649d212079a04990e135462091f8"
+  },
+  {
+    "name": "Site11.tif",
+    "bytes": 40980806,
+    "sha256": "58f3372c35bbd6baf38ffd5633c1c96b59bd89dbd252150581d12893a43136e5"
+  },
+  {
+    "name": "Site20.tif",
+    "bytes": 40980802,
+    "sha256": "e51451f3629ba7cd5cfc1b32c8c0ee3c5c454607488b00ea00cd06a9e301a892"
+  },
+  {
+    "name": "Site23.tif",
+    "bytes": 70586804,
+    "sha256": "12d280a59cd7580415f6bada638d0abe025ce6727541fddf68d5dc371a6c94cf"
+  },
+  {
+    "name": "SL3.tif",
+    "bytes": 64025611,
+    "sha256": "a18c153dab5c9e7e0b4d8a5f1547bd7ef5e31fba7dd1c3252d84060aebf0283b"
+  },
+  {
+    "name": "apollo-11.npz",
+    "bytes": 7011742,
+    "sha256": "5295cdcabc37628529a198608e0c6e28d17aa7ec733f5614e094319c5a80b43a"
+  },
+  {
+    "name": "apollo-12.npz",
+    "bytes": 6662859,
+    "sha256": "79f6744fb32c1c298cdcbdeb801072bc147443011e4f2477d09b22de49e33b1b"
+  },
+  {
+    "name": "apollo-14.npz",
+    "bytes": 6715566,
+    "sha256": "e31411255685e5cf31e2a1f2ab67df33a668a120aacf19af65a404cc922a8bb1"
+  },
+  {
+    "name": "apollo-15.npz",
+    "bytes": 8252764,
+    "sha256": "96f8a8099e216075cbd1300c0aa4e5afe2237d94ae23098c3f1eeaca7ed1c7b2"
+  },
+  {
+    "name": "apollo-16.npz",
+    "bytes": 7490935,
+    "sha256": "01fb8ef4b89050e03bb0512036c79549c289cad07a1fab4863b8fa557cfee7fd"
+  },
+  {
+    "name": "apollo-17.npz",
+    "bytes": 7712484,
+    "sha256": "e10bd37d329132e7f97f8cf7a3f311e88672231ef34229a7ac697282580cb966"
+  },
+  {
+    "name": "blue-ghost-1.npz",
+    "bytes": 7168697,
+    "sha256": "cbcb1b9e57b18bc1d42e1ebc5c7e6dcd58cb2c9d1b4fda486c38167c7b013509"
+  },
+  {
+    "name": "blue-ghost-3.npz",
+    "bytes": 8931430,
+    "sha256": "83deaf5363643d919c97009df70fc841c235e0f63e8e17e0a25d1215cdebb4f1"
+  },
+  {
+    "name": "change-3.npz",
+    "bytes": 9744491,
+    "sha256": "aaa47871614e079dc7086de594f49c5448637061664fedb10dd7687ccfb0df1d"
+  },
+  {
+    "name": "change-4.npz",
+    "bytes": 10718280,
+    "sha256": "afc2390e7cd191fca47c5d43c8eeadfc64afe0d45104fff9007bdd6d621480cd"
+  },
+  {
+    "name": "change-5.npz",
+    "bytes": 9855371,
+    "sha256": "0d7d627fa2c85707d08e33751a97f3c990c3db635ce9f53e1c7659161c39b0a0"
+  },
+  {
+    "name": "change-6.npz",
+    "bytes": 9733817,
+    "sha256": "1a61af74b6126d214e46540bd1337b60c8343aad7092a209972c0030b9617831"
+  },
+  {
+    "name": "im3-reiner-gamma.npz",
+    "bytes": 6727489,
+    "sha256": "6630cc78a0445cd7deda803c1c1bfe553d1632585652288c1e176f6af7edc818"
+  },
+  {
+    "name": "luna-24.npz",
+    "bytes": 7096998,
+    "sha256": "831a5c69d44a7c6d2e0474a3f648da7e59ea11bc7bcc7f4e9663e40672608e9e"
+  },
+  {
+    "name": "slim.npz",
+    "bytes": 7585519,
+    "sha256": "7fdf53bb4187dd6c20558c5ce462ff63712f446306712fed9f45894c557d748a"
+  }
+]

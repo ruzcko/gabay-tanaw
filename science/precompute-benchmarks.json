@@ -1,0 +1,577 @@
+{
+  "dateLocal": "2026-11-14",
+  "timezone": "Asia/Manila",
+  "baselineRevision": "4dfbd83",
+  "implementationCommits": [
+    "c9b75b7",
+    "b35ca5c",
+    "700cec4"
+  ],
+  "hardware": {
+    "cpu": "AMD Ryzen 5 3600",
+    "ramGiB": 16,
+    "runtime": "3.12.10",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "node": "24.13.0"
+  },
+  "method": {
+    "coldMonthlyTrials": 1,
+    "coldBatchTrials": 2,
+    "warmBuildsPerTrial": 3,
+    "start": "2026-12-01T00:00:00Z",
+    "stepMinutes": 10,
+    "horizonStepDeg": 0.25,
+    "eyeHeightM": 2,
+    "unchangedScientificParameters": true,
+    "timingIncludes": [
+      "Python process startup",
+      "fetch/validation",
+      "gzip writes",
+      "one-second courtesy pauses",
+      "forecast build/output"
+    ],
+    "timingExcludes": [
+      "terrain download",
+      "terrain horizon generation",
+      "global subpoint generation",
+      "browser transfer",
+      "rendering"
+    ],
+    "limits": [
+      "Fresh local cache does not imply a cold NASA cache.",
+      "Network and background CPU load uncontrolled; trials grouped.",
+      "Request-file counts exclude uninstrumented HTTP retries.",
+      "Existing static UI does not automatically compute arbitrary sites."
+    ]
+  },
+  "summary": [
+    {
+      "days": 7,
+      "samplesPerBody": 1009,
+      "baselineFetchBuildSeconds": 4.848253899952397,
+      "batchFetchBuildMedianSeconds": 6.588354050036287,
+      "batchFetchBuildRangeSeconds": [
+        4.837432200030889,
+        8.339275900041685
+      ],
+      "warmRawValidateBuildMedianSeconds": 0.36104355001589283,
+      "baselineChunks": 2,
+      "batchChunks": 2
+    },
+    {
+      "days": 14,
+      "samplesPerBody": 2017,
+      "baselineFetchBuildSeconds": 5.280871600029059,
+      "batchFetchBuildMedianSeconds": 7.5170829000126105,
+      "batchFetchBuildRangeSeconds": [
+        5.3349975000019185,
+        9.699168300023302
+      ],
+      "warmRawValidateBuildMedianSeconds": 0.43183989997487515,
+      "baselineChunks": 2,
+      "batchChunks": 2
+    },
+    {
+      "days": 28,
+      "samplesPerBody": 4033,
+      "baselineFetchBuildSeconds": 5.961887100012973,
+      "batchFetchBuildMedianSeconds": 5.881920699990587,
+      "batchFetchBuildRangeSeconds": [
+        5.86379669996677,
+        5.900044700014405
+      ],
+      "warmRawValidateBuildMedianSeconds": 0.5203932999866083,
+      "baselineChunks": 2,
+      "batchChunks": 2
+    },
+    {
+      "days": 90,
+      "samplesPerBody": 12961,
+      "baselineFetchBuildSeconds": 17.797874599986244,
+      "batchFetchBuildMedianSeconds": 8.972546800039709,
+      "batchFetchBuildRangeSeconds": [
+        8.873485500051174,
+        9.071608100028243
+      ],
+      "warmRawValidateBuildMedianSeconds": 1.0674704000120983,
+      "baselineChunks": 6,
+      "batchChunks": 2
+    },
+    {
+      "days": 182,
+      "samplesPerBody": 26209,
+      "baselineFetchBuildSeconds": 35.91742499999236,
+      "batchFetchBuildMedianSeconds": 12.238443599955644,
+      "batchFetchBuildRangeSeconds": [
+        12.224318499967922,
+        12.252568699943367
+      ],
+      "warmRawValidateBuildMedianSeconds": 1.723312199988868,
+      "baselineChunks": 12,
+      "batchChunks": 2
+    },
+    {
+      "days": 365,
+      "samplesPerBody": 52561,
+      "baselineFetchBuildSeconds": 71.77847609994933,
+      "batchFetchBuildMedianSeconds": 20.251972900005057,
+      "batchFetchBuildRangeSeconds": [
+        18.633152700029314,
+        21.8707930999808
+      ],
+      "warmRawValidateBuildMedianSeconds": 3.2124946999538224,
+      "baselineChunks": 24,
+      "batchChunks": 2
+    }
+  ],
+  "monthlyBaseline": {
+    "python": "3.12.10",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "site": {
+      "id": "benchmark-new-site",
+      "name": "Hypothetical benchmark location",
+      "lat": 1.12345,
+      "lon": 24.23456,
+      "referenceFrame": "MOON_ME_DE421",
+      "elevationDatum": "sphere-1737400m",
+      "frameEvidence": "Synthetic benchmark coordinate specified directly in the terrain frame; not a landing-site claim."
+    },
+    "start": "2026-12-01",
+    "stepMinutes": 10,
+    "batch": false,
+    "runs": [
+      {
+        "days": 7,
+        "fetchSeconds": 4.6140606999979354,
+        "buildSeconds": 0.2341931999544613,
+        "cacheValidationSeconds": 0.16736100002890453,
+        "warmBuildSeconds": [
+          0.20540460001211613,
+          0.20762120001018047,
+          0.2008776000002399
+        ],
+        "warmBuildMedianSeconds": 0.20540460001211613,
+        "rawResponseFiles": 2,
+        "forecastBytes": 17768
+      },
+      {
+        "days": 14,
+        "fetchSeconds": 4.990670899976976,
+        "buildSeconds": 0.29020070005208254,
+        "cacheValidationSeconds": 0.20576649997383356,
+        "warmBuildSeconds": [
+          0.26435899996431544,
+          0.25952620001044124,
+          0.26984470000024885
+        ],
+        "warmBuildMedianSeconds": 0.26435899996431544,
+        "rawResponseFiles": 2,
+        "forecastBytes": 29766
+      },
+      {
+        "days": 28,
+        "fetchSeconds": 5.5258027000236325,
+        "buildSeconds": 0.43608439998934045,
+        "cacheValidationSeconds": 0.2552161000203341,
+        "warmBuildSeconds": [
+          0.37323620001552626,
+          0.39465649996418506,
+          0.36573819996556267
+        ],
+        "warmBuildMedianSeconds": 0.37323620001552626,
+        "rawResponseFiles": 2,
+        "forecastBytes": 52481
+      },
+      {
+        "days": 90,
+        "fetchSeconds": 16.853899199981242,
+        "buildSeconds": 0.9439754000050016,
+        "cacheValidationSeconds": 0.498579399951268,
+        "warmBuildSeconds": [
+          0.8816557000391185,
+          0.9247755000251345,
+          0.9605034999549389
+        ],
+        "warmBuildMedianSeconds": 0.9247755000251345,
+        "rawResponseFiles": 6,
+        "forecastBytes": 167544
+      },
+      {
+        "days": 182,
+        "fetchSeconds": 34.265092799963895,
+        "buildSeconds": 1.652332200028468,
+        "cacheValidationSeconds": 0.8788886000402272,
+        "warmBuildSeconds": [
+          1.5724038000334986,
+          1.8848173000151291,
+          1.6044709000270814
+        ],
+        "warmBuildMedianSeconds": 1.6044709000270814,
+        "rawResponseFiles": 12,
+        "forecastBytes": 337615
+      },
+      {
+        "days": 365,
+        "fetchSeconds": 68.43096849997528,
+        "buildSeconds": 3.347507599974051,
+        "cacheValidationSeconds": 1.5700210999930277,
+        "warmBuildSeconds": [
+          3.074292199977208,
+          3.0266457999823615,
+          2.9969795999932103
+        ],
+        "warmBuildMedianSeconds": 3.0266457999823615,
+        "rawResponseFiles": 24,
+        "forecastBytes": 675827
+      }
+    ]
+  },
+  "batchTrials": [
+    {
+      "python": "3.12.10",
+      "platform": "Windows-10-10.0.19045-SP0",
+      "site": {
+        "id": "benchmark-new-site",
+        "name": "Hypothetical benchmark location",
+        "lat": 1.12345,
+        "lon": 24.23456,
+        "referenceFrame": "MOON_ME_DE421",
+        "elevationDatum": "sphere-1737400m",
+        "frameEvidence": "Synthetic benchmark coordinate specified directly in the terrain frame; not a landing-site claim."
+      },
+      "start": "2026-12-01",
+      "stepMinutes": 10,
+      "batch": true,
+      "runs": [
+        {
+          "days": 7,
+          "fetchSeconds": 8.117483800044283,
+          "buildSeconds": 0.22179209999740124,
+          "cacheValidationSeconds": 0.17538979998789728,
+          "warmBuildSeconds": [
+            0.18833630002336577,
+            0.19671340001514181,
+            0.21854390000225976
+          ],
+          "warmBuildMedianSeconds": 0.19671340001514181,
+          "rawResponseFiles": 2,
+          "forecastBytes": 17796
+        },
+        {
+          "days": 14,
+          "fetchSeconds": 9.464811900048517,
+          "buildSeconds": 0.23435639997478575,
+          "cacheValidationSeconds": 0.20260729995789006,
+          "warmBuildSeconds": [
+            0.22651110001606867,
+            0.21908670000266284,
+            0.23312800005078316
+          ],
+          "warmBuildMedianSeconds": 0.22651110001606867,
+          "rawResponseFiles": 2,
+          "forecastBytes": 29794
+        },
+        {
+          "days": 28,
+          "fetchSeconds": 5.570647099986672,
+          "buildSeconds": 0.29314959998009726,
+          "cacheValidationSeconds": 0.2471711999969557,
+          "warmBuildSeconds": [
+            0.27317400003084913,
+            0.27394669997738674,
+            0.27630289999069646
+          ],
+          "warmBuildMedianSeconds": 0.27394669997738674,
+          "rawResponseFiles": 2,
+          "forecastBytes": 52509
+        },
+        {
+          "days": 90,
+          "fetchSeconds": 8.3116501000477,
+          "buildSeconds": 0.5618354000034742,
+          "cacheValidationSeconds": 0.46636570000555366,
+          "warmBuildSeconds": [
+            0.5302780999918468,
+            0.5074720999691635,
+            0.5581375999609008
+          ],
+          "warmBuildMedianSeconds": 0.5302780999918468,
+          "rawResponseFiles": 2,
+          "forecastBytes": 157252
+        },
+        {
+          "days": 182,
+          "fetchSeconds": 11.28388919995632,
+          "buildSeconds": 0.9686794999870472,
+          "cacheValidationSeconds": 0.8087171000079252,
+          "warmBuildSeconds": [
+            0.8835940999560989,
+            0.8735047999653034,
+            0.9240787999588065
+          ],
+          "warmBuildMedianSeconds": 0.8835940999560989,
+          "rawResponseFiles": 2,
+          "forecastBytes": 311843
+        },
+        {
+          "days": 365,
+          "fetchSeconds": 16.830391800031066,
+          "buildSeconds": 1.8027608999982476,
+          "cacheValidationSeconds": 1.5444634999730624,
+          "warmBuildSeconds": [
+            1.7352074999944307,
+            1.7802609999780543,
+            1.6059314999729395
+          ],
+          "warmBuildMedianSeconds": 1.7352074999944307,
+          "rawResponseFiles": 2,
+          "forecastBytes": 619095
+        }
+      ]
+    },
+    {
+      "python": "3.12.10",
+      "platform": "Windows-10-10.0.19045-SP0",
+      "site": {
+        "id": "benchmark-new-site",
+        "name": "Hypothetical benchmark location",
+        "lat": 1.12345,
+        "lon": 24.23456,
+        "referenceFrame": "MOON_ME_DE421",
+        "elevationDatum": "sphere-1737400m",
+        "frameEvidence": "Synthetic benchmark coordinate specified directly in the terrain frame; not a landing-site claim."
+      },
+      "start": "2026-12-01",
+      "stepMinutes": 10,
+      "batch": true,
+      "runs": [
+        {
+          "days": 7,
+          "fetchSeconds": 4.620339400018565,
+          "buildSeconds": 0.217092800012324,
+          "cacheValidationSeconds": 0.16950760001782328,
+          "warmBuildSeconds": [
+            0.1804763000109233,
+            0.17812699999194592,
+            0.18120659998385236
+          ],
+          "warmBuildMedianSeconds": 0.1804763000109233,
+          "rawResponseFiles": 2,
+          "forecastBytes": 17796
+        },
+        {
+          "days": 14,
+          "fetchSeconds": 5.076323000015691,
+          "buildSeconds": 0.2586744999862276,
+          "cacheValidationSeconds": 0.21752489998470992,
+          "warmBuildSeconds": [
+            0.21602460002759472,
+            0.24167060002218932,
+            0.21703649999108166
+          ],
+          "warmBuildMedianSeconds": 0.21703649999108166,
+          "rawResponseFiles": 2,
+          "forecastBytes": 29794
+        },
+        {
+          "days": 28,
+          "fetchSeconds": 5.609524999978021,
+          "buildSeconds": 0.29051970003638417,
+          "cacheValidationSeconds": 0.24988160002976656,
+          "warmBuildSeconds": [
+            0.26978709996910766,
+            0.26775180001277477,
+            0.27350279997335747
+          ],
+          "warmBuildMedianSeconds": 0.26978709996910766,
+          "rawResponseFiles": 2,
+          "forecastBytes": 52509
+        },
+        {
+          "days": 90,
+          "fetchSeconds": 8.159797100001015,
+          "buildSeconds": 0.9118110000272281,
+          "cacheValidationSeconds": 0.5781972000258975,
+          "warmBuildSeconds": [
+            0.5600998000008985,
+            0.5621398000512272,
+            0.5298375000129454
+          ],
+          "warmBuildMedianSeconds": 0.5600998000008985,
+          "rawResponseFiles": 2,
+          "forecastBytes": 157252
+        },
+        {
+          "days": 182,
+          "fetchSeconds": 11.283031300001312,
+          "buildSeconds": 0.9412871999666095,
+          "cacheValidationSeconds": 0.8060670000268146,
+          "warmBuildSeconds": [
+            0.8724082999979146,
+            1.0636514999787323,
+            0.9482461999868974
+          ],
+          "warmBuildMedianSeconds": 0.9482461999868974,
+          "rawResponseFiles": 2,
+          "forecastBytes": 311843
+        },
+        {
+          "days": 365,
+          "fetchSeconds": 18.161237300024368,
+          "buildSeconds": 3.7095557999564335,
+          "cacheValidationSeconds": 1.4917036999831907,
+          "warmBuildSeconds": [
+            1.6402057000086643,
+            1.653614699956961,
+            1.6980633999919519
+          ],
+          "warmBuildMedianSeconds": 1.653614699956961,
+          "rawResponseFiles": 2,
+          "forecastBytes": 619095
+        }
+      ]
+    }
+  ],
+  "correctness": {
+    "catalog": [
+      "connecting-ridge",
+      "connecting-ridge-extension",
+      "shackleton-rim",
+      "peak-near-shackleton",
+      "de-gerlache-rim",
+      "malapert-massif",
+      "leibnitz-beta-plateau",
+      "im2-mons-mouton",
+      "im1-malapert-a",
+      "chandrayaan-3",
+      "apollo-11",
+      "peak-near-cabeus-b",
+      "haworth",
+      "mons-mouton-plateau",
+      "nobile-rim-1",
+      "nobile-rim-2",
+      "apollo-12",
+      "apollo-14",
+      "apollo-15",
+      "apollo-16",
+      "apollo-17",
+      "luna-24",
+      "change-3",
+      "change-4",
+      "change-5",
+      "change-6",
+      "slim",
+      "blue-ghost-1",
+      "im3-reiner-gamma",
+      "blue-ghost-3"
+    ],
+    "windows": [
+      {
+        "days": 7,
+        "trial": "batch",
+        "samplesPerBody": 1009,
+        "maxNumericDifference": 0,
+        "changedForecastFieldsExceptSources": 0
+      },
+      {
+        "days": 7,
+        "trial": "batch-repeat",
+        "samplesPerBody": 1009,
+        "maxNumericDifference": 0,
+        "changedForecastFieldsExceptSources": 0
+      },
+      {
+        "days": 14,
+        "trial": "batch",
+        "samplesPerBody": 2017,
+        "maxNumericDifference": 0,
+        "changedForecastFieldsExceptSources": 0
+      },
+      {
+        "days": 14,
+        "trial": "batch-repeat",
+        "samplesPerBody": 2017,
+        "maxNumericDifference": 0,
+        "changedForecastFieldsExceptSources": 0
+      },
+      {
+        "days": 28,
+        "trial": "batch",
+        "samplesPerBody": 4033,
+        "maxNumericDifference": 0,
+        "changedForecastFieldsExceptSources": 0
+      },
+      {
+        "days": 28,
+        "trial": "batch-repeat",
+        "samplesPerBody": 4033,
+        "maxNumericDifference": 0,
+        "changedForecastFieldsExceptSources": 0
+      },
+      {
+        "days": 90,
+        "trial": "batch",
+        "samplesPerBody": 12961,
+        "maxNumericDifference": 0,
+        "changedForecastFieldsExceptSources": 0
+      },
+      {
+        "days": 90,
+        "trial": "batch-repeat",
+        "samplesPerBody": 12961,
+        "maxNumericDifference": 0,
+        "changedForecastFieldsExceptSources": 0
+      },
+      {
+        "days": 182,
+        "trial": "batch",
+        "samplesPerBody": 26209,
+        "maxNumericDifference": 0,
+        "changedForecastFieldsExceptSources": 0
+      },
+      {
+        "days": 182,
+        "trial": "batch-repeat",
+        "samplesPerBody": 26209,
+        "maxNumericDifference": 0,
+        "changedForecastFieldsExceptSources": 0
+      },
+      {
+        "days": 365,
+        "trial": "batch",
+        "samplesPerBody": 52561,
+        "maxNumericDifference": 0,
+        "changedForecastFieldsExceptSources": 0
+      },
+      {
+        "days": 365,
+        "trial": "batch-repeat",
+        "samplesPerBody": 52561,
+        "maxNumericDifference": 0,
+        "changedForecastFieldsExceptSources": 0
+      }
+    ],
+    "polar": {
+      "site": "connecting-ridge",
+      "days": 365,
+      "hourlySamples": 8760,
+      "sunEvents": 46,
+      "earthEvents": 26,
+      "exactExceptSources": true
+    }
+  },
+  "verification": {
+    "pythonTestsPassed": 27,
+    "computeTestsPassed": 27,
+    "typescriptTypecheck": true,
+    "currentJsonFilesValidated": 451,
+    "actualPolarBatchObserverAdapter": {
+      "savedHoursChecked": 24,
+      "downloads": 14,
+      "passed": true
+    },
+    "uiFilesChanged": false,
+    "productionDataChanged": false,
+    "newDependencies": []
+  }
+}
