@@ -178,6 +178,12 @@ observer.setOptions({ earthPointer: true, belowHorizonCutaway: false });
 observer.dispose();
 ```
 
+The Sun and Earth readouts and Look toward controls share a 650 ms camera turn along the
+shorter azimuth arc. Readouts retain their plain text appearance and support Enter/Space.
+Dragging or using arrow keys interrupts the turn; retargeting starts from the current view.
+Reduced-motion preferences skip the animation. Hosts that need immediate framing can call
+`lookToward('earth', { animate: false })`; snapshot updates still own all body positions.
+
 `integration.js` defaults to saved forecasts and accepts coordinates plus UTC. Call its
 `update(site, utc)` on host selection changes. Changed heights require corresponding
 saved data; arbitrary heights and fractional hours return explicit errors. Its generation guard

@@ -2878,7 +2878,7 @@ document.addEventListener("tanaw:pick", (e) => {
 const sceneSource = createForecastSource();
 // Stars reuse the same computation inputs as Observer. Load only while requested;
 // coalesce fast scrub/playback updates instead of queuing a worker job per frame.
-let starsEnabled = false, wantedStarFrame = null, starFrameRunning = false;
+let starsEnabled = true, wantedStarFrame = null, starFrameRunning = false;
 async function updateStarFrame(utc = quickMode ? quickNow() : instant()) {
   if (!starsEnabled) return;
   wantedStarFrame = { utc, site: state.site, estimate: quickMode, emission: quickEmission };

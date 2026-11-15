@@ -5,6 +5,7 @@ import { createAppearance } from './appearance.js';
 import { createOverview } from './overview.js';
 import { createSunMaterial, createSunGlow } from './display-materials.js';
 import { observerZoom, observerVerticalFov, observerMaxDiagonal, faceSkyDisc } from './projection.js';
+import { interpolateLook } from './look-motion.js';
 export { createSnapshotLoader } from './math.js';
 
 /** Framework-neutral observer/overview renderer. The host supplies all astronomy. */
@@ -52,6 +53,8 @@ export function createObserverView({ container, terrainProvider, assetProvider, 
     if (name === 'sun') { mesh.material.transparent = true; mesh.add(sunGlow); }
     mesh.visible = false; scene.add(mesh);
     const label = document.createElement('div'); label.className = 'observer-body'; label.dataset.body = name;
+    label.setAttribute('role', 'button'); label.setAttribute('aria-disabled', 'true'); label.tabIndex = -1;
+    label.title = `Look toward ${name === 'sun' ? 'Sun' : 'Earth'}`;
     const arrow = document.createElement('span'); arrow.className = 'observer-arrow'; arrow.setAttribute('aria-hidden', 'true');
     arrow.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5m-7 7 7-7 7 7"/></svg>';
     const text = document.createElement('span');
@@ -61,7 +64,7 @@ export function createObserverView({ container, terrainProvider, assetProvider, 
     text.append(title, values, detail); label.append(arrow, text); readout.append(label);
     bodies[name] = { mesh, label, arrow, values, detail };
   }
-  let snapshot, disposed = false, frame = 0, yaw = 0, pitch = 0, drag, mode='observer', overview;
+  let snapshot, disposed = false, frame = 0, yaw = 0, pitch = 0, drag, mode='observer', overview, lookFlight;
   let options = { sunPointer: true, earthPointer: true, horizonLine: true, belowHorizonCutaway: false, bodySize: 'physical', quality: 'auto', tracking: null, verticalExaggeration: 1, decorativeTwinkling: false, starBrightness: 1, autoStarExposure: true };
   let terrainInfo = { state: 'unavailable' }, lastFrameMs = 0, renderCount=0, observerRenderCount=0, overviewRenderCount=0, slowFrames=0, autoReduced=false;
   const terrain = terrainProvider ? createTerrainLayer({ scene, provider: terrainProvider, invalidate, onError, onStatus: info => { terrainInfo = info; onTerrainStatus(info); } }) : null;
@@ -77,6 +80,14 @@ export function createObserverView({ container, terrainProvider, assetProvider, 
     if(mode==='overview'){
       overview.update(snapshot,appearance?.terrainMap()||null,appearance?.moonMaps(),appearance?.earthMap());
       renderer.render(overview.scene,overview.camera);renderCount++;overviewRenderCount++;lastFrameMs=performance.now()-started;return;
+    }
+    if (lookFlight) {
+      const progress = reducedMotion.matches ? 1 : Math.min(1, (started - lookFlight.started) / 650);
+      const body = snapshot?.bodies[lookFlight.target];
+      const target = body ? { yaw: body.azimuthDeg, pitch: body.elevationDeg } : { yaw: lookFlight.from.yaw, pitch: 0 };
+      ({ yaw, pitch } = interpolateLook(lookFlight.from, target, progress));
+      if (progress === 1) lookFlight = null;
+      else invalidate();
     }
     orient();
     if (snapshot) {
@@ -133,11 +144,14 @@ export function createObserverView({ container, terrainProvider, assetProvider, 
     camera.aspect = Math.max(1, width) / Math.max(1, height); updateObserverProjection(); invalidate();
     overview?.resize(Math.max(1,width),Math.max(1,height));
   }
-  function lookToward(target) {
+  function lookToward(target, { animate = true } = {}) {
     if (disposed) return;
-    if (target === 'horizon') pitch = 0;
-    else if (snapshot && ['sun', 'earth'].includes(target)) { yaw = snapshot.bodies[target].azimuthDeg; pitch = snapshot.bodies[target].elevationDeg; }
+    let next;
+    if (target === 'horizon') next = { yaw, pitch: 0 };
+    else if (snapshot && ['sun', 'earth'].includes(target)) next = { yaw: snapshot.bodies[target].azimuthDeg, pitch: snapshot.bodies[target].elevationDeg };
     else throw new TypeError('Expected horizon, sun or earth with a snapshot');
+    if (animate && !reducedMotion.matches) lookFlight = { from: { yaw, pitch }, target, started: performance.now() };
+    else { lookFlight = null; ({ yaw, pitch } = next); }
     invalidate();
   }
   // Opening view: face Earth if the forecast shows it, else the Sun, framed low so the horizon and
@@ -146,6 +160,7 @@ export function createObserverView({ container, terrainProvider, assetProvider, 
   // above the horizon, else toward Earth.
   function frameOpening() {
     if (disposed || !snapshot) return;
+    lookFlight = null;
     const { sun, earth } = snapshot.bodies, shown = [earth, sun].find(body => body.centerVisible === true);
     if (shown) {
       const halfHeight = Math.tan(camera.fov * Math.PI / 360), deg = 180 / Math.PI;
@@ -157,11 +172,18 @@ export function createObserverView({ container, terrainProvider, assetProvider, 
     }
     invalidate();
   }
-  function move(dx, dy) { if(mode==='overview'){overview.orbit(dx,dy);invalidate();return;}options.tracking = null; yaw = (yaw + dx + 360) % 360; pitch = clamp(pitch + dy, -90, 90); invalidate(); }
+  function move(dx, dy) { if(mode==='overview'){overview.orbit(dx,dy);invalidate();return;}lookFlight = null;options.tracking = null; yaw = (yaw + dx + 360) % 360; pitch = clamp(pitch + dy, -90, 90); invalidate(); }
   function zoom(delta) { if(mode==='overview'){overview.zoom(delta);invalidate();return;}observerFov = clamp(observerFov + delta, observerZoom.min, observerMaxDiagonal(camera.aspect)); updateObserverProjection(); invalidate(); }
   const listen = (target, name, fn, extra = {}) => target.addEventListener(name, fn, { ...extra, signal: listeners.signal });
+  for (const [name, item] of Object.entries(bodies)) {
+    const focusBody = () => { if (snapshot && mode === 'observer') lookToward(name); };
+    listen(item.label, 'click', focusBody);
+    listen(item.label, 'keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); focusBody(); }
+    });
+  }
   listen(reducedMotion,'change',invalidate);
-  listen(canvas, 'pointerdown', e => { if (e.button !== 0) return; drag = { id: e.pointerId, x: e.clientX, y: e.clientY, startX:e.clientX,startY:e.clientY,moved:false }; canvas.setPointerCapture(e.pointerId); });
+  listen(canvas, 'pointerdown', e => { if (e.button !== 0) return; lookFlight = null; drag = { id: e.pointerId, x: e.clientX, y: e.clientY, startX:e.clientX,startY:e.clientY,moved:false }; canvas.setPointerCapture(e.pointerId); });
   listen(canvas, 'pointermove', e => { if (!drag || drag.id !== e.pointerId) return; move((drag.x - e.clientX) * camera.fov / Math.max(1, canvas.clientHeight), (e.clientY - drag.y) * camera.fov / Math.max(1, canvas.clientHeight)); drag.x = e.clientX; drag.y = e.clientY; });
   listen(canvas,'pointermove',e=>{if(drag&&Math.hypot(e.clientX-drag.startX,e.clientY-drag.startY)>5)drag.moved=true;});
   listen(canvas,'pointerup',e=>{if(drag?.id===e.pointerId&&!drag.moved&&mode==='overview'&&onSiteSelect){const selected=overview.select(e.clientX,e.clientY);if(selected)onSiteSelect(selected);}drag=null;});
@@ -179,17 +201,18 @@ export function createObserverView({ container, terrainProvider, assetProvider, 
   const api = {
     setSnapshot(value) {
       if (disposed) return;
-      try { const next = validateSnapshot(value); snapshot = next; }
+      try { const next = validateSnapshot(value); if (snapshot?.site.id !== next.site.id) lookFlight = null; snapshot = next; }
       catch (error) { onError(error); onStatusChange('error'); return false; }
       if (!document.hidden&&mode==='observer') terrain?.update(snapshot.site, options.verticalExaggeration);
       status.textContent = `${snapshot.quality === 'estimate' ? 'Estimate · ' : ''}${snapshot.instantUtc.slice(0,16).replace('T',' ')} UTC · ${options.bodySize === 'enhanced' ? 'Sun and Earth enlarged' : 'Sun and Earth to scale'}${appearance && !snapshot.earthAppearance ? ' · Earth rotation is illustrative' : ''}${terrain ? (options.verticalExaggeration !== 1 ? ` · Heights ×${options.verticalExaggeration}` : '') : ' · Flat ground until terrain loads'}`;
       if(mode==='overview')status.textContent=`${snapshot.quality === 'estimate' ? 'Estimate · ' : ''}${snapshot.instantUtc.slice(0,16).replace('T',' ')} UTC · ${snapshot.overview?'Schematic sizes and distances — not to scale'+(!snapshot.earthAppearance?' · Earth rotation is illustrative':''):'Waiting for Moon-frame overview data from computation module'}`;
-      if (options.tracking) lookToward(options.tracking);
+      for (const item of Object.values(bodies)) { item.label.setAttribute('aria-disabled', 'false'); item.label.tabIndex = 0; }
+      if (options.tracking && !lookFlight) lookToward(options.tracking, { animate: false });
       onStatusChange('ready'); invalidate(); return true;
     },
     setMode(nextMode, { focusSite = false } = {}) {
       if(disposed)return;if(!['observer','overview'].includes(nextMode))throw new TypeError('Expected observer or overview');
-      if(mode===nextMode){if(mode==='overview'&&focusSite){overview?.focusSite(snapshot);invalidate();}return;}mode=nextMode;drag=null;
+      if(mode===nextMode){if(mode==='overview'&&focusSite){overview?.focusSite(snapshot);invalidate();}return;}mode=nextMode;drag=null;lookFlight=null;
       if(mode==='overview'){overview??=createOverview(viewport);if(focusSite)overview.focusSite(snapshot);terrain?.pause();}
       else overview?.hideLabels();
       readout.hidden=mode==='overview';
@@ -215,7 +238,7 @@ export function createObserverView({ container, terrainProvider, assetProvider, 
     resize,
     getDiagnostics() {
       let geometryBufferBytes=0;for(const activeScene of [scene,overview?.scene])activeScene?.traverse(object=>{if(object.geometry){for(const attribute of Object.values(object.geometry.attributes))geometryBufferBytes+=attribute.array.byteLength;geometryBufferBytes+=object.geometry.index?.array.byteLength||0;}});
-      return { mode, observerFovDeg:camera.fov, observerHorizontalFovDeg:2*Math.atan(Math.tan(camera.fov*Math.PI/360)*camera.aspect)*180/Math.PI, observerRenderCount,overviewRenderCount, overview:overview?.diagnostics()||null, siteId:snapshot?.site.id,instantUtc:snapshot?.instantUtc, frameCpuMs: lastFrameMs, renderCount, geometryBufferBytes, sky:appearance?.skyDiagnostics() || null, assetMemory:appearance?.memory() || null, terrain: { ...terrainInfo }, geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures, drawCalls: renderer.info.render.calls, shadowMapSize: sunlight.shadow.mapSize.x };
+      return { mode, cameraLook: { yaw, pitch, transitioning: !!lookFlight }, observerFovDeg:camera.fov, observerHorizontalFovDeg:2*Math.atan(Math.tan(camera.fov*Math.PI/360)*camera.aspect)*180/Math.PI, observerRenderCount,overviewRenderCount, overview:overview?.diagnostics()||null, siteId:snapshot?.site.id,instantUtc:snapshot?.instantUtc, frameCpuMs: lastFrameMs, renderCount, geometryBufferBytes, sky:appearance?.skyDiagnostics() || null, assetMemory:appearance?.memory() || null, terrain: { ...terrainInfo }, geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures, drawCalls: renderer.info.render.calls, shadowMapSize: sunlight.shadow.mapSize.x };
     },
     dispose() {
       if (disposed) return; disposed = true; cancelAnimationFrame(frame); listeners.abort(); observer.disconnect();

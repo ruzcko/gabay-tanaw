@@ -23,12 +23,12 @@ try{
   // Asset readiness is CPU readiness; allow lazy shader/texture and shadow setup.
   for(let i=0;i<30;i++){view.setSnapshot(snapshot);await frame();}
   const initial=view.getDiagnostics(), samples=[];
-  assert(initial.sky.starsVisible&&initial.sky.milkyWayVisible,'catalog stars and NASA Milky Way render together');
+  assert(initial.sky.starsVisible,'catalog stars render');
   snapshot.sky.catalogToLocal=[0,Math.sin(.2),0,Math.cos(.2)];view.setSnapshot(snapshot);await frame();
   const sky=view.getDiagnostics().sky;
-  assert(sky.starsRotation.every((v,i)=>Math.abs(v-snapshot.sky.catalogToLocal[i])<1e-9)&&sky.milkyWayRotation.every((v,i)=>Math.abs(v-snapshot.sky.catalogToLocal[i])<1e-9),'both sky layers use exactly the supplied rotation');
+  assert(sky.starsRotation.every((v,i)=>Math.abs(v-snapshot.sky.catalogToLocal[i])<1e-9),'stars use exactly the supplied rotation');
   const withoutSky={...snapshot};delete withoutSky.sky;view.setSnapshot(withoutSky);await frame();
-  assert(!view.getDiagnostics().sky.starsVisible&&!view.getDiagnostics().sky.milkyWayVisible,'missing sky orientation hides both layers without inventing positions');
+  assert(!view.getDiagnostics().sky.starsVisible,'missing sky orientation hides stars without inventing positions');
   view.setSnapshot(snapshot);await frame();
   for(let i=0;i<90;i++){
     snapshot.instantUtc=new Date(Date.UTC(2026,10,14,0,0,i)).toISOString();snapshot.lighting.sunDirectionLocal=direction(90+i*.1,5);

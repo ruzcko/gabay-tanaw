@@ -41,7 +41,7 @@ try {
   assert(connection.view.getDiagnostics().observerRenderCount > 0 && container.querySelector('canvas'), 'real WebGL observer renders the selected forecast');
   assert(container.querySelector('.observer-message').textContent.includes('2026-12-31 23:00 UTC') &&
     connection.view.getDiagnostics().instantUtc === '2026-12-31T23:00:00.000Z', 'observer readout shows the selected UTC');
-  connection.view.lookToward('earth'); await frame();
+  connection.view.lookToward('earth', { animate: false }); await frame();
   const cameraRequests = requests.length;
   const canvas = container.querySelector('canvas');
   for (let i = 0; i < 9; i++) canvas.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));

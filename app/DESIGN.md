@@ -1244,7 +1244,8 @@ Phone controls retain touch targets and the existing sheet pattern. Estimate and
 source labels remain visible on results; detailed metrics stay in the information tooltip.
 Candidate counts report the bounded search's progress and any shortfall explicitly.
 
-The Moon View menu places Stars beside Lat/lon grid. Stars start off and load the same fixed
-Hipparcos catalog and NASA Milky Way background as Observer on demand. The host supplies
+The Moon View menu places Stars beside Lat/lon grid. Stars start on, with the same fixed
+Hipparcos catalog as Observer; users can toggle them off. Both views use individual stars
+with a 15% display brightness boost and no Milky Way background. The host supplies
 the selected time's sky orientation; the renderer composes it with the Moon model rotation.
 The background follows the camera without parallax, and missing orientation hides it.

@@ -177,9 +177,8 @@ try {
   // A visited site's panel shows its landing day: the touchdown in UTC and the estimated sky.
   await page.setViewportSize({ width: 1280, height: 800 });
   await pick(page, 'apollo-11');
-  // The landing sky is worked out once its box is in view; the Forecast panel left open above
-  // makes the site panel shorter, so scroll to it.
-  await page.locator('#panel .landing').scrollIntoViewIfNeeded();
+  // The open Forecast panel can leave this lazy-loaded section below the site's photo.
+  await page.locator('#panel .landing[data-site="apollo-11"]').scrollIntoViewIfNeeded();
   await page.waitForFunction(() => {
     const box = document.querySelector('#panel .landing');
     return box && /20:17 UTC/.test(box.textContent) && /Sun (up|hidden)/.test(box.textContent) && /Earth (up|hidden)/.test(box.textContent);
@@ -188,6 +187,7 @@ try {
   log('a visited site shows its landing day at 20:17 UTC with the Sun and Earth');
   // A far-side site's Earth never rises.
   await pick(page, 'change-4');
+  await page.locator('#panel .landing[data-site="change-4"]').scrollIntoViewIfNeeded();
   await page.waitForFunction(() => /Earth hidden, [^·]*· never rises here/.test(document.querySelector('#panel .landing')?.textContent || ''),
     null, { timeout: 60000 }).catch(async () => assert.fail(`Chang'e 4's landing day: ${await page.locator('#panel').innerText()}`));
   log('landing day says how long sunlight lasts, and a far-side Earth never rises');

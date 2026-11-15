@@ -1,6 +1,6 @@
 import * as THREE from '../vendor/three/three.module.js';
 import {createEarthMaterial,updateBodyViewer} from './display-materials.js';
-import { createMilkyWay, createStars } from './sky-material.js';
+import { createStars } from './sky-material.js';
 
 // Without a supplied Earth orientation, Earth's north follows the Moon's north (as on the main
 // page) and longitude 0 faces the observer. Only the map's rotation is illustrative: the phase
@@ -14,8 +14,8 @@ function illustrativeOrientation(latitudeDeg,towardViewer){
 export function createAppearance({ scene, provider, invalidate, onError, onStatus }) {
   let controller;
   const textures = [], bitmaps = [];
-  let disposed = false, loaded=false, loading=false, earth, stars, milkyWay, catalogFrame, terrainTexture, terrainShading,earthTexture,normalTexture,polarTexture;
-  function clear(){for(const object of [earth,stars,milkyWay])if(object){scene.remove(object);object.geometry.dispose();object.material.dispose();}for(const t of textures)t.dispose();for(const b of bitmaps)b.close();textures.length=bitmaps.length=0;earth=stars=milkyWay=terrainTexture=earthTexture=normalTexture=polarTexture=null;}
+  let disposed = false, loaded=false, loading=false, earth, stars, catalogFrame, terrainTexture, terrainShading,earthTexture,normalTexture,polarTexture;
+  function clear(){for(const object of [earth,stars])if(object){scene.remove(object);object.geometry.dispose();object.material.dispose();}for(const t of textures)t.dispose();for(const b of bitmaps)b.close();textures.length=bitmaps.length=0;earth=stars=terrainTexture=earthTexture=normalTexture=polarTexture=null;}
   async function texture(asset,signal,width=2048,data=false) {
     if (!asset?.url || !asset.source || !asset.license) throw new Error('Asset URL and attribution required');
     const response = await fetch(asset.url, { signal });
@@ -42,11 +42,6 @@ export function createAppearance({ scene, provider, invalidate, onError, onStatu
       catalogFrame=catalog.frame;
       stars=createStars(catalog); stars.scale.setScalar(2000000);scene.add(stars);
       invalidate();
-      // A missing background must not discard the catalog stars or body textures.
-      if (assets.milkyWay) {
-        try { const map = await texture(assets.milkyWay, signal, 4096); milkyWay = createMilkyWay(map); scene.add(milkyWay); invalidate(); }
-        catch (error) { if (!disposed && !signal.aborted) onError(new Error(`Milky Way background unavailable: ${error.message}`)); }
-      }
       if (disposed || signal.aborted) return;
       loaded=true;loading=false;onStatus({state:'ready',stars:catalog.stars.length,earthShading:assets.earth.shading});invalidate();
     } catch(error) { if(!disposed && !signal.aborted) {loading=false;onError(error);onStatus({state:'error',message:error.message});} }
@@ -56,8 +51,8 @@ export function createAppearance({ scene, provider, invalidate, onError, onStatu
     terrainMap() { return terrainShading === 'albedo' || terrainShading === 'albedo-approximation' ? terrainTexture : null; },
     moonMaps(){return normalTexture&&polarTexture&&terrainTexture?{color:terrainTexture,normal:normalTexture,polar:polarTexture}:null;},
     earthMap(){return earthTexture;},
-    skyDiagnostics(){return { starsVisible: !!stars?.visible, milkyWayVisible: !!milkyWay?.visible,
-      starsRotation: stars?.quaternion.toArray(), milkyWayRotation: milkyWay?.quaternion.toArray() };},
+    skyDiagnostics(){return { starsVisible: !!stars?.visible,
+      starsRotation: stars?.quaternion.toArray() };},
     memory(){const bitmapBytes=bitmaps.reduce((sum,b)=>sum+b.width*b.height*4,0);return {bitmapBytes,estimatedTextureBytesWithMipmaps:Math.ceil(bitmapBytes*4/3)};},
     update(snapshot,camera,earthDisc,diameter,twinkle,starBrightness=1,autoStarExposure=true,pixelRatio=1) {
       if(earth) {
@@ -78,13 +73,6 @@ export function createAppearance({ scene, provider, invalidate, onError, onStatu
         // Display exposure only, not an eye/camera sensitivity or lunar-sky model.
         stars.material.uniforms.limit.value=autoStarExposure&&snapshot.bodies.sun.centerVisible===true?1.5:4.5;
       }}
-      if (milkyWay) {
-        milkyWay.visible = snapshot.sky?.catalogFrame === catalogFrame;
-        if (milkyWay.visible) {
-          milkyWay.position.copy(camera.position); milkyWay.quaternion.fromArray(snapshot.sky.catalogToLocal);
-          milkyWay.material.color.setScalar(.18 * starBrightness * (autoStarExposure && snapshot.bodies.sun.centerVisible ? .15 : 1));
-        }
-      }
       return !!(stars?.visible && twinkle);
     },
     pause(){if(!loaded){controller?.abort();loading=false;clear();}},

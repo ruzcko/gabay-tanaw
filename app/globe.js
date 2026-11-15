@@ -733,9 +733,8 @@ gridRow.addEventListener('click', () => {
 const starsRow = document.createElement('button');
 starsRow.type = 'button'; starsRow.className = 'btn'; starsRow.id = 'show-stars';
 starsRow.setAttribute('role', 'menuitemcheckbox'); starsRow.dataset.toggleDot = '';
-starsRow.setAttribute('aria-checked', 'false'); starsRow.textContent = 'Stars';
-starsRow.addEventListener('click', async () => {
-  const enabled = starsRow.getAttribute('aria-checked') !== 'true';
+starsRow.textContent = 'Stars';
+async function setStarsEnabled(enabled) {
   starsRow.setAttribute('aria-checked', String(enabled));
   document.dispatchEvent(new CustomEvent('tanaw:stars-change', { detail: enabled }));
   starsRow.setAttribute('aria-busy', String(enabled));
@@ -746,7 +745,9 @@ starsRow.addEventListener('click', async () => {
     document.dispatchEvent(new CustomEvent('tanaw:stars-change', { detail: false }));
     status.textContent = 'Stars could not load. Select Stars to retry.';
   } finally { starsRow.setAttribute('aria-busy', 'false'); }
-});
+}
+starsRow.addEventListener('click', () => setStarsEnabled(starsRow.getAttribute('aria-checked') !== 'true'));
+setStarsEnabled(true);
 viewMenu.append(gridRow, starsRow, document.getElementById('cinematic-mode'));
 // Under the button, right-aligned with it and kept on screen; the first row takes focus.
 viewMenu.addEventListener('beforetoggle', (e) => {

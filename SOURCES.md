@@ -20,3 +20,4 @@ Tools used to prepare data or test the app. None of them ships with the site.
 | tifffile | Reading NASA GeoTIFF elevation and colour maps | https://github.com/cgohlke/tifffile | BSD-3-Clause |
 | imagecodecs | Decoding compressed TIFF data | https://github.com/cgohlke/imagecodecs | BSD-3-Clause |
 | Playwright | Browser checks of the app (`verify-*.mjs`) | https://github.com/microsoft/playwright | Apache-2.0 |
+| GitHub Actions checkout, setup-node, setup-python and upload-artifact | Automated UI and browser checks | https://github.com/actions | MIT |
